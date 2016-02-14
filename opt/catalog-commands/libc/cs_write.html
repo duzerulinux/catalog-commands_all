@@ -1,0 +1,258 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>write()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="write()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>write( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta <a href="../chamadas.html"><b>chamada de sistema</b></a> escreve em um descritor de 
+<a href="../arquivo.html"><b>arquivo</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include&lt;unistd.h&gt;<br>
+ssize_t write(int fd, const void *buf, size_t count);
+</blockquote>
+
+<ul>
+<li>O argumento <i>fd</i> corresponde ao descritor do arquivo a ser escrito.
+<li>O argumento <i>buf</i> &eacute; um ponteiro para a &aacute;rea com os dados a serem escritos em <i>fd</i>.
+<li>O argumento <i>count</i> &eacute; a quantidade m&aacute;xima de bytes a ser escrita.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Se a chamada <i>write( )</i> &eacute; executada com sucesso, o n&uacute;mero de bytes escrito &eacute; retornado. Caso a 
+chamada n&atilde;o seja bem sucedida, o valor -1 &eacute; retornado e o c&oacute;digo do erro &eacute; colocado na vari&aacute;vel
+externa <b><a href="vr_errno.html">errno</a></b>. A tabela abaixo mostra os erros que podem ocorrer com esta chamada.</p>
+
+<p>
+<blockquote>
+<table class="t2" rules=all cellpadding=10 cellspacing=10 align=center width=650>
+<tr class="t1"><td><b>Erro</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td>EAGAIN      </td><td>Erro de <i>fd</i></td></tr>
+<tr><td>EBADF       </td><td>O <i>fd</i> n&atilde;o &eacute; v&aacute;lido</td></tr>
+<tr><td>EDESTADDRREQ</td><td>O <i>fd</i> &eacute; um soquete de rede</td></tr>
+<tr><td>EDQUOT      </td><td>Quota excedida</td></tr>
+<tr><td>EFAULT      </td><td>Nome do arquivo aponta para uma &aacute;rea de endere&ccedil;o n&atilde;o acess&iacute;vel</td></tr>
+<tr><td>EFBIG       </td><td>Arquivo muito grande</td></tr>
+<tr><td>EINTR       </td><td>Bloqueado</td></tr>
+<tr><td>EINVAL      </td><td>Valor n&atilde;o v&aacute;lido</td></tr>
+<tr><td>EIO         </td><td>Erro de I/O</td></tr>
+<tr><td>ENOSPC      </td><td>N&atilde;o h&aacute; espa&ccedil;o para os dados</td></tr>
+<tr><td>EPIPE       </td><td>O <i>fd</i> &eacute; um pipe ou um soquete de rede</td></tr>
+</table>
+</blockquote>
+<p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<blockquote class="t2">
+1. #include&lt;stdio.h&gt; <br>
+2. #include&lt;stdlib&gt;  <br>
+3. #include&lt;fcntl.h&gt; <br>
+4. #include&lt;string.h&gt;<br>
+5. #include&lt;errno.h&gt; <br>
+6. int main(int argc, char * const argv[], char * const envp[])<br>
+7. &nbsp; {<br>
+8.&nbsp; &nbsp;&nbsp;&nbsp; int arq1;<br>
+9.&nbsp; &nbsp;&nbsp;&nbsp; int arq2;<br>
+10.&nbsp;&nbsp;&nbsp; size_t num;<br>
+11.&nbsp;&nbsp;&nbsp; char linha[100];<br>
+12.&nbsp;&nbsp;&nbsp; struct stat buf;<br>
+13.&nbsp;&nbsp;&nbsp; if (argc &lt; 3) <br>
+14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Voce deve fornecer os nomes dos arquivos de origem e de destino\n");<br>
+16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(1);<br>
+17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+18.&nbsp;&nbsp;&nbsp; arq1 = open(argv[1], O_RDONLY);<br>
+19.&nbsp;&nbsp;&nbsp; if (arq1 == -1) <br>
+20.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+21.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Open arq1: %s\n", strerror(errno));<br>
+22.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(2);<br>
+23.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+24.&nbsp;&nbsp;&nbsp; if (fstat(arq1, &amp;buf) == -1)<br>
+25.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+26.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Fstat: %s\n", strerror(errno));<br>
+27.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(3);<br>
+28.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+29.&nbsp;&nbsp;&nbsp; arq2 = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, buf.st_mode);<br>
+30 &nbsp;&nbsp;&nbsp; if (arq2 == -1)<br>
+31.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+32.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Open arq2: %s\n", strerror(errno));<br>
+33.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(4);<br>
+34.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+35.&nbsp;&nbsp;&nbsp; num = read(arq1, linha, 100);<br>
+36.&nbsp;&nbsp;&nbsp; while(num != 0)<br>
+37.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+38.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (write(arq2, linha, num) == -1) <br>
+39.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+40.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Write: %s\n", strerror(errno));<br>
+41.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(5); <br>
+42.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+43.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; num = read(arq1, linha, 100);<br>
+44.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+45.&nbsp;&nbsp;&nbsp; close(arq1);<br>
+46.&nbsp;&nbsp;&nbsp; close(arq2);<br>
+47.&nbsp; }
+</blockquote>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/write.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 5 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da 
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>stdlib.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o de alguns tipos de vari&aacute;veis e com v&aacute;rias
+        fun&ccedil;&otilde;es de uso geral como, por exemplo, <a href="fc_exit.html"><b>exit( )</b></a>.
+    <li><b>fcntl.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o de op&ccedil;&otilde;es de controle dos arquivos. Por exemplo
+        <ul>
+        <li>O_RDONLY - abrir apenas para leitura;
+        <li>O_WRONLY - abrir apenas para escrita;
+        <li>O_CREAT - criar arquivo se ele ainda n&atilde;o existir;
+        <li>O_TRUNC - zerar arquivo se ele j&aacute; existir.
+        </ul>
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror( )</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro.
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+    </ul>
+<li><b>Linha 6 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da
+    linha 8 a linha 46.
+<li><b>Linhas 8 e 9 :</b> define as vari&aacute;veis <i>arq1</i> e <i>arq2</i>, que ser&atilde;o usadas para armazenar os descritores
+    dos arquivos de origem e de destino, respectivamente.
+<li><b>Linha 10 :</b> define a vari&aacute;vel <i>num</i> como sendo do tipo <i>size_t</i> (inteiro). Esta vari&aacute;vel ser&aacute; usada 
+    para armazenar o n&uacute;mero de bytes lidos a cada execu&ccedil;&atilde;o da chamada <a href="cs_read.html"><b>read( )</b></a>.
+<li><b>Linha 11 :</b> define a string <i>linha</i> com tamanho 100.
+<li><b>Linha 12 :</b> define <i>buf</i> como uma estrutura do tipo <a href="ed_stat.html"><b>stat</b></a>.
+<li><b>Linhas de 13 a 17 :</b> verifica se na chamada do programa os nomes dos arquivos de origem e de destino foram 
+    fornecidos. Caso os nomes n&atilde;o tenham sido fornecidos, o programa &eacute; encerrado e o c&oacute;digo de erro 1 &eacute;
+    retornado (este valor foi escolhido aleatoriamente).
+<li><b>Linha 18 :</b> usa a chamada de sistema <a href="cs_open.html"><b>open( )</b></a> para abrir o arquivo de origem. Este arquivo 
+    &eacute; aberto apenas para leitura (O_RDONLY) e o seu descritor &eacute; armazenado em <i>arq1</i>. 
+<li><b>Linhas de 19 a 23:</b> verifica se houve erro na execu&ccedil;&atilde;o da chamada <i>open( )</i>. Caso a chamada n&atilde;o tenha
+    sido bem sucedida (valor de retorno &eacute; igual a -1), o erro ocorrido durante a execu&ccedil;&atilde;o da chamada &eacute; 
+    informado e  o c&oacute;digo de erro 2 &eacute; retornado (este valor foi escolhido aleatoriamente).
+<li><b>Linha 24 :</b> usa a chamada de sistema <a href="cs_stat.html"><b>fstat( )</b></a> para obter informa&ccedil;&otilde;es sobre
+    <i>arq1</i>. Estas informa&ccedil;&otilde;es s&atilde;o armazenadas na estrutura <i>buf</i>. Caso a chamada <i>fstat( )</i> 
+    n&atilde;o seja bem sucedida (valor de retorno &eacute; igual a -1), as linhas 26 e 27 s&atilde;o executadas.<br>
+    <b>obs:</b> Podemos substituir <i>fstat( )</i> pela chamada <i>stat( )</i> como mostrado abaixo. A primeira chamada usa como
+    argumento o descritor de arquivo retornado pela chamada <i>open( )</i>, enquanto a segunda chamada usa como argumento o nome do
+    arquivo.
+    <blockquote class="t2">
+    if (stat(argv[1], &amp;buf) == -1)<br>
+    </blockquote>
+<li><b>Linha 26 :</b> informa o erro ocorrido durante a execu&ccedil;&atilde;o da chamada <i>fstat( )</i>.
+<li><b>Linha 27 :</b> encerra o programa e retorna o c&oacute;digo de erro 3 (este valor foi escolhido aleatoriamente).
+<li><b>Linha 29 :</b> usa a chamada de sistema <i>open( )</i> para abrir (possivelmente criar) o arquivo de destino. Este arquivo 
+    &eacute; aberto para escrita (O_WRONLY), &eacute; criado caso n&atilde;o exista (O_CREAT) e &eacute; truncado se j&aacute;
+    existe (O_TRUNC). O tipo do arquivo e as permiss&otilde;es de acesso s&atilde;o id&ecirc;nticas ao do primeiro arquivo se
+    o arquivo ainda n&atilde;o existe (estas informa&ccedil;&otilde;es est&atilde;o no campo <i>st_mode</i> da estrutura <i>buf</i>). 
+    O descritor do segundo arquivo aberto &eacute; armazenado em <i>arq2</i>.
+<li><b>Linhas de 30 a 34 :</b> estas linhas s&atilde;o executadas caso haja erro na execu&ccedil;&atilde;o da &uacute;ltima
+    chamada <i>open()</i>. Neste caso, o programa &eacute; encerrado e o c&oacute;digo de erro 4 &eacute; retornado (este valor foi
+    escolhido aleatoriamente).
+<li><b>Linha 35 :</b> usa a chamada <a href="cs_read.html"><b>read( )</b></a> para ler os 100 primeiros bytes do primeiro arquivo 
+    aberto (o valor 100 foi escolhido aleatoriamente) e armazen&aacute;-los em <i>linha</i>. Al&eacute;m disso a chamada <i>read( )</i>
+    retorna o n&uacute;mero efetivo de bytes lidos. Este valor &eacute; armazenado na vari&aacute;vel <i>num</i>.
+<li><b>Linhas de 36 a 44 :</b> estas linhas s&atilde;o executadas enquanto o valor de <i>num</i> for maior que zero, ou seja, 
+    enquanto a chamada <i>read( )</i> estiver lendo dados do arquivo.
+<li><b>Linha 38 :</b> esta linha executa duas a&ccedil;&otilde;es. Primeiro, usa a chamada de sistema 
+    <a href="cs_write.html"><b>write( )</b></a> para escrever no segundo arquivo o conte&uacute;do da string linha (note que a 
+    vari&aacute;vel <i>num</i> fornece o tamanho da string). Segundo, verifica se a execu&ccedil;&atilde;o da chamada <i>write( )</i>
+    foi bem sucedida. Em caso negativo, as linhas 40 e 41 s&atilde;o executadas.
+<li><b>Linha 40 :</b> exibe o erro ocorrido durante a execu&ccedil;&atilde;o da chamada <i>write( )</i>.
+<li><b>Linha 41 :</b> encerra o programa e retorna o c&oacute;digo de erro 5 (este valor foi escolhido aleatoriamente).
+<li><b>Linha 43 :</b> usa a chamada <i>read( )</i> para ler os pr&oacute;ximos 100 bytes do primeiro arquivo e armazen&aacute;-los
+    em <i>linha</i>. Note que a vari&aacute;vel <i>num</i> &eacute; atualizada a cada execu&ccedil;&atilde;o desta chamada.
+<li><b>Linhas 45 e 46 :</b> usa a chamada de sistema <a href="cs_close.html"><b>close( )</b></a> para fechar os arquivos.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar
+<blockquote class="t1">
+gcc -o write write.c 
+</blockquote>
+Para executar
+<blockquote class="t1">
+./write arquivo_origem arquivo_destino
+</blockquote>
+</p>
+
+<p>Suponha que o usu&aacute;rio aluno usa o programa para fazer uma c&oacute;pia do arquivo <i>/etc/passwd</i> com o nome <i>teste</i>. 
+Podemos ent&atilde;o usar o comando 
+<blockquote class="t1">
+ls -l /etc/passwd teste
+</blockquote>
+Para verificar as propriedades dos dois arquivos. Uma poss&iacute;vel sa&iacute;da para este comando &eacute; mostrada abaixo.
+Note que os dois arquivos possuem <a href="../permissao.html"><b>permiss&otilde;es</b></a> diferentes, pois o arquivo teste 
+j&aacute; existia no diret&oacute;rio (foi sobrescito).
+<blockquote class="t2">
+<table class="t2">
+<tr><td>-rw-r--r--</td><td>2 root</td><td>root  </td><td>&nbsp;&nbsp;929 Sep 13</td><td>09:38 /etc/passwd</td></tr>
+<tr><td>-rw-rw----</td><td>1 aluno</td><td>aluno</td><td>&nbsp;&nbsp;929 Oct  9</td><td>12:56 teste</td></tr>
+</table>
+</blockquote>
+
+<p>Voc&ecirc; tamb&eacute;m pode usar o comando
+<blockquote class="t1"> 
+diff /etc/passwd teste
+</blockquote> 
+para verificar que o conte&uacute;do dos dois arquivos s&atilde;o iguais.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<p>
+<ul>
+<li>Se o argumento <i>count</i> &eacute; zero e <i>fd</i> &eacute; um arquivo comum, a chamada <i>write( )</i> apenas retorna zero.
+<li>Note que o valor retornado pela chamada <i>write( )</i> &eacute; do tipo <i>ssize_t</i>, enquanto o terceiro argumento da
+    chamada &eacute; do tipo <i>size_t</i> (veja os <a href="../biblioteca_c.html#tipos_dados"><b>tipos de dados</b></a> da biblioteca C).
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

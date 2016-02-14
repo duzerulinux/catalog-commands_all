@@ -1,0 +1,160 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>rmdir()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="rmdir()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>rmdir( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta <a href="../chamadas.html"><b>chamada de sistema</b></a> apaga um diret&oacute;rio vazio.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include&lt;unistd.h&gt;<br>
+int rmdir(const char *pathname);
+</blockquote>
+
+<ul>
+<li>O argumento <i>pathname</i> &eacute; uma string com o nome do diret&oacute;rio a ser apagado.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Se a chamada <i>rmdir( )</i> &eacute; executada com sucesso, o valor zero &eacute; retornado. Caso a chamada n&atilde;o
+seja bem sucedida, o valor -1 &eacute; retornado e o c&oacute;digo do erro &eacute; colocado na vari&aacute;vel externa 
+<b><a href="vr_errno.html">errno</a></b>. A tabela abaixo mostra os erros que podem ocorrer com esta chamada.</p>
+
+<p>
+<blockquote>
+<table class="t2" rules=all cellpadding=10 cellspacing=10 align=center width=650>
+<tr class="t1"><td><b>Erro</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td>EACCES      </td><td>Acesso ao arquivo n&atilde;o &eacute; permitido</td></tr>
+<tr><td>EBUSY       </td><td>Acesso em uso por outro processo ou pelo sistema</td></tr>
+<tr><td>EFAULT      </td><td>Nome do arquivo aponta para uma &aacute;rea de endere&ccedil;o n&atilde;o acess&iacute;vel</td></tr>
+<tr><td>EINVAL      </td><td>Valor n&atilde;o v&aacute;lido</td></tr>
+<tr><td>ELOOP       </td><td>Muitos links simb&oacute;licos encontrados na defini&ccedil;&atilde;o do nome do arquivo</td></tr>
+<tr><td>ENAMETOOLONG</td><td>Nome do arquivo longo demais</td></tr>
+<tr><td>ENOENT      </td><td>O nome do arquivo especificado n&atilde;o existe</td></tr>
+<tr><td>ENOMEM      </td><td>Mem&oacute;ria insuficiente</td></tr>
+<tr><td>ENOTDIR     </td><td>Um componente do nome do arquivo n&atilde;o &eacute; um diret&oacute;rio</td></tr>
+<tr><td>ENOTEMPTY   </td><td>Caminho inv&aacute;lido</td></tr>
+<tr><td>EPERM       </td><td>Sem permiss&atilde;o</td></tr>
+<tr><td>EROFS       </td><td>Permiss&atilde;o de escrita foi solicitada para um arquivo que s&oacute; permite leitura</td></tr>
+</table>
+</blockquote>
+<p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<blockquote class="t2">
+1. #include&lt;stdio.h&gt;    <br>
+2. #include&lt;string.h&gt;   <br>
+3. #include&lt;sys/stat.h&gt; <br>
+4. #include&lt;errno.h&gt;    <br>
+5. int main() <br>
+6. &nbsp;&nbsp;&nbsp; { <br>
+7. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (mkdir("./testes", S_IRUSR | S_IWUSR | S_IXUSR) != 0) <br>
+8. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("mkdir: %s\n", strerror(errno)); <br>
+9. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; system("ls -al testes"); <br>
+10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       rmdir("./testes"); <br>
+11.&nbsp;&nbsp;&nbsp; }
+</blockquote>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/rmdir.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 4 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da 
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror( )</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro.
+    <li><b>sys/stat.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o dos nomes simb&oacute;licos para as permiss&otilde;es dos
+        arquivos. Por exemplo:
+        <ul>
+        <li>S_IRUSR - permiss&atilde;o de leitura para o dono do arquivo;
+        <li>S_IWUSR - permiss&atilde;o de escrita para o dono do arquivo;
+        <li>S_IXUSR - permiss&atilde;o de execu&ccedil;&atilde;o para o dono do arquivo;
+        </ul>
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+    </ul>
+<li><b>Linha 5 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da
+    linha 7 a linha 10.
+<li><b>Linha 7 :</b> esta linha executa duas a&ccedil;&otilde;es. Primeiro, usa a chamada de sistema <i>mkdir( )</i> para criar o
+    diret&oacute;rio <i>testes</i> dentro do diret&oacute;rio corrente com permiss&atilde;o de leitura, grava&ccedil;&atilde;o e
+    execu&ccedil;&atilde;o apenas para o dono do arquivo. Segundo, verifica se a execu&ccedil;&atilde;o da chamada <i>mkdir( )</i>
+    foi bem sucedida. Em caso negativo, a linha 8 &eacute; executada.
+<li><b>Linha 8 :</b> exibe o erro ocorrido durante a execu&ccedil;&atilde;o da chamada <i>mkdir( )</i>.
+<li><b>Linha 9 :</b> usa a fun&ccedil;&atilde;o <a href="fc_system.html"><b>system( )</b></a> para exibir as permiss&otilde;es de
+    acesso do diret&oacute;rio <i>testes</i>.
+<li><b>Linha 10 :</b> usa a chamada de sistema <i>rmdir( )</i> para apagar o diret&oacute;rio <i>testes</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar
+<blockquote class="t1">
+gcc -o rmdir rmdir.c 
+</blockquote>
+Para executar
+<blockquote class="t1">
+./rmdir
+</blockquote>
+Abaixo &eacute; apresentada uma poss&iacute;vel sa&iacute;da para o programa discutido acima.
+<blockquote class="t2">
+<table class="t2">
+<tr><td collspan=4>total 8</td>
+<tr><td>drwx------</td><td>2 aluno aluno</td><td>4096 Oct 4 21:27</td><td>.</td></tr>
+<tr><td>drwxrwxr-x</td><td>3 aluno aluno</td><td>4096 Oct 4 21:27</td><td>..</td></tr>
+</table>
+</blockquote>
+</p>
+
+<p>Note que a segunda linha da sa&iacute;da possui <a href="../permissao.html"><b>permiss&atilde;o</b></a> de leitura, 
+escrita e execu&ccedil;&atilde;o apenas para o dono do arquivo. Esta linha representa o diret&oacute;rio <i>testes</i> 
+criado pelo programa. A terceira linha representa o diret&oacute;rio-pai que s&oacute; n&atilde;o tem permiss&atilde;o
+de escrita para <i>outros</i> (n&atilde;o &eacute; o dono do arquivo e nem pertence ao grupo do arquivo).</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

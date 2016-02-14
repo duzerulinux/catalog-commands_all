@@ -1,0 +1,183 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>mkstemp()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="mkstemp()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+
+<h1>mkstemp( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta fun&ccedil;&atilde;o cria e abre um arquivo tempor&aacute;rio &uacute;nico.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<p>
+<blockquote class="t2">
+#include &lt;stdlib.h&gt;<br>
+int mkstemp(char *template);
+</blockquote>
+<ul>
+<li>O argumento <i>template</i> define o formato que o nome do arquivo deve ter. Os &uacute;ltimos seis caracteres do 
+    <i>template</i> devem ser "XXXXXX". Estes caracteres s&atilde;o substituidos por uma string que faz o arquivo ser
+    &uacute;nico no sistema.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Em caso de sucesso, a fun&ccedil;&atilde;o <i>mkstemp( )</i> retorna o n&uacute;mero do descritor de 
+<a href="../arquivo.html"><b>arquivo</b></a> criado. Em caso de erro, -1 &eacute; retornado na fun&ccedil;&atilde;o
+<i>mkstemp( )</i> e o c&oacute;digo de erro &eacute; colocado em <a href="vr_errno.html"><b>errno</b></a>.</p>
+
+<p>
+<blockquote>
+<table class="t2" rules=all cellpadding=10 celspacing=10 align=center width=650>
+<tr class="t1"><td><b>Erro</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td>EEXIST      </td><td>N&atilde;o pode criar o arquivo tempor&aacute;rio</td></tr>
+<tr><td>EINVAL      </td><td>Os &uacute;ltimos 6 caracreteres n&atilde;o s&atilde;o XXXXXX</td></tr>
+</table>
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1.  #include &lt;sys/types.h&gt; <br>
+2.  #include &lt;unistd.h&gt; <br>
+3.  #include &lt;stdio.h&gt; <br>
+4.  #include &lt;stdlib.h&gt; <br>
+5.  #include &lt;string.h&gt; <br>
+6.  #include &lt;errno.h&gt; <br>
+7.  int main() <br>
+8.  &nbsp;&nbsp;&nbsp;  { <br>
+9.  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int  fd; <br>
+10. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char nome[]   = "/tmp/arqXXXXXX"; <br>
+11. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char buffer[] = "teste de escrita"; <br>
+12. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; size_t tam    = 100; <br>
+13. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!(fd = mkstemp(nome))) <br>
+14. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+15. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro mkstemp %d: %s\n", errno, strerror(errno)); <br>
+16. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(1); <br>
+17. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+18. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Nome do arquivo temporario: %s\n", nome); <br>
+19. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (write(fd, buffer, tam) == -1) <br>
+20. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+21. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro write %d: %s\n", errno, strerror(errno)); <br>
+22. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(2); <br>
+23. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+24. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (close(fd) == -1) <br>
+25. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+26. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro close %d: %s\n", errno, strerror(errno)); <br>
+27. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(3); <br>
+28. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+29. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (unlink(nome) != 0) <br>
+30. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+31. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro unlink %d: %s\n", errno, strerror(errno)); <br>
+32. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(4); <br>
+33. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+34. &nbsp;&nbsp;&nbsp; }
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/mkstemp.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 6 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da 
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>sys/types.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o de 
+        <a href="../biblioteca_c.html#tipos_dados"><b>tipos de dados</b></a> como <i>size_t</i>.
+    <li><b>unistd.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das <a href="../chamadas.html"><b>chamadas de sistema</b></a> 
+        usadas neste exemplo: <a href="cs_write.html"><b>write( )</b></a> e <a href="cs_unlink.html"><b>unlink( )</b></a>.
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror( )</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro.
+    <li><b>stdlib.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o de alguns tipos de vari&aacute;veis e com v&aacute;rias
+        fun&ccedil;&otilde;es de uso geral como, por exemplo, <a href="fc_exit.html"><b>exit( )</b></a> e
+        <i>mkstemp( )</i>.
+    </ul>
+<li><b>Linha 7 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 8 a linha 34.
+<li><b>Linhas 9 a 12 :</b> defini&ccedil;&atilde;o de vari&aacute;veis.
+<li><b>Linha 13 :</b> chama a fun&ccedil;&atilde;o <i>mkstemp( )</i> para criar e abrir um arquivo tempor&aacute;rio.
+<li><b>Linhas 14 a 17 :</b> caso tenha ocorrido um erro na fun&ccedil;&atilde;o <i>mkstemp( )</i>, o programa imprime uma mensagem e
+    encerra a execu&ccedil;&atilde;o.
+<li><b>Linha 18 :</b> informa o nome do arquivo tempor&aacute;rio na sa&iacute;da padr&atilde;o.
+<li><b>Linha 19 :</b> grava a mensagem do vetor <i>buffer[]</i> no arquivo tempor&aacute;rio.
+<li><b>Linhas 20 a 23 :</b> caso tenha ocorrido um erro na chamada <i>write( )</i>, o programa imprime uma mensagem e
+    encerra a execu&ccedil;&atilde;o.
+<li><b>Linha 24 :</b> fecha o arquivo tempor&aacute;rio.
+<li><b>Linhas 25 a 28 :</b> caso tenha ocorrido um erro na chamada <i>close( )</i>, o programa imprime uma mensagem e
+    encerra a execu&ccedil;&atilde;o.
+<li><b>Linha 29 :</b> deleta o arquivo tempor&aacute;rio.
+<li><b>Linhas 30 a 33 :</b> caso tenha ocorrido um erro na chamada <i>unlink( )</i>, o programa imprime uma mensagem e
+    encerra a execu&ccedil;&atilde;o.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar
+<blockquote class="t1">
+gcc -o mkstemp mkstemp.c 
+</blockquote>
+Para executar
+<blockquote class="t1">
+./mkstemp 
+</blockquote>
+Abaixo uma poss&iacute;vel sa&iacute;da.
+<blockquote class="t2">
+Nome do arquivo temporario: /tmp/arqa6G8Z1
+</blockquote>
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O arquivo &eacute; criado com <a href="../permissao.html"><b>permiss&atilde;o</b></a> 0600 (s&oacute; o dono pode ler e escrever).
+<li>A fun&ccedil;&atilde;o <i>mkstemp( )</i> usa a chamada de sistema <a href="cs_open.html"><b>open( )</b></a> para abrir o arquivo 
+    depois que o nome &eacute; criado.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

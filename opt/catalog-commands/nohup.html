@@ -1,0 +1,73 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>nohup</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="nohup">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>nohup</h1>
+   
+<blockquote><font size="+1"><b>nohup comando</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>O <i>nohup</i> ignora os sinais de interrup&ccedil;&atilde;o durante a execu&ccedil;&atilde;o do 
+comando especificado. Assim, &eacute; poss&iacute;vel o comando continuar a executar mesmo depois que 
+o usu&aacute;rio se desconectar do sistema.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>--help</b> : exibe as op&ccedil;&otilde;es do comando.
+<li><b>--version</b> : exibe informa&ccedil;&otilde;es sobre o comando.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>Por exemplo,
+   <blockquote class="t1">nohup find / -name gcc &</blockquote>
+   executa o comando <b><a href="find.html">find</a></b> em background (&)
+   e sem permitir interrup&ccedil;&otilde;es (<i>nohup</i>).
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Se a sa&iacute;da padr&atilde;o &eacute; uma <i>tty</i>, esta sa&iacute;da e o erro padr&atilde;o 
+    s&atilde;o redirecionados para o arquivo <i>nohup.out</i> (primeira op&ccedil;&atilde;o) ou para o 
+    arquivo <i>$HOME/nohup.out</i> (segunda op&ccedil;&atilde;o). Caso nenhum destes dois arquivos
+    possam ser criados (ou alterados se j&aacute; existem), o comando n&atilde;o &eacute; executado.
+<li>O <i>nohup</i> n&atilde;o coloca o comando que ele executa em <i>background</i>. Isto deve ser feito
+    explicitamente pelo usu&aacute;rio.</p>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

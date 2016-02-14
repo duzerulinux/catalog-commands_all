@@ -1,0 +1,102 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>curingas</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="curingas">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>curingas</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Curingas s&atilde;o recursos usados para especificar um conjunto de arquivos e/ou 
+diret&oacute;rios de uma &uacute;nica vez. Permitindo assim, manipular v&aacute;rios 
+arquivos/diret&oacute;rios com um &uacute;nico comando.</p>
+
+<p>Existem tr&ecirc;s tipos de curingas no <a href="linux.html"><b>Linux</b></a>:</p> 
+
+<ol type=a>
+<li><b>*</b> que substitui um conjunto (zero ou mais de zero) de caracteres;</li> 
+  <li><b>?</b> que substitui um &uacute;nico caractere; 
+  <li><b>[ ]</b> que substitui um conjunto de caracteres especificados dentro dos colchetes.
+</ol>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<p>Por exemplo, suponha um diret&oacute;rio com os seguintes arquivos:
+
+<ul> 
+<li>teste1.txt;
+<li>teste2.txt;
+<li>teste3.txt;
+<li>teste4.txt; 
+<li>teste5.txt;
+<li>teste10.txt. 
+</ul>
+
+O comando</p> 
+
+<blockquote class="t1">rm teste*.txt</blockquote>
+
+ ou 
+
+<blockquote class="t1">rm teste*</blockquote>
+
+remove todos os arquivos do diret&oacute;rio, enquanto o comando
+
+<blockquote class="t1">rm teste?.txt</blockquote>
+
+remove apenas os cinco primeiros arquivos (<i>teste1.txt</i> a <i>test5.txt</i>) e o comando
+
+<blockquote class="t1">rm teste[2-4].txt</blockquote>
+
+remove os arquivos <i>teste2.txt</i>, <i>teste3.txt</i> e <i>teste4.txt</i>. Se usarmos a 
+v&iacute;rgula no lugar do tra&ccedil;o no exemplo acima, isto &eacute;,
+
+<blockquote class="t1">rm teste[2,4].txt</blockquote>
+
+apenas os arquivos <i>teste2.txt</i> e <i>teste4.txt</i> s&atilde;o apagados.
+O caractere <b>^</b> no in&iacute;cio da express&atilde;o significa 
+exclus&atilde;o, ou seja, qualquer 
+outro caractere menos os caracteres especificados. Portanto, o comando
+
+<blockquote class="t1">rm teste[^2,4].txt</blockquote>
+
+apaga os arquivos <i>teste1.txt</i>, <i>teste3.txt</i> e <i>teste5.txt</i>.
+Note que este comando n&atilde;o apaga o arquivo <i>teste10.txt</i> pois o 
+curinga substitui apenas um caractere. Para substituir mais de um caractere 
+podemos usar um ou mais curingas em um mesmo comando. Por exemplo,
+
+<blockquote class="t1">rm teste[^2,4]*.txt</blockquote>
+
+remove tamb&eacute;m o arquivo <i>teste10.txt</i>, al&eacute;m dos arquivos
+<i>teste1.txt</i>, <i>teste3.txt</i> e <i>teste5.txt</i>.
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

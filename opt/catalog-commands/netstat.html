@@ -1,0 +1,71 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>netstat</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="netstat">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>netstat</h1>
+
+<blockquote><font size="+1"><b>netstat [op&ccedil;&otilde;es]</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta ferramenta mostra informa&ccedil;&otilde;es sobre as conex&otilde;es de rede, tabelas de roteamento e estat&iacute;sticas da
+utiliza&ccedil;&atilde;o da interface na rede.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>--tcp</b> : mostra conex&otilde;es tcp.
+<li><b>--numeric</b> : exibe apenas o endere&ccedil;o IP.
+<li><b>--programs</b> : indica qual processo est&aacute; ouvindo a porta especificada.
+<li><b>--all</b> : mostra portas com conex&otilde;es e portas que est&atilde;o sendo ouvidas.
+<li><b>--route</b> : mostra a tabela de encaminhamento.
+<li><b>--statistics</b> : mostra as estat&iacute;sticas da rede.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<p>Para ver apenas as conexões TCP, digite
+   <blockquote class="t1">netstat –tcp --numeric</blockquote>
+</p>
+<p>Para ver quais portas TCP a sua máquina está ouvindo, basta digitar
+   <blockquote class="t1">netstat --tcp –listening --programs</blockquote>
+</p>
+<p>Para mostrar a tabela de encaminhamento, basta digitar
+   <blockquote class="t1">netstat --route</blockquote>
+</p>
+<p>Para mostrar as estat&iacute;sticas da rede, digite
+   <blockquote class="t1">netstat --statistics –raw</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

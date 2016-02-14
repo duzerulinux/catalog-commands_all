@@ -1,0 +1,131 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>comandos do linux</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="comandos do linux">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>comandos do Linux </h1>
+
+<blockquote><b><font size="+1"> comando [op&ccedil;&otilde;es] [argumentos] </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<ul>
+<li>Os comandos do Linux s&atilde;o utilizados na linha de comandos (<i>prompt</i>) do sistema: as <i>op&ccedil;&otilde;es</i>
+    definem par&acirc;metros do comando e usualmente come&ccedil;am com o caractere "-" seguido de uma ou mais letras; e os 
+    <i>argumentos</i> definem dados a serem usados no processamento do comando.
+<li>O respons&aacute;vel por interpretar e executar um comando &eacute; o <b><a href="shell.html">shell</a></b> do usu&aacute;rio.
+    Um comando pode ser implementado pelo pr&oacute;prio <i>shell</i> (<i>builtin command</i>) ou pode ser uma aplica&ccedil;&atilde;o
+    presente em um dos diret&oacute;rios do sistema como, por exemplo, /bin, /sbin, /usr/bin, etc. 
+<li>Atualmente, existem mais de 3 mil comandos que podem ser utilizados pelo usu&aacute;rio.
+</ul> 
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Por exemplo, para listar os arquivos e os diret&oacute;rios filhos do diret&oacute;rio atual, basta digitar
+    <blockquote class="t1">ls</blockquote>
+    J&aacute; o comando
+    <blockquote class="t1">ls -al</blockquote>
+    exibe informa&ccedil;&otilde;es (tamanho, dono, grupo, etc) sobre os arquivos e os diret&oacute;rios 
+    (op&ccedil;&atilde;o l) e inclui na listagem os arquivos escondidos (op&ccedil;&atilde;o a).<br>
+    <b>Importante:</b> os arquivos escondidos no Linux possuem nome que come&ccedil;am com um ponto (".").
+<li>As op&ccedil;&otilde;es podem possuir um ou mais argumentos. Al&eacute;m disso, &eacute; poss&iacute;vel existir
+    argumentos que n&atilde;o perten&ccedil;am a uma op&ccedil;&atilde;o. Observe, por exemplo, o comando abaixo.
+    <blockquote class="t1">awk -F: -farq.txt /etc/passwd</blockquote>
+    Neste caso, temos o comando <b><a href="awk.html">awk</a></b> com duas op&ccedil;&otilde;es (<i>F</i> e <i>f</i>)
+    e tr&ecirc;s argumentos (<b>:</b>, arq.txt e /etc/passwd), sendo que o &uacute;ltimo argumento n&atilde;o pertence
+    a nenhuma op&ccedil;&atilde;o (&eacute; usada pelo comando).
+<li>Para obter informa&ccedil;&otilde;es <i>on-line</i> sobre algum comando do Linux, digite <b><a href="man.html">man</a></b>
+    seguido do nome do comando. Por exemplo, para obter uma explica&ccedil;&atilde;o sobre o comando <a href="ls.html"><b>ls</b></a>
+    digite
+    <blockquote class="t1">man ls</blockquote>
+    &Eacute; tamb&eacute;m poss&iacute;vel obter a lista dos par&acirc;metros dispon&iacute;veis usando o par&acirc;metro/comando
+    <b><a href="help.html">help</a></b>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Entrada e sa&iacute;da padr&atilde;o dos comandos do Linux</h2>
+
+<ul>
+<li><b>stdin</b> (<i>standard input</i>) - entrada padr&atilde;o para os comandos do Linux. Normalmente,
+    a entrada padr&atilde;o &eacute; o teclado, mas &eacute; poss&iacute;vel usar o 
+    <b><a href="redirecionadores.html">redirecionador de sa&iacute;da &lt;</a></b> para alterar a 
+    entrada padr&atilde;o. Por exemplo, o comando
+    <blockquote class="t1">tr a-z A-Z < teste</blockquote>
+    usa o arquivo <i>teste</i> como entrada para o comando <b><a href="tr.html">tr</a></b>.
+<li><b>stdout</b> (<i>standard output</i>) - sa&iacute;da padr&atilde;o dos comandos do
+    Linux. Normalmente, a sa&iacute;da padr&atilde;o &eacute; a tela da 
+    sess&atilde;o onde o comando foi digitado, mas &eacute; poss&iacute;vel usar o 
+    <b><a href="redirecionadores.html">redirecionador de sa&iacute;da &gt; ou 1&gt;</a></b>
+    para alterar a sa&iacute;da padr&atilde;o. Por exemplo, 
+    <blockquote class="t1">ls > teste</blockquote>
+    ou
+    <blockquote class="t1">ls 1> teste</blockquote>
+    cria o arquivo <i>teste</i> com o conte&uacute;do do diret&oacute;rio atual.
+<li><b>stderr</b> (<i>standard error</i>) - sa&iacute;da padr&atilde;o para os erros encontrados durante a 
+    execu&ccedil;&atilde;o de um comando do Linux. Normalmente, a sa&iacute;da padr&atilde;o 
+    &eacute; a tela da sess&atilde;o onde o comando foi digitado, mas &eacute; poss&iacute;vel usar o 
+    <b><a href="redirecionadores.html">redirecionador de sa&iacute;da 2&gt;</a></b> para alterar a sa&iacute;da
+    padr&atilde;o. Suponha que o diret&oacute;rio <i>/meu_dir</i> n&atilde;o exista. Portanto, 
+    o comando
+    <blockquote class="t1">ls /meu_dir 2> teste</blockquote>
+    cria o arquivo <i>teste</i> com a mensagem de erro relacionada a execu&ccedil;&atilde;o do comando acima.
+<li>&Eacute; poss&iacute;vel digitar mais de um comando de uma vez. Se ";" for usado para separar os comandos, ent&atilde;o
+    o sistema executa todos os comandos, independentemente do resultado.
+    <blockquote class="t1">man ls > teste; ls -l teste</blockquote>
+    Se "&&" for usado entre os comandos, um comando s&oacute; &eacute; executado quando os comandos anteriores n&atilde;o 
+    apresentam erro.
+    <blockquote class="t1">man ls > teste && ls -l teste</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<p>Neste Guia de Refer&ecirc;ncias foi adotada a seguinte norma na apresenta&ccedil;&atilde;o dos comandos: 
+<ol>
+<li> op&ccedil;&otilde;es/argumentos n&atilde;o obrigat&oacute;rios (os usu&aacute;rios podem ou n&atilde;o digit&aacute;-los)
+     est&atilde;o entre colchetes.
+<li>argumentos obrigat&oacute;rios (devem ser fornecidos pelos usu&aacute;rios) n&atilde;o s&atilde;o delimitados por nenhum
+    s&iacute;mbolo.
+</ol>
+
+Por exemplo, o comando
+<blockquote class="t1">cat [-n] arquivo</blockquote>
+possui uma op&ccedil;&atilde;o (<i>-n</i>) e um argumento (<i>arquivo</i>), sendo que apenas o segundo deve ser obrigatoriamente
+informado pelo usu&aacute;rio. Por exemplo, suponha que voc&ecirc; queira exibir o conte&uacute;do do arquivo <i>teste.txt</i>, 
+ent&atilde;o voc&ecirc; pode digitar</p> 
+<blockquote class="t1">cat -n teste.txt</blockquote>
+ou 
+<blockquote class="t1">cat teste.txt</blockquote>
+onde o primeiro comando numera as linhas do arquivo e o segundo comando apenas exibe o arquivo.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

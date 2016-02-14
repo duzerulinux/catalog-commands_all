@@ -1,0 +1,149 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>time()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="time()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>time( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta <a href="../chamadas.html"><b>chamada de sistema</b></a> fornece a quantidade de segundos desde &agrave;s 
+zero horas de 01/01/1970 (<a href="../tempo_unix.html"><b>tempo do Unix</b></a>).</p>
+
+   
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include&lt;time.h&gt;<br>
+time_t time(time_t *t);
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Se as chamadas s&atilde;o executadas com sucesso, o valor zero &eacute; retornado. Caso a chamada n&atilde;o
+seja bem sucedida, o valor (time_t) -1 &eacute; retornado e o c&oacute;digo do erro &eacute; colocado na vari&aacute;vel externa 
+<b><a href="vr_errno.html">errno</a></b>. A tabela abaixo mostra os erros que podem ocorrer com esta chamada.</p>
+
+<p>
+<blockquote>
+<table class="t2" rules=all cellpadding=10 cellspacing=10 align=center width=650>
+<tr class="t1"><td><b>Erro</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td>EFAULT      </td><td>Nome do arquivo aponta para uma &aacute;rea de endere&ccedil;o n&atilde;o acess&iacute;vel</td></tr>
+</table>
+</blockquote>
+<p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<blockquote class="t2">
+1. #include&lt;stdio.h&gt; <br>
+2. #include&lt;time.h&gt;  <br>
+3. int main() <br>
+4. &nbsp;&nbsp;&nbsp; { <br>
+5. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; time_t tp; <br>
+6. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; struct tm lt; <br>
+7. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; time(&tp); <br>
+8. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lt = *localtime(&tp); <br>
+9. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Dia  = %i\n", lt.tm_mday); <br>
+10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Mes  = %i\n", lt.tm_mon+1); <br>
+11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Ano  = %i\n", lt.tm_year+1900); <br>
+12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Hora = %i\n", lt.tm_hour); <br>
+13.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Min  = %i\n", lt.tm_min); <br>
+14. &nbsp;&nbsp;&nbsp; }
+</blockquote>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/time.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas 1 e 2 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da 
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf()</b></a>.
+    <li><b>time.h</b> - cabe&ccedil;alho com as fun&ccedil;&otilde;es para manipular datas e horas.
+    </ul>
+<li><b>Linha 3 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main()</b></a> cujos comandos v&atilde;o 
+    da linha 5 a linha 13.
+<li><b>Linha 5 :</b> &eacute; definida a vari&aacute;vel <i>tp</i> como sendo do tipo <i>time_t</i> (inteiro longo).
+<li><b>Linha 6 :</b> &eacute; definida a estrutura de dados <i>lt</i>.
+<li><b>Linha 7 :</b> usa a chamada de sistema <i>time()</i> para obter a quantidade de segundos passados desde &agrave;s 
+    00:00:00 de 01/01/1970. Este valor &eacute; armazenado na vari&aacute;vel <i>tp</i>. Podemos substituir esta linha por
+    <blockquote>tp=time(0)</blockquote>
+    para obter o mesmo resultado.
+<li><b>Linha 8 :</b> usa a fun&ccedil;&atilde;o <a href="fc_localtime.html"><b>localtime()</b></a> para converter o valor da 
+    vari&aacute;vel <i>tp</i> em uma estrutura do tipo <a href="ed_tm.html"><b>tm</b></a>. Este valor &eacute; armazenado 
+    em <i>lt</i>.
+<li><b>Linha 9 a 13:</b> exibe campos da estrutura <i>lt</i>.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar
+<blockquote class="t1">
+gcc -o time time.c 
+</blockquote>
+Para executar
+<blockquote class="t1">
+./time
+</blockquote>
+Abaixo uma poss&iacute;vel sa&iacute;da.
+<blockquote class="t2">
+<table class="t2">
+<tr><td>Dia  </td><td>=</td><td> 16  </td></tr>
+<tr><td>Mes  </td><td>=</td><td> 6   </td></tr>
+<tr><td>Ano  </td><td>=</td><td> 2015 </td></tr>
+<tr><td>Hora </td><td>=</td><td> 16  </td></tr>
+<tr><td>Min  </td><td>=</td><td> 57  </td></tr>
+</table>
+</blockquote>
+Os dados representam 16:57 do dia 16 de junho (m&ecirc;s 5, janeiro &eacute; zero) de 2015 (115 anos desde 1900).
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Se <i>t</i> n&atilde;o &eacute; nulo, o valor devolvido &eacute; armazenado na estrutura apontada por <i>t</i>.
+<li>O tipo <i>time_t</i> corresponde ao tipo long int (inteiro longo).
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

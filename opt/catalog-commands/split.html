@@ -1,0 +1,79 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>split</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="split">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>split</h1>
+   
+<blockquote><font size="+1"><b>split [op&ccedil;&otilde;es] [arquivo [prefixo]]</b></font></blockquote>
+<ul>
+<li>O argumento <i>arquivo</i> &eacute; o nome do arquivo a ser dividido. Se <i>arquivo</i> n&atilde;o &eacute; 
+    fornecido, o sistema usa a entrada padr&atilde;o.
+<li>O argumento <i>prefixo</i> corresponde ao prefixo usado na gera&ccedil;&atilde;o dos nomes dos 
+    arquivos menores.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando divide um arquivo em arquivos menores.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-b num[bkm]</b> : coloca <i>num</i> bytes, kbytes ou Mbytes em cada arquivo.</li>
+<li><b>-l num</b>: coloca <b>num</b> linhas em cada arquivo.</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>Os nomes dos arquivos de sa&iacute;da s&atilde;o formados do <i>prefixo</i> mais os sufixos 
+<i>aa</i> (para o primeiro arquivo), <i>ab</i> (para o segundo arquivo), e assim por diante 
+(at&eacute; <i>zz</i>). Portanto, a sa&iacute;da &eacute; <i>prefixoaa</i>, <i>prefixoab</i>, etc. 
+Caso n&atilde;o seja fornecido um valor para ser usado como <i>prefixo</i>, o sistema usa o caractere
+<i>x</i>. </p>
+
+<p>Por exemplo, o comando
+
+<blockquote class="t1">split -l 500 teste.txt novo</blockquote>
+
+divide o arquivo <i>teste.txt</i> em arquivos menores de 500 linhas cada. Os arquivos criados 
+s&atilde;o <i>novoaa</i>, <i>novoab</i>, <i>novoac</i>, etc.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Note que o &uacute;ltimo arquivo gerado pelo comando pode ter um tamanho menor que os demais arquivos, 
+    pois o &uacute;ltimo arquivo representa o resto da divis&atilde;o do arquivo maior em arquivos menores.
+</ul>
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

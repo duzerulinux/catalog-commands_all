@@ -1,0 +1,319 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>make</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="make">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>make</h1>
+   
+<blockquote><font size="+1"><b>make [op&ccedil;&otilde;es] alvo...</b></font><br></blockquote>
+<ul>
+<li>O argumento <i>alvo</i> &eacute um par&acirc;metro passado para o utilit&aacute;rio.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>O utilit&aacute;rio <b>make</b> &eacute; utilizado para verificar quais arquivos precisam 
+ser compilados (foram alterados desde a &uacute;ltima compila&ccedil;&atilde;o ou nunca foram compilados) 
+e para emitir a ordem de compila&ccedil;&atilde;o (e de <b>linkedi&ccedil;&atilde;o</b>).</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-f arquivo</b> : usa o arquivo especificado como entrada do comando.
+<li><b>-e</b> : as <b><a href="variaveis.html">vari&aacute;veis de ambiente</a></b> possuem preced&ecirc;ncia
+    sobre as vari&aacute;veis do arquivo <b>makefile</b>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Makefile</h2>
+
+<ul>
+<li>Ao iniciar o comando <b>make</b> sem a especifica&ccedil;&atilde;o de um arquivo (<b>op&ccedil;&atilde;o -f</b>),
+    o utilit&aacute;rio faz a seguinte sequ&ecirc;ncia de busca no diret&oacute;rio atual:
+    <ol>
+    <li>GNUmakefile</li>
+    <li>makefile</li>
+    <li>Makefile</li>
+    </ol>
+    Apenas o primeiro arquivo encontrado &eacute; executado pelo utilit&aacute;rio.
+<li>O comando <b>make</b> usa o conceito de alvo para definir os comandos a serem executados. Entenda por alvo um conjunto
+    de instru&ccedil;&otilde;es. Um alvo possui a seguinte estrutura dentro de um arquivo <b>makefile</b>
+    <blockquote class="t2">
+    nome_alvo : [depend&ecirc;ncias]<br>
+    comandos<br>
+    </blockquote>
+    onde temos a identifica&ccedil;&atilde;o do alvo, os pr&eacute;-requisitos necess&aacute;rios para executar o alvo e os 
+    comandos associados ao alvo em quest&atilde;o. Um nome de alvo sempre inicia no come&ccedil;o da linha e &eacute; seguido
+    por um sinal de dois-pontos ("<b>:</b>"). Um alvo pode ter como depend&ecirc;ncia uma lista de outros alvos ou uma lista
+    de arquivos. Quando a depend&ecirc;ncia &eacute; uma lista de alvos, ent&atilde;o cada alvo da lista deve ser executado 
+    antes do alvo especificado. Quando a depend&ecirc;ncia &eacute; uma lista de arquivos, ent&atilde;o cada um dos arquivos 
+    da lista deve existir para o alvo poder ser executado.
+<li>Outra importante observa&ccedil;&atilde;o em rela&ccedil;&atilde;o a estrutura mostrada acima diz respeito a 
+    posi&ccedil;&atilde;o onde s&atilde;o escritas as linhas de a&ccedil;&atilde;o (comandos). Em um arquivo <b>make</b>, os 
+    comandos devem iniciar com um caractere de tabula&ccedil;&atilde;o. Portanto, deve-se pressionar a tecla <b>Tab</b>, antes
+    de digitar os comandos do alvo.
+<li>Na linha do comando <b>make</b> pode-se definir um ou mais alvos. Caso nenhum alvo seja definido, o utilit&aacute;rio 
+    executa o primeiro alvo especificado dentro do arquivo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>Vejamos um exemplo.</p>
+
+<blockquote class="t2">          
+1 Objetivo = Estudo do makefile<br>
+2 alvo1: alvo3<br>
+3 @echo $(Objetivo)<br>
+4 alvo2:<br>
+5 @echo este eh o alvo2 do $(Objetivo)<br>
+6 alvo3:<br>
+7 @echo alvo3 do makefile<br>
+</blockquote>
+
+<p>Inicialmente &eacute; definida no <b>makefile</b> acima uma macro chamada <b>Objetivo</b>. 
+Em seguida, s&atilde;o definidos tr&ecirc;s alvos: <b>alvo1</b>, <b>alvo2</b> e <b>alvo3</b>. 
+Note que apenas o <b>alvo1</b> tem uma depend&ecirc;ncia: <b>alvo3</b>. Isto significa que 
+antes de executar <b>alvo1</b>, o utilit&aacute;rio dever&aacute; executar <b>alvo3</b>. 
+Al&eacute;m disso, observe que cada alvo usa o comando <b>echo</b> que exibe strings e 
+conte&uacute;do de macros (o s&iacute;mbolo <b>@</b> antes do comando <b>echo</b> apenas evita 
+que o comando tamb&eacute;m seja exibido).</p>
+
+<p>No primeiro alvo temos o s&iacute;mbolo <b>$</b> seguido pelo nome da macro entre 
+par&ecirc;nteses. O s&iacute;mbolo <b>$</b> informa ao comando <b>@echo</b> para substituir o 
+nome da macro pelo seu conte&uacute;do (os par&ecirc;nteses n&atilde;o s&atilde;o exigidos se o 
+nome da macro tem apenas uma letra). No segundo alvo temos uma string seguida pela macro 
+<b>Objetivo</b>. E no terceiro alvo temos apenas uma string. Abaixo mostramos poss&iacute;veis
+linhas de comando e suas sa&iacute;das para este <b>makefile</b>.
+
+<blockquote>
+<b>1)</b> make<br><br>
+alvo3 do makefile<br>
+Estudo do makefile<br><br>
+<b>2)</b> make alvo1<br><br>
+alvo3 do makefile<br>
+Estudo do makefile<br><br>
+<b>3)</b> make alvo2<br><br>
+este eh o alvo2 do Estudo do makefile<br><br>
+<b>4)</b> make alvo3<br><br>
+alvo3 do makefile<br><br>
+<b>5)</b> make alvo1 alvo2 alvo3<br><br>
+alvo3 do makefile<br>
+Estudo do makefile<br>
+este eh o alvo2 do Estudo do makefile<br>
+make: `alvo3' is up to date.<br><br>
+<b>6)</b> make alvo3 alvo2 alvo1<br><br>
+alvo3 do makefile<br>
+este eh o alvo2 do Estudo do makefile<br>
+Estudo do makefile<br><br>
+<b>7)</b> Objetivo=teste make -e   (ou make -e Objetivo=teste)<br><br>
+alvo3 do makefile<br>
+teste<br>
+</blockquote>
+
+Podemos fazer algumas observa&ccedil;&otilde;es em rela&ccedil;&atilde;o ao exemplo acima:
+<ol>
+<li>Os comandos <b>make</b> e <b>make alvo1</b> s&atilde;o id&ecirc;nticos pois quando o 
+alvo n&atilde;o &eacute; especificado na linha de comando, o utilit&aacute;rio sempre 
+executa o primeiro alvo especificado no arquivo <b>makefile</b>. </li>
+
+<li>O quinto exemplo acima mostra uma mensagem de advert&ecirc;ncia do <b>make</b>. Este 
+exemplo solicita a execu&ccedil;&atilde;o de <b>alvo1</b>, <b>alvo2</b> e ent&atilde;o 
+<b>alvo3</b>. S&oacute; que <b>alvo3</b> &eacute; pr&eacute;-requisito de <b>alvo1</b> e 
+portanto, o utilit&aacute;rio executa <b>alvo3</b>, <b>alvo1</b> e <b>alvo2</b>, quando 
+chega para executar o <b>alvo3</b>, ele verifica que este j&aacute; foi executado e exibe a 
+mensagem de advert&ecirc;ncia. </li>
+
+<li>O sexto exemplo executa inicialmente <b>alvo3</b> e <b>alvo2</b>. Quando vai executar 
+<b>alvo1</b>, verifica que este requer a execu&ccedil;&atilde;o de <b>alvo3</b> antes de 
+executar <b>alvo1</b>. Como <b>alvo3</b> j&aacute; foi executado, <b>alvo1</b> &eacute; 
+executado imediatamente. </li>
+
+<li>O &uacute;ltimo exemplo define uma vari&aacute;vel de ambiente tamb&eacute;m chamada 
+<b>Objetivo</b>; o uso da op&ccedil;&atilde;o <b>-e</b> com o comando <b>make</b>, informa 
+que o conte&uacute;do desta vari&aacute;vel de ambiente deve sobrepor o conte&uacute;do da 
+macro de mesmo nome definida dentro do arquivo <b>makefile</b>.</li>
+</ol>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<p>Embora n&atilde;o exista um padr&atilde;o formal para nomes de alvos, normalmente, 
+s&atilde;o adotados os seguintes nomes de alvos nos arquivos <b>makefiles</b>:</p>
+
+<ul>
+<li><b>all</b> : nome do primeiro alvo e portanto, o nome padr&atilde;o.</li>
+<li><b>clean</b> : usado para apagar arquivos-objeto (<b>*.o</b>) e outros arquivos 
+tempor&aacute;rios.</li>
+<li><b>clobber</b> : usado para apagar arquivos execut&aacute;veis.</li> 
+<li><b>install</b> : usado para instalar programas.</li>
+<li><b>distclean</b> : usado para apagar todos os arquivos que n&atilde;o fazem parte da 
+distribui&ccedil;&atilde;o original.</li>
+</ul>
+
+<p>No exemplo mostrado acima, usamos uma macro de nome <b>Objetivo</b>. Esta macro foi 
+definida pelo usu&aacute;rio dentro do <b>makefile</b>. Por&eacute;m, podemos tamb&eacute;m 
+fazer uso de macros embutidas, ou seja, de macros internamente mantidas pelo <b>make</b> e 
+que portanto, podem ter o seu conte&uacute;do alterado durante a execu&ccedil;&atilde;o e 
+n&atilde;o precisam ser definidas pelo usu&aacute;rio. S&atilde;o alguns exemplos de macros 
+embutidas:</p>
+
+<ul>
+<li><b>$*</b> : nomes dos arquivos dependentes sem sufixo (extens&atilde;o).</li>
+<li><b>$@</b> : nome do arquivo alvo com sufixo (extens&atilde;o).</li>
+<li><b>$&lt;</b> : nomes dos arquivos dependentes com sufixo (extens&atilde;o).</li>
+</ul>
+
+<p>O comando <b>make</b> baseia-se bastante no uso de sufixos de arquivo. S&atilde;o alguns 
+sufixos de arquivos reconhecidos pelo <b>make</b>:
+<ul>
+<li><b>.c</b> : arquivo-fonte em linguagem C</li>
+<li><b>.cc</b> : arquivo-fonte em linguagem C++</li>
+<li><b>.h</b> : arquivo de cabe&ccedil;alho em linguagem C</li>
+<li><b>.o</b> : arquivo-objeto compilado</li>
+<li><b>.s</b> : arquivo-fonte assembler</li>
+<li><b>.sh</b> : arquivo shell</li>
+</ul>
+A partir dos sufixos de arquivo podemos definir regras de infer&ecirc;ncias nos arquivos 
+<b>makefiles</b>. Estas regras definem como arquivos s&atilde;o gerados a partir de outros 
+arquivos. Podemos, por exemplo, escrever
+<blockquote class="t1">.c.o : gcc -c -o $@ $&lt;</blockquote>
+A regra de infer&ecirc;ncia acima define como um arquivo com sufixo <b>.o</b> &eacute; 
+gerado a partir de um arquivo <b>.c</b>. Note que usamos duas macros embutidas: a primeira 
+macro (<b>$@</b>) fornece o nome do arquivo final com sufixo <b>.o</b> e a segunda 
+(<b>$&lt;</b>) fornece o nome do arquivo original com sufixo <b>.c</b>. Para a regra de 
+infer&ecirc;ncia mostrada acima poder&iacute;amos, por exemplo, criar o seguinte alvo
+<blockquote class="t1">teste.o : teste.c funcoes.h</blockquote>
+Neste caso, o comando <b>make teste.o</b> faz com que o utilit&aacute;rio <b>make</b> 
+execute o seguinte comando
+<blockquote class="t1">gcc -c -o teste.o teste.c funcoes.h</blockquote>
+onde a op&ccedil;&atilde;o <b>-c</b> define apenas compila&ccedil;&atilde;o e a 
+op&ccedil;&atilde;o <b>-o</b> define o nome do arquivo de sa&iacute;da. Os arquivos 
+<b>teste.c</b> e <b>funcoes.h</b> s&atilde;o os arquivos de entrada. Uma 
+observa&ccedil;&atilde;o final em rela&ccedil;&atilde;o a regras de infer&ecirc;ncia &eacute; 
+que n&atilde;o se deve definir depend&ecirc;ncias (pr&eacute;-requisitos) para regras de 
+infer&ecirc;ncia. Em algumas plataformas UNIX, a regra com pr&eacute;-requisitos &eacute; 
+interpretada como alvo.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Mais exemplos</h2>
+
+<p>Vejamos agora um exemplo completo de um <b>makefile</b>. O exemplo mostrado abaixo gera o 
+execut&aacute;vel <b>solv</b> a partir dos arquivos <b>solvers.o</b>, <b>option_1.o</b>, 
+<b>option_2.o</b>, <b>option_3.o</b> e <b>misc.o</b>.</p>
+
+<blockquote class="t2">
+1 CC=gcc<br>
+2 INCLUDEDIR=.<br>
+3 FLAGS=-g -I${INCLUDEDIR} <br>
+4 .c.o:<br>
+5 ${CC} ${FLAGS} -c -o $@ $&lt; <br>
+6 OBJS = solvers.o option_1.o option_2.o option_3.o misc.o <br>
+7 solv: objects<br>
+8 ${CC} -o $@ ${OBJS} -g -lm<br>
+9 objects: ${OBJS}<br>
+10 solvers.o: solvers.c define.h misc.c<br>
+11 option_1.o: option_1.c define.h misc.c<br>
+12 option_2.o: option_2.c define.h misc.c<br>
+13 option_3.o: option_3.c define.h misc.c<br>
+14 misc.o: misc.c define.h<br>
+15 clean: <br>
+16 rm -fr *.o<br>
+</blockquote>
+
+<p>Inicialmente, s&atilde;o definidas 3 macros: <b>CC</b>, <b>INCLUDEDIR</b> e <b>FLAGS</b>. 
+Na linha 4 &eacute; definida uma regra de infer&ecirc;ncia para gerar os arquivos com sufixo 
+<b>.o</b> a partir dos arquivos com sufixo <b>.c</b>. Na linha 6 &eacute; definida a macro 
+<b>OBJS</b>. Nas linhas de 7 a 16 s&atilde;o definidos 8 alvos: <b>solv</b>, <b>objects</b>, 
+<b>solvers.o</b>, <b>option_1.o</b>, <b>option_2.o</b>, <b>option_3.o</b>, <b>misc.o</b> e 
+<b>clean</b>. O primeiro alvo (<b>solv</b>) &eacute; o alvo padr&atilde;o, ou seja, o alvo 
+que ser&aacute; executado caso o usu&aacute;rio digite <b>make</b>. O alvo <b>solv</b> tem 
+como pr&eacute;-requisito o alvo <b>objects</b> e como linha de a&ccedil;&atilde;o o comando 
+<b>gcc</b>. O alvo <b>objects</b> n&atilde;o tem linhas de a&ccedil;&atilde;o, apenas 
+pr&eacute;-requisitos: os alvos definidos nas linhas de 10 a 14. Note que estes alvos lista 
+apenas as depend&ecirc;ncias, portanto ser&aacute; utilizada a regra de infer&ecirc;ncia 
+definida nas linhas 4 e 5 na execu&ccedil;&atilde;o de cada alvo. Por exemplo, na 
+gera&ccedil;&atilde;o do arquivo <b>solvers.o</b> o seguinte comando &eacute; executado
+<blockquote class="t1">gcc -g -I. -c -o solvers.o solvers.c define.h misc.c</blockquote>
+onde <b>-g</b>, <b>-I</b> e <b>-c</b> correspodem, respectivamente, as op&ccedil;&otilde;es
+de depura&ccedil;&atilde;o, inclus&atilde;o de diret&oacute;rio no caminho de busca e apenas 
+compila&ccedil;&atilde;o. O alvo <b>objects</b> &eacute; usado para gerar os arquivos definidos
+na macro <b>OBJS</b>. Ap&oacute;s a conclus&atilde;o do alvo <b>objects</b>, o comando retorna 
+ao alvo <b>solv</b> que executa a seguinte linha de a&ccedil;&atilde;o
+<blockquote class="t1">gcc -o solv solvers.o option_1.o option_2.o option_3.o misc.o</blockquote>
+e finaliza a execu&ccedil;&atilde;o do <b>makefile</b>. Caso o usu&aacute;rio tenha 
+digitado <b>make clean</b>, o alvo <b>clean</b> &eacute; executado. Este alvo apaga todos os 
+arquivos com sufixo <b>.o</b> do diret&oacute;rio. Note que tamb&eacute;m &eacute; 
+poss&iacute;vel utilizar o <b>makefile</b> para gerar apenas os arquivos <b>.o</b>, pois 
+existem alvos definidos com os nomes desses arquivos. Por exemplo, o comando
+<blockquote class="t1">make option_1.o</blockquote> 
+gera o arquivo <b>option_1.o</b>.</p>
+
+<p>Vejamos um segundo exemplo de <b>makefile</b>. O exemplo mostrado abaixo gera o 
+execut&aacute;vel <b>teste</b> a partir dos arquivos <b>teste.o</b>, <b>prog1.o</b> e 
+<b>prog2.o</b>.</p>
+
+<blockquote class="t2">
+1 CC = gcc<br>
+2 OBJS = teste.o prog1.o prog2.o<br>
+3 .c.o:<br>
+4 $(CC) -c -o $@ $&lt;<br>
+5 all: $(OBJS)<br>
+6 $(CC) $(OBJS) -o teste<br>
+7 clean:<br>
+8 rm -f *.o core<br>
+9 clobber: clean<br>
+10 rm -f teste <br>
+</blockquote>
+
+<p>Inicialmente, s&atilde;o definidas 2 macros: <b>CC</b> e <b>OBJS</b>. Nas linha 3 e 4 
+&eacute; definida uma regra de infer&ecirc;ncia para gerar os arquivos com sufixo <b>.o</b> 
+a partir dos arquivos com sufixo <b>.c</b>. Nas linhas de 5 a 10 s&atilde;o definidos 3 alvos: 
+<b>all</b>, <b>clean</b> e <b>clobber</b>. O primeiro alvo (<b>all</b>) &eacute; o alvo 
+executado caso o usu&aacute;rio digite apenas <b>make</b>. Este alvo tem como 
+pr&eacute;-requisito a lista dos arquivos com extens&atilde;o <b>.o</b>. Para gerar estes 
+arquivos o <b>make</b> far&aacute; uso da regra de infer&ecirc;ncia definida nas linhas 3 e 4. 
+Por exemplo, na gera&ccedil;&atilde;o do arquivo <b>teste.o</b> o seguinte comando &eacute; 
+executado:
+<blockquote class="t1">gcc -c -o teste.o teste.c</blockquote>
+Ap&oacute;s a gera&ccedil;&atilde;o dos arquivos <b>teste.o</b>, <b>prog1.o</b> e 
+<b>prog2.o</b>, o <b>make</b> gera o execut&aacute;vel <b>teste</b> com o seguinte comando 
+(linha 6)
+<blockquote class="t1">gcc teste.o prog1.o prog2.o -o teste</blockquote>
+O alvo <b>clean</b> (linhas 7 e 8) &eacute; utilizado para apagar os arquivos com 
+extens&atilde;o <b>.o</b> e o arquivo <b>core</b> (gerado pelo sistema em caso de erro de 
+execu&ccedil;&atilde;o). O alvo <b>clobber</b> (linhas 9 e 10) &eacute; utilizado 
+tamb&eacute;m para apagar estes arquivos al&eacute;m do arquivo execut&aacute;vel 
+<b>teste</b> (note que o alvo <b>clobber</b> tem o alvo <b>clean</b> como 
+pr&eacute;-requisito).</p> 
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

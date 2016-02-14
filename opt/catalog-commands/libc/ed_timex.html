@@ -1,0 +1,92 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>timex</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="timex">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+<h1>timex</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Estrutura de dados usada para ajustar o rel&oacute;gio do <a href="../kernel.html"><b>kernel</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Cabe&ccedil;alho</h2>
+
+<p>Para usar esta estrutura de dados deve-se incluir o cabe&ccedil;alho <i>timex.h</i> no programa.</p>
+
+<blockquote class="t2">
+#include &lt;sys/timex.h&gt;
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<p>
+<blockquote class="t2">
+<table class="t2">
+<tr><td colspan=3>struct timex</td></tr>
+<tr><td colspan=3>{             </td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; unsigned int </td><td> modes; </td><td> /* mode selector */ </td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; long</td><td>offset;</td><td> /* time offset (usec) */ </td></tr> 
+<tr><td>&nbsp;&nbsp;&nbsp; long</td><td>freq;</td><td>/* frequency offset (scaled ppm) */</td></tr> 
+<tr><td>&nbsp;&nbsp;&nbsp; long</td><td> maxerror; </td><td> /* maximum error (usec) */ </td></tr> 
+<tr><td>&nbsp;&nbsp;&nbsp; long</td><td>esterror;</td><td>/* estimated error (usec) */</td></tr> 
+<tr><td>&nbsp;&nbsp;&nbsp; int</td><td>status;</td><td>/* clock command/status */ </td></tr> 
+<tr><td>&nbsp;&nbsp;&nbsp; long</td><td>constant;</td><td>/* pll time constant */ </td></tr> 
+<tr><td>&nbsp;&nbsp;&nbsp; long</td><td>precision;</td><td>/* clock precision (usec) (read only) */</td></tr> 
+<tr><td>&nbsp;&nbsp;&nbsp; long</td><td>tolerance;</td><td>/* clock frequency tolerance (ppm) * (read only) */</td></tr> 
+<tr><td>&nbsp;&nbsp;&nbsp; struct timeval</td><td>time;</td><td>/* (read only, except for ADJ_SETOFFSET) */</td></tr> 
+<tr><td>&nbsp;&nbsp;&nbsp; long</td><td>tick;</td><td>/* (modified) usecs between clock ticks */ </td></tr> 
+<tr><td>&nbsp;&nbsp;&nbsp; long</td><td>ppsfreq;</td><td>/* pps frequency (scaled ppm) (ro) */</td></tr> 
+<tr><td>&nbsp;&nbsp;&nbsp; long</td><td>jitter;</td><td>/* pps jitter (us) (ro) */ </td></tr> 
+<tr><td>&nbsp;&nbsp;&nbsp; int </td><td> shift; </td><td> /* interval duration (s) (shift) (ro) */</td></tr> 
+<tr><td>&nbsp;&nbsp;&nbsp; long </td><td> stabil; </td><td> /* pps stability (scaled ppm) (ro) */</td></tr> 
+<tr><td>&nbsp;&nbsp;&nbsp; long </td><td> jitcnt; </td><td> /* jitter limit exceeded (ro) */ </td></tr> 
+<tr><td>&nbsp;&nbsp;&nbsp; long </td><td> calcnt; </td><td> /* calibration intervals (ro) */ </td></tr> 
+<tr><td>&nbsp;&nbsp;&nbsp; long </td><td> errcnt; </td><td> /* calibration errors (ro) */ </td></tr> 
+<tr><td>&nbsp;&nbsp;&nbsp; long </td><td> stbcnt; </td><td> /* stability limit exceeded (ro) */ </td></tr> 
+<tr><td>&nbsp;&nbsp;&nbsp; int </td><td> tai; </td><td> /* TAI offset (ro) */ </td></tr> 
+<tr><td colspan=2>&nbsp;&nbsp;&nbsp; int &nbsp; &nbsp; :32; &nbsp; int  &nbsp; &nbsp; :32; &nbsp; int  &nbsp; &nbsp; :32; &nbsp; int  &nbsp;&nbsp; :32; </td></tr>
+<tr><td colspan=2>&nbsp;&nbsp;&nbsp; int &nbsp; &nbsp; :32; &nbsp; int  &nbsp; &nbsp; :32; &nbsp; int  &nbsp; &nbsp; :32; &nbsp; int  &nbsp;&nbsp; :32; </td></tr>
+<tr><td colspan=2>&nbsp;&nbsp;&nbsp; int &nbsp; &nbsp; :32; &nbsp; int  &nbsp; &nbsp; :32; &nbsp; int  &nbsp; &nbsp; :32; </td></tr>
+<tr><td colspan=3>};</td></tr>
+</table>
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+<ul>
+<li>A estrutura <i>timex</i> est&aacute; definida em <i>/usr/include/linux/timex.h</i>.
+<li>Veja a chamada de sistema <a href="cs_adjtimex.html"><b>adjtimex()</b></a> para mais detalhes do uso dessa estrutura de dados.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>telinit</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="telinit">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>telinit</h1>
+
+<blockquote><font size="+1"><b>telinit [op&ccedil&otilde;es]</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>O <b>telinit</b> recebe um caractere como argumento e sinaliza ao <b><a href="init.html">init</a></b> 
+(processo com <a href="pid.html"><b>PID</b></a> 1) 
+para executar a a&ccedil;&atilde;o apropriada.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>0</b> : encerra o sistema (desliga a m&aacute;quina).
+<li><b>2</b>, <b>3</b>, <b>4</b> ou <b>5</b> : altera o n&iacute;vel de execu&ccedil;&atilde;o (<i>runlevel</i>) para o valor especificado.
+<li><b>6</b> : reinicializa o sistema (<i>reboot</i>).
+<li><b>S</b> ou <b>s</b> : diz para o init entrar em modo monousu&aacute;rio sem parar a execu&ccedil;&atilde;o dos processos (n&atilde;o aconselh&aacute;vel).
+<li><b>Q</b> ou <b>q</b> : diz para o init recarregar a sua configura&ccedil;&atilde;o.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O utilit&aacute;rio <i>telinit</i> grava o novo <i>runlevel</i> no arquivo /var/run/utmp e adiciona uma nova entrada em
+    /var/log/wtmp.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="init.html">init</a></b> - processo de controle da inicializa&ccedil;&atilde;o do sistema.
+<li><b><a href="reboot.html">reboot</a></b> - reinicializa o computador.
+<li><b><a href="shutdown.html">shutdown</a></b> - encerra/reinicializa o sistema.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

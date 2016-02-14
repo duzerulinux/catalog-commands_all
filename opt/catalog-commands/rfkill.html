@@ -1,0 +1,88 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>rfkill</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="rfkill">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>rfkill [op&ccedil;&otilde;es] comandos</h1>
+ 
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Ferramenta para habilitar e desabilitar dispositivos sem fio.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Op&ccedil;&otilde;es</h2>
+
+<ul>
+<li><b>--version</b> : mortra informa&ccedil;&otilde;es sobre o aplicativo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Comandos</h2>
+
+<ul>
+<li><b>help</b> :   mostra informa&ccedil;&otilde;es sobre o aplicativo.
+<li><b>event</b> :  ouve e exibe os eventos relacionados &agrave; ferramenta.
+<li><b>list [type]</b> : lista todos os equipamentos sem fio ou apenas os equipamentos de um determinado tipo.
+<li><b>block index|type</b> : Desabilita os equipamentos correspondentes ao &iacute;ndice fornecido. O argumento "type" pode ser
+              "all", "wifi", "wlan", "bluetooth", "uwb", "ultrawideband", "wimax", "wwan", "gps", "fm" ou "nfc".
+<li><b>unblock index|type</b> : habilita os equipamentos correspondentes ao &iacute;ndice fornecido.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>O comando 
+   <blockquote class="t1">
+   rfkill list
+   </blockquote>
+informa os equipamentos sem fio da m&aacute;quina.
+   <blockquote class="t2">
+   <table class="t2">
+   <tr><td>0: dell-wifi:</td><td>  Wireless LAN     </td></tr>
+   <tr><td>	        </td><td>Soft blocked: no   </td></tr>
+   <tr><td>	        </td><td>Hard blocked: no   </td></tr>
+   <tr><td>1: phy0:     </td><td> Wireless LAN      </td></tr>
+   <tr><td>	        </td><td>Soft blocked: no   </td></tr>
+   <tr><td>	        </td><td>Hard blocked: no   </td></tr>
+   </table>
+   </blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<p>Para desativar o bluetooth na inicialização do linux, basta colocar no arquivo /etc/rc.local as linhas abaixo.
+    <blockquote class="t2">
+    rfkill block bluetooth <br>
+    exit 0
+    </blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

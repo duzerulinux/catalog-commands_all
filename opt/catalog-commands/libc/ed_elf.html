@@ -1,0 +1,268 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>elf</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="elf">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<p>&nbsp;</p>
+
+<a name="inicio"></a>
+
+<h1>ELF</h1>
+
+<br>
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>ELF (<i>Executable and Linking Format</i>) &eacute; um formato usado em <a href="../arquivo.html"><b>arquivos</b></a> 
+(execut&aacute;veis e objetos), <a href="../biblioteca_c.html"><b>bibliotecas</b></a> e <i>core dumps</i>. O uso deste 
+formato facilita a portabilidade para outros sistemas.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Estrutura</h2>
+
+<p>Um arquivo execut&aacute;vel com o formato ELF consiste de um cabe&ccedil;alho ELF seguido por:
+<ul>
+<li>Tabela de cabe&ccedil;alhos de programa (<i>Pro­gram Header Table</i>) - descreve zero ou mais segmentos. Os segmentos
+    possuem informa&ccedil;&otilde;es usadas pelo sistema operacional para carrregar o programa na 
+    <a href="../memoria.html"><a>mem&oacute;ria</b></a>.
+<li>Tabela de cabe&ccedil;alhos de se&ccedil;&atilde;o (<i>Ses­sion Header Table</i>) - descreve zero ou mais se&ccedil;&otilde;es.
+    As se&ccedil;&otilde;es possuem dados importantes para a linkedi&ccedil;&atilde;o e a realoca&ccedil;&atilde;o.
+<li>Dados do programa - s&atilde;o referenciados pelas entradas da tabela de cabe&ccedil;alhos de programa ou pelas entradas da
+    tabela de cabe&ccedil;alhos de se&ccedil;&atilde;o.
+</ul>
+</p>
+<!-
+o Ses­sion Header Table pos­sui infor­mações sobre o Ses­sion (tre­chos) do programa. (**** checar ****)
+-->
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Cabe&ccedil;alho ELF</h2>
+
+<p>O cabe&ccedil;alho ELF aparece no in&iacute;cio do arquivo e descreve as estruturas dos cabe&ccedil;alhos de programa e dos 
+    cabe&ccedil;alhos de se&ccedil;&atilde;o. Abaixo &eacute; mostrado o cabe&ccedil;alho ELF para a arquitetura de 64 bits.
+    <blockquote class="t2">
+    <table class="t2" cellpadding=3>
+    <tr><td colspan=3>typedef struct</td></tr>
+    <tr><td colspan=3>{</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;unsigned char </td><td>e_ident[EI_NIDENT]; </td><td>/* Magic number and other info */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Half    </td><td>e_type;             </td><td>/* Object file type */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Half    </td><td>e_machine;          </td><td>/* Architecture */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Word    </td><td>e_version;          </td><td>/* Object file version */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Addr    </td><td>e_entry;            </td><td>/* Entry point virtual address */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Off     </td><td>e_phoff;            </td><td>/* Program header table file offset */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Off     </td><td>e_shoff;            </td><td>/* Section header table file offset */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Word    </td><td>e_flags;            </td><td>/* Processor-specific flags */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Half    </td><td>e_ehsize;           </td><td>/* ELF header size in bytes */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Half    </td><td>e_phentsize;        </td><td>/* Program header table entry size */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Half    </td><td>e_phnum;            </td><td>/* Program header table entry count */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Half    </td><td>e_shentsize;        </td><td>/* Section header table entry size */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Half    </td><td>e_shnum;            </td><td>/* Section header table entry count */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Half    </td><td>e_shstrndx;         </td><td>/* Section header string table index */</td></tr>
+    <tr><td colspan=3>} Elf64_Ehdr;</td></tr>
+    </table>
+    </blockquote>
+<p>Os campos do cabe&ccedil;alho ELF s&atilde;o discutidos com um pouco mais de detalhes abaixo.
+    <ul>
+    <li><b>e_ident</b> - s&atilde;o 16 bytes que identificam o formato do arquivo.
+        <ul>
+        <li>Os quatro primeiros bytes s&atilde;o sempre iguais a "7f 45 4c 46" (unicode: 45=E, 4c=L e 46=F).
+        <li>Um byte identifica a arquitetura usada na gera&ccedil;atilde;o do arquivo (por exemplo se &eacute; 32 bits ou 64 bits).
+        <li>Um byte especifica o formato usado para representar os dados (<i>little endian</i> ou <i>big endian</i>,
+            complemento de dois, etc).
+        <li>Um byte identifica o n&uacute;mero da vers&atilde;o da especifica&ccedil;&atilde;o ELF.
+        <li>Um byte identifica o sistema operacional e a ABI (<i>application binary interface</i>) do arquivo.
+        <li>Um byte identifica a vers&atilde;o da ABI (<i>application binary interface</i>) do arquivo.
+        <li>Alguns bytes n&atilde;o s&atilde;o usados e foram deixados para futuras implementa&ccedil;&otilde;es.
+        </ul>
+    <li><b>e_type</b> - identifica o tipo do arquivo (desconhecido, reloc&aacute;vel, execut&aacute;vel, compartilh&aacute;vel
+        ou <i>core</i>).
+    <li><b>e_machine</b> - especifica a arquitetura requerida para o arquivo.
+    <li><b>e_version</b> - identifica a vers&atilde;o do arquivo.
+    <li><b>e_entry</b> - especifica o endere&ccedil;o virtual associado com o ponto de entrada do programa (&eacute; zero quando
+        o arquivo n&atilde;o tem ponto de entrada).
+    <li><b>e_phoff</b> - informa o tamanho da tabela de cabe&ccedil;alhos de programa (se n&atilde;o existir, &eacute; zero).
+    <li><b>e_shoff</b> - informa o tamanho da tabela de cabe&ccedil;alhos de se&ccedil&atilde;o (se n&atilde;o existir, &eacute; zero).
+    <li><b>e_flags</b> - armazena flags associados ao arquivo.
+    <li><b>e_ehsize</b> - informa o tamanho do cabe&ccedil;alho ELF em bytes.
+    <li><b>e_phentsize</b> - informa o tamanho de uma entrada da tabela de cabe&ccedil;alhos de programa em bytes. Todas as
+        entradas possuem o mesmo tamanho.
+    <li><b>e_phnum</b> - informa o n&uacute;mero de entradas da tabela de cabe&ccedil;alhos de programa.
+    <li><b>e_shentsize</b> - informa o tamanho do cabe&ccedil;alho de se&ccedil;&otilde;es em bytes. Um cabe&ccedil;alho de 
+        se&ccedil;&atilde;o &eacute; uma entrada na tabela de cabe&ccedil;alhos de se&ccedil;&atilde;o. Todas as entradas possuem o 
+        mesmo tamanho.
+    <li><b>e_shnum</b> - informa o n&uacute;mero de entradas da tabela de cabe&ccedil;alhos de se&ccedil;&atilde;o.
+    <li><b>e_shstrndx</b> - possui os &iacute;ndices associados &agrave; tabela de cabe&ccedil;alhos de se&ccedil;&atilde;o.
+    </ul>
+</p>
+<p>Para verificar o conte&uacute;do do cabe&ccedil;alho ELF de um arquivo use o comando <a href="../readelf.html"><b>readelf</b></a>.
+Por exemplo, 
+   <blockquote class="t1">readelf -h teste</blockquote>
+mostra o conte&uacute;do do do cabe&ccedil;alho ELF do arquivo execut&aacute;vel <i>teste</i>.
+   <blockquote class="t2">
+   Cabeçalho ELF: <br>
+   &nbsp;&nbsp;&nbsp;M&aacute;gico:&nbsp;&nbsp;&nbsp;7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00  <br>
+   &nbsp;&nbsp;&nbsp;Classe: ELF64 <br>
+   &nbsp;&nbsp;&nbsp;Dados: complemento de 2, little endian <br>
+   &nbsp;&nbsp;&nbsp;Vers&atilde;o: 1 (current) <br>
+   &nbsp;&nbsp;&nbsp;OS/ABI:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UNIX - System V <br>
+   &nbsp;&nbsp;&nbsp;Vers&atilde;o ABI: 0 <br>
+   &nbsp;&nbsp;&nbsp;Tipo: EXEC (Arquivo executável) <br>
+   &nbsp;&nbsp;&nbsp;M&aacute;quina: Advanced Micro Devices X86-64 <br>
+   &nbsp;&nbsp;&nbsp;Vers&atilde;o: 0x1 <br>
+   &nbsp;&nbsp;&nbsp;Endere&ccedil;o do ponto de entrada:&nbsp;&nbsp;&nbsp; 0x400490 <br>
+   &nbsp;&nbsp;&nbsp;In&iacute;cio dos cabe&ccedil;alhos de programa:&nbsp;&nbsp;&nbsp; 64 (bytes dentro do arquivo) <br>
+   &nbsp;&nbsp;&nbsp;Princ&iacute;pio do cabe&ccedil;alho da se&ccedil;&atilde;o:&nbsp;&nbsp;&nbsp; 4472 (bytes dentro do arquivo) <br>
+   &nbsp;&nbsp;&nbsp;Sinaliza&ccedil;&otilde;es: 0x0 <br>
+   &nbsp;&nbsp;&nbsp;Tamanho deste cabe&ccedil;alho: 64 (bytes) <br>
+   &nbsp;&nbsp;&nbsp;Tamanho dos cabe&ccedil;alho dos  programas: 56 (bytes) <br>
+   &nbsp;&nbsp;&nbsp;N&uacute;mero do cabe&ccedil;alho do programa: 9 <br>
+   &nbsp;&nbsp;&nbsp;Tamanho do cabe&ccedil;alho da se&ccedil;&atilde;o: 64 (bytes) <br>
+   &nbsp;&nbsp;&nbsp;N&uacute;mero do cabe&ccedil;alho da se&ccedil;&atilde;o: 30 <br>
+   &nbsp;&nbsp;&nbsp;Sequ&ecirc;ncia do &iacute;ndice da tabela cabe&ccedil;alho da se&ccedil;&atilde;o: 27
+   </blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Tabela de cabe&ccedil;alhos do programa</h2>
+
+<p>A tabela de cabe&ccedil;alhos do programa de um arquivo objeto execut&aacute;vel ou compartilh&aacute;vel &eacute; composta por um
+    conjunto de estuturas, onde cada estrutura descreve um segmento (a <a href="../processo.html#memoria"><b>mem&oacute;ria</b></a> alocada
+    para a execu&ccedil;&atilde;o de um <a href="../processo.html"><b>processo</b></a> &eacute; dividida em segmentos) ou outra
+    informa&ccedil;&atilde;o que o sistema precisa para preparar o programa para a execu&ccedil;&atilde;o. O segmento de um arquivo objeto
+    cont&eacute;m uma ou mais se&ccedil;&otilde;es. Abaixo &eacute; apresentado o cabe&ccedil;alho de um segmento na arquitetura de 64 bits.
+    <blockquote class="t2">
+    <table class="t2" cellpadding=3>
+    <tr><td colspan=3>typedef struct</td></tr>
+    <tr><td colspan=3>{</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Word  </td><td>p_type;    </td><td>/* Segment type */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Word  </td><td>p_flags;   </td><td>/* Segment flags */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Off   </td><td>p_offset;  </td><td>/* Segment file offset */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Addr  </td><td>p_vaddr;   </td><td>/* Segment virtual address */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Addr  </td><td>p_paddr;   </td><td>/* Segment physical address */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Xword </td><td>p_filesz;  </td><td>/* Segment size in file */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Xword </td><td>p_memsz;   </td><td>/* Segment size in memory */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Xword </td><td>p_align;   </td><td>/* Segment alignment */</td></tr>
+    <tr><td colspan=3>} Elf64_Phdr;;</td></tr>
+    </table>
+    </blockquote>
+</p>
+
+<p>Os campos do cabe&ccedil;alho do programa s&atilde;o discutidos com um pouco mais de detalhes abaixo.
+<ul>
+    <li><b>p_type</b> - especifica o tipo de segmento.
+        <p>
+        <table class="t2" rules=all cellpadding=3>
+        <tr><td>PT_NULL     </td><td>N&atilde;o est&aacute; sendo usado</td></tr>
+        <tr><td>PT_LOAD     </td><td>&Eacute; um segmento recarreg&aacute;vel</td></tr>
+        <tr><td>PT_DYNAMIC  </td><td>Especifica linkedi&ccedil;&atilde;o din&acirc;mica</td></tr>
+        <tr><td>PT_INTERP   </td><td>Especifica um interpretador</td></tr>
+        <tr><td>PT_NOTE     </td><td>Especifica localiza&ccedil;&atilde;o e tamanho da informa&ccedil;&atilde;o auxiliar</td></tr>
+        <tr><td>PT_SHLIB    </td><td>Reservado para sem&acirc;ntica ainda n&atilde;o especificada</td></tr>
+        <tr><td>PT_PHDR     </td><td>Especifica localiza&ccedil;&atilde;o e tamanho da tabela de cabe&ccedil;alhos do programa</td></tr>
+        <tr><td>PT_LOPROC   </td><td>Especifica sem&acirc;ntica relacionadas a processadores</td></tr>
+        <tr><td>PT_HIPROC   </td><td>Especifica sem&acirc;ntica relacionadas a processadores</td></tr>
+        <tr><td>PT_GNU_STACK</td><td>Usado pelo sistema para controlar o estado da pilha de 
+                                     <a href="../processo.html#memoria"><b>mem&oacute;ria</b></a></td></tr>
+        </table>
+        <p>
+    <li><b>p_offset</b> - possui o deslocamento do in&iacute;cio do arquivo at&eacute; o primeiro byte do segmento.
+    <li><b>p_vaddr </b> - possui o endere&ccedil;o virtual do primeiro byte do segmento.
+    <li><b>p_paddr </b> - armazena o endere&ccedil;o f&iacute;sico do segmento.
+    <li><b>p_filesz</b> - possui o n&uacute;mero de bytes da imagem do arquivo do segmento.
+    <li><b>p_memsz </b> - possui o n&uacute;mero de bytes da imagem da mem&oacute;ria do segmento.
+    <li><b>p_flags </b> - flags com informa&ccedil;&otilde;es sobre as permiss&otilde;es do segmento (execut&aacute;vel,
+        permite escrita, permite leitura).
+    <li><b>p_align </b> - possui valores para os quais os segmentos s&atilde;o alinhados na mem&oacute;ria e no arquivo.
+</ul>
+
+<p>Para verificar o conte&uacute;do do cabe&ccedil;alho do programa de um arquivo use o comando <a href="../readelf.html"><b>readelf</b></a>.
+Por exemplo, 
+   <blockquote class="t1">readelf -l teste</blockquote>
+mostra o conte&uacute;do do cabe&ccedil;alho do programa do arquivo execut&aacute;vel <i>teste</i>.
+</p>
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Tabela de cabe&ccedil;alhos de se&ccedil;&atilde;o</h2>
+
+<p>A tabela de cabe&ccedil;alhos de se&ccedil;&atilde;o mant&eacute;m informa&ccedil;&otilde;es sobre todas as se&ccedil;&otilde;es
+    do arquivo. Abaixo &eacute; mostrada a estrutura da arquitetura de 64 bits.
+    <blockquote class="t2">
+    <table class="t2" cellpadding=3>
+    <tr><td colspan=3>typedef struct</td></tr>
+    <tr><td colspan=3>{</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Word    </td><td>sh_name;       </td><td>/* Section name (string tbl index) */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Word    </td><td>sh_type;       </td><td>/* Section type */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Xword   </td><td>sh_flags;      </td><td>/* Section flags */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Addr    </td><td>sh_addr;       </td><td>/* Section virtual addr at execution */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Off     </td><td>sh_offset;     </td><td>/* Section file offset */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Xword   </td><td>sh_size;       </td><td>/* Section size in bytes */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Word    </td><td>sh_link;       </td><td>/* Link to another section */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Word    </td><td>sh_info;       </td><td>/* Additional section information */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Xword   </td><td>sh_addralign;  </td><td>/* Section alignment */</td></tr>
+    <tr><td>&nbsp;&nbsp;&nbsp;Elf64_Xword   </td><td>sh_entsize;    </td><td>/* Entry size if section holds table */</td></tr>
+    <tr><td colspan=3>} Elf64_Shdr;</td></tr>
+    </table>
+    </blockquote>
+</p>
+
+<p>Os campos do cabe&ccedil;alho de se&ccedil;&atilde;o s&atilde;o discutidos com um pouco mais de detalhes abaixo.
+<ul>
+<li><b>sh_name</b>      - especifica o nome da se&ccedil;&atilde;o.
+<li><b>sh_type</b>      - define o tipo da se&ccedil;&atilde;o.
+<li><b>sh_flags</b>     - descreve atributos da se&ccedil;&atilde;o.
+<li><b>sh_addr</b>      - possui o endere&ccedil;o virtual do primeiro byte da se&ccedil;&atilde;o.
+<li><b>sh_offset</b>    - possui o deslocamento do in&iacute;cio da se&ccedil;&atilde;o em rela&ccedil;&atilde;o ao in&iacute;cio do arquivo.
+<li><b>sh_size</b>      - possui o tamanho da se&ccedil;&atilde;o em bytes.
+<li><b>sh_link</b>      - possui link para os &iacute;ndices da tabela de cabe&ccedil;alho de se&ccedil;&atilde;o.
+<li><b>sh_info</b>      - mat&eacute;m informa&ccedil;&atilde;o extra sobre a se&ccedil;&atilde;o.
+<li><b>sh_addralign</b> - informa sobre restri&ccedil;&otilde;es de alinhamento de endere&ccedil;os.
+<li><b>sh_entsize</b>   - tamanho das entradas de uma tabela (por exemplo, tabela de s&iacute;mbolos).
+</ul>
+</p>
+
+<p>Para verificar o conte&uacute;do do cabe&ccedil;alho de se&ccedil;&atilde;o de um arquivo use o comando 
+<a href="../readelf.html"><b>readelf</b></a>.
+Por exemplo, 
+   <blockquote class="t1">readelf -S teste</blockquote>
+mostra o conte&uacute;do do cabe&ccedil;alho de se&ccedil;&atilde;o do arquivo execut&aacute;vel <i>teste</i>.
+</p>
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O cabe&ccedil;alho <i>elf.h</i> define os tipos, as estruturas e as macros do formato ELF.
+<li>Para mais informa&ccedil;&otilde;es sobre o formato ELF, digite
+    <blockquote class="t1">man elf</blockquote>
+<li>&Eacute; poss&iacute;vel abrir um arquivo bin&aacute;rio com <a href="../vim.html"><b>vim</b></a> e transform&aacute;-lo
+    em hexadecimal com :%!xxd.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

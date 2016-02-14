@@ -1,0 +1,103 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>uuid</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="uuid">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<p>&nbsp;</p>
+
+<a name="inicio"></a>
+
+<h1>UUID</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p><b>UUID</b> (<i>Universally Unique Identifier</i>) &eacute; um campo de 128 bits usado no <b>DuZeru</b> para 
+identificar as parti&ccedil;&otilde;es do disco.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>Para ver as <b>UUIDs</b> das parti&ccedil;&otilde;es do disco, digite
+   <blockquote class="t1">ls -l /dev/disk/by-uuid/</blockquote>
+   No exemplo abaixo s&atilde;o apresentadas as <b>UUIDs</b> de quatro parti&ccedil;&otilde;es de uma m&aacute;quina.
+   <blockquote class="t2">
+   total 0<br>
+   lrwxrwxrwx 1 root root 10 Fev 13 08:26 12a14f23-93fc-474e-97b3-6e0773a150e0 -> ../../sda5<br>
+   lrwxrwxrwx 1 root root 10 Fev 13 08:26 64B4AD31B4AD0720 -> ../../sda2<br>
+   lrwxrwxrwx 1 root root 10 Fev 13 08:26 7CC094C0C09481D6 -> ../../sda1<br>
+   lrwxrwxrwx 1 root root 10 Fev 13 08:26 b2caf857-2b09-46cb-934d-2fb411f7fa6b -> ../../sda6
+   </blockquote>
+   Entretanto, o arquivo <b><a href="dir_etc.html#fstab">/etc/fstab</a></b> do mesmo sistema s&oacute; tem 2 parti&ccedil;&otilde;es.
+   <blockquote class="t2">
+   proc            /proc           proc    nodev,noexec,nosuid 0       0<br>
+   # / was on /dev/sda6 during installation<br>
+   UUID=b2caf857-2b09-46cb-934d-2fb411f7fa6b /               ext4    errors=remount-ro 0       1<br>
+   # swap was on /dev/sda5 during installation<br>
+   UUID=12a14f23-93fc-474e-97b3-6e0773a150e0 none            swap    sw              0       0
+   </blockquote>
+   Esta diferen&ccedil;a ocorre porque o arquivo <b>/etc/fstab</b> s&oacute; mostra o que est&aacute; montado no sistema (neste caso, temos
+   a parti&ccedil;&atilde;o <b>sda6</b> com o sistema <b>Linux</b> e a parti&ccedil;&atilde;o <b>sda5</b> como &aacute;rea de 
+   <b><a href="swap.html">swap</a></b>), enquanto o primeiro comando apresenta todas as parti&ccedil;&otilde;es detectadas (as parti&ccedil;&otilde;es
+   <b>sda1</b> e <b>sda2</b> s&atilde;o <b>Windows</b> e n&atilde;o est&atilde;o montadas).
+   
+<p>Para ver como as parti&ccedil;&otilde;es est&atilde;o alocadas, basta digitar
+   <blockquote class="t1">sudo fdisk -l</blockquote>
+   Abaixo, &eacute apresentada a sa&iacute;da do comando para o mesmo ambiente discutido anteriormente. 
+   <blockquote class="t2">
+   Disco /dev/sda: 80.1 GB, 80060424192 bytes<br>
+   255 cabeças, 63 setores/trilhas, 9733 cilindros, total de 156368016 setores<br>
+   Unidades = setores de 1 * 512 = 512 bytes<br>
+   Tamanho do setor (lógico/físico): 512 bytes / 512 bytes<br>
+   Tamanho da E/S (mínimo/ideal): 512 bytes / 512 bytes<br>
+   Identificador do disco: 0x00087fe3<br>
+   <br>
+   <table class="t2" cellpadding=3>
+   <tr><td>Dispositivo</td><td> Boot </td><td align="right">    Início </td><td align="right">        Fim </td><td align="right">Blocos   </td><td>            Id</td><td>Sistema</td></tr>
+   <tr><td>/dev/sda1  </td><td>      </td><td align="right">      2048 </td><td align="right">     206847 </td><td align="right">  102400</td><td align="right">7</td><td>  HPFS/NTFS/exFAT</td></tr>
+   <tr><td>/dev/sda2  </td><td>      </td><td align="right">    206848 </td><td align="right">  111936119 </td><td align="right">55864636</td><td align="right">7</td><td>  HPFS/NTFS/exFAT</td></tr>
+   <tr><td>/dev/sda3  </td><td>      </td><td align="right"> 111937534 </td><td align="right">  156366847 </td><td align="right">22214657</td><td align="right">5</td><td>  Estendida</td></tr>
+   <tr><td>/dev/sda5  </td><td>      </td><td align="right"> 111937536 </td><td align="right">  113889279 </td><td align="right">  975872</td><td align="right">82</td><td> Linux swap / Solaris</td></tr>
+   <tr><td>/dev/sda6  </td><td>   *  </td><td align="right"> 113891328 </td><td align="right">  156366847 </td><td align="right">21237760</td><td align="right">83</td><td>  Linux</td></tr>
+   </table>
+   </blockquote>
+</p>
+
+<p>Tamb&eacute;m &eacute; poss&iacute;vel ver as <b>UUIDs</b> no <b>/boot/grub/grub.cfg</b> que &eacute; o arquivo de configura&ccedil;&atilde;o do
+<b><a href="grub.html">GRUB</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="fdisk.html">fdisk</a></b> - aplicativo utilizado para particionar discos.
+<li><b><a href="grub.html">GRUB</a></font></b> - carregador de inicializa&ccedil;&atilde;o do <b>Linux</b>.
+<li><b><a href="mount.html">mount</a></b> - monta sistemas de arquivos.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

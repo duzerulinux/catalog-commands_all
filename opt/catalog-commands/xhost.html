@@ -1,0 +1,79 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>xhost</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="xhost">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>xhost</h1>
+   
+<blockquote><b><font size="+1">xhost [[+-]nome...]</font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>O programa <i>xhost</i> &eacute; usado para adicionar ou deletar nomes de m&aacute;quinas e de usu&aacute;rios &agrave; lista dos
+que possuem autoriza&ccedil;&atilde;o para acessar o servidor <b><a href="xwindow.html">X</a></b> (ou seja, tem autoriza&ccedil;&atilde;o
+para acessar remotamente a m&aacute;quina). Por exemplo, &eacute; preciso ter acesso ao servidor X para poder redirecionar a sa&iacute;da
+de uma aplica&ccedil;&atilde;o gr&aacute;fica.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>+</b> : acesso &eacute; garantido a todos os usu&aacute;rios.</li>
+<li><b>-</b> : acesso &eacute; garantido apenas aos usu&aacute;rios que est&atilde;o na lista.</li>
+<li><b>+nome</b> : o nome especificado (m&aacute;quina ou usu&aacute;rio) &eacute; adicionado a lista garantido assim acesso ao servidor X.</li>
+<li><b>-nome</b> : o nome especificado (m&aacute;quina ou usu&aacute;rio) &eacute; retirado da lista que permite acesso ao servidor X.</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Se nenhum par&acirc;metro &eacute; fornecido com o comando <i>xhost</i>, o sistema apenas informa se o controle de acesso ao servidor X 
+    est&aacute; sendo feito, ou n&atilde;o, e exibe a lista dos usu&aacute;rios que est&atilde;o conectados.
+<li>O arquivo /etc/ssh/ssh_config possui o par&acirc;metro ForwardX11 que define se as conex&otilde;es X11 devem ser automaticamente
+    redirecionadas. Por padr&atilde;o, temos
+    <blockquote class="t2">ForwardX11 no</blockquote>
+    Pode-se, portanto, alterar este par&acirc;metro para
+    <blockquote class="t2">ForwardX11 yes</blockquote>
+    O uso da defini&ccedil;&atilde;o acima implica que n&atilde;o h&aacute; mais necessidade de utilizar o comando <i>xhost</i> pois as
+    conex&otilde;es X11 s&atilde;o automaticamente redirecionadas.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="display.html">DISPLAY</a></b> - vari&aacute;vel de ambiente que define onde a sa&iacute;da de um aplica&ccedil;&atilde;o
+    gr&aacute;fica deve aparecer.
+<li><b><a href="xwindow.html">X ou X Window</a></b> - &eacute; a interface gr&aacute;fica (GUI) padr&atilde;o do Linux.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

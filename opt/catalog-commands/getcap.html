@@ -1,0 +1,76 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>getcap</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="getcap">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+<h1>getcap</h1>
+
+<blockquote><b><font size="+1"> getcap [op&ccedil;&otilde;es] arquivos </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando informa as capacidades dos <a href="arquivo.html"><b>arquivos</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-r</b> : faz pesquisa recursiva.
+<li><b>-h</b> : exibe as op&ccedil;&otilde;es do comando.
+<li><b>-v</b> : permite fornecer mais de um arquivo na linha de comandos.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2> Exemplos </h2>
+
+<ul>
+<li>Para ver as capacidades do comando <i>ping</i>, digite
+    <blockquote class="t1">getcap /bin/ping</blockquote>
+    Uma poss&iacute;vel resposta pode ser
+    <blockquote class="t2">/bin/ping = cap_net_raw+p</blockquote>
+    Neste caso, o comando tem permiss&atilde;o para abrir soquetes de rede e transmitir/receber pacotes de dados.
+<li>Para ver as capacidades de mais de um arquivo &eacute; preciso usar a op&ccedil;&atilde;o -v.
+    <blockquote class="t1">getcap -v /bin/ping /usr/bin/crontab /bin/grep</blockquote>
+    A resposta abaixo informa que apenas o comando <i>ping</i> possui capacidade definida.
+    <blockquote class="t2">
+    /bin/ping = cap_net_raw+p<br>
+    /usr/bin/crontab<br>
+    /bin/grep
+    </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O comando <a a href="setcap.html"><b>setcap</b></a> permite alterar/incluir/deletar capacidades.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

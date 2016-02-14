@@ -1,0 +1,72 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>login</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="login">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>login</h1>
+
+<blockquote><b><font size="+1">login [op&ccedil;&otilde;es] </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<ul>
+<li>Este comando &eacute; respons&aacute;vel por inicializar uma sess&atilde;o no sistema.
+<li>O comando <b>login</b> &eacute; usado para se obter acesso ao sistema. Al&eacute;m disso, ele pode ser usado
+    para alterar de um para outro usu&aacute;rio a qualquer tempo.
+<li>O <b>login</b> &eacute;  o  terceiro dos  tr&ecirc;s  programas (<b><a href="init.html">init</a></b>,
+    <b><a href="getty.html">getty</a></b> e <b>login</b>) usados pelo sistema para permitir o acesso dos 
+    usu&aacute;rios.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>nome</b> : muda para o usu&aacute;rio especificado por <b>nome</b>.</li>
+<li><b>-p</b> : usado por <b>getty</b> para dizer ao <b>login</b> n&atilde;o destruir o ambiente.</li>
+<li><b>-h m&aacute;quina</b> : usado por outros servidores para passar o nome para o servidor remoto. Somente o 
+    administrador pode usar esta op&ccedil;&atilde;o</li> 
+<li><b>-f nome</b> : usado para evitar uma segunda autentica&ccedil;&atilde;o de acesso. Isto n&atilde;o 
+    funciona para o superusu&aacute;rio.</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Caso nenhum argumento seja passado, o <b>login</b> solicita o nome do usu&aacute;rio.
+<li>Caso o usu&aacute;rio  n&atilde;o seja o <b>root</b> e se o <b><a href="dir_etc.html#nologin">/etc/nologin</a></b> 
+    existir, o conte&uacute;do deste arquivo ser&aacute; listado na tela e o login ser&aacute; terminado.
+<li>Caso o usu&aacute;rio seja o <b>root</b>, ent&atilde;o o acesso deve ocorrer em um dos terminais listados no 
+    <b><a href="dir_etc.html#securetty">/etc/securetty</a></b>.
+<ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>cat</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="cat">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>cat</h1>
+
+<blockquote><b><font size="+1">cat [op&ccedil;&otilde;es] arquivos</font></b></blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando envia o conte&uacute;do de um ou mais <a href="arquivo.html"><b>arquivos</b></a> para a sa&iacute;da
+padr&atilde;o ou para um outro arquivo. Portanto, <i>cat</i> conCATena (junta) arquivos.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-n</b> : numera todas as linhas.</li>
+<li><b>--version</b> : mostra informa&ccedil;&otilde;es sobre o aplicativo.</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+
+<li>Podemos usar o comando <i>cat</i> para exibir os arquivos na tela. Por exemplo, 
+    <blockquote class="t1">cat teste1 teste2</blockquote>
+    mostra na tela o conte&uacute;do dos arquivos <i>teste1</i> e <i>teste2</i>.
+<li>Para parar a rolagem da tela e permitir a navega&ccedil;&atilde;o com o resultado do comando <i>cat</i>, 
+    use os comandos <b><a href="more.html">more</a></b> ou <b><a href="less.html">less</a></b> junto com o 
+    <b><a href="redirecionadores.html">pipe</a></b> (caractere "|").
+    <blockquote class="t1">cat teste1 teste2 | more</blockquote>
+    ou 
+    <blockquote class="t1">cat teste1 teste2 | less</blockquote>
+<li>Para concatenar v&aacute;rios arquivos e colocar o resultado em um outro arquivo deve-se usar o 
+    <b><a href="redirecionadores.html">redirecionador de sa&iacute;da</a></b> <b>&gt;</b>. Por exemplo,
+    <blockquote class="t1">cat arq1 arq2 arq3 &gt; arq_final</blockquote>
+    gera o arquivo <i>arq_final</i> que corresponde a concatena&ccedil;&atilde;o dos arquivos <i>arq1</i>, 
+    <i>arq2</i> e <i>arq3</i>. Se j&aacute; existe um arquivo chamado <i>arq_final</i>, este arquivo &eacute; 
+    destru&iacute;do e criado novamente.
+<li>Para inserir o arquivo <i>arq4</i> no final do arquivo <i>arq_final</i> digite
+    <blockquote class="t1">cat arq4 &gt;&gt; arq_final</blockquote>
+<li>Tamb&eacute;m &eacute; poss&iacute;vel criar um arquivo usando o comando <i>cat</i> junto com o redirecionador
+    de sa&iacute;da <b>&gt;</b>. Para ter um exemplo, basta digitar as tr&ecirc;s linhas abaixo (tecle <b>ENTER</b> ao
+    final das duas primeiras linhas e <b>CTRL+D</b> ao final da terceira linha).
+    <blockquote class="t1">cat > teste</blockquote>
+<li>Para numerar as linhas do arquivo basta usar o par&acirc;metro <b>n</b>. Por exemplo,
+    <blockquote class="t1">cat -n teste1.txt</blockquote>
+    exibe o n&uacute;mero e o conte&uacute;do de cada linha do arquivo <i>teste1.txt</i>.</p>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li>O comando <b><a href="tac.html">tac</a></b> funciona como o comando <i>cat</i>, s&oacute; que as linhas dos arquivos
+    aparecem na ordem decrescente (a &uacute;ltima linha aparece primeiro e a primeira linha aparece por &uacute;ltimo).
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

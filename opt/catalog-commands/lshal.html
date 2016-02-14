@@ -1,0 +1,103 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>lshal</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="lshal">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>lshal</h1>
+
+<blockquote><b><font size="+1"> lshal [op&ccedil;&otilde;es] </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<ul>
+<li>Este comando exibe informa&ccedil;&otilde;es detalhadas sobre o hardware. Na realidade, este
+aplicativo analisa o diret&oacute;rio <b><a href="dir_proc.html">/proc</a></b> e gera uma sa&iacute;da
+costumizada.
+<li>HAL (<i>hardware abstraction layer</i>) &eacute; o n&iacute;vel de abstra&ccedil;&atilde;o entre o hadware e
+o <b><a href="kernel.html">kernel</a></b> do sistema operacional da m&aacute;quina. Portanto, este software
+permite que um mesmo <b>kernel</b> seja executado em m&aacute;quinas com diferentes hardwares.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-s, --short</b> : apresenta um relat&aacute;rio resumido.
+<li><b>-t, --tree</b> : o relat&oacute;rio apresenta o relat&oacute;rio organizado em uma &aacute;vore.
+<li><b>-u, --show</b> : mostra o relat&oacute;rio apenas de um UDI (<i>Unique Device Identifier</i>).
+<li><b>-h, --help</b> : informa as op&ccedil;&otilde;es do aplicativo.
+<li><b>-V, --version</b> : exibe a vers&atilde;o do aplicativo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>O comando
+
+<blockquote class="t1">lshal -u pci_8086_2a00</blockquote>
+
+pode apresentar, por exemplo, a seguinte sa&iacute;da:
+
+<blockquote class="t2">
+udi = '/org/freedesktop/Hal/devices/pci_8086_2a00'<br>
+&nbsp;&nbsp;&nbsp;&nbsp; info.linux.driver = 'agpgart-intel'  (string)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; info.parent = '/org/freedesktop/Hal/devices/computer'  (string)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; info.product = 'Mobile PM965/GM965/GL960 Memory Controller Hub'  (string)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; info.subsystem = 'pci'  (string)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; info.udi = '/org/freedesktop/Hal/devices/pci_8086_2a00'  (string)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; info.vendor = 'Intel Corporation'  (string)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; linux.hotplug_type = 2  (0x2)  (int)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; linux.subsystem = 'pci'  (string)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; linux.sysfs_path = '/sys/devices/pci0000:00/0000:00:00.0'  (string)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; pci.device_class = 6  (0x6)  (int)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; pci.device_protocol = 0  (0x0)  (int)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; pci.device_subclass = 0  (0x0)  (int)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; pci.linux.sysfs_path = '/sys/devices/pci0000:00/0000:00:00.0'  (string)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; pci.product = 'Mobile PM965/GM965/GL960 Memory Controller Hub'  (string)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; pci.product_id = 10752  (0x2a00)  (int)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; pci.subsys_product_id = 65360  (0xff50)  (int)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; pci.subsys_vendor = 'Toshiba America Info Systems'  (string)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; pci.subsys_vendor_id = 4473  (0x1179)  (int)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; pci.vendor = 'Intel Corporation'  (string)<br>
+&nbsp;&nbsp;&nbsp;&nbsp; pci.vendor_id = 32902  (0x8086)  (int)
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="hwinfo.html">hwinfo</a></b> - fornece informa&ccedil;&otilde;es sobre o hardware da m&aacute;quina.
+<li><b><a href="lspci.html">lspci</a></b> - exibe informa&ccedil;&otilde;es sobre dispositivos PCI.
+<li><b><a href="lsusb.html">lsusb</a></b> - exibe informa&ccedil;&otilde;es sobre dispositivos USB.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

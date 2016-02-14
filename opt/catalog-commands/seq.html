@@ -1,0 +1,100 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>seq</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="seq">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>seq</h1>
+   
+<blockquote><font size="+1"><b>seq [op&ccedil;&otilde;es] [primeiro n&uacute;mero] [incremento] [&uacute;ltimo n&uacute;mero]</b></font>
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando exibe uma sequ&ecirc;ncia de n&uacute;meros.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-f</b> ou <b>--format=FORMAT</b> : usa a conven&ccedil;&atilde;o do <a href="libc/fc_printf.html"><b>printf( )</b></a> para
+    ponto flutuante (por padr&atilde;o, usa a menor representa&ccedil;&atilde;o, %g, para ponto flutuante).
+<li><b>-s</b> ou <b>--separator=STRING</b> : Usa STRING para separar a sequencia de n&uacute;meros (o padr&atilde;o: &eacute; \n)
+<li><b>-w</b> ou <b>--equal-width</b> : insere zeros na frente dos n&uacute;meros mantendo a sequ&ecirc;ncia alinhada.
+<li><b>--help</b> : mostra as op&ccedil;&otilde;es do comando.
+<li><b>--version</b> : mostra a vers&atilde;o do comando.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>O comando
+    <blockquote class="t1">seq 0 2 10</blockquote>
+    mostra a os n&uacute;meros inteiros pares que existem de zero a 10.
+    <blockquote class="t2">
+    0 <br> 2 <br> 4 <br> 6 <br> 8 <br> 10
+    </blockquote>
+<li>Para ver a sequ&ecirc;ncia de n&uacute;meros de 0,2 a 1,0 com incremento de 0,1, basta digitar
+    <blockquote class="t1">seq 0.2 0.1 1</blockquote>
+    Abaixo &eacute; mostrada a sa&iacute;da do comando. Note que a entrada do comando define n&uacute;meros no formato americano
+    (usa '.' no ponto flutuante), enquanto a sa&iacute;da usa formato brasileiro (usa ',' no ponto flutuante). Isto acontece porque
+    a configura&ccedil;&atilde;o da m&aacute;quina onde o comando foi executado adota o portugu&ecirc;s do Brasil como padr&atilde;o.
+    <blockquote class="t2">
+    0,2 <br> 0,3 <br> 0,4 <br> 0,5 <br> 0,6 <br> 0,7 <br> 0,8 <br> 0,9 <br> 1,0
+    </blockquote>
+<li>Para ver a sequ&ecirc;ncia acima usando a nota&ccedil;&atilde;o cient&iacute;fica, digite
+    <blockquote class="t1">seq -f %e 0.2 0.1 1</blockquote>
+    A sa&iacute;da do comando &eacute; apresentada abaixo.
+    <blockquote class="t2">
+    2,000000e-01 <br> 3,000000e-01 <br> 4,000000e-01 <br> 5,000000e-01 <br> 6,000000e-01 <br> 7,000000e-01 <br> 
+    8,000000e-01 <br> 9,000000e-01 <br> 1,000000e+00
+    </blockquote>
+<li>Para imprimir os n&uacute;meros inteiros de zero a 20 usando a v&iacute;rgula como separador, basta digitar
+    <blockquote class="t1">seq -s ", " 0 20</blockquote>
+    A resposta do comando &eacute; mostrada abaixo.
+    <blockquote class="t2">0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20</blockquote>
+<li>Para que a sequ&ecirc;ncia acima exiba os n&uacute;meros com a mesma quantidade de d&iacute;gitos, digite
+    <blockquote class="t1">seq -w -s ", " 0 20</blockquote>
+    <blockquote class="t2">00, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Se o primeiro n&uacute;mero ou  o incremento for omitido, o valor 1 ser&aacute; utilizado por padr&atilde;o.
+<li>Os n&uacute;meros recebidos s&atilde;o interpretados como n&uacute;meros em ponto flutuante
+<li>O incremento deve ser positivo se o primeiro n&uacute;mero for menor do que o &uacute;ltimo n&uacute;mero. O incremento
+    deve ser negativo em caso contr&aacute;rio.
+<li>Quando utilizamos a op&ccedil;&atilde;o --format, o argumento deve ser %e, %f ou %g.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

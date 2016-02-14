@@ -1,0 +1,100 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>tar</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="tar">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>tar</h1>
+
+<blockquote><font size="+1"> <b>tar [op&ccedil;&otilde;es] reposit&oacute;rio.tar [arquivos]</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>O utilit&aacute;rio <i>tar</i> (<i>Tape ARchiving</i>) agrupa/desagrupa arquivos.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-c</b> : cria um novo arquivo <i>tar</i>.
+<li><b>-j</b> ou <b>--bzip2</b> : compacta/descompacta os arquivos usando <a href="bzip2.html"><b>bzip2</a></b>.
+<li><b>-J</b> ou <b>--xz</b> : descompacta os arquivos .xz e .lzma.
+<li><b>-t</b> : lista o conte&uacute;do do arquivo <i>tar</i>.
+<li><b>-x</b> : extrai o conte&uacute;do do arquivo <i>tar</i>.
+<li><b>-v</b> : mostra mensagens.
+<li><b>-f arquivo</b> : define o nome do arquivo <i>tar</i>.
+<li><b>-z</b> ou <b>--gzip</b> ou <b>--gunzip</b> : compacta/descompacta os arquivos usando 
+    <a href="gzip.html"><b>gzip</b></a>/<a href="gzip.html"><b>gunzip</b></a>.
+<li><b>-Z</b> ou <b>--compress</b> ou <b>--uncompress</b> : compacta/descompacta os arquivos usando 
+    <a href="compress.html"><b>compress</b></a>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Para criar o arquivo <i>colecao_txt</i> contendo todos os arquivos <i>txt</i> do diret&oacute;rio atual, basta digitar:
+    <blockquote class="t1">tar cvf colecao_txt *.txt</blockquote>
+<li>Para verificar o conte&uacute;do do arquivo <i>colecao_txt</i>, digite
+    <blockquote class="t1">tar tvf colecao_txt</blockquote>
+<li>Para extrair todos arquivos de <i>colecao_txt</i>, digite
+    <blockquote class="t1">tar xvf colecao_txt</blockquote>
+<li>Para extrair apenas um determinado arquivo de <i>colecao_txt</i>, digite
+    <blockquote class="t1">tar xvf colecao_txt nome_arquivo</blockquote>
+<li>&Eacute; poss&iacute;vel compactar os arquivos agrupados por <i>tar</i>. Por exemplo, para compactar com  
+    <a href="gzip.html"><b>gzip</b></a> os arquivos que come&ccedil;am por <i>teste</i> no reposit&oacute;rio <i>colecao</i>, digite
+    <blockquote class="t1">tar czvf colecao.tar teste*</blockquote>
+    Para compactar com <a href="bzip2.html"><b>bzip2</a></b> os arquivos que come&ccedil;am por <i>teste</i> no reposit&oacute;rio 
+    <i>colecao2</i>, basta digitar
+    <blockquote class="t1">tar cjvf colecao2.tar teste*</blockquote>
+    Normalmente, o <i>bzip2</i> ob&eacute;m um maior grau de compacta&ccedil;&atilde;o como mostrado no exemplo abaixo.
+    <blockquote class="t2">
+    <table class="t2" cellpadding=3 cellspacing=3>
+    <tr><td>-rw-rw-r--</td><td>1</td><td> aluno </td><td>aluno </td><td>888927</td><td> Mai 15 10:50</td><td> colecao.tar</td></tr>
+    <tr><td>-rw-rw-r--</td><td>1</td><td> aluno </td><td>aluno </td><td>515447</td><td> Mai 15 10:51</td><td> colecao2.tar</td></tr>
+    </table>
+    </blockquote>
+<li>Os arquivos compactados com o algoritmo LZMA (<i>Lempel–Ziv–Markov chain</i>) normalmente recebem extensão .tar.xz. 
+    Para descompactar o arquivo <i>teste.tar.xz</i>, digite
+    <blockquote class="t1">tar -xJf arquivo.tar.xz</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Se a primeira letra das op&ccedil;&otilde;es for uma fun&ccedil;&atilde;o como criar (letra "c"), extrair (letra "x") ou 
+    listar (letra"t"), n&atilde;o h&aacute; necessidade de usar o caractere "-" antes da letra.
+<li>A extens&atilde;o <i>.tar</i> n&atilde;o &eacute; obrigat&oacute;ria para os arquivos gerados com o comando <i>tar</i>, 
+    mas &eacute; aconselh&aacute;vel. O uso desta extens&atilde;o facilita a identifica&ccedil;&atilde;o do tipo do arquivo
+    (voc&ecirc; tamb&eacute;m pode usar o comando <b><a href="file.html">file</a></b> para verificar o tipo do arquivo).
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

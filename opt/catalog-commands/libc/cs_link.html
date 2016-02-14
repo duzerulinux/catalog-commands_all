@@ -1,0 +1,280 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>link()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="link()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>link( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta <a href="../chamadas.html"><b>chamada de sistema</b></a> cria um novo nome para um 
+<a href="../arquivo.html"><b>arquivo</b></a> que j&aacute; existe.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include &lt;unistd.h&gt;<br>
+int link(const char *oldpath, const char *newpath);
+</blockquote>
+
+<ul>
+<li>O argumento <i>oldpath</i> corresponde a um nome que j&aacute; existe no sistema de arquivos.
+<li>O argumento <i>newpath</i> corresponde ao novo nome a ser dado ao arquivo que j&aacute; existe.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Se a chamada <i>link( )</i> &eacute; executada com sucesso, o valor zero &eacute; retornado. Caso a chamada n&atilde;o
+seja bem sucedida, o valor -1 &eacute; retornado e o c&oacute;digo do erro &eacute; colocado na vari&aacute;vel externa 
+<b><a href="vr_errno.html">errno</a></b>. A tabela abaixo mostra os erros que podem ocorrer com esta chamada.</p>
+
+<p>
+<blockquote>
+<table class="t2" rules=all cellpadding=10 cellspacing=10 align=center width=650>
+<tr class="t1"><td><b>Erro</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td>EACCES      </td><td>Acesso ao arquivo n&atilde;o &eacute; permitido</td></tr>
+<tr><td>EDQUOT      </td><td>Quota de disco do usu&aacute;rio excedida</td></tr>
+<tr><td>EEXIST      </td><td>Novo caminho j&aacute; existe</td></tr>
+<tr><td>EFAULT      </td><td>Nome do arquivo aponta para uma &aacute;rea de endere&ccedil;o n&atilde;o acess&iacute;vel</td></tr>
+<tr><td>EIO         </td><td>Erro de I/O</td></tr>
+<tr><td>ELOOP       </td><td>Muitos links simb&oacute;licos encontrados na defini&ccedil;&atilde;o do nome do arquivo</td></tr>
+<tr><td>EMLINK      </td><td>N&uacute;mero de links para arquivo excedido</td></tr>
+<tr><td>ENAMETOOLONG</td><td>Nome do arquivo longo demais</td></tr>
+<tr><td>ENOENT      </td><td>O nome do arquivo especificado n&atilde;o existe</td></tr>
+<tr><td>ENOMEM      </td><td>Mem&oacute;ria insuficiente</td></tr>
+<tr><td>ENOSPC      </td><td>N&atilde;o existe entrada no diret&oacute;rio</td></tr>
+<tr><td>ENOTDIR     </td><td>Um componente do nome do arquivo n&atilde;o &eacute; um diret&oacute;rio</td></tr>
+<tr><td>EPERM       </td><td>Sem permiss&atilde;o</td></tr>
+<tr><td>EROFS       </td><td>Permiss&atilde;o de escrita foi solicitada para um arquivo que s&oacute; permite leitura</td></tr>
+<tr><td>EXDEV       </td><td>Arquivos est&atilde;o em sistemas diferentes</td></tr>
+</table>
+</blockquote>
+<p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<blockquote class="t2">
+1. #include&lt;stdio.h&gt; <br>
+2. #include&lt;stdlib.h&gt;<br>
+3. #include&lt;fcntl.h&gt;<br>
+4. #include&lt;string.h&gt;<br>
+5. #include&lt;errno.h&gt;<br>
+6. int main()<br>
+7. &nbsp; { <br>
+8. &nbsp;&nbsp; int arq;<br>
+9. &nbsp;&nbsp; int valor_st;<br>
+10.&nbsp;&nbsp; char linha1[50]="Escrita feita pelo processo-filho\n";<br>
+11.&nbsp;&nbsp; char  linha2[50]="Escrita feita pelo processo-pai\n";<br>
+12.&nbsp;&nbsp; pid_t filho, ret;<br>
+13.&nbsp;&nbsp; filho = fork();<br>
+14.&nbsp;&nbsp; if (filho == -1)<br>
+15.&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro fork() %d: %s\n", errno, strerror(errno)); <br>
+17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(1); <br>
+18.&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+19.&nbsp;&nbsp; if (filho == 0) <br>
+20.&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+21.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; arq=open("/tmp/arquivo1",O_WRONLY|O_CREAT|O_TRUNC,S_IRWXU);<br>
+22.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (arq == -1)<br>
+23.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+24.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Open arq: %s\n", strerror(errno)); <br>
+25.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(2); <br>
+26.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+27.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (write(arq, linha1, strlen(linha1)) == -1) <br>
+28.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+29.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Write: %s\n", strerror(errno)); <br>
+30.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(3); <br>
+31.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+32.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; close(arq);<br>
+33.&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+34.&nbsp;&nbsp; else <br>
+35.&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+36.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ret = waitpid(filho, NULL, NULL);<br>
+37.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (ret != filho)<br>
+38.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+39.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Waitpid: %s\n", strerror(errno)); <br>
+40.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(5); <br>
+41.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+42.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (link("/tmp/arquivo1", "arquivo2") != 0)<br>
+43.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+44.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Link: %s\n", strerror(errno)); <br>
+45.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(6);<br>
+46.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+47.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; arq = open("arquivo2", O_WRONLY | O_APPEND, NULL);<br>
+48.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (arq == -1)<br>
+49.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+50.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Open arq2: %s\n", strerror(errno)); <br>
+51.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(7);<br>
+52.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+53.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (write(arq, linha2, strlen(linha2)) == -1) <br>
+54.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+55.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Write: %s\n", strerror(errno)); <br>
+56.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(8);<br>
+57.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+58.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; close(arq);<br>
+59.&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+60. &nbsp; }
+</blockquote>
+</font>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/link.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 5 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da 
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>stdlib.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o de alguns tipos de vari&aacute;veis e com v&aacute;rias
+        fun&ccedil;&otilde;es de uso geral como, por exemplo, <a href="fc_exit.html"><b>exit( )</b></a>.
+    <li><b>fcntl.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o de op&ccedil;&otilde;es de controle dos arquivos. Por exemplo
+        <ul>
+        <li>O_RDONLY - abrir apenas para leitura;
+        <li>O_WRONLY - abrir apenas para escrita;
+        <li>O_APPEND - adicionar registros no final do arquivo;
+        <li>O_CREAT - criar arquivo se ele ainda n&atilde;o existir;
+        <li>O_TRUNC - zerar arquivo se ele j&aacute; existir.
+        </ul>
+        O cabe&ccedil;alho <i>fcntl.h</i> inclui automaticamente o cabe&ccedil;alho <i>sys/stat.h</i> que possui defini&ccedil;&otilde;es
+        das <a href="../permissao.html"><b>permiss&otilde;es</b></a> de arquivo como, por exemplo
+        <ul>
+        <li>S_IRWXU - leitura, escrita e execu&ccedil;&atilde;o para o dono do arquivo;
+        </ul>
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror( )</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro e <a href="fc_strlen.html"><b>strlen( )</b></a> que retorna o tamanho 
+        de uma string.
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+    </ul>
+<li><b>Linha 6 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 8 a linha 59.
+<li><b>Linhas de 8 a 12 :</b> s&atilde;o definidas as vari&aacute;veis do programa. Note que temos duas vari&aacute;veis,
+    <i>filho</i> e <i>ret</i>, do tipo <i>pid_t</i> (para armazenar <a href="../pid.html"><b>PID</b></a> de processos).
+<li><b>Linha 13 :</b> a chamada de sistema <a href="cs_fork.html"><b>fork( )</b></a> &eacute; usada para criar um novo processo,
+    filho do processo atual. Na realidade, o sistema faz uma c&oacute;pia do processo e aloca espa&ccedil;o de mem&oacute;ria, 
+    em separado, para a execu&ccedil;&atilde;o deste novo processo. A partir deste ponto, a execu&ccedil;&atilde;o dos dois processos
+    se diferenciam. Neste exemplo, se a chamada &eacute; bem sucedida, o processo-pai armazena o PID do processo-filho na 
+    vari&aacute;vel filho, enquanto o processo-filho armazena zero nesta mesma vari&aacute;vel.
+<li><b>Linhas de 14 a 18 :</b> se a chamada <i>fork( )</i> n&atilde;o foi bem sucedida (a vari&aacute;vel filho &eacute; igual a -1), 
+    &eacute; exibida mensagem de erro e o programa &eacute; encerrado com c&oacute;digo de erro 1 (este valor foi escolhido aleatoriamente).
+<li><b>Linhas de 19 a 59 :</b> se a chamada <i>fork( )</i> foi bem sucedida, o processo-filho executa os comandos da linha 21 a 32,
+    enquanto o processo-pai executa os comandos da linha 36 a 58.
+<li><b>Linha 21 :</b> a chamada de sistema <a href="cs_open.html"><b>open( )</b></a> &eacute; usada para abrir (possivelmente criar)
+    o arquivo <i>/tmp/arquivo1</i>. Este arquivo &eacute; aberto para escrita (O_WRONLY), &eacute; criado caso n&atilde;o exista 
+    (O_CREAT), &eacute; truncado se j&aacute; existe (O_TRUNC) e possui permiss&otilde;es de leitura, grava&ccedil;&atilde;o e
+    execu&ccedil&atilde;o apenas para o dono (S_IRWXU).
+<li><b>Linhas de 22 a 26 :</b> estas linhas s&atilde;o executadas somente se algum erro ocorreu durante a execu&ccedil;&atilde;o
+    da chamada <i>open( )</i>.
+<li><b>Linhas de 27 a 31 :</b> a linha 27 executa duas a&ccedil;&otilde;es. Primeiro, usa a chamada de sistema write( ) para 
+    escrever no arquivo o conte&uacute;do da string linha1. Segundo, verifica se a execu&ccedil;&atilde;o da chamada 
+    <a href="cs_write.html"><b>write( )</b></a> foi bem sucedida. Em caso negativo, as linhas 29 e 30 s&atilde;o executadas.
+<li><b>Linha 32 :</b> usa a chamada de sistema <a href="cs_close.html"><b>close( )</b></a> para fechar o arquivo.
+<li><b>Linha 36 :</b> usa a chamada de sistema <a href="cs_wait.html"><b>waitpid( )</b></a> para aguardar o t&eacute;rmino da
+    execu&ccedil;&atilde;o do processo-filho. Note que o c&oacute;digo de retorno &eacute; armazenado na vari&aacute;vel <i>ret</i>. 
+    Em caso de sucesso, o valor desta vari&aacute;vel deve ser igual ao <a href="../pid.html"><b>PID</b></a> do processo-filho.
+<li><b>Linhas de 37 a 41 :</b> estas linhas s&atilde;o executadas somente se algum erro ocorreu com a chamada <i>waitpid( )</i>.
+<li><b>Linhas de 42 a 46 :</b> a linha 42 executa duas a&ccedil;&otilde;es. Primeiro, usa a chamada de sistema 
+    <a href="cs_link.html"><b>link( )</b></a> para criar um segundo nome para o arquivo <i>/tmp/arquivo1</i>. Este novo nome &eacute;
+    armazenado no diret&oacute;rio corrente. Segundo, verifica se a execu&ccedil;&atilde;o da chamada <i>link( )</i> foi bem sucedida. 
+    Em caso negativo, as linhas 44 e 45 s&atilde;o executadas.
+<li><b>Linha 47 :</b> a chamada de sistema <a href="cs_open.html"><b>open( )</b></a> &eacute; usada para abrir  o arquivo <i>arquivo2</i>.
+    Este arquivo &eacute; aberto para escrita (O_WRONLY) sendo que o conte&uacute;do que j&aacute; existe n&atilde;o &eacute; perdido.
+    Qualquer opera&ccedil;&atilde;o de grava&ccedil;&atilde;o &eacute; feita no final do arquivo (O_APPEND).
+<li><b>Linhas de 48 a 52 :</b> estas linhas s&atilde;o executadas somente se algum erro ocorreu durante a execu&ccedil;&atilde;o da
+    chamada <i>open( )</i>.
+<li><b>Linhas de 53 a 57 :</b> a linha 53 executa duas a&ccedil;&otilde;es. Primeiro, usa a chamada de sistema 
+    <a href="cs_write.html"><b>write( )</b></a> para escrever no arquivo o conte&uacute;do da string <i>linha2</i>. Segundo, verifica se
+    a execu&ccedil;&atilde;o da chamada write() foi bem sucedida. Em caso negativo, as linhas 55 e 56 s&atilde;o executadas.
+<li><b>Linha 58 :</b> usa a chamada de sistema <a href="cs_close.html"><b>close( )</b></a> para fechar o arquivo.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar
+<blockquote class="t1">
+gcc -o link link.c 
+</blockquote>
+Para executar
+<blockquote class="t1">
+./link
+</blockquote>
+</p>
+
+<p>O conte&uacute;do dos arquivos /tmp/arquivo1 e arquivo2 &eacute; apresentado abaixo. Note que quem primeiro gravou
+no arquivo foi o processo-filho. O processo-pai gravou a segunda frase logo em seguida.</p>
+
+<blockquote class="t2">
+Escrita feita pelo processo-filho<br>
+Escrita feita pelo processo-pai
+</blockquote>
+
+<p>Ap&oacute;s a execu&ccedil;&atilde;o do programa podemos usar o comando
+<blockquote class="t1">
+ls -li /tmp/arquivo1 arquivo2
+</blockquote>
+</p>
+
+<p>para verificar as propriedades dos arquivos. Abaixo &eacute; mostrada uma poss&iacute;vel sa&iacute;da para este comando.
+<blockquote class="t2">
+<table class="t2" cellpadding=5>
+<tr><td>193442 -rwx------</td><td>2 aluno aluno</td><td>66 Oct 10 09:34 /tmp/arquivo1</td></tr>
+<tr><td>193442 -rwx------</td><td>2 aluno aluno</td><td>66 Oct 10 09:34 arquivo2</td></tr>
+</table>
+</blockquote>
+</p>
+
+<p>Note que os dois arquivos possuem o mesmo <a href="../inode.html"><b>inode</b></a> (193442), o mesmo tamanho (66) e a
+mesma data e hora da &uacute;ltima atualiza&ccedil;&atilde;o. Na realidade, temos dois nomes para o mesmo arquivo.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<p>
+<ul>
+<li>A chamada de sistema <i>link( )</i> cria um link direto para um arquivo que j&aacute; existe. Um link direto nada mais 
+    &eacute; que um outro nome para o arquivo e um arquivo pode possuir mais de um nome.
+<li>Se o nome definido no argumento <i>newpath</i> j&aacute; existe, a execu&ccedil;&atilde;o da chamada <i>link( )</i> falha.
+<li>A chamada <i>link( )</i> corresponde ao comando <a href="../ln.html"><b>ln</b></a> do Linux.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

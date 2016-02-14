@@ -1,0 +1,152 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>size</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="size">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>size</h1>
+
+<blockquote><b><font size="+1">size [op&ccedil;&otilde;es] [arquivo]</font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando informa o tamanho das se&ccedil;&otilde;es de mem&oacute;ria a serem alocadas para a
+execu&ccedil;&atilde;o de um <a href="arquivo.html"><b>arquivo</b></a> (objeto ou execut&aacute;vel).</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2> Algumas op&ccedil;&otilde;es do comando </h2>
+
+<ul>
+<li><b>-A</b> ou <b>--format=sysv</b> : sa&iacute;da no formato <i>System V</i> (mais detalhado).
+<li><b>-B</b> ou <b>--format=berkeley</b> : sa&iacute;da no formato <i>Berkeley</i> (padr&atilde;o).
+<li><b>--help</b> : mostra as op&ccedil;&otilde;es do comando.
+<li><b>--version</b> : informa a vers&atilde;o do utilit&aacute;rio.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Suponha que o <a href="gcc.html"><b>GCC</b></a> &eacute; usado para compilar o arquivo <i>teste.c</i> e gerar
+    o execut&aacute;vel <i>teste</i> com o comando abaixo.
+    <blockquote class="t1">gcc -v -save-temps teste.c -o teste</blockquote>
+    Neste caso, s&atilde;o criados 4 arquivos: <i>teste.i</i> (pr&eacute;-processado com inclus&atilde;o de cabe&ccedil;alhos
+    e macros), <i>teste.s</i> (compilado e convertido para a linguagem assembly), <i>teste.o</i> (convertido para a linguagem de 
+    m&aacute;quina) e <i>teste</i> (execut&aacute;vel). S&oacute; os dois &uacute;ltimos arquivos usam linguagens que definem os recursos
+    a serem alocados pelo hardware. Por isso, &eacute; poss&iacute;vel usar o comando abaixo para verificar o tamanho das 
+    se&ccedil;&otilde;es de <a href="processo.html#memoria"><b>mem&oacute;ria</b></a> que precisam ser alocadas na execu&ccedil;&atilde;o
+    do programa.
+    <blockquote class="t1">size teste.o teste</blockquote>
+    Abaixo, &eacute; mostrada uma poss&iacute;vel sa&iacute;da. 
+<!--
+O arquivo <i>teste</i> prev&ecirc; uma maior aloca&ccedil;&atilde;o de mem&oacute;ria porque adicionou as bibliotecas solicitadas
+pelo programa ???????
+-->
+    <blockquote class="t2">
+    <table class="t2" cellpadding=3>
+    <tr><td>text	</td><td> data </td><td> bss </td><td> dec  </td><td> hex </td><td> filename </td></tr>
+    <tr><td>667	</td><td> 0    </td><td> 0   </td><td> 667  </td><td> 29b </td><td> teste.o  </td></tr>
+    <tr><td>2089	</td><td> 592  </td><td> 8   </td><td> 2689 </td><td> a81 </td><td> teste    </td></tr>
+    </table>
+    </blockquote>
+<li>Para ver mais detalhes das se&ccedil&otilde;es do arquivo <i>teste.o</i>, digite
+   <blockquote class="t1">size --format=sysv teste.o</blockquote>
+   Se usarmos o mesmo arquivo do primeiro exemplo, teremos a resposta mostrada abaixo. Note que no novo formato 
+   <i>.text + .rodata + .eh_frame</i> &eacute; igual a <i>text</i> no formato anterior. Al&eacute;m disso, note que os endere&ccedil;os
+   vituais ainda n&atilde;o foram gerados. 
+   <blockquote class="t2">
+   <table class="t2" cellpadding=3>
+   <tr><td colspan=3>teste.o  :</td></tr>
+   <tr><td>section           </td><td>size   </td><td>addr </td></tr>
+   <tr><td>.text             </td><td> 361   </td><td>   0 </td></tr>
+   <tr><td>.data             </td><td>   0   </td><td>   0 </td></tr>
+   <tr><td>.bss              </td><td>   0   </td><td>   0 </td></tr>
+   <tr><td>.rodata           </td><td> 242   </td><td>   0 </td></tr>
+   <tr><td>.comment          </td><td>  37   </td><td>   0 </td></tr>
+   <tr><td>.note.GNU-stack   </td><td>   0   </td><td>   0 </td></tr>
+   <tr><td>.eh_frame         </td><td>  64   </td><td>   0 </td></tr>
+   <tr><td>Total             </td><td colspan=2> 704       </td></tr>
+   </table>
+   </blockquote>
+<li>Para ver mais detalhes das se&ccedil&otilde;es do arquivo <i>teste</i>, basta digitar
+   <blockquote class="t1">size --format=sysv teste</blockquote>
+   Abaixo a resposta mostrada pelo sistema. Note que agora temos os endere&ccedil;os vituais. Sem eles, o programa n&atilde;o
+   pode ser executado pelo sistema.
+   <blockquote class="t2">
+   <table class="t2" cellpadding=3>
+   <tr><td colspan=3>teste  :</td></tr>
+   <tr><td>section              </td><td>size   </td><td>   addr</td></tr>
+   <tr><td>.interp              </td><td>  28   </td><td>4194872</td></tr>
+   <tr><td>.note.ABI-tag        </td><td>  32   </td><td>4194900</td></tr>
+   <tr><td>.note.gnu.build-id   </td><td>  36   </td><td>4194932</td></tr>
+   <tr><td>.gnu.hash            </td><td>  28   </td><td>4194968</td></tr>
+   <tr><td>.dynsym              </td><td> 192   </td><td>4195000</td></tr>
+   <tr><td>.dynstr              </td><td>  94   </td><td>4195192</td></tr>
+   <tr><td>.gnu.version         </td><td>  16   </td><td>4195286</td></tr>
+   <tr><td>.gnu.version_r       </td><td>  32   </td><td>4195304</td></tr>
+   <tr><td>.rela.dyn            </td><td>  24   </td><td>4195336</td></tr>
+   <tr><td>.rela.plt            </td><td> 168   </td><td>4195360</td></tr>
+   <tr><td>.init                </td><td>  26   </td><td>4195528</td></tr>
+   <tr><td>.plt                 </td><td> 128   </td><td>4195568</td></tr>
+   <tr><td>.text                </td><td> 722   </td><td>4195696</td></tr>
+   <tr><td>.fini                </td><td>   9   </td><td>4196420</td></tr>
+   <tr><td>.rodata              </td><td> 250   </td><td>4196432</td></tr>
+   <tr><td>.eh_frame_hdr        </td><td>  52   </td><td>4196684</td></tr>
+   <tr><td>.eh_frame            </td><td> 252   </td><td>4196736</td></tr>
+   <tr><td>.init_array          </td><td>   8   </td><td>6295056</td></tr>
+   <tr><td>.fini_array          </td><td>   8   </td><td>6295064</td></tr>
+   <tr><td>.jcr                 </td><td>   8   </td><td>6295072</td></tr>
+   <tr><td>.dynamic             </td><td> 464   </td><td>6295080</td></tr>
+   <tr><td>.got                 </td><td>   8   </td><td>6295544</td></tr>
+   <tr><td>.got.plt             </td><td>  80   </td><td>6295552</td></tr>
+   <tr><td>.data                </td><td>  16   </td><td>6295632</td></tr>
+   <tr><td>.bss                 </td><td>   8   </td><td>6295648</td></tr>
+   <tr><td>.comment             </td><td>  36   </td><td>      0</td></tr>
+   <tr><td>Total                </td><td colspan=2>2725</td></tr>
+   </table>
+   </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Se nenhum nome de arquivo &eacute; fornecido, o utilit&aacute;rio <i>size</i> procura pelo arquivo <i>a.out</i>.
+<li>Um programa em execu&ccedil;&atilde;o corresponde a um ou mais <a href="processo.html"><b>processos</b></a>
+    sendo executados pelo sistema. 
+<li>O comando <i>size</i> fornece informa&ccedil;&otilde;es sobre a aloca&ccedil;&atilde;o de 
+    <a href="processo.html#memoria"><b>mem&oacute;ria</b></a> que j&aacute; se sabe necess&aacute;ria. Ele n&atilde;o 
+    fornece o que realmente ser&aacute; usado. N&atilde;o h&aacute; como prever a aloca&ccedil;&atilde;o din&acirc;mica
+    de mem&oacute;ria para vari&aacute;veis e chamadas de fun&ccedil;&otilde;es.
+<li>Tamb&eacute;m &eacute; poss&iacute;vel verificar informa&ccedil;&otilde;es sobre as se&ccedil;&otilde;es
+    usando o comando <a href="readelf.html"><b>readelf</b></a> com a op&ccedil;&atilde;o -S.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

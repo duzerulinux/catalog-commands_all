@@ -1,0 +1,101 @@
+
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>init</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="init">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>Inicializa&ccedil;&atilde;o</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Vis&atilde;o Geral</h2>
+
+
+<p>Ao iniciar o computador o processador executa um c&oacute;digo em um local conhecido. Nos computadores pessoais (PC) esse c&oacute;digo est&aacute; armazenado na mem&oacute;ria da placa m&atilde;e, o BIOS (Sistema B&aacute;sico de Entrada/Sa&iacute;da).</p>
+<p>Quando um dispositivo de boot &eacute; encontrado, o loader de boot de primeiro est&aacute;gio &eacute; carregado na RAM e executado. Este loader tem menos de 512 bytes (um &uacute;nico setor), e sua tarefa &eacute; carregar o loader de boot de segundo est&aacute;gio.</p>
+<p>O "bootloader" de segundo est&aacute;gio passa o controle para a imagem do kernel, o kernel &eacute; descompactado e inicializado. Conclui mais algumas etapas e o primeiro espa&ccedil;o de usu&aacute;rio (<b><a href="init.html">init</a></b>) inicia; a inicializa&ccedil;&atilde;o do sistema de alto n&iacute;vel &eacute; executada.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>BIOS</h2>
+
+<p> A fun&ccedil;&atilde;o do BIOS tem duas partes: o c&oacute;digo Power-On Self Test (POST) e os servi&ccedil;os em tempo de execu&ccedil;&atilde;o. O POST executa uma verifica&ccedil;&atilde;o do hardware e depois de conclu&iacute;do &eacute; apagado da mem&oacute;ria. Os servi&ccedil;os em tempos de execu&ccedil;&atilde;o permanecem e ficam dispon&iacute;veis ao sistema operacional de destino</p>
+
+<p> Para inicializar, o BIOS procura dispositivos ativos e inicializ&aacute;veis na ordem de prefer&ecirc;ncia definida pelas configura&ccedil;&otilde;es de CMOS (Complementary Metal Oxide Semiconductor). Dispositivos de boot: CD-ROM, parti&ccedil;&atilde;o do disco r&iacute;gido, dispositivo de rede ou pen-drive.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Primeiro est&aacute;gio</h2>
+
+<p>O <b><a href="mbr.html">MBR</a></b> (Master Boot Record) &eacute; um setor de 512 bytes, localizado no primeiro setor do disco (setor 1 do cilindro 0, cabe&ccedil;ote 0). O loader de boot prim&aacute;rio reside no MBR e sua fun&ccedil;&atilde;o &eacute; encontrar e carregar o loader de boot secund&aacute;rio.</p>
+
+<p> Os primeiros 446 bytes s&atilde;o o loader de boot prim&aacute;rio, que cont&eacute;m o c&oacute;digo execut&aacute;vel e um texto de mensagem de erro. Os 64 bytes seguintes formam a tabela de parti&ccedil;&atilde;o, que cont&eacute;m um registro para cada uma das quatro parti&ccedil;&otilde;es (cada uma com 16 bytes). Guarda informa&ccedil;&otilde;es onde cada parti&ccedil;&atilde;o come&ccedil;a e termina.
+
+ O MBR termina com dois bytes, que s&atilde;o definidos como o n&uacute;mero m&aacute;gico (0xAA55). O n&uacute;mero m&aacute;gico funciona como verifica&ccedil;&atilde;o de valida&ccedil;&atilde;o do MBR.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Segundo est&aacute;gio</h2>
+<p>A fun&ccedil;&atilde;o do loader de boot secund&aacute;rio &eacute carregar na mem&oacute;ria, o kernel Linux e um arquivo que simula a mem&oacute;ria RAM; o disco RAM inicial opcional (sistema de arquivo raiz tempor&aacute;rio).</p>
+<p>Quando o loader de boot de segundo est&aacute;gio est&aacute; na mem&oacute;ria e em execu&ccedil;&atilde;o, uma tela inicial &eacute exibida. O loader enumera dispositivos de hardware anexados, monta o dispositivo raiz e carrega os m&oacute;dulos de kernel necess&aacute;rios. O sistema de arquivos &eacute consultado e a imagem de kernel padr&atilde;o e a imagem initrd s&atilde;o carregadas na mem&oacute;ria. Com as imagens prontas, o loader de boot de est&aacute;gio 2 chama a imagem de kernell. O kernell  &eacute descompactado e inicializado.</p>
+<p>Loaders de boot de primeiro e segundo est&aacute;gio combinados s&atilde;o chamados de Linux Loader (LILO) ou GRand Unified Bootloader (GRUB) no ambiente x86 do PC.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Kernel</h2>
+
+<p>O kernell se encontra comprimido (zlib), uma s&eacute;rie de rotinas permite que seja expandido e carregado na mem&oacute;ria.</p>
+
+<p>A ram image que foi carregada durante o est&aacute;gio 2 do boot, cont&eacute;m todos os drivers necess&aacute;rios para que o kernel tenha acesso aos diversos dispositivos que ele precise.
+pode ser montado como um sistema de arquivos existentes apenas na mem&oacute;ria.</p>
+
+<p>O disco de RAM inicial (initrd) atua como sistema de arquivos tempor&aacute;rio na RAM. Permite que o kernel execute boot totalmente, sem precisar montar disco f&iacute;sico.
+Esse mecanismo garante uma grande flexibilidade a sistemas Linux uma vez que permite inclusive que o pr&oacute;prio root file system resida em um servidor remoto (NFS).</p>
+<p>Depois que o kernel executa boot, o sistema de arquivos raiz &eacute; dinamizado (por meio do  pivot_root), no qual o sistema de arquivos initrd &eacute; desmontado e o sistema de arquivos real &eacute; montado</p>
+
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>init</h2>
+
+<p>Ap&oacute;s executar boot e inicializado, o kernel inicia o aplicativo do primeiro espa&ccedil;o do usu&aacute;rio. Ele &eacute; o primeiro programa chamado, compilado com a biblioteca C padr&atilde;o. At&eacute; este momento no processo, nenhum aplicativo C padr&atilde;o foi executado.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>&Eacute; poss&iacute;vel listar e escolher entre diversos tipos de kernel instalados (definidos em /boot/grub/menu.lst), e inclusive    
+    passar par&acirc;metros de boot durante a inicializa&ccedil;&atilde;o do sistema.
+<li>O arquivo de configura&ccedil;&atilde;o do init &eacute; o "/etc/inittab". Ele &eacute; geralmente o primeiro arquivo de 
+    configura&ccedil;&atilde;o lido durante o boot. A principal tarefa dele &eacute; carregar os demais scripts de 
+    inicializa&ccedil;&atilde;o, usados para carregar os demais componentes do sistema e fazer todas as opera&ccedil;&otilde;es
+    de checagem, necess&aacute;rias durante o boot.
+<li>Todas essas etapas s&atilde;o realizadas por scripts, localizados na pasta "/etc/init.d", que executam os comandos apropriados
+    para inicializar os servi&ccedil;os e executar as demais opera&ccedil;&otilde;es necess&aacute;rias. Alguns deles s&atilde;o
+    executados apenas durante o boot (verificando alguma configura&ccedil;&atilde;o, por exemplo), enquanto outros inicializam 
+    servi&ccedil;os que ficam ativos continuamente.</p>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

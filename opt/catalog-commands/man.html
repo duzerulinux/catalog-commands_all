@@ -1,0 +1,172 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>man</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="man">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>man</h1>
+
+<blockquote><font size="+1"><b>man [op&ccedil;&otilde;es] comando</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Defini&ccedil;&atilde;o</h2>
+
+<p>Este utilit&aacute;rio formata e apresenta p&aacute;ginas do manual on-line sobre um determinado comando.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-a</b> : mostra todas as páginas para o nome definido seguindo a ordem das se&ccedil;&otilde;es definida em
+    <b><a href="dir_etc.html#manpathconfig">/etc/manpath.config</a></b>.
+<li><b>-f</b> ou <b>--whatis</b> : apresenta apenas uma pequena descri&ccedil;&atilde;o do comando.
+    Esta op&ccedil;&atilde;o fornece o mesmo resultado do comando <b><a href="whatis.html">whatis</a></b>.
+<li><b>-k palavra</b> ou <b>--apropos palavra</b> : procura nos &iacute;ndices do manual a palavra especificada.
+    Esta op&ccedil;&atilde;o fornece o mesmo resultado do comando <b><a href="apropos.html">apropos</a></b>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>O comando
+    <blockquote class="t1">man ls</blockquote>
+    apresenta a p&aacute;gina do manual com as informa&ccedil;&otilde;es sobre o comando <b><a href="ls.html">ls</a></b>.
+<li>Para copiar o conte&uacute;do do manual on-line para o arquivo <i>teste</i>.
+    <blockquote class="t1">man ls &gt; teste</blockquote>
+<li>Para obter mais informa&ccedil;&otilde;es sobre o comando <i>man</i>, digite
+    <blockquote class="t1">man man<br></blockquote>
+<li>Para ler mais sobre a formata&ccedil;&atilde;o das p&aacute;ginas do manual on-line, digite
+    <blockquote class="t1">man 7 man</blockquote>
+<li>Para ver apenas uma pequena descri&ccedil;&atilde;o do comando <i>ls</i>:
+    <blockquote class="t1">man -f ls</blockquote>
+    que ter&aacute; a seguinte sa&iacute;da:
+    <blockquote class="t2">
+    ls (1) - list directory contents
+    </blockquote>
+<li>Para saber quais as p&aacute;ginas do manual tem a palavra <b><a href="swap.html">swap</a></b>, digite
+    <blockquote class="t1">man -k swap</blockquote>
+    Abaixo uma poss&iacute;vel sa&iacute;da para o comando.
+    <blockquote class="t2">
+    <table class="t2" cellpadding=3>
+    <tr><td>
+    <tr><td>all-swaps (7)        </td><td>- event signalling that all swap partitions have been activated</td></tr>
+    <tr><td>mkswap (8)           </td><td>- set up a Linux swap area</td></tr>
+    <tr><td>swab (3)             </td><td>- swap adjacent bytes</td></tr>
+    <tr><td>swapcontext (3)      </td><td>- manipulate user context</td></tr>
+    <tr><td>swaplabel (8)        </td><td>- print or change the label or UUID of a swap area</td></tr>
+    <tr><td>swapoff (2)          </td><td>- start/stop swapping to file/device</td></tr>
+    <tr><td>swapoff (8)          </td><td>- enable/disable devices and files for paging and swapping</td></tr>
+    <tr><td>swapon (2)           </td><td>- start/stop swapping to file/device</td></tr>
+    <tr><td>swapon (8)           </td><td>- enable/disable devices and files for paging and swapping</td></tr>
+    <tr><td>XdbeSwapBuffers (3)  </td><td>- swaps front and back DBE buffers.</td></tr>
+    </table>
+    </blockquote>
+<li>Para ver todas as se&ccedil;&otilde;es com o comando <i>swapon</i>, digite
+    <blockquote class="t1">
+    man -a swapon
+    </blockquote>
+    O sistema ent&atilde;o mostrar&aacute; o <i>swapon</i> da se&ccedil;&atilde;o 8 e depois o <i>swapon</i> da se&ccedil;&atilde;o 2.
+    Para sair da primeira p&aacute;gina e ir para a segunda p&aacute;gina, basta teclar <i>q</i> e depois <i>Enter</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Teclas</h2>
+
+<ul> 
+<li>Para sair do manual on-line digite <b>q</b> (de <b>quit</b> em ingl&ecirc;s que significa sair).
+<li>Use as teclas <b>Page-Down</b>, <b>Ctrl+F</b> ou <b>Space</b> para avan&ccedil;ar nas p&aacute;ginas do manual.
+<li>Use as teclas <b>Page-Up</b> ou <b>Ctrl+B</b> para voltar p&aacute;ginas no manual.
+<li>Use <b>Enter</b> para avan&ccedil;ar apenas uma linha por vez.
+<li>Digite <b>h</b> para ver a lista das teclas dispon&iacute;veis para navegar no manual on-line (tecle <b>q</b> para
+    sair desta lista e retornar ao manual).
+</ul> 
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O manual on-line possui v&aacute;rias se&ccedil;&otilde;es.
+    <blockquote>
+    <b>(1)</b> programas execut&aacute;veis ou comandos <b><a href="shell.html">shell</a></b><br>
+    <b>(2)</b> <b><a href="chamadas.html">chamadas do sistema</a></b> (fun&ccedil;&otilde;es fornecidas pelo
+       <b><a href="kernel.html">kernel</a></b>)<br>
+    <b>(3)</b> chamadas de bibliotecas (fun&ccedil;&otilde;es de <b><a href="biblioteca_c.html">bibliotecas</a></b>)<br>
+    <b>(4)</b> arquivos especiais<br>
+    <b>(5)</b> formatos e conven&ccedil;&otilde;es de arquivo<br>
+    <b>(6)</b> jogos<br>
+    <b>(7)</b> diversos (inclui pacotes de macro e conven&ccedil;&otilde;es)<br>
+    <b>(8)</b> comandos de administra&ccedil;&atilde;o do sistema<br>
+    <b>(9)</b> rotinas do <b><a href="kernel.html">kernel</a></b>
+    </blockquote>
+    Para saber qual a se&ccedil;&atilde;o que um determinado comando/utilit&aacute;rio pertence, basta observar o 
+    n&uacute;mero que aparece ao lado do comando na p&aacute;gina do manual.
+<li>A lista dos diret&oacute;rios que possuem as p&aacute;ginas do manual e a ordem em que as p&aacute;ginas devem ser 
+    recuperadas s&atilde;o definidas no arquivo <b><a href="dir_etc.html#manpathconfig">/etc/manpath.config</a></b>. 
+    Atualmente, a ordem padr&atilde;o de procura das p&aacute;ginas &eacute;
+    <blockquote class="t2">1 n l 8 3 2 3posix 3pm 3perl 5 4 9 6 7</blockquote>
+    Note que a defini&ccedil;&atilde;o possui 5 extens&otilde;es (n&atilde;o instaladas por padr&atilde;o no sistema), sendo
+    que 3 delas s&atilde;o subse&ccedil;&otilde;es da se&ccedil;&atilde;o 3 (chamadas de bibliotecas).
+    <blockquote>
+    <b>(l)</b> rotinas da biblioteca de matem&aacute;tica<br>
+    <b>(n)</b> fun&ccedil;&otilde;es tcl <br>
+    <b>(3posix)</b> fun&ccedil;&otilde;es posix <br>
+    <b>(3pm)</b> m&oacute;dulos perl <br>
+    <b>(3perl)</b> comandos perl
+    </blockquote>
+    Quando uma determinada extens&atilde;o n&atilde;o est&aacute; na lista do arquivo <i>manpath.config</i>, ela &eacute; 
+    mostrada com o resto da se&ccedil;&atilde;o a qual pertence. Assim, s&oacute; se torna necess&aacute;rio explicitar as
+    extens&otilde;es quando se deseja for&ccedil;ar uma determinada ordem de pesquisa.
+<li>Se comandos de n&iacute;veis diferentes possuem o mesmo nome, apenas a primeira p&aacute;gina encontrada
+    ser&aacute; mostrada. Para obter a p&aacute;gina do comando de um determinado n&iacute;vel, digite
+    <blockquote class="t1">man n comando</blockquote>
+    onde <b>n</b> corresponde ao n&iacute;vel de execu&ccedil;&atilde;o do <i>comando</i>. 
+    Por exemplo, digite
+    <blockquote class="t1">man swapon</blockquote>
+    e depois
+    <blockquote class="t1">man 2 swapon</blockquote>
+    A primeira p&aacute;gina no exemplo acima &eacute; da se&ccedil;&atilde;o <b>8</b> que explica o comando <i>swapon</i>
+    usado para controlar a &aacute;rea de troca, enquanto a segunda p&aacute;gina &eacute; da se&ccedil;&atilde;o <b>2</b>
+    que explica a chamada do sistema <i>swapon</i>. 
+
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O comando <b><a href="apropos.html">apropos</a></b> pesquisa por determina express&atilde;o nas p&aacute;ginas do manual do sistema.
+<li>O comando <b><a href="info.html">info</a></b> ler documentos no formato <i>info</i>.
+<li>O comando <b><a href="mandb.html">mandb</a></b> cria/atualiza os &iacute;ndices da base de dados das p&aacute;ginas do manual
+    do sistema.
+<li>O comando <a href="whatis.html"><b>whatis</b></a> mostra um resumo sobre um ou mais comandos.
+<li>O comando <a href="xman.html"><b>xman</b></a> &eacute; um navegador para as p&aacute;ginas on-line.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

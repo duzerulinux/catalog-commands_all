@@ -1,0 +1,131 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>df</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="df">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>df</h1>
+<blockquote><p><font size="+1"><b>df [op&ccedil;&otilde;es] </b></font></p></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando exibe informa&ccedil;&otilde;es sobre espa&ccedil;o livre e espa&ccedil;o usado nas 
+   parti&ccedil;&otilde;es do sistema.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-a</b>                    : inclui tamb&eacute;m na listagem os sistemas de arquivos com zero blocos.
+<li><b>--help</b>                : exibe as op&ccedil;&otilde;es do comando.
+<li><b>-i</b> ou <b>--inodes</b> : exibe informa&ccedil;&otilde;es sobre <a href="inode.html"><b>inode</b></a>.
+<li><b>-k</b>                    : lista o tamanho dos blocos em kbytes.
+<li><b>-m</b>                    : lista o tamanho dos blocos em Mbytes.
+<li><b>-t tipo</b>               : especifica o tipo dos sistemas de arquivos a serem listados.
+<li><b>-T</b>                    : exibe o tipo dos sistemas de arquivos listados.
+<li><b>-x tipo</b>               : especifica o tipo dos sistemas de arquivos que n&atilde;o deve ser listado.
+<li><b>--version</b>             : exibe informa&ccedil;&otilde;es sobre o aplicativo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Abaixo, um poss&iacute;vel resultado para o comando <i>df</i>. Note que o sistema possui 6 parti&ccedil;&otilde;es, onde
+    a parti&ccedil;&atilde;o /dev/sda1 possui os arquivos do sistema Linux (incluindo os diret&oacute;rios dos usu&aacute;rios), 
+    enquanto a parti&ccedil;&atilde;o /dev/sdb1 corresponde a um sistema externo de arquivos montado pelo sistema (neste exemplo,
+    temos um pendrive com a identifica&ccedil;&atilde;o ALUNO).
+
+<blockquote class="t2">
+<table class="t2" cellpadding=3>
+<tr><td>Sist. Arq.</td><td>1K-blocos           </td><td> Usad               </td><td> Dispon.              </td><td> Uso%            </td><td> Montado em   </td></tr>
+<tr><td>/dev/sda1 </td><td class="t1">303700336</td><td class="t1"> 9235412 </td><td class="t1"> 279037852 </td><td class="t1"> 4%   </td><td> /            </td></tr>
+<tr><td>udev      </td><td class="t1">1974156  </td><td class="t1"> 4       </td><td class="t1"> 1974152   </td><td class="t1"> 1%   </td><td> /dev         </td></tr>
+<tr><td>tmpfs     </td><td class="t1">792580   </td><td class="t1"> 800     </td><td class="t1"> 791780    </td><td class="t1"> 1%   </td><td> /run         </td></tr>
+<tr><td>none      </td><td class="t1">5120     </td><td class="t1"> 0       </td><td class="t1"> 5120      </td><td class="t1"> 0%   </td><td> /run/lock    </td></tr>
+<tr><td>none      </td><td class="t1">1981444  </td><td class="t1"> 152     </td><td class="t1"> 1981292   </td><td class="t1"> 1%   </td><td> /run/shm     </td></tr>
+<tr><td>/dev/sdb1 </td><td class="t1">14907968 </td><td class="t1"> 12514304</td><td class="t1"> 2393664   </td><td class="t1"> 84%  </td><td> /media/ALUNO </td></tr>
+</table>
+</blockquote>
+
+    Para obter apenas informa&ccedil;&otilde;es sobre o espa&ccedil;o livre da parti&ccedil;&atilde;o /dev/sdb1, digite
+    <blockquote class="t1">df /dev/sdb1</blockquote>
+
+<li>O comando
+    <blockquote class="t1">df -Tm</blockquote>
+    permite visualizar o tipo dos sistemas de arquivos e o espa&ccedil;o em Megabytes. Um exemplo do resultado deste comando pode
+    ser visto abaixo. 
+
+    <blockquote class="t2">
+    <table class="t2" cellpadding=3>
+    <tr><td>Sist. Arq.</td><td>Tipo</td><td>1M-blocos</td><td> Usad</td><td> Dispon.</td><td>Uso% </td><td>Montado em</td></tr>
+    <tr><td>/dev/sda6 </td><td>ext4    </td><td class="t1">20674</td><td class="t1">2481</td><td class="t1">17157 </td>
+        <td class="t1"> 13% </td><td>/         </td></tr>
+    <tr><td>udev      </td><td>devtmpfs</td><td class="t1">999  </td><td class="t1">1   </td><td class="t1">999   </td>
+        <td class="t1"> 1%  </td><td>/dev      </td></tr>
+    <tr><td>tmpfs     </td><td>tmpfs   </td><td class="t1">403  </td><td class="t1">1   </td><td class="t1">402   </td>
+        <td class="t1"> 1%  </td><td>/run      </td></tr>
+    <tr><td>none      </td><td>tmpfs   </td><td class="t1">5    </td><td class="t1">0   </td><td class="t1">5     </td>
+        <td class="t1"> 0%  </td><td>/run/lock </td></tr>
+    <tr><td>none      </td><td>tmpfs   </td><td class="t1">1006 </td><td class="t1">1   </td><td class="t1">1006  </td>
+        <td class="t1"> 1%  </td><td>/run/shm  </td></tr>
+    </table>
+    </blockquote>
+<li>Para obter informa&ccedil;&otilde;es sobre os <a href="inode.html"><b>inodes</b></a>, basta digitar
+    <blockquote class="t1">df --inode</blockquote>
+    Uma poss&iacute;vel resposta ao comando &eacute; mostrada abaixo.
+    <blockquote class="t2">
+    <table class="t2" cellpadding=3>
+    <tr><td>Sist. Arq.  </td><td>Inodes   </td><td>IUsado </td><td>ILivr    </td><td>IUso% </td><td>Montado em</td></tr>
+    <tr><td>/dev/sda1   </td><td>60538880 </td><td>773159 </td><td>59765721 </td><td>2%    </td><td>/</td></tr>
+    <tr><td>none        </td><td>1005676  </td><td>2      </td><td>1005674  </td><td>1%    </td><td>/sys/fs/cgroup</td></tr>
+    <tr><td>udev        </td><td>986291   </td><td>511    </td><td>985780   </td><td>1%    </td><td>/dev</td></tr>
+    <tr><td>tmpfs       </td><td>1005676  </td><td>536    </td><td>1005140  </td><td>1%    </td><td>/run</td></tr>
+    <tr><td>none        </td><td>1005676  </td><td>4      </td><td>1005672  </td><td>1%    </td><td>/run/lock</td></tr>
+    <tr><td>none        </td><td>1005676  </td><td>62     </td><td>1005614  </td><td>1%    </td><td>/run/shm</td></tr>
+    <tr><td>none        </td><td>1005676  </td><td>33     </td><td>1005643  </td><td>1%    </td><td>/run/user</td></tr>
+    <tr><td>/dev/sdb1   </td><td>0        </td><td>0      </td><td>0        </td><td>-     </td><td>/media/aluno/ALUNO</td></tr>
+    </table>
+    </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O comando <a href="du.html"><b>du</b></a> exibe informa&ccedil;&otilde;es sobre o espa&ccedil;o usado pelos diret&oacute;rios
+    e arquivos.
+<li>O comando <b><a href="fdisk.html">fdisk</a></b> &eacute; utilizado para particionar discos.
+<li>O comando <b><a href="hdparm.html">hdparm</a></b> exibe/altera os par&acirc;metros de discos SATA/IDE do sistema.
+<li>O comando <b><a href="smartctl.html">smartctl</a></b> exibe relat&oacute;rio detalhado sobre os discos IDE/SCSI existentes
+    no sistema.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>dd</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="dd">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>dd</h1>
+<blockquote><b><font size="+1">dd [op&ccedil;&otilde;es]</font></b></blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando converte e copia um arquivo.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>if=<i>arquivo</i></b> : define o arquivo de entrada.
+<li><b>of=<i>arquivo</i></b> : define o arquivo de sa&iacute;da.
+<li><b>ibs=<i>bytes</i></b> : define o n&uacute;mero de bytes a serem lidos por vez (o padr&atilde;o &eacute; 512).
+<li><b>obs=<i>bytes</i></b> : define o n&uacute;mero de bytes a serem gravados por vez (o padr&atilde;o &eacute; 512).
+<li><b>bs=<i>bytes</i></b> : define o n&uacute;mero de bytes a serem lidos e gravados por vez; este par&acirc;metro anula os par&acirc;metros <i>ibs</i> e <i>obs</i>.
+<li><b>count=<i>bytes</i></b> : define o n&uacute;mero de blocos a serem copiados; cada bloco tem o n&uacute;mero de bytes definidos pelo par&acirc;metro <i>ibs</i>.
+<li><b>conv=<i>tipo</i></b> : converte o arquivo de acordo com o tipo especificado. Por exemplo,
+<ul>
+<li><b>ascii</b> - converte um arquivo EBCDIC para ASCII;
+<li><b>ebcdic</b> - converte um arquivo ASCII para EBCDIC;
+<li><b>lcase</b> - converte as letras mai&uacute;sculas do arquivo em letras min&uacute;sculas;
+<li><b>ucase</b> - converte as letras min&uacute;sculas do arquivo em letras mai&uacute;sculas.
+</ul>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>O comando
+    <blockquote class="t1">dd if=teste of=teste2 conv=ucase</blockquote>
+    cria o arquivo <i>teste2</i> a partir do arquivo <i>teste</i>, substituindo as letras 
+    min&uacute;sculas por letras mai&uacute;sculas.
+
+<li>Podemos alterar o comando acima para
+    <blockquote class="t1">dd if=teste of=teste2 count=1 conv=ucase</blockquote>
+    Neste caso, apenas o primeiro bloco do arquivo <i>teste</i> &eacute; copiado para <i>teste2</i>.
+    Como o tamanho do bloco n&atilde;o &eacute; especificado, o sistema assume blocos de 512 bytes.
+    Portanto, apenas os 512 primeiros bytes de <i>teste</i> s&atilde;o copiados para <i>teste2</i>.</p>
+<li>Para criar a imagem <i>image.iso</i> de um DVD no diret&oacute;rio <b><a href="dir_home.html">home</a></b>
+    do usu&aacute;rio <i>aluno</i>, basta digitar 
+    <blockquote class="t1">dd if=/dev/dvd of=/home/aluno/image.iso</blockquote>
+    Abaixo o resultado do comando para a c&oacute;pia de um DVD de 4,6 GB. Voc&ecirc; pode acessar a imagem e
+    utiliz&aacute;-la em algum aplicativo de m&iacute;dia como se estivesse lendo diretamente do DVD.
+    <blockquote class="t2">
+    9060736+0 registros de entrada <br>
+    9060736+0 registros de saída<br>
+    4639096832 bytes (4,6 GB) copiados, 597,571 s, 7,8 MB/s
+    </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

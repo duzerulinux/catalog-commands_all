@@ -1,0 +1,129 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>sed</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="sed">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>sed</h1>
+
+<blockquote><b><font size="+1"> sed [op&ccedil;&otilde;es / comandos] [arquivo] </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>O aplicativo sed (<i>stream editor</i>) permite alterar e filtrar textos.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es</h2>
+
+<ul>
+<li><b>-e</b> : adiciona o script (comandos) aos comandos a serem executados.
+<li><b>-f arquivo</b> ou <b>--file=arquivo</b> : adiciona os comandos do arquivo aos comandos a serem executados.
+<li><b>-n</b> : n&atilde;o imprime
+<li><b>--help</b> : informa as op&ccedil;&otilde;es do utilit&aacute;rio.
+<li><b>--version</b> : informa a vers&atilde;o do utilit&aacute;rio.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Alguns Comandos</h2>
+
+<ul>
+<li><b>d</b> : deleta linha de um arquivo.
+<li><b>g</b> : executa o comando mais de uma vez na mesma linha.
+<li><b>p</b> : imprime.
+<li><b>q</b> : encerra a execu&ccedil;&atilde;o do utilit&aacute;rio.
+<li><b>s/express&atilde;o atual/express&atilde;o nova/</b> : substitui todas as ocorr&ecirc;ncias da express&atilde;o definida.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2> Exemplos </h2>
+
+<ul>
+<li>Para substituir a palavra "directory" no arquivo <i>teste</i> pela palavra "diret&oacute;rio" e gravar o resultado no 
+    arquivo <i>teste2</i>, digite
+    <blockquote class="t1">sed s/directory/diret&oacute;rio/ &lt;teste &gt;teste2</blockquote>
+    Note que o comando usa os <a href="redirecionadores.html"><b>redirecionadores de E/S</b></a> &lt; (para definir entrada) e &gt; 
+    (para definir sa&iacute;da). O primeiro redirecionador n&atilde;o &eacute; obrigat&oacute;rio, pois um arquivo sem redirecionador
+    &eacute; considerado como arquivo de entrada.
+<li>Caso existam espa&ccedil;os na express&atilde;o, use a aspa simples para que o aplicativo interprete
+    o comando corretamente.
+    <blockquote class="t1">sed s/'information about'/'informação sobre'/ &lt;teste &gt;teste2</blockquote>
+    ou
+    <blockquote class="t1">sed 's/information about/informação sobre/' &lt;teste &gt;teste2</blockquote>
+<li>Para que a substitui&ccedil;&atilde;o seja feita em todas as ocorr&ecirc;ncias da linha, deve-se digitar
+    <blockquote class="t1">sed s/directory/diret&oacute;rio/g &lt;teste &gt;teste2</blockquote>
+<li>O comando <i>sed</i> sem op&ccedil;&otilde;es e sem comandos exibe o conte&uacute;do do arquivo de entrada na sa&iacute;da padr&atilde;o.
+    <blockquote class="t1">sed '' teste</blockquote>
+    Para redirecionar a sa&iacute;da para um arquivo use &gt;.
+    <blockquote class="t1">sed '' teste &gt; teste2</blockquote>
+<li>Para ver as 20 primeiras linhas do arquivo <i>teste</i>, digite
+    <blockquote class="t1">sed 20q teste</blockquote>
+<li>Para ver apenas a quinta linha do arquivo <i>teste</i>, entre com
+    <blockquote class="t1">sed -n 5p teste</blockquote>
+<li>Para ver a quinta e a oitava linhas do arquivo <i>teste</i>, digite
+    <blockquote class="t1">sed -n -e 5p teste -e 8p teste</blockquote>
+<li>Para deletar a sexta linha do arquivo <i>teste</i>, basta digitar
+    <blockquote class="t1">sed 6d teste</blockquote>
+<li>Para deletar as vinte primeiras linhas, digite
+    <blockquote class="t1">sed '1,20'd teste</blockquote>
+<li>Para deletar todas as linhas em branco do arquivo <i>teste</i>, entre com
+    <blockquote class="t1">sed /^$/d teste</blockquote>
+    onde ^ e $ s&atilde;o express&otilde;es que representam, respectivamente, o in&iacute;cio e o fim da linha (n&atilde;o existe
+    nada entre ^ e $).
+<li>Para deletar todas as linhas do arquivo <i>teste</i> que possui a palavra "Windows", digite
+    <blockquote class="t1">sed /Windows/d teste > teste2</blockquote>
+<li>Para remover comet&aacute;rios e linhas em branco, basta digitar
+    <blockquote class="t1">sed -e 's/#.*//' -e '/^$/ d' teste > teste2</blockquote>
+    onde o primeiro comando converte coment&aacute;rios (iniciado com #) em linhas em branco e o segundo comando deleta as linhas
+    em branco.
+<li>O comando <i>sed</i> &eacute; usado abaixo para exibir os nomes dos usu&aacute;rios armazenados no arquivo /etc/passwd.
+    <blockquote class="t1">sed 's/\([a-z]*\).*/\1/' /etc/passwd</blockquote>
+    Os s&iacute;mbolos "\(" e "\)" definem parte do padr&atilde;o a ser lembrado na busca (in&iacute;cio e fim). Neste caso, o padr&atilde;o
+    procurado come&ccedil;a com uma letra min&uacute;scula e termina quando encontra qualquer s&iacute;mbolo (representado por ".") que
+    n&atilde;o seja uma letra min&uacute;scula. O resto da linha &eacute; representado por um asterisco. Como este &eacute; o primeiro
+    padr&atilde;o definido no comando, ele &eacute; associado a \1 no processamento (o <i>sed</i> permite a defini&ccedil;&atilde;o de
+    at&eacute; 9 padr&otilde;es numerados de \1 a \9). A figura abaixo mostra como o <i>sed</i> faz o mapeamneto em uma linha do 
+    /etc/passwd neste exemplo.
+    <blockquote class="t2"><img src="imagens/sed.png" width=540 height=97></blockquote>
+</ul>
+  
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>&Eacute; poss&iacute;vel criar um arquivo execut&aacute;vel com os comandos do <i>sed</i>. Abaixo &eacute; mostrado o script
+    do &uacute;timo exemplo.
+    <blockquote class="t2">
+    #!/bin/sed -f<br>
+    s/\([a-z]*\).*/\1/
+    </blockquote>
+    Suponha que o nome do arquivo seja <i>teste</i>, para executar basta digitar
+    <blockquote class="t1">./teste /etc/passwd</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

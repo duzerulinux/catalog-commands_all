@@ -1,0 +1,87 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>consoles</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="consoles">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>consoles virtuais</h1>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>A partir de uma mesma m&aacute;quina podemos acessar o Linux usando diferentes usu&aacute;rios,
+ao mesmo tempo e de forma independente. Para isto, basta logar cada usu&aacute;rio em um determinado 
+console virtual. Um console virtual corresponde &agrave; combina&ccedil;&atilde;o de terminal, teclado
+e mouse.</p>
+
+<p>Os consoles virtuais s&atilde;o representados no Linux por arquivos especiais que ficam armazenados no 
+<a href="dir_dev.html"><b>/dev</b></a> como <b>tty1</b>, <b>tty2</b>, <b>tty3</b>, etc.
+Na realidade, estes arquivos s&atilde;o interfaces para os <i>drivers</i> dos componentes do sistema que
+assim podem ser acessados usando as mesmas "system calls" dos arquivos comuns.
+
+<p> Quando o sistema &eacute; inicializado, normalmente s&atilde;o criados seis consoles de texto 
+com o aplicativo <b><a href="getty.html">getty</a></b> e um console com interface gr&aacute;fica com o
+sistema <a href="xwindow.html"><b>X</b></a>. Para ver os processos que inicializa os consoles, pode-se 
+usar o comando <b><a href="ps.html">ps -au</a></b>.</p>
+
+<blockquote class="t2">
+<table class="t2" cellpadding=3>
+<tr><td>USER</td><td>PID</td><td> %CPU</td><td>%MEM</td><td>VSZ  </td><td>RSS</td><td>TTY </td><td>STAT</td><td>START</td><td>TIME</td><td>COMMAND</td></tr>
+<tr><td>root</td><td>867</td><td> 0.0 </td><td>0.0 </td><td>4632 </td><td>824</td><td>tty4</td><td>Ss+</td><td>14:52</td><td>0:00</td><td>/sbin/getty -8 38400 tty4</td></tr>
+<tr><td>root</td><td>874</td><td> 0.0 </td><td>0.0 </td><td>4632 </td><td>824</td><td>tty5</td><td>Ss+</td><td>14:52</td><td>0:00</td><td>/sbin/getty -8 38400 tty5</td></tr>
+<tr><td>root</td><td>881</td><td> 0.0 </td><td>0.0 </td><td>4632 </td><td>820</td><td>tty2</td><td>Ss+</td><td>14:52</td><td>0:00</td><td>/sbin/getty -8 38400 tty2</td></tr>
+<tr><td>root</td><td>882</td><td> 0.0 </td><td>0.0 </td><td>4632 </td><td>820</td><td>tty3</td><td>Ss+</td><td>14:52</td><td>0:00</td><td>/sbin/getty -8 38400 tty3</td></tr>
+<tr><td>root</td><td>886</td><td> 0.0 </td><td>0.0 </td><td>4632 </td><td>820</td><td>tty6</td><td>Ss+</td><td>14:52</td><td>0:00</td><td>/sbin/getty -8 38400 tty6</td></tr>
+<tr><td>root</td><td>1132</td><td>5.1 </td><td>1.1 </td><td>51884</td><td>22648</td><td>tty7</td><td>Ss+</td><td>14:52</td><td>9:19</td><td>/usr/bin/X :0</td></tr>
+<tr><td>root</td><td>1145</td><td>0.0</td><td>0.0</td><td>4632</td><td>828</td><td>tty1</td><td>Ss+</td><td>14:52</td><td>0:00</td><td>/sbin/getty -8 38400 tty1</td></tr>
+</table>
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Modo texto e modo gr&aacute;fico</b> </h2>
+
+<ul>
+<li>Durante a inicializa&ccedil;&atilde;o, o <b>DuZeru 12.04</b> cria 6 consoles no modo texto e 1 console no modo 
+    gr&aacute;fico. Os consoles do modo texto s&atilde;o numerados de 1 a 6 (de tty1 a tty6), enquanto o console
+    do modo gr&aacute;fico &eacute; numerado como 7 (tty7).
+<li>O console virtual 1 (tty1) &eacute;, por padr&atilde;o, utilizado para mostrar as mensagens de 
+    inicializa&ccedil;&atilde;o do sistema. 
+<li>Estando no modo texto, para mudar de console, basta pressionar a tecla <b>ALT</b> 
+    junto com uma tecla de fun&ccedil;&atilde;o. Por exemplo, <b>ALT+F2</b> mostra 
+    o console virtual 2. No modo gr&aacute;fico &eacute; preciso tamb&eacute;m pressionar 
+    a tecla <b>CTRL</b> junto com as duas outras teclas. Assim, podemos logar um 
+    usu&aacute;rio diferente (ou um mesmo usu&aacute;rio) em mais de um console.
+<li>Caso o modo de inicializa&ccedil;&atilde;o 
+    do sistema seja texto, o prompt de identifica&ccedil;&atilde;o dos usu&aacute;rios 
+    do sistema &eacute; apresentado no console 2. Caso o sistema seja inicializado no modo gr&aacute;fico, 
+    a tela de identifica&ccedil;&atilde;o &eacute; apresentada no console 7.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

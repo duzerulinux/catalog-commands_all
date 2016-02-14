@@ -1,0 +1,97 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>ypcat</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="ypcat">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>ypcat</h1>
+
+<blockquote><b><font size="+1">ypcat [op&ccedil;&otilde;es] map</font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando exibe informa&ccedil;&otilde;es da base de dados do <a href="nis.html"><b>NIS</b></a> 
+(<i>Network Information System</i>).</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-d</b> <i>dom&iacute;nio</i> : especifica <i>dom&iacute;nio</i> diferente do dom&iacute;nio padr&atilde;o.
+<li><b>-h</b> <i>host</i> : especifica informa&ccedil;&otilde;es do <i>host</i> em vez do host padr&atilde;o.
+<li><b>-k</b> : exibe as chaves e seus valores.
+<li><b>-t</b> : for&ccedil;a o comando <i>ypcat</i> a ignorar a tabela de convers&atilde;o de apelidos e procura apenas o mapa 
+    especificado pelo par&acirc;metro <i>NomeMapa</i>.
+<li><b>-x</b> : lista os apelidos conforme especificado pelo par&acirc;metro <i>NomeMapa</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Para ver os apelidos especificados para os mapas disponibilizados pelo <i>ypcat</i>, basta digitar
+    <blockquote class="t1">ypcat -x</blockquote>
+    Abaixo &eacute; apresentada a resposta para o comando.
+    <blockquote class="t2">
+    Use "ethers"	for map "ethers.byname"<br>
+    Use "aliases"	for map "mail.aliases"<br>
+    Use "services"	for map "services.byname"<br>
+    Use "protocols"	for map "protocols.bynumber"<br>
+    Use "hosts"	for map "hosts.byname"<br>
+    Use "networks"	for map "networks.byaddr"<br>
+    Use "group"	for map "group.byname"<br>
+    Use "passwd"	for map "passwd.byname"
+    </blockquote>
+<li>Portanto, para ver as m&aacute;quinas associadas com o servidor NIS, digite
+    <blockquote class="t1">ypcat hosts</blockquote>
+    Se o servidor estiver funcionando a sa&iacute;da do comando acima devera ser algo do tipo:
+    <blockquote class="t2">
+    127.0.0.1----localhost----localhost.unixbrasil.com.br<br>
+    127.0.0.1----ameixa-------ameixa.unixbrasil.com.br<br>
+    127.0.0.1----abacaxi------abacaxi.unixbrasil.com.br<br>
+    127.0.0.1----uva----------uva.unixbrasil.com.br<br>
+    127.0.0.1----banana-------banana.unixbrasil.com.br
+    </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Para usar este comando &eacute; preciso instalar o NIS (<i>Network Information Service</i>).
+<li>O termo <i>YP</i> vem de <i>Yellow Page</i> (p&aacute;ginas amarelas), nome original do NIS.
+</ul>
+
+<!--
+http://en.wikipedia.org/wiki/Network_Information_Service
+http://docstore.mik.ua/orelly/networking_2ndEd/nfs/ch13_04.htm
+-->
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

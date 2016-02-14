@@ -1,0 +1,92 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>sort</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="sort">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>sort</h1>
+   
+<blockquote><font size="+1"><b>sort [op&ccedil;&otilde;es] arquivo</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este utilit&aacute;rio ordena as linhas de arquivos textos e exibe o resultado na sa&iacute;da padr&atilde;o.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-b</b> : ignora espa&ccedil;os em branco.</li>
+<li><b>-c</b> : retorna uma mensagem de erro se o arquivo n&atilde;o estiver ordenado.</li>
+<li><b>-f</b> : ignora a diferen&ccedil;a entre letras mai&uacute;sculas e letras min&uacute;sculas.</li>
+<li><b>-r</b> : organiza em ordem decrescente.</li>
+<li><b>-n</b> : os valores num&eacute;ricos s&atilde;o organizados na ordem aritm&eacute;tica.</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>Por exemplo, suponha um arquivo chamado <i>teste.txt</i> com o seguinte conte&uacute;do:</p>
+
+<blockquote class="t2">
+aaa<br>
+BBB<br>
+&nbsp; 53<br>
+0101<br>
+02<br>
+2<br>
+34<br>
+Aa<br>
+aA<br>
+</blockquote>
+
+<p>A sa&iacute;da para o comando</p>
+
+<blockquote class="t1">sort teste.txt</blockquote>
+
+<p>&eacute; a seguinte</p>
+        
+<blockquote class="t2">
+&nbsp; 53<br>
+0101<br>
+02<br>
+2<br>
+34<br>
+Aa<br>
+BBB<br>
+aA<br>
+aaa<br>
+</blockquote>
+
+<p>Note que o comando trata o arquivo como um conjunto de caracteres onde a ordem crescente &eacute;: espa&ccedil;os, 
+n&uacute;meros, letra mai&uacute;sculas [A-Z] e letras min&uacute;sculas 
+[a-z].</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

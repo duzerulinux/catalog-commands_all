@@ -1,0 +1,68 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>ppid</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="ppid">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>PPID</h1>
+     
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>PPID (<i>Parent Process IDentification</i>) &eacute; n&uacute;mero de identifica&ccedil;&atilde;o do
+processo-pai.</p> 
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Quando um processo inicia outro processo, passa a existir uma rela&ccedil;&atilde;o de pai-filho dentro do sistema:
+    o processo que cria um outro processo &eacute; o processo-pai; o processo criado &eacute; o processo-filho.
+<li>O processo <a href="init.html"><b>init</b></a> &eacute; o &uacute;nico que n&atilde;o possui um processo-pai, pois
+    &eacute; o primeiro processo a ser inicializado no sistema.
+<li>Quando um processo termina a sua execu&ccedil;&atilde;o, ele avisa o processo-pai. Os recursos do processo s&oacute;
+    s&atilde;o liberados e o processo &eacute; realmente finalizado quando o processo-pai sinaliza que est&aacute; ciente
+    do t&eacute;rmino. Durante este per&iacute;odo, o processo-filho &eacute; conhecido como <i>zombie</i> (morreu, mas ainda
+    n&atilde;o sabe).
+<li>Quando um processo-pai termina antes do processo-filho, o processo <a href="init.html"><b>init</b></a> adota o processo
+    &oacute;rf&atilde;o e passa a monitorar a sua execu&ccedil;&atilde;o.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="pid.html">PID</a></b> - n&uacute;mero de identifica&ccedil;&atilde;o (ID) de um processo.
+<li><b><a href="processo.html">processo</a></b> - programa em execu&ccedil;&atilde;o.
+<li><b><a href="ps.html">ps</a></b> - exibe informa&ccedil;&otilde;es sobre os processos que est&atilde;o executando na m&aacute;quina.
+<li><b><a href="pstree.html">pstree</a></b> - apresenta, em formato de árvore, os processos em execu&ccedil;&atilde;o
+<li><b><a href="top.html">top</a></b> - utilit&aacute;rio que lista, em tempo real, os processos que est&atilde;o usando a cpu.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

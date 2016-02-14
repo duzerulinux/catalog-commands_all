@@ -1,0 +1,311 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>capget(), capset()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="capget(), capset()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>capget( ), capset( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Estas <a href="../chamadas.html"><b>chamadas de sistema</b></a> servem para manipular as 
+<a href="../capacidades.html"><b>capacidades</b></a> dos <a href="../processo.html"><b>processos</b></a>. 
+Quando um processo possui uma determinada capacidade, ele possui autoriza&ccedil;&atilde;o para executar 
+as opera&ccedil;&otilde;es definidas pela capacidade.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<p>
+<blockquote class="t2">
+#include &lt;sys/capability.h&gt; <br>
+int capget(cap_user_header_t hdrp, cap_user_data_t datap); <br>
+int capset(cap_user_header_t hdrp, const cap_user_data_t datap);
+</blockquote>
+</p>
+
+<ul>
+<li>A estrutura de <i>cap_user_header_t</i> possui a seguinte defini&ccedil;&atilde;o:
+    <blockquote class="t2">
+    typedef struct __user_cap_header_struct { <br>
+    &nbsp;&nbsp;&nbsp;__u32 version; <br>
+    &nbsp;&nbsp;&nbsp;int pid; <br>
+    } *cap_user_header_t;
+    </blockquote>
+<li>A estrutura de <i>cap_user_data_t</i> possui a seguinte defini&ccedil;&atilde;o:
+    <blockquote class="t2">
+    typedef struct __user_cap_data_struct { <br>
+    &nbsp;&nbsp;&nbsp;__u32 effective; <br>
+    &nbsp;&nbsp;&nbsp;__u32 permitted; <br>
+    &nbsp;&nbsp;&nbsp;__u32 inheritable; <br>
+    } *cap_user_data_t;
+    </blockquote>
+<li>Al&eacute;m disso, s&atilde;o fornecidas defini&ccedil;&otilde;es relacionadas &agrave;s capacidades no sistema.
+    <blockquote class="t2">
+    #define _LINUX_CAPABILITY_VERSION_1  0x19980330 <br>
+    #define _LINUX_CAPABILITY_U32S_1     1 <br>
+    #define _LINUX_CAPABILITY_VERSION_2  0x20071026   /* deprecated - use v3 */<br>
+    #define _LINUX_CAPABILITY_U32S_2     2 <br>
+    #define _LINUX_CAPABILITY_VERSION_3  0x20080522 <br>
+    #define _LINUX_CAPABILITY_U32S_3     2
+    </blockquote>
+    Para saber qual a vers&atilde;o em uso, veja o arquivo <i>/usr/include/linux/capability.h</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Se as chamadas s&atilde;o executadas com sucesso, o valor zero &eacute; retornado. Caso as chamadas n&atilde;o
+sejam bem sucedidas, o valor -1 &eacute; retornado e o c&oacute;digo do erro &eacute; colocado na vari&aacute;vel externa 
+<b><a href="vr_errno.html">errno</a></b>. A tabela abaixo mostra os erros que podem ocorrer com estas chamadas.</p>
+
+<blockquote>
+<table class="t2" rules=all cellpadding=10 cellspacing=10 align=center width=650>
+<tr class="t1"><td><b>Erro</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td>EFAULT  </td><td>Problema com o endere&ccedil;o de mem&oacute;ria </td></tr>
+<tr><td>EINVAL  </td><td>Argumento inv&aacute;lido </td></tr>
+<tr><td>EPERM   </td><td>Falta de permiss&atilde;o para adicionar/alterar uma capacidade</td></tr>
+<tr><td>ESRCH   </td><td>Erro na identifica&ccedil;&atilde;o do processo</td></tr>
+</table>
+</blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include&lt;unistd.h&gt;<br>
+2. #include&lt;linux/capability.h&gt;<br>
+3. #include&lt;stdio.h&gt;<br>
+4. #include&lt;string.h&gt;<br>
+5. #include&lt;errno.h&gt;<br>
+6. #include&lt;sys/socket.h&gt;<br>
+7. #include&lt;netinet/in.h&gt;<br>
+8. int main()<br>
+9. {<br>
+10.&nbsp;&nbsp;&nbsp; int soquete;<br>
+11.&nbsp;&nbsp;&nbsp; struct __user_cap_header_struct hdr   = { 0 };<br>
+12.&nbsp;&nbsp;&nbsp; struct __user_cap_data_struct   data  = { 0 };<br>
+13.&nbsp;&nbsp;&nbsp; hdr.pid = getpid();<br>
+14.&nbsp;&nbsp;&nbsp; hdr.version = _LINUX_CAPABILITY_VERSION;<br>
+15.&nbsp;&nbsp;&nbsp; if (capget(&hdr, &data))<br>
+16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro capget() %d: %s\n", errno, strerror(errno));<br>
+18.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 1;<br>
+19.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+20.&nbsp;&nbsp;&nbsp; else<br>
+21.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+22.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("PID = %d, versao = %x\n", hdr.pid, hdr.version);<br>
+23.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Efetivas = %x,  permitidas = %x, herdadas = %x\n", data.effective,
+                                                       data.permitted, data.inheritable);<br>
+24.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+25.&nbsp;&nbsp;&nbsp; soquete = socket(AF_INET, SOCK_RAW, IPPROTO_RAW);<br>
+26.&nbsp;&nbsp;&nbsp; if (soquete == -1)<br>
+27.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro socket() %d: %s\n", errno, strerror(errno));<br>
+28.&nbsp;&nbsp;&nbsp; else<br>
+29.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+30.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Soquete foi criado com sucesso\n");<br>
+31.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; close(soquete);<br>
+32.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+33.&nbsp;&nbsp;&nbsp; data.effective = CAP_TO_MASK(CAP_NET_RAW);<br>
+34.&nbsp;&nbsp;&nbsp; if (capset(&hdr, &data))<br>
+35.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+36.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro capset() %d: %s\n", errno, strerror(errno));<br>
+37.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 1;<br>
+38.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+39.&nbsp;&nbsp;&nbsp; else<br>
+40.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Capacidade CAP_NET_RAW incluida\n");<br>
+41.&nbsp;&nbsp;&nbsp; if (capget(&hdr, &data))<br>
+42.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+43.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro capget() %d: %s\n", errno, strerror(errno));<br>
+44.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 1;<br>
+45.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+46.&nbsp;&nbsp;&nbsp; else<br>
+47.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Efetivas = %x,  permitidas = %x, herdadas = %x\n", data.effective, data.permitted,  
+                                     data.inheritable);<br>
+48.&nbsp;&nbsp;&nbsp; soquete = socket(AF_INET, SOCK_RAW, IPPROTO_RAW);<br>
+49.&nbsp;&nbsp;&nbsp; if (soquete == -1)<br>
+50.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro socket() %d: %s\n", errno, strerror(errno));<br>
+51.&nbsp;&nbsp;&nbsp; else<br>
+52.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+53.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Soquete foi criado com sucesso\n");<br>
+54.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; close(soquete);<br>
+55.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+56.}
+</blockquote>
+</p>
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/capget.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 7 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>unistd.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das <a href="../chamadas.html"><b>chamadas de sistema</b></a>.
+    <li><b>capability.h</b> - cabe&ccedil;alho com as defini&ccedil;&otilde;es das <a href="../capacidades.html"><b>capacidades</b></a>.
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror( )</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro.
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+    <li><b>socket.h</b> - cabe&ccedil;alho com defini&ccedil;&otilde;es usadas na cria&ccedil;&atilde;o de um soquete de rede.
+    <li><b>in.h</b> - cabe&ccedil;alho com defini&ccedil;&otilde;es dos protocolos da Internet.
+    </ul>
+<li><b>Linha 8 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 10 a linha 55.
+<li><b>Linha 10 a 12:</b> defini&ccedil;&atilde;o de vari&aacute;veis.
+<li><b>Linha 13 :</b> obt&eacute;m o n&uacute;mero do processo com a chamada <a href="cs_getpid.html"><b>getpid( )</b></a>.
+<li><b>Linha 14 :</b> obt&eacute;m a vers&atilde;o das <a href="../capacidades.html"><b>capacidades</b></a> usadas pelo 
+    <a href="../kernel.html"><b>kernel</b></a>.
+<li><b>Linha 15 a 24:</b> usa a chamada <i>capget( )</i> para obter as capacidades do processo.
+<li><b>Linha 25 a 32:</b> abre um soquete de rede.
+    <ul>
+    <li>AF_INET - usa os protocolos da Internet IPv4.
+    <li>SOCK_RAW - define o uso do protocolo IPv4 no espa&ccedil;o do usu&aacute;rio. Somente processos com ID efetivo zero ou
+        com <a href="../capacidades.html"><b>capacidade</b></a> CAP_NET_RAW (bit 13) podem abrir este tipo de soquete 
+        (transmiss&atilde;o de datagramas).
+    <li>IPPROTO_RAW - interage diretamente com o n&iacute;vel 3 dos protocolos da Internet (IP).
+    </ul>
+<li><b>Linha 33 a 40:</b> usa a chamada <i>capset( )</i> para incluir a capacidade CAP_NET_RAW. Esta
+    capacidade permite abrir soquetes para a transmiss&atilde;o de datagramas.
+<li><b>Linha 41 a 47:</b> usa a chamada <i>capget( )</i> para verificar as novas capacidades do processo.
+<li><b>Linha 48 a 55:</b> abre novamente um soquete de rede.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Basicamente, o programa apresentado acima executa 5 opera&ccedil;&otilde;es: a) verifica quais as capacidades do processo;
+b) abre um soquete de redes para a transmiss&atilde;o de pacotes datagramas; c) inclui a capacidade CAP_NET_RAW no conjunto de
+capacidades efetivas; d) verifica quais as capacidades atuais do processo; e) abre novamente um soquete de redes para a 
+transmiss&atilde;o de pacotes datagramas.</p>
+
+<p>Sabemos que apenas processos com ID efetivo zero (<i>root</i>) ou com <a href="../capacidades.html"><b>capacidade</b></a> 
+CAP_NET_RAW (bit 13) podem abrir soquete para pacotes datagramas. Portanto, o programa s&oacute; ser&aacute; executado com sucesso
+se for executado pelo <i>root</i> ou se tiver permiss&atilde;o de abrir soquete como se fosse o <i>root</i>. Abaixo s&atilde;o
+mostradas quatro formas de executar o programa. Nem todas conseguem abrir o soquete de redes.</p>
+   
+<ol>
+<li>O usu&aacute;rio comum (n&atilde;o <i>root</i>) compila e executa o programa.
+    <blockquote class="t1">
+    gcc -o capget capget.c<br>
+    ./capget 
+    </blockquote>
+    O sistema n&atilde;o permite abrir o soquete de rede e nem alterar as <a href="../capacidades.html"><b>capacidades</b></a>
+    do processo. O programa termina na linha 37.
+    <blockquote class="t2">
+    PID = 3016, versao = 20080522<br>
+    Efetivas = 0,  permitidas = 0, herdadas = 0<br>
+    Erro socket() 1: Operation not permitted<br>
+    Erro capset() 1: Operation not permitted
+    </blockquote>
+<li>O usu&aacute;rio comum (n&atilde;o <i>root</i>) compila o programa e, em seguida, o executa como <i>root</i> (usa o comando
+    <a href="../sudo.html"><b>sudo</b></a>).
+    <blockquote class="t1">
+    gcc -o capget capget.c<br>
+    sudo ./capget 
+    </blockquote>
+    O programa n&atilde;o apresenta qualquer erro durante a execu&ccedil;&atilde;o. Entretanto, como o programa executa como <i>root</i>,
+    n&atilde;o era necess&aacute;rio usar o comando <i>capset( )</i> para incluir a <a href="../capacidades.html"><b>capacidade</b></a>
+    CAP_NET_RAW. Note que as capacidades efetivas passaram de "ffffffff" para "2000" (perde capacidades com o comando): o primeiro
+    conjunto corresponde a um mapa de bits com 32 valores "1" e o segundo conjunto corresponde a um mapa onde apenas o bit 13 tem 
+    valor "1".
+    <blockquote class="t2">
+    PID = 3152, versao = 20080522<br>
+    Efetivas = ffffffff,  permitidas = ffffffff, herdadas = 0<br>
+    Soquete foi criado com sucesso<br>
+    Capacidade CAP_NET_RAW incluida<br>
+    Efetivas = 2000,  permitidas = ffffffff, herdadas = 0<br>
+    Soquete foi criado com sucesso<br>
+    </blockquote>
+<li>O programa &eacute; executado da mesma forma que o programa <i>ping</i> costuma ser executado: o dono &eacute; 
+    o <i>root</i> (usa-se o comando <a href="../chown.html"><b>chown</b></a> para alterar o dono e o grupo do programa) e 
+    o programa tem a <a href="../permissao.html"><b>permiss&atilde;o</b></a> especial SUID para permitir que qualquer 
+    usu&aacute;rio possa execut&aacute;-lo (usa-se o comando <a href="../chmod.html"><b>chmod</b></a> para alterar as 
+    permiss&otilde;es).
+    <blockquote class="t1">
+    gcc -o capget capget.c<br>
+    sudo chown root:root capget<br>
+    sudo chmod u+s capget<br>
+    ./capget 
+    </blockquote>
+    O programa &eacute; executado por um usu&aacute;rio comum sem qualquer erro. Mais uma vez o programa perde capacidades com
+    o comando <i>capset( )</i>.
+    <blockquote class="t2">
+    PID = 3175, versao = 20080522<br>
+    Efetivas = ffffffff,  permitidas = ffffffff, herdadas = 0<br>
+    Soquete foi criado com sucesso<br>
+    Capacidade CAP_NET_RAW incluida<br>
+    Efetivas = 2000,  permitidas = ffffffff, herdadas = 0<br>
+    Soquete foi criado com sucesso
+    </blockquote>
+
+<li>O programa &eacute; executado por um usu&aacute;rio comum, mas possui capacidade permitida (p) CAP_NET_RAW (bit 13). Usa-se o 
+    comando <a href="../setcap.html"><b>setcap</b></a> para fornecer esta capacidade ao programa.
+    <blockquote class="t1">
+    gcc -o capget capget.c<br>
+    sudo setcap cap_net_raw+p capget<br>
+    ./capget 
+    </blockquote>
+    O programa n&atilde;o consegue abrir o primeiro soquete de rede, pois n&atilde;o tem permiss&atilde;o para isto. Mas 
+    consegue alterar o conjunto de permiss&otilde;es efetivas e abrir o soquete de redes na segunda tentativa.
+    <blockquote class="t2">
+    PID = 3184, versao = 20080522<br>
+    Efetivas = 0,  permitidas = 2000, herdadas = 0<br>
+    Erro socket() 1: Operation not permitted<br>
+    Capacidade CAP_NET_RAW incluida<br>
+    Efetivas = 2000,  permitidas = 2000, herdadas = 0<br>
+    Soquete foi criado com sucesso
+    </blockquote>
+</ol>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Desde o Linux 2.6.33, as capacidades fazem parte do kernel. Mas em algumas 
+    <a href="../distribuicao.html"><b>distribui&ccedil;&otilde;es</b></a> Linux &eacute; preciso instalar a biblioteca 
+    <i>libcap</i> para ter acesso &agrave;s fun&ccedil;&otilde;es e aos comandos que manipulam as capacidades.
+<li>As chamadas <i>capget( )</i> e <i>capset( )</i> s&atilde;o espec&iacute;ficas do Linux (n&atilde;o port&aacute;veis).
+    Para manipular as capacidades considerando a portabilidade, use as fun&ccedil;&otilde;es <i>cap_get_proc( )</i> e 
+    <i>cap_set_proc( )</i> da biblioteca <i>libcap</i>.
+<li>Para ver a lista completa das capacidades que um processo pode adquirir, digite
+    <blockquote class="t1">man capabilities</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>history</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="history">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>history</h1>
+
+<blockquote><b><font size="+1">history [n&uacute;mero]</font></b></blockquote>
+onde
+<ul>
+<li><b>n&uacute;mero</b> corresponde à quantidade de comandos a serem exibidos. Se este valor n&atilde;o for fornecido, o sistema mostra
+    os &uacute;ltimos 500 comandos digitados.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este aplicativo mostra os &uacute;ltimos comandos utilizados pelo usuário.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>O comando
+
+<blockquote class="t1">history 5</blockquote>
+
+mostra os &uacute;ltimos 5 comandos digitados pelo usu&aacute;rios. Abaixo, &eacute; apresentada uma poss&iacute;vel sa&iacute;da.
+Note que o sistema tem armazenado 508 comandos do usu&aacute;rio.
+
+<blockquote>
+504 ls<br>
+505 top<br>
+506 vi teste<br>
+507 cd<br>
+508 history 5<br>
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>&Eacute; poss&iacute;vel limpar o hist&oacute;rico com o comando <strong>history -c</strong>.
+<li>No <b><a href="shell.html">shell</a></b> <b>bash</b>, o arquivo que armazena os comandos mostrados pelo <b>history</b> &eacute; o <b>.bash_history</b>.
+<li>A distribui&ccedil;&atilde;o <b>DuZeru</b> define os seguintes padr&otilde;es no arquivo <b>.bashrc</b> para o comando <b>history</b>:
+    <ul>
+    <li>Ignora linhas duplicadas (comandos repetidos)
+        <blockquote>HISTCONTROL=ignoreboth</blockquote>
+    <li>Os novos comandos digitados s&atilde;o adicionados no final do arquivo usado pelo <b>history</b>.
+        <blockquote>shopt -s histappend</blockquote>
+        O termo "shopt -s" indica que a op&ccedil;&atilde;o <b>histappend</b> deve ser habilitada no <b>shell</b>.
+    <li>Define o n&uacute;mero de comandos que devem ser lembrados. O padr&atilde;o &eacute; 1000.
+        <blockquote>HISTSIZE=1000</blockquote>
+    <li>Define o tamanho m&aacute;ximo de linhas do arquivo usado pelo <b>history</b>. O padr&atilde;o &eacute; 2000 linhas.
+        <blockquote>HISTFILESIZE=2000</blockquote>
+    </ul>
+    Note que nas defini&ccedil;&otilde;es acima foram usadas tr&ecirc;s <b><a href="variaveis.html">vari&aacute;veis de ambiente</a></b>: 
+    HISTCONTROL, HISTSIZE e HISTFILESIZE.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>
+

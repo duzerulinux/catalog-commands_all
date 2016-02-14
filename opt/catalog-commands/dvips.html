@@ -1,0 +1,87 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>dvips</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="dvips">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>dvips</h1>
+  
+<blockquote><p><font size="+1"><b> dvips [options] arquivo</b></font></p></blockquote>
+onde
+<ul>
+<li><b>arquivo</b> &eacute; o nome do arquivo de entrada com extens&atilde;o <i>dvi</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando converte um arquivo TeX no formato <i>dvi</i> (<i>device independent file format</i>) para o formato 
+<i>ps</i> (<i>postscript</i>).</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-C num</b> : gera <i>num</i> c&oacute;pias do arquivo.</li>
+<li><b>-n num</b> : gera no m&aacute;ximo <i>n</i> p&aacute;ginas.</li>
+<li><b>-o arquivo</b> : define o nome do arquivo de sa&iacute;da.</li>
+<li><b>-p n</b> : a primeira p&aacute;gina do arquivo de sa&iacute;da ser&aacute; a p&aacute;gina <i>n</i> do arquivo de entrada.</li>
+<li><b>-pp lista</b> : lista de p&aacute;ginas a serem geradas, podemos citar explicitamente as p&aacute;ginas (2,5,7,etc) ou especificar 
+    um conjunto de p&aacute;ginas (5-8).</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+
+<li>Para criar o arquivo teste.ps a partir do arquivo teste.dvi, basta digitar
+
+<blockquote class="t1">dvips -o teste.ps teste</blockquote>
+
+<li>Para definir que apenas 10 p&aacute;ginas s&atilde;o geradas a partir da 
+vig&eacute;sima p&aacute;gina do arquivo teste.dvi, digite
+
+<blockquote class="t1">dvips -o teste.ps -p 20 -n 10 teste</blockquote>
+
+<li>Para criar arquivo que tem 3 cópias do arquivo original, entre com
+
+<blockquote class="t1">dvips -o teste.ps -C 3 teste</blockquote>
+
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="gv.html">gv</a></b> - aplicativo para visualiza&ccedil;&atilde;o de arquivos nos formatos <i>ps</i> e <i>pdf</i>.
+<li><b><a href="ps2pdf.html">ps2pdf</a></b> - converte arquivo no formato <i>ps</i> para o formato <i>pdf</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

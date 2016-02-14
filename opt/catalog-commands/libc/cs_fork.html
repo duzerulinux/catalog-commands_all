@@ -1,0 +1,166 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>fork()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="fork()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+
+<a name="inicio"></a>
+
+<h1>fork( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta <a href="../chamadas.html"><b>chamada de sistema</b></a> cria um <a href="../processo.html"><b>processo</b></a>-filho.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include&lt;unistd.h&gt;<br>
+pid_t fork(void);
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Se a chamada <i>fork( )</i> &eacute; executada com sucesso, o valor zero &eacute; retornado. Caso a chamada n&atilde;o
+seja bem sucedida, o valor -1 &eacute; retornado e o c&oacute;digo do erro &eacute; colocado na vari&aacute;vel externa 
+<b><a href="vr_errno.html">errno</a></b>. A tabela abaixo mostra os erros que podem ocorrer com esta chamada.</p>
+
+<p>
+<blockquote>
+<table class="t2" rules=all cellpadding=10 cellspacing=10 align=center width=650>
+<tr class="t1"><td><b>Erro</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td>EAGAIN      </td><td>N&atilde;o &eacute; poss&iacute;vel criar um novo processo</td></tr>
+<tr><td>ENOMEM      </td><td>Mem&oacute;ria insuficiente</td></tr>
+<tr><td>ENOSYS      </td><td>Chamada n&atilde;o &eacute; suportada pelo kernel</td></tr>
+</table>
+</blockquote>
+<p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include&lt;unistd.h&gt;  <br>
+2. #include&lt;stdio.h&gt;   <br>
+3. #include&lt;string.h&gt;  <br>
+4. #include&lt;errno.h&gt;   <br>
+5. int main() <br>
+6. &nbsp;&nbsp;&nbsp; { <br>
+7. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pid_t filho; <br>
+8. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; filho = fork();<br>
+9. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (filho == -1) <br>
+10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("Erro fork() %d: %s\n", errno, strerror(errno));<br>
+11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else <br>
+12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+13.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (filho == 0)<br>
+14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   printf("Processo-filho: PID = %ld, PPID = %ld\n", (long)getpid(), (long)getppid());<br>
+15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else<br>
+16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   printf("Processo-pai: PID = %ld, PPID = %ld, PID do filho = %ld\n", (long)getpid(), (long)getppid(), (long)filho); <br>
+17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+18.&nbsp;&nbsp;&nbsp; }
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/fork.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 4 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>unistd.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das <a href="../chamadas.html"><b>chamadas de sistema</b></a>. 
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror( )</b></a>.
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+    </ul>
+<li><b>Linha 5 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main()</b></a> cujos comandos v&atilde;o da 
+    linha 7 a linha 17.
+<li><b>Linha 7 :</b> &eacute; definida a vari&aacute;vel <i>filho</i> do tipo <i>pid_t</i> (valor inteiro usado para representar
+    um n&uacute;mero de processo).
+<li><b>Linha 8 :</b> a chamada de sistema <i>fork( )</i> &eacute; usada para criar um novo processo, filho do processo atual. 
+    Na realidade, o sistema faz uma c&oacute;pia do processo e aloca espa&ccedil;o de mem&oacute;ria, em separado, para
+    a execu&ccedil;&atilde;o deste novo processo. A partir deste ponto, a execu&ccedil;&atilde;o dos dois processos se 
+    diferenciam. Neste exemplo, se a chamada &eacute; bem sucedida, o processo-pai armazena o PID do processo-filho na 
+    vari&aacute;vel <i>filho</i>, enquanto o processo-filho fica com valor zero nesta mesma vari&aacute;vel.
+<li><b>Linhas 9 e 10 :</b> se a chamada <i>fork( )</i> n&atilde;o foi bem sucedida (a vari&aacute;vel <i>filho</i> &eacute; 
+    igual a -1), o programa exibe o c&oacute;digo (valor da vari&aacute;vel <i>errno</i>) e a mensagem de erro (<i>strerror()</i>)
+    usando <i>printf()</i>.
+<li><b>Linhas de 13 a 16 :</b> se a chamada <i>fork()</i> foi bem sucedida (a vari&aacute;vel <i>filho</i> &eacute; diferente de -1), 
+    o programa verifica se quem est&aacute; executando &eacute; o processo-pai (vari&aacute;vel filho &eacute; diferente de zero) ou 
+    &eacute; o processo-filho (vari&aacute;vel filho &eacute; igual a zero). Para cada situa&ccedil;&atilde;o &eacute; exibida uma
+    frase que informa o PID e o PPID do processo obtidos com as chamadas de sistema <a href="cs_getpid.html"><b>getpid()</b></a> e
+    <a href="cs_getppid.html"><b>getppid()</b></a>, respectivamente.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+<blockquote class="t1">
+gcc -o fork fork.c
+</blockquote>
+e para executar, digite
+<blockquote class="t1">
+./fork
+</blockquote>
+Abaixo, &eacute; mostrada uma poss&iacute;vel sa&iacute;da. O processo inicial (PID = 2471) imprime a primeira linha e
+tem como pai o <a href="../shell.html"><b>shell</b></a> <i>bash</i> (PID = 2233). O processo criado (processo-filho) exibe
+a segunda linha (PID = 2472).
+<blockquote class="t2">
+Processo-pai: PID = 2471, PPID = 2233, PID do filho = 2472<br>
+Processo-filho: PID = 2472, PPID = 2471
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<p>
+<ul>
+<li>A chamada <i>fork()</i> cria um processo-filho que se diferencia do processo-pai apenas nos n&uacute;meros de 
+    <a href="../pid.html"><b>PID</b></a> (identifica&ccedil;&atilde;o do processo) e de 
+    <a href="../ppid.html"><b>PPID</b></a> (identifica&ccedil;&atilde;o do processo-pai). Al&eacute;m disso, o novo processo 
+    n&atilde;o herda a lista dos recursos associados ao processo-pai tais como arquivos abertos e sinais pendentes.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

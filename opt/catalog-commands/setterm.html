@@ -1,0 +1,79 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>setterm</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="setterm">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>setterm</h1>
+
+<blockquote><font size="+1"><b>setterm [op&ccedil;&otilde;es]</b></font></blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>O comando <i>setterm</i> envia para a sa&iacute;da padr&atilde;o um string de 
+caracteres para  ativar  uma  habilidade  espec&iacute;fica do terminal. As 
+op&ccedil;&otilde;es n&atilde;o implementadas pelo terminal s&atilde;o ignoradas.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-background [black|red|green|yellow|blue|magenta|cyan|white|default]</b> : altera a cor de fundo do terminal para a 
+    cor especificada.
+<li><b>-blank [num]</b> : configura a prote&ccedil;&atilde;o de tela no <b><a href="shell.html">shell</a></b> onde <i>num</i>
+    corresponde ao n&uacute;mero de minutos de inatividade do computador para que a prote&ccedil;&atilde;o de tela seja 
+    executada. O valor de <b>num</b> pode variar de zero a 60 sendo que o valor zero corresponde a desativa&ccedil;&atilde;o
+    da tela de prote&ccedil;&atilde;o.
+<li><b>-foreground [black|red|green|yellow|blue|magenta|cyan|white|default]</b> : altera a cor da letra do terminal para a 
+    cor especificada.
+<li><b>-reset</b> : coloca o terminal na condi&ccedil;&atilde;o de rec&eacute;m ligado.
+<li><b>-store</b> : passa a assumir as op&ccedil;&otilde;es definidas no comando como padr&atilde;o.
+<li><b>-term terminal</b> : altera o nome da <b><a href="variaveis_ambiente.html">vari&aacute;vel de ambiente</a></b> TERM.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>Por exemplo, o comando
+
+<blockquote class="t1">setterm -store -background blue</blockquote>
+
+altera a cor do fundo da <b><a href="consoles.html">console virtual</a></b> para azul (n&atilde;o funciona na interface
+gr&aacute;fica). Esta defini&ccedil;&atilde;o &eacute; agora padr&atilde;o para os todos os terminais virtuais do sistema.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="stty.html">stty</a></b> - modifica e/ou mostra as configura&ccedil;&otilde;es de linhas de terminal.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

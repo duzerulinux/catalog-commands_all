@@ -1,0 +1,151 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>system()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="system()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>system( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta fun&ccedil;&atilde;o executa um comando <a href="../shell.html"><b>shell</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include&lt;stdlib.h&gt;<br>
+int system (const char *command);
+</blockquote>
+
+<ul>
+<li>A fun&ccedil;&atilde;o executa o comando especificado chamando 
+    <blockquote class="t1">/bin/sh -c command</blockquote>
+<li>Quando termina a execu&ccedil;&atilde;o do comando, retorna para o programa.
+</ul>
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<ul>
+<li>Em caso de sucesso, o valor retornado corresponde &agrave; resposta do comando executado.
+<li>Se o valor retornado pelo comando &eacute; NULL, a fun&ccedil;&atilde;o <i>system( )</i> retorna um valor n&atilde;o zero se o
+    <a href="../shell.html"><b>shell</b></a> est&aacute; dispon&iacute;vel e retorna zero em caso de indisponibilidade.
+<li>Em caso de erro, o valor retornado &eacute; -1 e o c&oacute;digo de erro correspondente &eacute; armazenado na vari&aacute;vel
+    externa <b><a href="vr_errno.html">errno</a></b>.
+</ul>
+ 
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include&lt;stdio.h&gt;<br>
+2. #include&lt;stdlib.h&gt;<br>
+3. #include&lt;string.h&gt;<br>
+4. #include&lt;errno.h&gt;<br>
+5. int main()<br>
+6. {<br>
+7.&nbsp;&nbsp;&nbsp; int ret;<br>
+8.&nbsp;&nbsp;&nbsp; ret = system("pwd");<br>
+9.&nbsp;&nbsp;&nbsp; if (ret == -1)<br>
+10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro system() %d: %s\n", errno, strerror(errno));<br>
+11.&nbsp;&nbsp;&nbsp;else<br>
+12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Exemplo executado com sucesso\n");<br>
+13.}
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/system.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 4 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>stdlib.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da fun&ccedil;&atilde;o <i>system( )</i>.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror( )</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro.
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+   </ul>
+<li><b>Linha 5 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 7 a linha 12.
+<li><b>Linha 7 :</b> define a vari&aacute;vel que armazenar&aacute; o valor retornado pela fun&ccedil;&atilde;o <i>system( )</i>.
+<li><b>Linha 8 :</b> executa o comando <a href="../pwd.html"><b>pwd</b></a> que informa o diret&oacute;rio de trabalho do processo.
+<li><b>Linhas de 9 a 12 :</b> verifica se a fun&ccedil;&atilde;o <i>system( )</i> foi executada com sucesso. Em caso negativo, 
+    imprime o erro ocorrido. Em caso positivo, exibe mensagem de sucesso.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+    <blockquote class="t1">
+    gcc -o system system.c
+    </blockquote>
+Para executar, entre com
+    <blockquote class="t1">
+    ./system 
+    </blockquote>
+Supondo que o programa seja executado pelo usu&aacute;rio <i>aluno</i>, uma poss&iacute;vel resposta &eacute; mostrada abaixo.
+    <blockquote class="t1">
+    /home/aluno/estacao/guia/libc/testes<br>
+    Exemplo executado com sucesso
+    </blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Para passar valores de vari&aacute;veis com a fun&ccedil;&atilde;o <i>system( )</i> &eacute preciso montar a string. Abaixo 
+    um exemplo que usa a fun&ccedil;&atilde;o <a href="fc_sprintf.html"><b>sprintf( )</b></a> para formatar o comando "cat /etc/passwd".
+    <blockquote class="t2">
+    char dir[20] = "/etc/passwd";<br>
+    char comando[100];<br>
+    sprintf(comando, "cat %s", dir);<br>
+    ret = system(comando);
+    </blockquote>
+<li>Durante a execu&ccedil;&atilde;o da fun&ccedil;&atilde;o <i>system( )</i>, o <a href="../sinal.html"><b>sinal</b></a> 
+    <i>SIGCHLD</i> &eacute; bloqueado e os sinais <i>SIGINT</i> e <i>SIGQUIT</i> s&atilde;o ignorados.
+<li>A fun&ccedil;&atilde;o <i>system( )</i> n&atilde;o afeta o estado de espera dos processos-filhos.
+<li>N&atilde;o se deve usar a chamada <i>system( )</i> em programas com <a href="../permissao.html"><b>permiss&otilde;es</b></a>
+    SUID ou SGID por quest&otilde;es de seguran&ccedil;a.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

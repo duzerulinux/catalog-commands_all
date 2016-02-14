@@ -1,0 +1,266 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>fcntl()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="fcntl()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>fcntl( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta <a href="../chamadas.html"><b>chamada de sistema</b></a> realiza opera&ccedil;&otilde;es de controle em um
+descritor de <a href="../arquivo.html"><b>arquivo</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include&lt;unistd.h&gt;<br>
+#include&lt;fcntl.h&gt;<br>
+int fcntl(int fd, int cmd, ... /* arg */ );
+</blockquote>
+<ul>
+<li>O argumento <i>cmd</i> &eacute; a opera&ccedil;&atilde;o a ser efetuada no arquivo definido pelo descritor <i>fd</i>. 
+    Abaixo alguns exemplos de comandos que podem ser usados com a chamada <i>fcntl( )</i>.
+    <ul>
+    <li><b>F_DUPFD (int)</b> : encontra o menor n&uacute;mero de descritor de arquivo dispon&iacute;vel, maior que ou igual ao 
+        terceiro argumento da chamada, e o faz uma c&oacute;pia do <i>fd</i>. Em caso de sucesso, o n&uacute;mero do novo descritor
+        de arquivo &eacute; retornado.
+    <li><b>F_GETFD (void)</b> : fornece os <i>flags</i> do  descritor de arquivo; o terceiro argumento &eacute; ignorado.
+    <li><b>F_SETFD (int)</b> : altera os <i>flags</i> do  descritor de arquivo para o valor especificado no terceiro argumento.
+    <li><b>F_GETFL (void)</b> : fornece o modo de acesso e os <i>flags</i> de <i>status</i> do arquivo; o terceiro argumento
+        &eacute; ignorado.
+    <li><b>F_SETFL (int)</b> : altera os <i>flags</i> de <i>status</i> do arquivo para o valor especificado no terceiro argumento.
+    <li><b>F_GETLK</b>, <b>F_SETLK</b> e <b>F_SETLKW</b> : usados para adquirir, liberar ou testar <i>record locks</i>.
+    <li><b>F_GETOWN</b>, <b>F_SETOWN</b>, <b>F_GETSIG</b> e <b>F_SETSIG</b> : usados para gerenciar <a href="../sinal.html"><b>sinais</b></a> 
+        (SIGIO e SIGURG) de disponibilidade para opera&ccedil;&otilde;es de E/S.
+    <li><b>F_SETLEASE</b> e <b>F_GETLEASE</b> : usados para estabelecer uma nova aloca&ccedil;&atilde;o ou para verificar a 
+        aloca&ccedil;&atilde;o em arquivo j&aacute; alocado.
+    <li><b>F_NOTIFY(int)</b> : notifica o processo quando o diret&oacute;rio referenciado pelo <i>fd</i>, ou qualquer um dos seus arquivos, 
+        &eacute; alterado.
+        <p>
+        <table class="t2" rules=all cellpadding=10 celspacing=10 align=center width=650>
+        <tr class="t1"><td><b>Evento</b></td><td><b>Descri&ccedil;&atilde;o</b>                      </td></tr>
+        <tr><td>DN_ACCESS               </td><td>Um arquivo foi acessado                             </td></tr>
+        <tr><td>DN_MODIFY               </td><td>Um arquivo foi modificado                           </td></tr>
+        <tr><td>DN_CREATE               </td><td>Um arquivo foi criado                               </td></tr>
+        <tr><td>DN_DELETE               </td><td>Um arquivo foi desligado                            </td></tr>
+        <tr><td>DN_RENAME               </td><td>Um arquivo foi renomeado dentro do diret&oacute;rio </td></tr>
+        <tr><td>DN_ATTRIB               </td><td>Os atributos de um arquivo foram modificados        </td></tr>
+        </table>
+        </p>
+    </ul>
+<li>O terceiro argumento &eacute; opcional e depende de do comando <i>cmd</i>. Se o terceiro argumento &eacute; requerido, o tipo 
+    &eacute; indicado entre par&ecirc;ntesis. Se  o argumento n&atilde;o &eacute; requerido, <i>void</i> &eacute; especificado.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<ul>
+<li>Se a chamada &eacute; executada com sucesso, o valor
+    retornado depende da opera&ccedil;&atilde;o solicitada em <i>cmd</i>. <br><br>
+    <table class="t2" rules=all cellpadding=10 celspacing=10 align=center width=650>
+    <tr class="t1"><td><b>Comando</b></td><td><b>Valor de retorno</b></td></tr>
+    <tr><td>F_DUPFD     </td><td>O novo descritor de arquivo</td></tr>
+    <tr><td>F_GETFD     </td><td>Valor dos <i>flags</i> do descritor de arquivo</td></tr>
+    <tr><td>F_GETFL     </td><td>Valor dos <i>flags</i> do <i>status</i></td></tr>
+    <tr><td>F_GETLEASE  </td><td>Tipo de loca&ccedil;&atilde;o (<i>lease</i>) associada ao descritor de arquivo: F_RDLCK 
+                                 (loca&ccedil;&atilde;o para leitura), F_WRLCK (loca&ccedil;&atilde;o para escrita) ou 
+                                 F_UNLCK (sem loca&ccedil;&atilde;o)</td></tr>
+    <tr><td>F_GETOWN    </td><td>Valor do dono do descritor de arquivo</td></tr>
+    <tr><td>F_GETSIG    </td><td>Valor do sinal enviado quando leitura ou escrita &eacute; poss&iacute;vel ou o valor zero
+                                 para o sinal padr&atilde;o <i>SIGIO</i></td></tr>
+    <tr><td>F_GETPIPE_SZ</td><td>Capacidade do <i>pipe</i></td></tr>
+    <tr><td>Todos os outros comandos</td><td>zero</td></tr>
+    </table>
+<li>Se a chamada <i>fcntl( )</i> n&atilde;o &eacute; bem sucedida, o valor -1 &eacute; retornado e o c&oacute;digo do erro &eacute;
+    colocado na vari&aacute;vel externa <b><a href="vr_errno.html">errno</a></b>. 
+    <blockquote>
+    <table class="t2" rules=all cellpadding=10 celspacing=10 align=center width=650>
+    <tr class="t1"><td><b>Erro</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+    <tr><td>EACCES      </td><td>Acesso ao arquivo n&atilde;o &eacute; permitido</td></tr>
+    <tr><td>EAGAIN      </td><td>Opera&ccedil;&atilde;o n&atilde;o permitida</td></tr>
+    <tr><td>EBADF       </td><td>Problema com a deni&ccedil;&atilde;o do <i>fd</i></td></tr>
+    <tr><td>EDEADLK     </td><td>Opera&ccedil;&atilde;o pode causar <i>deadlock</i></td></tr>
+    <tr><td>EFAULT      </td><td>Nome do arquivo aponta para uma &aacute;rea de endere&ccedil;o n&atilde;o acess&iacute;vel</td></tr>
+    <tr><td>EINTR       </td><td>Comando interrompido por um sinal</td></tr>
+    <tr><td>EINVAL      </td><td>Valor inv&aacute;lido</td></tr>
+    <tr><td>EMFILE      </td><td>N&uacute;mero m&aacute;mero de descritores j&aacute; alcan&ccedil;ado</td></tr>
+    <tr><td>ENOLCK      </td><td>Muitos <i>locks</i> pendentes</td></tr>
+    <tr><td>EPERM       </td><td>Opera&ccedil;&atilde;o n&atilde;o permitida</td></tr>
+    </table>
+    </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include&lt;fcntl.h&gt;   <br>
+2. #include&lt;stdio.h&gt;   <br>
+3. #include&lt;stdlib.h&gt;  <br>
+4. #include&lt;string.h&gt;  <br>
+5. #include&lt;errno.h&gt;   <br>
+6. int main() <br>
+7. &nbsp;&nbsp;&nbsp; { <br>
+8. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int fd, flags; <br>
+9. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fd = open("./teste", O_RDWR); <br>
+10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (fd == -1) <br>
+11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro open %d: %s\n", errno, strerror(errno)); <br>
+13.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(1); <br>
+14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ((flags = fcntl(fd, F_GETFL)) &lt; 0) <br>
+16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro fcntl %d: %s\n", errno, strerror(errno)); <br>
+18.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(2); <br>
+19.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+20.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else <br>
+21.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+22.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ((flags & O_ACCMODE) == O_RDWR) <br>
+23.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   printf("Arquivo permite leitura e escrita\n"); <br>
+24.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ((flags & O_APPEND) == 0) <br>
+25.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   printf("(1) Escrita sobrescreve arquivo existente\n"); <br>
+26.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else <br>
+27.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   printf("(1) Escrita no final do arquivo\n"); <br>
+28.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+29.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (fcntl(fd, F_SETFL, flags | O_APPEND) &lt; 0) <br>
+30.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+31.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro fcntl %d: %s\n", errno, strerror(errno)); <br>
+32.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(3); <br>
+33.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  } <br>
+34.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; flags = fcntl(fd, F_GETFL); <br>
+35.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ((flags & O_APPEND) == 0) <br>
+36.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("(2) Escrita sobrescreve arquivo existente\n"); <br>
+37.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else <br>
+38.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("(2) Escrita no final do arquivo\n"); <br>
+39.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char buffer[] = "Adeus, mundo cruel\n"; <br>
+40.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (write(fd, buffer, strlen(buffer)) == -1) <br>
+41.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+42.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro write %d: %s\n", errno, strerror(errno)); <br>
+43.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(4); <br>
+44.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+45.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (close(fd) == -1) <br>
+46.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+47.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro close %d: %s\n", errno, strerror(errno)); <br>
+48.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(5); <br>
+49.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+50.&nbsp;&nbsp;&nbsp; }
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/fcntl.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 5 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>unistd.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das <a href="../chamadas.html"><b>chamadas de sistema</b></a>.
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>stdlib.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es gerais como
+        <a href="fc_exit.html"><b>exit( )</b></a>.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror( )</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro.
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+    </ul>
+<li><b>Linha 6 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 8 a linha 49.
+<li><b>Linha 8 :</b> define vari&aacute;veis.
+<li><b>Linhas de 9 a 14 :</b> abre o descritor, para leitura e escrita (O_RDWR), associado ao arquivo <i>teste</i> do diret&oacute;rio
+    de trabalho.
+<li><b>Linhas de 15 a 28 :</b> recupera e verifica os flags associados ao descritor de arquivo aberto.
+<li><b>Linhas de 29 a 33 :</b> inclui flag (O_APPEND) que permite adicionar escrita ao final do arquivo.
+<li><b>Linhas de 34 a 38 :</b> verifica situa&ccedil;&atilde;o atual da escrita no arquivo.
+<li><b>Linhas de 39 a 44 :</b> grava frase no arquivo.
+<li><b>Linhas de 45 a 49 :</b> fecha descritor de arquivo.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+<blockquote class="t1">
+gcc -o fcntl fcntl.c
+</blockquote>
+e para executar, basta digitar
+<blockquote class="t1">
+./fcntl
+</blockquote>
+Suponha que o arquivo <i>teste</i> tenha o conte&uacute;do abaixo.
+<blockquote class="t2">
+Alo, mundo! <br>
+Teste de fcntl()
+</blockquote>
+Ao executar o programa, as seguintes mensagens s&atilde;o exibidas:
+<blockquote class="t2">
+Arquivo permite leitura e escrita <br>
+(1) Escrita sobrescreve arquivo existente <br>
+(2) Escrita no final do arquivo
+</blockquote>
+O arquivo <i>teste</i> tem agora o seguinte conte&uacute;do:
+<blockquote class="t2">
+Alo, mundo! <br>
+Teste de fcntl() <br>
+Adeus, mundo cruel
+</blockquote>
+Note que se eliminarmos as linhas de 35 a 38 do programa (adicionam o flag O_APPEND) e executarmos novamente, o arquivo <i>teste</i>
+ser&aacute; sobrescrito e o resultado passa a ser
+<blockquote class="t2">
+Adeus, mundo cruel<br>
+e fcntl()<br>
+Adeus, mundo cruel
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul> 
+<li>No Linux, o comando <i>F_SETFL (int)</i> do <i>fcntl( )</i> consegue apenas alterar os flags O_APPEND, O_ASYNC, O_DIRECT, 
+    O_NOATIME e O_NONBLOCK.
+</ul>
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

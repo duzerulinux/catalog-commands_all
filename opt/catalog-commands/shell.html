@@ -1,0 +1,693 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>shell</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="shell">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>shell</h1>
+      
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>&Eacute o interpretador de comandos do <a href="linux.html"><b>Linux</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Informa&ccedil;&otilde;es complementares</h2>
+
+<ul>
+<li>Na realidade, o <i>shell</i> &eacute; apenas um arquivo execut&aacute;vel armazenado em <b><a href="dir_bin.html">/bin</a></b>. 
+    No modo gr&aacute;fico, um <i>shell</i> &eacute; executado em cada terminal aberto.
+<li>Os comandos digitados pelo usu&aacute;rio podem ser comandos internos (embutidos ou <i>builtin command</i>) do <i>shell</i>, mas
+    na maioria das vezes eles s&atilde;o programas externos. A lista dos comandos embutidos pode ser obtida com o comando 
+    <b><a href="help.html">help</a></b>. Basta digitar
+    <blockquote class="t1">help</blockquote>
+    Os comandos n&atilde;o embutidos s&atilde;o programas que se iniciam invocando-se um <a href="arquivo.html"><b>arquivo</b></a>
+    execut&aacute;vel em algum lugar no sistema de arquivos do Linux (o <i>shell</i> pesquisa em todos os diret&oacute;rios listados
+    na <a href="variaveis_ambiente.html"><b>vari&aacute;vel de ambiente</b></a> PATH).
+<li>O <i>shell</i> analisa sintaticamente a linha de comando depois que ela &eacute; lida. A 
+    <a href="variaveis_ambiente.html"><b>vari&aacute;vel de ambiente</b></a> IFS (<i>Internal  Field  Separator</i>) determina como
+    isso &eacute; feito. Normalmente, IFS &eacute; configurada de tal forma que espa&ccedil;os em branco separam os diferentes 
+    argumentos de linha de comando.
+<li>Existem v&aacute;rios <i>shells</i> para o Linux, onde cada <i>shell</i> tem seus pr&oacute;prios recursos, capacidades e
+    limita&ccedil;&otilde;es. 
+<li>Para ver qual &eacute; o seu <i>shell</i> padr&atilde;o, basta digitar o comando
+    <blockquote class="t1">printenv SHELL</blockquote>
+    O comando acima exibe o conte&uacute;do da <a href="variaveis_ambiente.html"><b>vari&aacute;vel de ambiente</b></a> SHELL que 
+    cont&eacute;m o caminho completo do shell. Outra forma
+    de saber qual &eacute; o shell padr&atilde;o, &eacute; verificar o &uacute;ltimo par&acirc;metro definido para o usu&aacute;rio no
+    arquivo <b><a href="dir_etc.html#passwd">/etc/passwd</a></b>. Por exemplo,
+    <blockquote class="t2">aluno:x:501:501::/home/aluno:/bin/bash</blockquote>
+    mostra que o usu&aacute;rio <i>aluno</i> usa o <i>shell bash</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Arquivos</h2>
+
+<p>Suponha que o <i>shell</i> padr&atilde;o do sistema seja o <i>bash</i>. Ent&atilde;o, quando o usu&aacute;rio acessa o sistema, 
+o <i>bash</i> utiliza os arquivos abaixo do diret&oacute;rio <b><a href="dir_home.html">home</a></b> para montar
+o ambiente (estes arquivos s&atilde;o criados automaticamente pelo comando <a href="adduser.html"><b>adduser</b></a>):        
+<ol type="a">
+<li><b>.bashrc</b> : cont&eacute;m fun&ccedil;&otilde;es, nomes alternativos (<a href="alias.html"><b>alias</b></a>) e 
+    <a href="variaveis_ambiente.html"><b>vari&aacute;veis de ambiente</b></a> do usu&aacute;rio.
+<li><b>.bash_history</b> : cont&eacute;m a lista dos &uacute;ltimos (o padr&atilde;o &eacute; 1000) comandos digitados pelo 
+    usu&aacute;rio.
+<li><b>.bash_logout</b> : cont&eacute;m os comandos executados pelo sistema no fechamento da sess&atilde;o pelo usu&aacute;rio.
+</ol>
+</p> 
+
+<p>Quando o usu&aacute;rio abre uma sess&atilde;o, inicialmente s&atilde;o carregadas as defini&ccedil;&otilde;es gerais
+(armazenadas em <a href="dir_etc.html"><b>/etc</b></a>) e, em seguida, as defini&ccedil;&otilde;es espec&iacute;ficas do
+usu&aacute;rio (armazenadas em <a href="dir_home.html"><b>/home</b></a>): inicialmente o <i>bash</i> executa os comandos de
+/etc/profile, se ele existe; em seguida, o sistema procura e executa os arquivos /etc/bash.bashrc 
+(configura&ccedil;&otilde;es gerais do ambiente) e ~/.bashrc (configura&ccedil;&otilde;es pessoais do usu&aacute;rio).</p>
+
+<p>Os arquivos do <i>shell bash</i> para os usu&aacute;rios est&atilde;o em /etc/skel.
+Estes arquivos s&atilde;o copiados para o diret&oacute;rio do usu&aacute;rio durante a cria&ccedil;&atilde;o da conta.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Par&acirc;metros</h2>
+
+<p>No shell, um par&acirc;metro &eacute; uma entidade que pode armazenar um n&uacute;mero, um nome ou um caractere especial. Quando
+o par&acirc;metro &eacute; identificado por um nome, ele &eacute; uma vari&aacute;vel.</p>
+
+<p>Existem tr&ecirc;s tipos de par&acirc;metros:
+<ul>
+<li>par&acirc;metros posicionais;
+<li>par&acirc;metro especiais;
+<li>vari&aacute;veis.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Par&acirc;metros posicionais</h2>
+
+<p>Um par&acirc;metro posicional corresponde a um argumento fornecido na linha de comando. Ele &eacute; representado por
+$ seguido um ou mais d&iacute;gitos. O menor valor para o d&iacute;gito &eacute; 1, j&aacute; que o par&acirc;metro $0 
+corresponde ao nome do <i>script</i>. No caso da posi&ccedil;&atilde;o ser maior que 9, os d&iacute;gitos deve ser colocados
+entre chaves. 
+
+<p>Por exemplo, considere o <i>script shell</i> abaixo. Neste caso, o <i>script</i> informa quais s&atilde;o o primeiro, o segundo
+e o d&eacute;cimo par&acirc;metros recebidos. 
+<blockquote  class="t2">
+#!/bin/sh <br>
+echo "O nome do script     = " $0    <br>
+echo "O primeiro argumento = " $1    <br>
+echo "O segundo argumento  = " $2    <br>
+echo "O decimo  argumento  = " ${10} <br>
+exit
+</blockquote>
+</p>
+
+<p>Suponha que o nome do script seja <i>teste_param</i> e que doze par&acirc;metros s&atilde;o fornecidos.
+<blockquote  class="t1">
+bash teste_param 1 oi a b c 7 8 9 teste xxx yyy zzz
+</blockquote>
+</p>
+
+<p>A sa&iacute;da do programa &eacute; mostrada abaixo.
+<blockquote  class="t2">
+O nome do script     =  teste_param <br>
+O primeiro argumento =  1           <br>
+O segundo argumento  =  oi          <br>
+O decimo  argumento  =  xxx         <br>
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Par&acirc;metros especiais</h2>
+
+<p>Este tipo de par&acirc;metro &eacute; tratado de forma especial pelo shell. O programador pode referenciar os par&acirc;metros
+especiais, mas n&atilde;o pode modific&aacute;-los.</p>
+
+<p>S&atilde;o exemplos:
+<ul>
+<li><b>$#</b> - cont&eacute;m o n&uacute;mero de argumentos passado para o programa.
+<li><b>$*</b> - cont&eacute;m todos os argumentos passado para o programa.
+<li><b>*?</b> - cont&eacute;m informa&ccedil;&otilde;es sobre o &uacute;ltimo comando executado.
+<li><b>$$</b> - cont&eacute;m o n&uacute;mero do processo em execu&ccedil;&atilde;o.
+<li><b>$!</b> - cont&eacute;m o n&uacute;mero do processo do &uacute;ltimo comando executado em <i>background</i>.
+</ul>
+
+<p>Por exemplo, considere o <i>teste_param</i> com o seguinte c&oacute;digo:
+<blockquote  class="t2">
+#!/bin/sh <br>
+echo "O número de argumentos = " $# <br>
+echo "Argumentos passados    = " $* <br>
+exit
+</blockquote>
+</p>
+
+<p>O <i>script</i> &eacute; ent&atilde;o executado usando o comando abaixo.
+<blockquote  class="t1">
+bash teste_param 1 oi a b c 7 8 9 teste xxx yyy zzz
+</blockquote>
+</p>
+
+<p>A sa&iacute;da do programa ser&aacute;:
+<blockquote  class="t2">
+O número de argumentos =  12 <br>
+Argumentos passados    =  1 oi a b c 7 8 9 teste xxx yyy zzz
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Vari&aacute;veis</h2>
+
+<p>Uma vari&aacute;vel pode ser definida como:
+<blockquote  class="t2">
+nome=[valor]
+</blockquote>
+</p>
+
+<p>Se um valor n&atilde;o &eacute; fornecido, a vari&aacute;vel &eacute; associada a uma string nula (<i>null string</i>).</p>
+
+<p>Um tipo especial de vari&aacute;vel s&atilde;o as vari&aacute;veis do shell que customizam o ambiente de trabalho do usu&aacute;rio.
+Por isso, elas s&atilde;o tamb&eacute;m conhecidas como vari&aacute;veis de ambiente.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Vari&aacute;veis do shell</h2>
+
+<p>Os arquivos carregados pelo shell definem as vari&aacute;veis de ambiente, que nada mais s&atilde;o que defini&ccedil;&otilde;es
+e valores que o shell e os outros programas do sistema reconhecem. Para ver quais as vari&aacute;veis de ambiente no seu sistema
+voc&ecirc; pode digitar <a href="printenv.html"><b>printenv</b></a> ou <a href="env.html"><b>env</b></a>. 
+Por exemplo, s&atilde;o algumas das vari&aacute;veis de ambiente do <i>bash</i>:
+<ul>
+<li><b>$</b> : n&uacute;mero do processo do comando em execu&ccedil;&atilde;o.
+<li><b>CDPATH</b> : mostra o caminho de busca para o comando <a href="cd.html"><b>cd</b></a> (por exemplo, "CDPATH=.:~:/etc" 
+    faz com que o sistema utilize a seguinte ordem de busca do diret&oacute;rio especificado: 1) a partir do diret&oacute;rio atual;
+    2) a partir do diret&oacute;rio raiz do usu&aacute;rio; 3) a partir do diret&oacute;rio /etc<).
+<li><b>FCEDIT</b> : define o editor padr&atilde;o para editar comandos do "history". O padr&atilde;o &eacute; o editor
+    <a href="vim.html"><b>vi</b></a>.
+<li><b>HISTFILE</b> : mostra o nome do arquivo que armazena as linhas de comando digitadas pelo usu&aacute;rio (no shell <i>bash</i>
+    o arquivo padr&atilde;o &eacute; o .bash_history).
+<li><b>HISTSIZE </b> : mostra o n&uacute;mero de linhas de comando digitadas pelo usu&aacute;rio que s&atilde;o memorizadas pelo sistema.   
+<li><b>HOME</b> : mostra o diret&oacute;rio <a href="dir_home.html"><b>home</b></a> do usu&aacute;rio.
+<li><b>IFS</b> : separador de campos usado para definir como dividir as linhas em palavras para serem processadas separadamente. O valor
+    padr&atilde;o de IFS &eacute; <i>&lt;space&gt;&lt;tab&gt;&lt;new-line&gt;</i>.
+<li><b>LOGNAME</b> : mostra o nome de acesso do usu&aacute;rio.
+<li><b>MAIL</b> : mostra o diret&oacute;rio que cont&eacute;m as mensagens de correio eletr&ocirc;nicas recebidas pelo usu&aacute;rio.
+<li><b>OLDPWD</b> : mostra o diret&oacute;rio anterior de trabalho do usu&aacute;rio.
+<li><b>OSTYPE</b> : mostra o sistema operacional em uso.
+<li><b>PATH</b> : mostra caminho de busca dos comandos digitados pelo usu&aacute;rio.
+<li><b>PPID</b> : mostra o n&uacute;mero de identifica&ccedil;&atilde;o do processo que inicializou o shell do usu&aacute;rio. Existe um
+    diret&oacute;rio em <b><a href="dir_proc.html">/proc</a></b> com este n&uacute;mero e que cont&eacute;m informa&ccedil;&otilde;es sobre
+    o processo em quest&atilde;o.
+<li><b>PS1</b> : mostra a defini&ccedil;&atilde;o do <i>prompt</i> da linha de comando.
+<li><b>PS2</b> : mostra a defini&ccedil;&atilde;o do <i>prompt</i> secund&aacute;rio da linha de comando.
+<li><b>PWD</b> : mostra o diret&oacute;rio atual de trabalho do usu&aacute;rio.
+<li><b>SHELL</b> : mostra o nome do shell atualmente em uso.
+<li><b>SHLVL</b> : mostra o n&uacute;mero de shells atualmente em execu&ccedil;&atilde;o na conta do usu&aacute;rio.
+<li><b>TERM</b> : mostra o tipo de terminal em uso.
+<li><b>TZ</b> : define o fuso hor&aacute;rio a ser usado pelo sistema.
+<li><b>UID</b> : mostra o n&uacute;mero de identifica&ccedil;&atilde;o do usu&aacute;rio.
+<li><b>USER</b> : mostra o nome do usu&aacute;rio atual.
+</ul>
+</p>
+
+<p>&Eacute; poss&iacute;vel criar novas vari&aacute;veis, excluir vari&aacute;veis existentes ou apenas alterar o conte&uacute;do
+de uma vari&aacute;vel de ambiente.</p>
+
+<p>Para criar uma nova vari&aacute;vel de ambiente, basta definir o nome e o valor da nova vari&aacute;vel de ambiente e usar o comando
+<a href="export.html"><b>export</b></a> para permitir que a vari&aacute;vel seja visualizada pelos aplicativos (por exemplo, um novo
+shell ou um novo terminal) inicializados no mesmo terminal (neste caso a vari&aacute;vel existir&aacute; enquanto a sess&atilde;o estiver
+aberta). Por exemplo,
+<blockquote class="t1">TESTE=10; export TESTE</blockquote>
+ou
+<blockquote class="t1">export TESTE=10</blockquote>
+cria a vari&aacute;vel de ambiente TESTE com valor inicial 10. O comando export faz com que a nova vari&aacute;vel seja conhecida por
+todos os processos a partir deste shell. Os nomes das vari&aacute;veis de ambiente s&atilde;o, tradicionamente, definidas usando apenas
+letras mai&uacute;sculas. Entretanto, isto n&atilde;o &eacute; obrigat&oacute;rio. Voc&ecirc; pode tamb&eacute;m usar letras
+min&uacute;sculas. Mas, <b>CUIDADO!</b> O Linux &eacute; <i>case sensitive</i>. Isto significa que o sistema diferencia letras
+mai&uacute;sculas de letras min&uacute;sculas. Portanto, o comando
+<blockquote class="t1">teste=10; export teste</blockquote>
+cria uma nova vari&aacute;vel de ambiente chamada teste e que &eacute; diferente da 
+vari&aacute;vel TESTE criada anteriormente.</p>
+
+<p>&Eacute; importante observar que as vari&aacute;veis de ambiente definidas a partir da linha de comando s&atilde;o tempor&aacute;rias.
+Para criar uma vari&aacute;vel permanente, deve-se acrescentar a defini&ccedil;&atilde;o e o comando export no arquivo .bash_profile 
+(no caso de shell <i>bash</i>).</p>
+
+<p>Para excluir uma vari&aacute;vel de ambiente, deve-se usar o comando <a href="unset.html"><b>unset</b></a>. Por exemplo, o comando
+<blockquote class="t1">unset teste</blockquote>
+exclui a vari&aacute;vel de ambiente teste criada no exemplo anterior.</p>
+
+<p>Para alterar o valor de uma vari&aacute;vel de ambiente, basta fornecer o nome da vari&aacute;vel e o novo valor a ser atribuido a
+vari&aacute;vel. Para a vari&aacute;vel de ambiente TESTE definida anteriormente nesta se&ccedil;&atilde;o, podemos digitar
+<blockquote class="t1"> TESTE=200</blockquote>
+e a vari&aacute;vel TESTE passa a ter valor 200. Neste caso, o conte&uacute;do da vari&aacute;vel &eacute; completamente alterado.
+Pode ser que ao inv&eacute;s de alterar o conte&uacute;do, voc&ecirc; queira apenas acrescentar mais alguma informa&ccedil;&atilde;o
+ao conte&uacute;do armazenado em uma vari&aacute;vel. Por exemplo, suponha que voc&ecirc; queira acrescentar o diret&oacute;rio /teste/bin
+no caminho de busca, ou seja, no PATH. Devemos, ent&atilde;o digitar
+<blockquote class="t1">PATH=$PATH:/teste/bin</blockquote>
+O s&iacute;mbolo <b>$</b> usado acima antes de PATH informa ao shell para usar o conte&uacute;do da vari&aacute;vel de ambiente PATH.</p>
+
+<p>Suponha agora que temos "USER=aluno" e que queremos "USER=aluno linux". Ent&atilde;o podemos definir
+<blockquote class="t1">USER="$USER Linux"</blockquote>
+As aspas acima s&atilde;o necess&aacute;rias devido ao espa&ccedil;o em branco existente no novo conte&uacute;do da vari&aacute;vel 
+USER. Note que novamente usamos <b>$</b> para indicar ao shell que se deve substituir o nome USER pelo conte&uacute;do da vari&aacute;vel
+ambiente USER.</p>
+
+<p>Os exemplos mostrados acima s&atilde;o altera&ccedil;&otilde;es tempor&aacute;rias no ambiente do usu&aacute;rio. Para tornar uma
+altera&ccedil;&atilde;o efetiva, deve-se alterar o arquivo profile do usu&aacute;rio (.bash_profile no shell <i>bash</i>). Por exemplo, 
+suponha que queremos personalizar o <i>prompt</i> das linhas de comando. Podemos ent&atilde;o incluir no arquivo de profile
+<blockquote class="t1">PS1="[\W]\$"</blockquote>
+e
+<blockquote class="t1">export PS1</blockquote>
+onde o novo <i>prompt</i> apenas exibe o nome do diret&oacute;rio atual de trabalho do usu&aacute;rio (\W) e o s&iacute;mbolo <b>$</b> 
+(<b>\$</b>).</p>
+ 
+<p>Consulte o manual on line para conhecer um pouco mais sobre os comandos embutidos no seu shell (por exemplo, "man bash" para ler 
+sobre o script <i>bash</i>).</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Usando  as vari&aacute;veis de ambiente em um programa C</h2>
+
+<p>O terceiro argumento da fun&ccedil;&atilde;o main() &eacute; a lista de vari&aacute;veis de ambiente. Em um programa C, pode-se
+usar a fun&ccedil;&atilde;o putenv() para criar/alterar vari&aacute;veis de ambiente, a fun&ccedil;&atilde;o getenv() para obter o
+valor das vari&aacute;veis e a fun&ccedil;&atilde;o unsetenv() para remover vari&aacute;veis.</p>
+
+<p>O exemplo mostrado a seguir exibe um <i>dump</i> das vari&aacute;veis de ambiente e de algumas fun&ccedil;&otilde;es de C, antes
+e depois, que algumas modifica&ccedil;&otilde;es s&atilde;o introduzidas no ambiente do sistema.</p>
+
+<p>
+<blockquote  class="t2">
+ 1. #include&lt;stdio.h&gt;<br>
+ 2. #include&lt;stdlib.h&gt;<br>
+ 3. #include&lt;unistd.h&gt;<br>
+ 4. #include&lt;string.h&gt;<br>
+ 5. #include&lt;errno.h&gt;<br>
+ 6. void imprime_variavel(const char *desc, const void *addr)<br>
+ 7. {<br>
+ 8.&nbsp;&nbsp;&nbsp; printf("0x%08lX %-s\n", (long)addr, desc); <br>
+ 9. }<br>
+ 10. void dump(char * const envp[], const char *cabecalho)<br>
+ 11. {<br>
+ 12.&nbsp;&nbsp;&nbsp; int x;         /* &iacute;ndice envp[x] */<br>
+ 13.&nbsp;&nbsp;&nbsp; /* Exibe um t&iacute;tulo */<br>
+ 14.&nbsp;&nbsp;&nbsp; printf("\n%s\n\n", cabecalho);<br>
+ 15.<br>
+ 16.&nbsp;&nbsp;&nbsp; /* Exibe as vari&aacute;veis de ambiente */<br>
+ 17.&nbsp;&nbsp;&nbsp; for (x = 0; envp[x] != 0; ++x)<br>
+ 18.&nbsp;&nbsp;&nbsp; {<br>
+ 19.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; imprime_variavel(envp[x], envp+x); /* imprime vari&aacute;vel */<br>
+ 20.&nbsp;&nbsp;&nbsp; }<br>
+ 21.&nbsp;&nbsp;&nbsp; /* Exibe outras vari&aacute;veis */<br>
+ 22.&nbsp;&nbsp;&nbsp; imprime_variavel("stderr",stderr);/* Dump do endere&ccedil;o de stderr */<br>
+ 23.&nbsp;&nbsp;&nbsp; imprime_variavel("stdout",stdout);/* Dump do endere&ccedil;o de stdout */<br>
+ 24.&nbsp;&nbsp;&nbsp; imprime_variavel("stdin", stdin); /* Dump do endere&ccedil;o de stdin  */<br>
+ 25.&nbsp;&nbsp;&nbsp; imprime_variavel("dump",  dump);  /* Dump do endere&ccedil;o de main   */<br>
+ 26. }<br>
+ 27. int main(int argc, char * const argv[], char * const envp[])<br>
+ 28. {<br>
+ 29.&nbsp;&nbsp;&nbsp; /* Faz dump das vari&aacute;veis de ambiente */<br>
+ 30.&nbsp;&nbsp;&nbsp; dump(envp, "AMBIENTE INICIAL:");<br>
+ 31.&nbsp;&nbsp;&nbsp; /* inclui duas novas vari&aacute;veis de ambiente */<br>
+ 32.&nbsp;&nbsp;&nbsp; if (putenv("TESTE1=100") == -1)<br>
+ 33.&nbsp;&nbsp;&nbsp; {<br>
+ 34.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("%s: putenv()\n", strerror(errno));<br>
+ 35.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(1); <br>
+ 36.&nbsp;&nbsp;&nbsp; }<br>
+ 37.&nbsp;&nbsp;&nbsp; if (putenv("TESTE2=teste de variaveis") == -1)<br>
+ 38.&nbsp;&nbsp;&nbsp; {<br>
+ 39.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("%s: putenv()\n", strerror(errno));<br>
+ 40.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(2); <br>
+ 41.&nbsp;&nbsp;&nbsp; }<br>
+ 42.&nbsp;&nbsp;&nbsp; /* altera valor da vari&aacute;vel de ambiente LOGNAME */<br>
+ 43.&nbsp;&nbsp;&nbsp; if (putenv("LOGNAME=linux") == -1)<br>
+ 44.&nbsp;&nbsp;&nbsp; {<br>
+ 45.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("%s: putenv()\n", strerror(errno));<br>
+ 46.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(3); <br>
+ 47.&nbsp;&nbsp;&nbsp; }<br>
+ 48.&nbsp;&nbsp;&nbsp; /* Faz dump das vari&aacute;veis de ambiente */<br>
+ 49.&nbsp;&nbsp;&nbsp; dump(envp, "AMBIENTE Modificado:");<br>
+ 50.&nbsp;&nbsp;&nbsp; /* Verifica o valor de LOGNAME, TESTE1 e TESTE2 */ <br>
+ 51.&nbsp;&nbsp;&nbsp; printf("\ngetenv(LOGNAME) = %s;",   getenv("LOGNAME"));<br>
+ 52.&nbsp;&nbsp;&nbsp; printf("\ngetenv(TESTE1)  = %s;",   getenv("TESTE1"));<br>
+ 53.&nbsp;&nbsp;&nbsp; printf("\ngetenv(TESTE2)  = %s;\n", getenv("TESTE2"));<br>
+ 54.&nbsp;&nbsp;&nbsp; return 0;<br>
+ 55. } <br>
+</blockquote>
+<p></p>
+
+<p>Uma observa&ccedil;&atilde;o interessante em rela&ccedil;&atilde;o ao programa acima diz respeito ao par&acirc;metro envp[]
+antes e depois da altera&ccedil;&atilde;o da vari&aacute;vel LOGNAME e da inclus&atilde;o das vari&aacute;veis TESTE1 e TESTE2: 
+o vetor envp[] n&atilde;o se altera. Isto significa que as altera&ccedil;&otilde;es introduzidas pelo programa no ambiente s&atilde;o
+feitas em outra &aacute;rea de mem&oacute;ria e monitoradas pelo sistema enquanto o programa est&aacute; sendo executado. N&atilde;o
+&eacute; poss&iacute;vel alterar as vari&aacute;veis de ambiente do shell pois as vari&aacute;veis do shell s&atilde;o definidas na
+pr&oacute;pria mem&oacute;ria privada do shell.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Altera&ccedil;&atilde;o do shell</h2>
+
+<p>&Eacute; poss&iacute;vel mudar de <i>shell</i> em tempo de execu&ccedil;&atilde;o. Para isto, basta digitar o nome do novo <i>shell</i>
+na linha de comandos. Para encerrar o novo <i>shell</i> e voltar para o shell anterior basta digitar <i>exit</i>.</p>
+
+<p>Para ver quais os <i>shells</i> que est&atilde;o dispon&iacute;veis no sistema, basta verificar o conte&uacute;do do arquivo 
+<b><a href="dir_etc.html#shells">/etc/shells</a></b>.</p>
+
+<p>Para mudar o shell padr&atilde;o, o usu&aacute;rio pode usar o comando <a href="chsh.html"><b>chsh</b></a> (<i>change shell</i>). 
+Suponha, por exemplo, que queremos adotar como  padr&atilde;o o shell <i>ash</i>, ent&atilde;o podemos digitar
+<blockquote class="t1">chsh -s /bin/ash</blockquote>
+
+<p>O Linux apenas pedir&aacute; a senha do usu&aacute;rio logado para confirmar a altera&ccedil;&atilde;o. Na pr&oacute;xima vez que
+o usu&aacute;rio logar no sistema, o <i>ash</i> ser&aacute; o seu shell padr&atilde;o. O uso do comando <i>chsh</i>, sem par&acirc;metros,
+far&aacute; com que, al&eacute;m  da senha, o Linux tamb&eacute;m solicite o nome do novo shell. Neste caso, deve-se fornecer o caminho
+completo do novo shell.</p>
+
+<p>&Eacute; tamb&eacute;m importante observar que quando uma nova sess&atilde;o &eacute; aberta com o comando <i>bash</i>, apenas os
+arquivos /etc/bash e ~/.bashrc s&atilde;o lidos. Nestes arquivos s&atilde;o colocados os comandos que devem continuar existindo na nova
+sess&atilde;o como, por exemplo, os <a href="alias.html"><b>aliases</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Programa&ccedil;&atilde;o em shell script</h2>
+
+<p>Como vimos acima, o shell funciona como mediador entre o usu&aacute;rio e o <a href="kernel.html"><b>kernel</b></a> do sistema. 
+Quando o usu&aacute;rio digita um comando, o shell analisa o comando e solicita ao kernel a execu&ccedil;&atilde;o das 
+a&ccedil;&otilde;es  correspondentes ao comando em quest&atilde;o.</p>
+
+<p>Normalmente, o usu&aacute;rio (principalmente se ele &eacute; o administrador do sistema) executa um mesmo conjunto de tarefas
+diariamente. O ideal ent&atilde;o &eacute; que o usu&aacute;rio possa automatizar as suas tarefas, ou seja, o usu&aacute;rio digita
+um &uacute;nico comando e o shell o interpreta como um conjunto de comandos a serem executados pelo  sistema. Este tipo de
+automatiza&ccedil;&atilde;o de tarefas &eacute; poss&iacute;vel atrav&eacute;s da programa&ccedil;&atilde;o shell.</p>
+
+<p>Abaixo s&atilde;o mostrados alguns exemplos de <i>scripts</i>.</p>
+
+<ul>
+<li><b>EXEMPLO 1</b>
+    <p>Suponha que voc&ecirc; queira bloquear o acesso de um usu&aacute;rio ao sistema e caso o usu&aacute;rio tente acessar o sistema
+    mostrar uma mensagem de aviso. Para isto &eacute; necess&aacute;rio: criar um <i>shell script</i> que ser&aacute; usado na 
+    inicializa&ccedil;&atilde;o da conta do usu&aacute;rio e definir este <i>script</i> para ser chamado quando o usu&aacute;rio logar na
+    conta. Por exemplo, queremos bloqueiar a conta do usu&aacute;rio aluno. Ent&atilde;o, devemos</p>
+    <p><b>a)</b> criar o <b>script</b> abaixo (sem a numera&ccedil;&atilde;o do lado esquerdo).</p>
+    <blockquote class="t2">
+    1 #!/bin/sh<br>
+    2 echo '***********************************************'<br>
+    3 echo '* Sua conta foi encerrada. Procure o suporte. *'<br>
+    4 echo '***********************************************'<br>
+    5 sleep 10s<br>
+    6 exit<br>
+    </blockquote>
+    <ul>
+    <li>A linha 1 indica que o script deve ser executado pelo shell <i>sh</i>. O s&iacute;mbolo <b>#</b> significa in&iacute;cio de um
+        coment&aacute;rio (o resto da linha n&atilde;o &eacute; interpretada), mas quando <b>#!</b> aparecem na primeira linha de um 
+        <i>script</i>,estamos informando ao sistema para procurar o programa definido a seguir (neste caso o /bin/sh) e transmitir o 
+        resto do arquivo a esse&nbsp; programa.
+    <li>O comando echo (linhas 2 a 4) imprime o texto entre aspa na tela.
+    <li>O comando "sleep 10s" (linha 5) d&aacute; uma pausa de 10 segundos antes de continuar a execu&ccedil;&atilde;o do <i>script</i>.
+    <li>O comando exit (linha 6) finaliza o <i>script</i>.
+    </ul>
+    <p>Salve o script acima em /bin com o nome nsh e torne este arquivo execut&aacute;vel (use o comando "chmod +x nsh").</p>
+    <p><b>b)</b> alterar o arquivo /etc/passwd para que o novo <i>script</i> seja chamado quando o usu&aacute;rio logar no sistema. 
+    <blockquote class="t2">aluno:x:501:501::/home/aluno:/bin/nsh</blockquote>
+    <p>Agora, quando o usu&aacute;rio aluno tentar logar no sistema, ele receber&aacute; a mensagem que a conta foi encerrada.
+
+<li><b>EXEMPLO 2</b>
+    <p>Abaixo temos um segundo exemplo de <i>script</i> de shell. Este <i>script</i> mostra quais as 
+    <a href="permissao.html"><b>permiss&otilde;es de acesso</b></a> do usu&aacute;rio em rela&ccedil;&atilde;o a um determinado arquivo.</p>
+    <blockquote class="t2">
+    1.  #!/bin/bash<br>
+    2.  echo -n 'Forne&ccedil;a o nome do arquivo a ser verificado: '<br>
+    3.  read <br>
+    4.  if [ $REPLY ] #usu&aacute;rio digitou o nome do arquivo?<br>
+    5.  then<br>
+    6. &nbsp;&nbsp;&nbsp; arq=$REPLY     <br>
+    7. &nbsp;&nbsp;&nbsp; if [ -e $arq ]; then  # o arquivo existe ?<br>
+    8. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo 'o arquivo existe'<br>
+    9. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if [ -r $arq ]; then # o usu&aacute;rio pode ler o arquivo?<br>
+    10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo 'voc&ecirc; pode ler o arquivo'<br>
+    11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else<br>
+    12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo 'voc&ecirc; n&atilde;o pode ler o arquivo'<br>
+    13.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fi<br>
+    14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if [ -w $arq ]; then # o usu&aacute;rio pode alterar o arquivo?<br>
+    15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo 'voc&ecirc; pode alterar o arquivo'<br>
+    16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else<br>
+    17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo 'voc&ecirc; n&atilde;o pode alterar o arquivo'<br>
+    18.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fi<br>
+    19.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if [ -x $arq ]; then # o usu&aacute;rio pode executar o arquivo?<br>
+    20.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo 'voc&ecirc; pode executar o arquivo'<br>
+    21.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else<br>
+    22.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo 'voc&ecirc; n&atilde;o pode executar o arquivo'<br>
+    23.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fi<br>
+    24.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if [ -d $arq ]; then  # o arquivo &eacute; um diret&oacute;rio?<br>
+    25.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo 'O arquivo &eacute; um diret&oacute;rio'<br>
+    26.&nbsp;&nbsp;&nbsp; fi <br>
+    27.&nbsp;&nbsp;&nbsp; else<br>
+    28.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo 'o arquivo n&acirc;o existe'<br>
+    29. fi<br>
+    30. else<br>
+    31.&nbsp;&nbsp;&nbsp; echo 'Voc&ecirc; n&atilde;o forneceu o nome do arquivo'<br>
+    32. fi<br>
+    33. exit<br>
+    </blockquote>
+    <p>Em rela&ccedil;&atilde;o ao <i>script</i> acima podemos comentar:
+    <ul>
+    <li>A linha 1 especifica que o <i>script</i> deve ser executado pelo shell <i>sh</i>.
+    <li>A linha 2 exibe na tela a mensagem 'Forne&ccedil;a o nome do arquivo a ser verificado: '. O par&acirc;metro <b>-n</b> do comando
+        echo indica que o cursor n&atilde;o deve mudar de linha ap&oacute;s a exibi&ccedil;&atilde;o da frase. Em rela&ccedil;&atilde;o
+        ao comando echo, &eacute; tamb&eacute;m importante observar que podemos usar tanto aspas simples quanto aspas duplas, embora sejam
+        interpretadas de forma diferente pelo shell. Por exemplo, suponha uma vari&aacute;vel denominada TESTE e que tenha armazenado o 
+        valor Maria. A execu&ccedil;&atilde;o dos comandos
+        <blockquote class="t2">
+        echo 'TESTE = $TESTE'<br>
+        echo "TESTE = $TESTE"<br>
+        </blockquote>
+        mostram, respectivamente, os seguintes resultados
+        <blockquote class="t2">
+        TESTE = $TESTE<br>
+        TESTE = Maria<br>
+        </blockquote>
+        <p>No primeiro caso, o uso de aspas simples informa ao <i>bash</i> para imprimir o conte&uacute;do do <i>string</i>, sem nenhuma
+        preocupa&ccedil;&atilde;o adicional. No segundo caso, o uso de aspas duplas faz com que o <i>sh</i> substitua o nome da vari&aacute;vel
+        TESTE pelo seu conte&uacute;do. O s&iacute;mbolo <b>$</b> indica ao <i>sh</i> quem &eacute; vari&aacute;vel dentro do string.
+        <li>O comando read da linha 3 recebe o nome do arquivo digitado pelo usu&aacute;rio e o armazena na vari&aacute;vel padr&atilde;o 
+        REPLY. Pode-se tamb&eacute;m usar uma vari&aacute;vel qualquer para receber o nome  do arquivo. Por exemplo, voc&ecirc; pode alterar a
+        linha 3 para "read arq". Neste caso, o <i>sh</i> passa a executar duas a&ccedil;&otilde;es quando interpreta a linha 3: primeiro, cria
+        a vari&aacute;vel arq, e segundo, armazena o nome do arquivo nesta  vari&aacute;vel.
+    <li>A linha 4 do <b>script</b> verifica se o usu&aacute;rio digitou algo (ele pode ter apenas teclando ENTER). O comando <i>if</i> possui
+        a seguinte estrutura
+        <blockquote class="t2">
+        if [ condi&ccedil;&atilde;o ]<br>
+        then<br> 
+        &nbsp;&nbsp;&nbsp;&nbsp; comandos<br>
+        else<br>
+        &nbsp;&nbsp;&nbsp;&nbsp; comandos<br>
+        fi
+        </blockquote>
+        <p>Antes de discutirmos o <i>script</i>, algumas observa&ccedil;&otilde;es em rela&ccedil;&atilde;o ao comando <i>if</i> tornam-se
+        necess&aacute;rias. A condi&ccedil;&atilde;o (ou condi&ccedil;&otilde;es) a ser testada deve ser colocada entre colchetes (pode-se
+        tamb&eacute;m usar explicitamente a palavra <i>test</i> no lugar dos colchetes, por exemplo, voc&ecirc; pode substituir 
+        <i>if [ $REPLY ]</i> por <i>if test $REPLY</i>). Al&eacute;m disso, deve existir um espa&ccedil;o entre a condi&ccedil;&atilde;o e
+        o colchete (abrindo e/ou fechando). O <i>sh</i> retorna 0 ou 1 como resultado do teste, dependendo se a condi&ccedil;&atilde;o &eacute;
+        verdadeira (valor zero) ou falsa (valor 1). Caso a condi&ccedil;&atilde;o seja verdadeira, s&atilde;o executados os comandos definidos
+        logo ap&oacute;s o comando <i>then</i>. Caso a condi&ccedil;&atilde;o seja falsa, s&atilde;o executados os comandos logo ap&oacute;s o
+        comando <i>else</i> (voc&ecirc; n&atilde;o &eacute; obrigado a definir um <i>else</i> para cada <i>if</i>). O comando <i>if</i>
+        &eacute; fechado com um comando <i>fi</i>.</p>
+        <p>Olhando novamente o segundo exemplo de <i>script</i> podemos notar a seguinte estrutura
+        <blockquote class="t2">
+        4  if [ $REPLY ] #usu&aacute;rio digitou o nome do arquivo?<br>
+        5  then<br>
+        &nbsp; &nbsp; &nbsp; executa linhas de 6 a 29<br>
+        30 else<br>
+        &nbsp; &nbsp; &nbsp; executa linha 31<br>
+        32 fi<br>
+        </blockquote>
+        <p>A linha 4 verifica se a vari&aacute;vel REPLY tem algum valor armazenado. Caso o resultado do teste seja verdadeiro, s&atilde;o
+        executados os comandos da linha 6 a linha 29; caso o resultado do teste seja falso, apenas a linha 32  &eacute; executada.</p> 
+    <li>A linha 6 define a vari&aacute;vel arq e copia o conte&uacute;do da vari&aacute;vel REPLY para a nova vari&aacute;vel. Podemos aqui
+        fazer tr&ecirc;s observa&ccedil;&otilde;es: primeiro, n&atilde;o existe espa&ccedil;o em branco entre as vari&aacute;veis e o
+        s&iacute;mbolo de atribui&ccedil;&atilde;o ("=");  segundo, a cria&ccedil;&atilde;o da vari&aacute;vel arq n&atilde;o &eacute;
+        necess&aacute;ria, poder&iacute;amos continuar usando a vari&aacute;vel REPLY no resto do <i>script</i>; e terceiro, a vari&aacute;vel
+        arq &eacute; uma vari&aacute;vel local (n&atilde;o existe um comando <b><a href="export.html">export</a></b> para esta
+        vari&aacute;vel), isto significa que esta vari&aacute;vel existe somente durante a execu&ccedil;&atilde;o do <i>script</i>. 
+    <li>A linha 7 mostra o comando <i>if</i> com o operador <b>-e</b>. O uso deste operador faz com que o <i>sh</i> verifique a
+        exist&ecirc;ncia do arquivo cujo nome foi informado pelo usu&aacute;rio. Podemos ver que o <i>script</i> tem a seguinte estrutura
+        a partir deste teste
+        <blockquote class="t2">
+        7   if [ -e $arq ]; then      # o arquivo existe ?<br>
+        &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; executa linhas de 8 a 26<br>
+        27   else<br>
+        &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; executa linha 28<br>
+        29   fi<br>
+        </blockquote>
+        <p>Note que temos dois comandos na linha 7: o comando <i>if</i> e o comando <i>then</i>. Quando mais de um comando s&atilde;o 
+        colocados em uma mesma linha, eles devem ser separados por um ponto-e-v&iacute;rgula. </p>
+        <p>As linhas de 8 a 26 utilizam operadores junto com o comando <i>if</i> para verificar as 
+        <b><a href="permissao.html">permiss&otilde;es</a></b> do arquivo. Abaixo mostramos alguns operadores que podem ser usados para 
+        testar arquivos (digite "man test" para obter mais informa&ccedil;&otilde;es).</p>
+        <blockquote class="t2">
+        <b>-b</b> : o arquivo existe e &eacute; um arquivo &eacute; especial de bloco ?<br>
+        <b>-c</b> : o arquivo existe e &eacute; um arquivo &eacute; especial de caractere ?<br>
+        <b>-d</b> : o arquivo existe e &eacute; um diret&oacute;rio ?<br>
+        <b>-e</b> : o arquivo existe ?<br>
+        <b>-f</b> : o arquivo existe e &eacute; um arquivo normal ?<br>
+        <b>-r</b> : o arquivo existe e o usu&aacute;rio pode l&ecirc;-lo ?<br>
+        <b>-s</b> : o arquivo existe e tem tamanho maior que zero ?<br>
+        <b>-x</b> : o arquivo existe e o usu&aacute;rio pode execut&aacute;-lo ?<br>
+        <b>-w</b> : o arquivo existe e o usu&aacute;rio pode alter&aacute;-lo ?<br>
+        <b>-G</b> : o arquivo existe e pertence ao grupo do usu&aacute;rio ?<br>
+        <b>-L</b> : o arquivo existe e &eacute; um link simb&oacute;lico ?<br>
+        <b>-O</b> : o arquivo existe e o usu&aacute;rio &eacute; dono do arquivo ?<br>
+        <b>arq1 nt arq2</b> : o arquivo arq1 &eacute; mais novo que o arquivo arq2 ?<br>
+        <b>arq1 ot arq2</b> : o arquivo arq1 &eacute; mais antigo que o arquivo arq2 ?<br>
+        </blockquote>
+    </ul>
+
+<li><b>EXEMPLO 3</b>
+    <p>O terceiro <i>script</i> &eacute; uma ferramenta de <i>backup</i> para arquivos com extens&atilde;o <i>txt</i>. O usu&aacute;rio
+    fornece o nome do diret&oacute;rio e todos os arquivos .txt deste diret&oacute;rio s&atilde;o copiados para o diret&oacute;rio
+    <i>backup</i>. Se o diret&oacute;rio <i>backup</i> j&aacute; existe, ele &eacute; inicialmente apagado e depois criado.</p>
+    <blockquote class="t2">
+    1.  #!/bin/sh<br>
+    2.  if [  ! $1 ]<br>
+    3.  then<br>
+    4.  &nbsp;&nbsp;&nbsp; echo 'Voc&ecirc; deve fornecer o nome do diret&oacute;rio'<br>
+    5.  &nbsp;&nbsp;&nbsp; exit 1<br>
+    6.  fi<br>
+    7.  if [ ! -d $1 ]<br>
+    8.  then<br>
+    9.  &nbsp;&nbsp;&nbsp; echo "$1 n&atilde;o &eacute; um diret&oacute;rio"<br>
+    10. &nbsp;       exit 1<br>
+    11. fi<br>
+    12. rm -fr ~/backup<br>
+    13. mkdir ~/backup<br>
+    14. for i in $1/*; do<br>
+    15. &nbsp;&nbsp;&nbsp; echo $i<br>
+    16. &nbsp;&nbsp;&nbsp; cp -f $i ~/backup/<br>
+    17. done<br>
+    18. exit<br>
+    </blockquote>
+    <p>Podemos comentar em rela&ccedil;&atilde;o ao <i>script</i> acima:
+    <ul>
+    <li>A linha 1 especifica que o <i>script</i> deve ser executado pelo shell <i>sh</i>.
+    <li>A linha 2 testa se o usu&aacute;rio forneceu algum argumento de linha de comando. A vari&aacute;vel <b>$1</b> corresponde ao
+        primeiro argumento, a vari&aacute;vel <b>$2</b> corresponde ao segundo argumento, e assim por diante. A vari&aacute;vel <b>$0</b>
+        possui o nome do programa e a vari&aacute;vel <b>$*</b> possui a lista das vari&aacute;veis (<b>$0</b>, <b>$1</b>, <b>$2</b>, ...). 
+        O s&iacute;mbolo <b>!</b> &eacute; o s&iacute;mbolo de nega&ccedil;&atilde;o (N&Atilde;O), portanto estamos perguntando na linha 2 
+        se o agumento n&atilde;o foi fornecido pelo usu&aacute;rio. Caso seja verdade, o programa mostra a frase 'Voc&ecirc; deve fornecer
+        o nome do diret&oacute;rio' e encerra a execu&ccedil;&atilde;o de forma anormal (<i>exit 1</i>).
+    <li>A linha 7 verifica se o nome fornecido pelo usu&aacute;rio n&atilde;o  &eacute; o nome de um diret&oacute;rio. Caso isto seja
+        verdade, o programa &eacute; encerrado.
+    <li>A linha 12 apaga o diret&oacute;rio <i>~/backup</i> e todos os seus arquivos, caso este diret&oacute;rio exista.
+    <li>A linha 13 cria o diret&oacute;rio <i>~/backup</i>. Note que o diret&oacute;rio &eacute; filho do diret&oacute;rio principal
+        (raiz) do usu&aacute;rio.
+    <li>Nas linhas de 14 a 17 temos a c&oacute;pia dos arquivos. A linha 14 define que para cada arquivo do diret&oacute;rio fornecido
+        pelo usu&aacute;rio, deve-se executar os comandos das linhas 15 (exibe o nome do arquivo na tela) e 16 (copia o arquivo para
+        diret&oacute;rio <i>~/backup</i>). As instru&ccedil;&otilde;es dentro do la&ccedil;o <i>for</i> ser&atilde;o executadas tantas vezes
+        quantas forem o n&uacute;mero de arquivos com extens&atilde;o txt no diret&oacute;rio fornecido pelo usu&aacute;rio. Portanto, a
+        vari&aacute;vel local armazena um nome do arquivo diferente a cada execu&ccedil;&atilde;o do la&ccedil;o.
+    <li>A linha 18 encerra o <i>script</i>.
+    </ul>
+
+</ul>
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Mais exemplos</h2>
+<ul>
+<li>O exemplo abaixo mostra a implementa&ccedil;&atilde;o de uma calculadora com as quatro opera&ccedil;&otilde;es. Note que
+    tr&ecirc;s linhas do programa possuem mais de um comando e que eles s&atilde;o separados por ";". Al&eacute;m disso, a
+    &uacute;ltima linha chama <a href="bc.html"><b>bc</b></a> (<i>basic calculator</i>) para resolver a opera&ccedil;&atilde;o e 
+    fornecer o resultado com at&eacute; duas casas decimais (as opera&ccedil;&otilde;es feitas pelo <i>bash</i> n&atilde;o trabalham
+    com ponto flutuante). 
+    <blockquote class="t2">
+    #!/bin/bash <br>
+    echo -n "escolha um numero: "; read numero1 <br>
+    echo -n "escolha a operacao '- + * /': "; read func <br>
+    echo -n "escolha outro numero: "; read numero2 <br>
+    echo -n "Resultado = "; echo "scale=2; $numero1$func$numero2" | bc
+    </blockquote>
+<li>Outra forma de implementar uma calculadora &eacute; mostrada abaixo.
+    <blockquote class="t2">
+    #!/bin/bash <br>
+    let soma=3+5 <br>
+    echo "3 + 5 =" $soma <br>
+    let subtracao=7-8 <br>
+    echo "7 - 8 =" $subtracao <br>
+    let multiplicacao=5*8 <br>
+    echo "5 * 8 =" $multiplicacao <br>
+    let divisao=5/2 <br>
+    echo "5 / 2 =" $divisao <br>
+    let resto=5%2 <br>
+    echo "5 % 2 =" $resto
+    </blockquote>
+<li>Este exemplo ler e exibe as linhas de um arquivo. O nome do arquivo de entrada deve ser fornecido na linha de comandos.
+    <blockquote class="t2">
+    #!/bin/bash <br>
+    arquivo=$1 <br>
+    while read -r linha <br>
+    do <br>
+    &nbsp;&nbsp;&nbsp; echo $linha <br>
+    done < $arquivo
+    </blockquote>
+<li>Para ler os campos de /etc/passwd que s&atilde;o separados por ":", basta implementar a vers&atilde;o abaixo.
+    <blockquote class="t2">
+    #!/bin/bash <br>
+    i=0 <br>
+    while IFS=: read user pass uid gid full home shell <br>       
+    do <br>
+    &nbsp;&nbsp;&nbsp; let i=$i+1 <br>
+    &nbsp;&nbsp;&nbsp; echo "*$i* User = $user, UID = $uid, GID = $gid, Home = $home, Shell = $shell" <br>         
+    done < /etc/passwd
+    </blockquote>
+<li>O exemplo abaixo usa <i>printf</i> para formatar a sa&iacute;da.
+    <blockquote class="t2">
+    #!/bin/bash <br>
+    i=0 <br>
+    while IFS=: read user pass uid gid full home shell <br>  
+    do <br>
+    &nbsp;&nbsp;&nbsp; let i=$i+1 <br>
+    &nbsp;&nbsp;&nbsp; printf "*%2d* User = %s, UID = %d, GID = %d, Home = %s, Shell = %s\n" $i $user $uid $gid $home $shell <br>
+    done < /etc/passwd
+    </blockquote>
+    Para gravar a sa&iacute;da em um arquivo, basta alterar o final da linha <i>printf</i> para
+    <blockquote class="t2">
+    printf "*%2d* User = %s, UID = %d, GID = %d, Home = %s, Shell = %s\n" $i $user $uid $gid $home $shell >> $1
+    </blockquote>
+    onde $1 &eacute; um nome de arquivo fornecido na linha de comandos.
+<li>&Eacute; muito simples definir e acessar vetores no <i>bash</i>. No exemplo abaixo, dois par&acirc;metros especiais s&atilde;o
+    usados: # calcula o n&uacute;mero de posi&ccedil;&otilde;es do vetor e @ expande todas as ocorr&ecirc;ncias do vetor.
+    <blockquote class="t2">
+    #!/bin/bash <br>
+    Vetor=( 'Debian Linux' 'Redhat Linux' DuZeru Linux ) <br>
+    num=${#Vetor[@]} <br>
+    for ((i = 0; i < $num; i++)) <br>
+    do <br>
+    &nbsp;&nbsp;&nbsp; echo ${Vetor[$i]} <br>
+    done
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Consulte a p&aacute;gina do grupo <b><a href="http://ss64.com/bash/" target="_blank">SS64</a></b> para mais informa&ccedil;&otilde;es
+    sobre os comandos e as op&ccedil;&otilde;es do shell <i>bash</i>.
+<li>Existe outra forma de executar os scripts. Ao inv&eacute;s de alterar as <b><a href="permissao.html">permiss&otilde;es de acesso</a></b>
+    do script com o comando <b><a href="chmod.html">chmod</a></b>, pode-se simplesmente especificar o nome do shell na linha de comandos. 
+    Por exemplo, suponha que queremos executar o arquivo <i>teste</i> usando o <i>script bash</i>. Ent&atilde;o podemos digitar
+    <blockquote class="t1">bash teste</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

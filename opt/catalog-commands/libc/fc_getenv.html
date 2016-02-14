@@ -1,0 +1,129 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>getenv()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="getenv()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>getenv( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta fun&ccedil;&atilde;o fornece o valor de uma <a href="../variaveis_ambiente.html"><b>vari&aacute;vel de ambiente</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include &lt;stdlib.h&gt;<br>
+char *getenv(const char *name);
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>A fun&ccedil;&atilde;o <i>getenv( )</i> retorna um ponteiro para o valor da vari&aacute;vel de ambiente ou
+retorna NULL se a vari&aacute;vel n&atilde;o existir.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include&lt;stdio.h&gt;<br>
+2. #include&lt;stdlib.h&gt;<br>
+3. #include&lt;string.h&gt;<br>
+4. #include&lt;errno.h&gt;<br>
+5. int main()<br>
+6. {<br>
+7. &nbsp;&nbsp;&nbsp; char *dir;<br>
+8. &nbsp;&nbsp;&nbsp; dir = getenv("HOME");<br>
+9. &nbsp;&nbsp;&nbsp; if (dir == NULL)<br>
+10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro getenv() %d: %s\n", errno, strerror(errno));<br>
+11.&nbsp;&nbsp;&nbsp; else<br>
+12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Diretorio home = %s\n", dir);<br>
+13.}
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/getenv.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 4 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>stdlib.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da fun&ccedil;&atilde;o <i>getenv( )</i>.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror( )</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro.
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+   </ul>
+<li><b>Linha 5 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 7 a linha 12.
+<li><b>Linha 7 :</b> define a vari&aacute;vel que armazenar&aacute; o nome de um diret&oacute;rio.
+<li><b>Linha 8 :</b> recupera o nome do diret&oacute;rio <i>home</i> do usu&aacute;rio.
+<li><b>Linhas de 9 a 12 :</b> verifica se a fun&ccedil;&atilde;o <i>getenv( )</i> foi executada com sucesso. Em caso negativo, 
+    imprime o erro ocorrido. Em caso positivo, informa qual &eacute; o diret&oacute;rio <i>home</i> do usu&aacute;rio.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+    <blockquote class="t1">
+    gcc -o getenv getenv.c
+    </blockquote>
+Para executar, entre com
+    <blockquote class="t1">
+    ./getenv 
+    </blockquote>
+Supondo que o programa seja executado pelo usu&aacute;rio <i>aluno</i>, a resposta &eacute;
+    <blockquote class="t1">
+    Diretorio home = /home/aluno
+    </blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Para ver a lista de vari&aacute;veis de ambiente usadas no seu sistema, use o comando <a href="../printenv.html"><b>printenv</b></a>.
+<li>Veja <a href="../shell.html"><b>shell</b></a> para mais informa&ccedil;&otilde;es sobre as vari&aacute;veis de ambiente.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>tee</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="tee">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>tee</h1>
+
+<blockquote><font size="+1"><b>tee [op&ccedil;&otilde;es] [arquivo]</b></font></blockquote>
+<ul>
+<li>O argumento <b>arquivo</b> &eacute; o nome do arquivo de sa&iacute;da onde os dados de entrada ser&atilde;o
+    gravados (al&eacute;m de serem tamb&eacute;m exibidos na sa&iacute;da padr&atilde;o).
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este utilit&aacute;rio ler dados na entrada padr&atilde;o e os grava na sa&iacute;da padr&atilde;o e em arquivos.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-a</b> : adiciona a entrada padr&atilde;o no final do <b>arquivo</b> especificado.
+<li><b>-i</b> : ignora os sinais de interrup&ccedil;&atilde;o.
+<li><b>--help</b> : exibe as op&ccedil;&otilde;es do utilit&aacute;rio.
+<li><b>--version</b> : mostra informa&ccedil;&otilde;es sobre o utilit&aacute;rio.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>O comando
+    <blockquote class="t1">tee teste.txt</blockquote>
+    faz com que toda entrada digitada pelo usu&aacute;rio seja ecoada na tela e gravada no arquivo
+    <i>teste.txt</i>. 
+<li>Para acrescentar os novos dados de entrada no final do arquivo <i>teste.txt</i>, sem perder as 
+    informa&ccedil;&otilde;es que este arquivo j&aacute; possui, digite
+    <blockquote class="t1">tee -a teste.txt</blockquote>
+<li>&Eacute; poss&iacute;vel usar o <i>PIPE</i> (representado pelo s&iacute;mbolo <b>|</b>) para 
+    redirecionar a sa&iacute;da de algum comando para o <i>tee</i>. Por exemplo,
+    <blockquote class="t1">cat teste.txt | tee teste2.txt</blockquote>
+    exibe o conte&uacute;do do arquivo <i>teste.txt</i> na tela al&eacute;m de copi&aacute;-lo para o
+    arquivo <i>teste2.txt</i> (para saber mais sobre o <i>PIPE</i>, veja 
+    <b><a href="redirecionadores.html">redirecionadores de E/S</a></b>).
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Caso o nome de um arquivo n&atilde;o seja definido junto com o comando <i>tee</i>, o sistema exibir&aacute; 
+    os dados apenas na sa&iacute;da padr&atilde;o.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+<ul>
+<li><b><a href="cat.html">cat</a></b> - concatena e/ou exibe um ou mais arquivos.</li>
+<li><b><a href="redirecionadores.html">redirecionadores de E/S</a></b> - <b>&gt;</b>, <b>&gt;&gt;</b>, <b>&lt;</b> e <b>|</b>.</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

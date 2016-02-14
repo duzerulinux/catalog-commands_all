@@ -1,0 +1,253 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>modulos</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="modulos">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>m&oacute;dulos</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Defini&ccedil;&atilde;o</h2>
+
+<p>O <a href="kernel.html"><b>kernel</b></a> do <a href="linux.html"><b>Linux</b></a> &eacute; do tipo
+monol&iacute;tico. Isto significa que o kernel corresponde a um &uacute;nico arquivo execut&aacute;vel bin&aacute;rio.
+Para alterar o kernel &eacute; preciso recompil&aacute;-lo.</p>
+
+<p>Na inicializa&ccedil;&atilde;o do sistema, somente um kernel residente m&iacute;nimo &eacute; carregado na memória.
+Quando uma funcionalidade que n&atilde;o est&aacute; presente no kernel &eacute; solicitada, um m&oacute;dulo do kernel
+&eacute; dinamicamente carregado para atender a esta necessidade. Este m&oacute;dulo passa a fazer parte do kernel, 
+embora n&atilde;o seja parte do execut&aacute;vel do kernel.</p>
+
+<p>Portanto, &eacute; poss&iacute;vel inicializar o sistema com um kernel qualquer e adicionar os m&oacute;dulos
+necess&aacute;rios sem precisar reinicializar o sistema.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Caracter&iacute;ticas</h2>
+
+<p>Os m&oacute;dulos
+<ul>
+<li>s&atilde;o executados no espa&ccedil;o do kernel;
+<li>s&oacute; podem executar fun&ccedil;&otilde;es definidas pelo kernel;
+<li>s&atilde;o orientados a eventos (executam uma determinada tarefa apenas quando recebem uma
+    solicita&ccedil;&atilde;o);
+<li>possuem uma fun&ccedil;&atilde;o de inicializa&ccedil;&atilde;o que o prepara para receber as
+    solicita&ccedil;&otilde;es;
+<li>possuem uma fun&ccedil;&atilde;o de finaliza&ccedil;&atilde;o  que libera os recursos alocados antes da
+    desinstala&ccedil;&atilde;o.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>M&oacute;dulo "<i>alomundo</i>"</h2>
+
+<p>Abaixo, &eacute; apresentado o c&oacute;digo do arquivo <a href="libc/exemplos/alomundo.c" target="_blank"><b>alomundo.c</b></a>. 
+<blockquote class="t2">
+#include &lt;linux/module.h&gt; <br>
+<br>
+MODULE_LICENSE("Dual BSD/GPL"); <br>
+<br>
+static int alo_inicio(void) { <br>
+&nbsp;&nbsp;&nbsp; printk("Alo, Mundo!\n"); <br>
+&nbsp;&nbsp;&nbsp; return 0; <br>
+} <br>
+<br>
+static void alo_fim(void) { <br>
+&nbsp;&nbsp;&nbsp; printk("Adeus, Mundo Cruel!\n"); <br>
+} <br>
+<br>
+module_init(alo_inicio); <br>
+module_exit(alo_fim);
+</blockquote>
+</p>
+
+<p>Inicialmente &eacute; incluido o cabe&ccedil;alho
+<i>module.h</i> que possui as defini&ccedil;&otilde;es necess&aacute;rias para a compila&ccedil;&atilde;o de m&oacute;dulos. 
+<ul>
+<li><b>MODULE_LICENSE()</b> - esta macro informa a licen&ccedil;a do m&oacute;dulo (no exemplo, o c&oacute;digo &eacute; disponibilizado
+    sob as licen&ccedil;as <a href="http://opensource.org/licenses/bsd-license.php" target="_blank"><b>BSD</b></a> e 
+    <a href="http://www.gnu.org/licenses/licenses.pt-br.html" target="_blank"><b>GPL</b></a>).
+<li><b>module_init()</b> - macro que define quais fun&ccedil;&otilde;es s&atilde;o chamadas quando o m&oacute;dulo &eacute; carregado.
+    Neste exemplo, apenas a fun&ccedil;&atilde;o <i>alo_inicio()</i> &eacute; chamada. 
+<li><b>module_exit()</b> - macro que define quais fun&ccedil;&otilde;es s&atilde;o chamadas antes do m&oacute;dulo ser removido.
+    Neste exemplo, apenas a fun&ccedil;&atilde;o <i>alo_fim()</i> &eacute; chamada. 
+<li><b>printk()</b> - fun&ccedil;&atilde;o que escreve mensagens do kernel em /var/log/syslog.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Makefile</h2>
+
+<p>Para compilar e gerar o arquivo .ko do m&oacute;dulo, crie o arquivo <a href="libc/exemplos/Makefile" target="_blank"><b>Makefile</b></a>. 
+
+<blockquote class="t2">
+obj-m := alomundo.o <br>
+<br>
+all: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules <br>
+<br>
+clean: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+</blockquote>
+</p>
+
+<p>No arquivo
+<ul>
+<li><b>obj-m</b> - especifica os arquivos-objeto que ser&atilde;o usados para gerar os m&oacute;dulos carreg&aacute;veis do kernel.
+    Neste exemplo, ser&aacute; usado o arquivo <i>alomundo.o</i> para gerar o arquivo <i>alomundo.ko</i>.
+<li><b>-C diret&oacute;rio</b> - esta op&ccedil;&atilde;o muda para o diret&oacute;rio especificado antes de ler o Makefile (vai usar
+    esse ambiente na gera&ccedil;&atilde;o dos m&oacute;dulos).
+<li><b>M diret&oacute;rio modules</b> - vai para o diret&oacute;rio especificado antes de gerar os m&oacute;dulos (os arquivos 
+    ser&atilde;o armazenados nesse diret&oacute;rio).
+</ul>
+O <i>Makefile</i> tem dois alvos (<i>targets</i>):
+<ul>
+<li><b>all</b> - compila o arquivo <i>arquivo.c</i> e gera o m&oacute;dulo. Basta digitar
+    <blockquote class="t1">
+    make all
+    </blockquote>
+    Como este &eacute; o padr&atilde;o, pode-se digitar apenas
+    <blockquote class="t1">
+    make
+    </blockquote>
+<li><b>clean</b> - deleta todos os arquivos gerados na execu&ccedil;&atilde;o do <i>Makefile</i>.
+    <blockquote class="t1">
+    make clean
+    </blockquote>
+</ul>
+Veja o comando <a href="make.html"><b>make</b></a> para saber mais sobre o funcionamento do arquivo <i>Makefile</i>.
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Carregando o m&oacute;dulo</h2>
+
+<p>Para carregar o módulo sem verificar erros, use o comando <a href="insmod.html"><b>insmod</b></a>.
+<blockquote class="t1">
+sudo insmod alomundo.ko
+</blockquote>
+Para carregar o módulo apenas se não houver erros de dependência, use o comando <a href="modprobe.html"><b>modprobe</b></a>
+<blockquote class="t1">
+sudo modprobe -a ./alomundo.ko 
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Verificando os m&oacute;dulos</h2>
+
+<p>Para ver quais m&oacute;dulos est&atilde;o carregados, use  o comando <a href="lsmod.html"><b>lsmod</b></a>
+<blockquote class="t1">
+lsmod
+</blockquote>
+ou verifique o conte&uacute;do do arquivo <i>modules</i> do diret&oacute;rio <i>/proc</i>.
+<blockquote class="t1">
+less /proc/modules
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Informa&ccedil;&otilde;es do m&oacute;dulo</h2>
+
+<p>Para ver as informa&ccedil;&otilde;es do m&oacute;dulo use o comando <a href="modinfo.html"><b>modinfo</b></a>.
+<blockquote class="t1">
+modinfo alomundo.ko
+</blockquote>
+Abaixo, &eacute; mostrada uma poss&iacute;vel sa&iacute;da do comando.
+<blockquote class="t2">
+<table class="t2" cellpadding=3>
+<tr><td>filename:  </td><td>     /home/aluno/estacao/guia/libc/testes/alomundo.ko </td></tr>
+<tr><td>license:   </td><td>     Dual BSD/GPL                                     </td></tr>
+<tr><td>srcversion:</td><td>     02E21C2D4758A60BBD6B6D9                          </td></tr>
+<tr><td>depends:   </td><td>                                                      </td></tr>
+<tr><td>vermagic:  </td><td>     3.16.1-031801-generic SMP mod_unload modversions </td></tr>
+</table>
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Depend&ecirc;ncias</h2>
+
+<p>Para verificar as depend&ecirc;ncias dos m&oacute;dulos use o comando
+<a href="depmod.html"><b>depmod</b></a>.
+<blockquote class="t1">
+sudo depmod
+</blockquote>
+Este comando grava o arquivo <i>modules.dep</i> no diret&oacute;rio <i>/lib/modules/&lt;vers&atilde;o do Linux&gt;</i>
+com as depend&ecirc;ncias de todos os m&oacute;dulos.
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Removendo o m&oacute;dulo</h2>
+
+<p>Para remover o m&oacute;dulo, use o comando <a href="rmmod.html"><b>rmmod</b></a>.
+<blockquote class="t1">
+sudo rmmod alomundo
+</blockquote>
+</p><p>
+Tamb&eacute;m &eacute; poss&iacute;vel usar o comando <a href="modprobe.html"><b>modprobe</b></a>.
+Mas, neste caso, o comando s&oacute; funciona se o m&oacute;dulo estiver armazenado em /lib/modules.
+<blockquote class="t1">
+sudo modprobe -r alomundo
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Log do sistema</h2>
+
+<p>Para ver as mensagens do m&oacute;dulo no log do sistema, use o comando <a href="dmesg.html"><b>dmesg</b></a>
+<blockquote class="t1">
+dmesg
+</blockquote>
+Abaixo &eacute; mostrado o log produzido pelo carregamento e pela remo&ccedil;&atilde;o do m&oacute;dulo <i>alomundo.ko</i>.
+Por padr&atilde;o, no in&iacute;cio dos registros &eacute; colocado o <i>timestamp</i> do kernel, ou seja, a quantidade
+de segundos ap&oacute;s a inicializa&ccedil;&atilde;o do sistema.
+<blockquote class="t2">
+[ 3693.344434] Alo, Mundo! <br>
+[ 3900.333562] Adeus, Mundo Cruel!
+</blockquote>
+</P>
+
+Outra forma para verificar as mensagens do log &eacute; olhar o arquivo <i>syslog</i>.
+<blockquote class="t1">
+less /var/log/syslog
+</blockquote>
+
+<blockquote class="t2">
+Jan  9 17:43:36 Aluno kernel: [ 3693.344434] Alo, Mundo! <br>
+Jan  9 17:47:03 Aluno kernel: [ 3900.333562] Adeus, Mundo Cruel!
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Os m&oacute;dulos carreg&aacute;veis s&atilde;o armazenados em /lib/modules/&lt;vers&atilde;o do kernel&gt;. 
+    Por exemplo, /lib/modules/3.16.1-031801-generic/kernel/drivers possui os <i>drivers</i> do kernel 3.16 da 
+    distribui&ccedil;&atilde;o DuZeru.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

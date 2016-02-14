@@ -1,0 +1,83 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>cp</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="cp">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>cp</h1>
+
+<blockquote><b><font size="+1">cp [op&ccedil;&otilde;es] origem destino</font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando faz c&oacute;pias de <a href="arquivo.html"><b>arquivos</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-b</b> : gera c&oacute;pia de seguran&ccedil;a se o arquivo de destino j&aacute; existir.
+<li><b>-f</b> : substitui arquivos existentes sem pedir confirma&ccedil;&atilde;o.
+<li><b>-i</b> : pede permiss&atilde;o antes de substituir arquivos existentes.
+<li><b>-l</b> : cria um link para o arquivo de origem ao inv&eacute;s de copiar o arquivo.
+<li><b>-r</b> : copia arquivos e subdiret&oacute;rios (recursivo).
+<li><b>-u</b> : copia apenas quando o arquivo de origem &eacute; mais novo que o arquivo de destino ou quando o
+    arquivo de destino n&atilde;o existe.
+<li><b>-v</b> : lista os arquivos copiados.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<p>Para criar uma cópia do arquivo <i>teste.txt</i> com o nome <i>teste_bak.txt</i>, basta digitar</p> 
+
+<blockquote class="t1">cp teste.txt teste_bak.txt</blockquote>
+
+<p>&Eacute; poss&iacute;vel especificar mais de um arquivo no comando <i>cp</i> usando os 
+<b><a href="curingas.html">curingas</a></b> <b>*</b>, <b>?</b> e <b>[ ]</b>. O primeiro
+substitui um grupo qualquer de caracteres (qualquer n&uacute;mero de carateres, inclusive zero,
+e para qualquer valor de caractere), o segundo substitui apenas um caractere (qualquer 
+caractere), e o terceiro substitui um &uacute;nico caractere dentro de uma faixa de valores.
+Abaixo são mostrados alguns exemplos.
+
+<blockquote class="t1">
+cp teste*.txt /tmp/. <br><br>
+cp teste?.txt /tmp/. <br><br>
+cp teste[1-3].txt /tmp/.
+</blockquote>
+
+O primeiro comando acima, copia todos os arquivos do diret&oacute;rio atual que come&ccedil;am 
+por <i>teste</i> e t&ecirc;m extens&atilde;o <i>txt</i> para o diret&oacute;rio <i>/tmp</i>. 
+O segundo comando copia todos os arquivos que come&ccedil;am por <i>teste</i>, t&ecirc;m um 
+caractere qualquer na sexta posi&ccedil;&atilde;o e extens&atilde;o <i>txt</i> para o 
+diret&oacute;rio <i>/tmp</i>. O &uacute;ltimo comando copia os arquivos <i>teste1.txt</i>, 
+<i>teste2.txt</i> e <i>teste3.txt</i> (se existirem) para o diret&oacute;rio <i>/tmp</i>.
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

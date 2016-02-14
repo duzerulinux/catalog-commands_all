@@ -1,0 +1,142 @@
+
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>Desempenho</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="mkdir">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>Ganho de desempenho no Linux</h1>
+   
+<! -------------------------------------------------------------------------------------------- -->
+<h2>1 - Instala&ccedil;&atilde;o de patch</h2>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>Como fazer no DuZeru: abra uma janela no terminal.
+<ul>
+<li>$ cd
+<li>$ wget http://launchpadlibrarian.net/59511828/cgroup_patch
+<li>$ chmod +x cgroup_patch
+<li>$ sudo ./cgroup_patch
+</ul>
+Reinicie o sistema.
+
+<p>Vale ressaltar que o pr&oacute;prio <b>Linus Torvalds</b> atestou que o patch proporciona uma melhora expressiva, principalmente
+em multitarefas que exigem muita CPU.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+
+<h2>2 - Otimiza&ccedil;&atilde;o do uso do disco r&iacute;gido.</h2>
+
+<p>O <a href="hdparm.html"><b>hdparm</b></a> &eacute; um programa que permite modificar caracter&iacute;sticas diversas da unidade de 
+disco r&iacute;gido e de CD como modo de transfer&ecirc;ncia de dados, leitura adiante, dma, cache, leitura simultânea de setores, 
+hiberna&ccedil;&atilde;o, etc.</p>
+
+<p>Por padr&atilde;o as transfer&ecirc;ncias de dados entre a controladora do HD e a controladora de perif&ecirc;ricos &eacute; feita
+em 16 bits.</p>
+
+<p> Todas as distribui&ccedil;&otilde;es relativamente novas de linux possuem o hdparm na instala&ccedil;&atilde;o b&aacute;sica. Portanto,
+para exibir a configura&ccedil;&atilde;o atual do disco r&iacute;gido /dev/hda (por exemplo), basta digitar:</p>
+
+<blockquote><b>hdparm /dev/hda</b></blockquote>
+
+<p>Algo como isto ser&aacute; exibido:</p>
+
+<blockquote>
+ /dev/hda:<br>
+ multcount    = 16 (on)<br>
+ IO_support   =  1 (32-bit)<br>
+ unmaskirq    =  0 (off)<br>
+ using_dma    =  1 (on)<br>
+ keepsettings =  0 (off)<br>
+ readonly     =  0 (off)<br>
+ readahead    = 16 (on)<br>
+ geometry     = 16383/255/63, sectors = 40020664320, start = 0<br>
+</blockquote>
+
+<h4>Exemplos:</h4>
+
+<ul>
+<li><b>multcount</b> - pode ser modificada com <i><b>-m[num]</b></i> e especifica o n&uacute;mero m&aacute;ximo de setores que ser&atilde;o
+    acessados de uma s&oacute; vez na opera&ccedil;&atilde;o de leitura da unidade. O valor m&aacute;ximo recomendado &eacute; igual a
+    capacidade m&aacute;xima suportada pelo seu disco r&iacute;gido, que pode ser obtida verificando o valor de <i>MaxMultSect</i> com o
+    comando: 
+    <blockquote class="t1">hdparm -i /dev/hda</blockquote>
+    Observa&ccedil;&atilde;o: Para discos r&iacute;gidos Western Digital &eacute; recomend&aacute;vel deixar este valor como 0, porque 
+    eles possuem um mecanismo embutido para leitura de setores.</blockquote>
+<li><b>using_dma</b> - modificado com <i><b>-d[num]</b></i>. Habilita ou n&atilde;o o uso de DMA (Acesso Direto &agrave; Mem&oacute;ria) 
+    para a transfer&ecirc;ncia de dados do HD, ativando o controle de algumas opera&ccedil;&otilde;es pelo chipset livrando a CPU para
+    processamento. 0 desativa DMA e 1 ativa. Note que nem todos os chipsets aceitam esta opera&ccedil;&atilde;o. Esta &eacute; usada em
+    conjunto com a op&ccedil;&atilde;o <b>-X</b> oferece um excelente ganho de performance pelo uso correto de sua controladora.
+<li><b>I/O support</b> - modificado com -c[num]. O n&uacute;mero especificado pode ser 0 para transfer&ecirc;ncia de dados em 16 bits, 
+    1 para 32 bits e 3 para 32 bits com uma sequ&ecirc;ncia especial de sincronismo (alguns chips requerem esta ao inv&eacute;s da 1). 
+    Em HDs que suportam o modo 32 bits, este oferece uma melhor performance se comparado ao modo 16 bits. &Eacute; poss&iacute;vel saber
+    se o seu HD suporta o modo 32 bits na BIOS do seu computador. </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>3 - Instala&ccedil;&atilde;o de ferramentas</h2>
+
+<ul>
+<li><b>3.1 - Preload</b> - &eacute; uma ferramenta que funciona em background e que monitora as aplica&ccedil;&otilde;es que s&atilde;o
+    usadas com frequ&ecirc;ncia. Com base nessas an&aacute;lises, o preload prepara os bin&aacute;rios e depend&ecirc;ncias de uma determinada
+    aplica&ccedil;&atilde;o para executados imediatamente, diminuindo assim o tempo de inicializa&ccedil;&atilde;o da 
+    aplica&ccedil;&atilde;o. Para instalar:
+    <blockquote class="t1">sudo apt-get install preload</blockquote></p>
+
+<li><b> 3.2 - BleachBit</b> - similar ao popular Ccleaner, utilizado por usu&aacute;rios Windows, o BleachBit &eacute; um software que faz
+    limpeza do cache de aplicativos, arquivos tempor&aacute;rios, arquivos de configura&ccedil;&atilde;o de softwares n&atilde;o instalados,
+    logs e uma s&eacute;rie de outros tipos de dados. Para instalar:
+    <blockquote class="t1">sudo apt-get install bleachbit</blockquote>
+<li><b> 3.2 - zRam</b> - o zRam &eacute; uma aplica&ccedil;&atilde;o que permite aumentar a performance do sistema, evitando a 
+    pagina&ccedil;&atilde;o do disco propriamente dita. Para isso &eacute; usada um bloco comprimido de RAM (que funciona como mem&oacute;ria
+    cache – virtual swap) para pagina&ccedil;&atilde;o, em vez do processo nativo. Para instalar:
+    <blockquote class="t1">sudo add-apt-repository ppa:shnatsel/zram</blockquote>
+    <blockquote class="t1">sudo apt-get update</blockquote>
+    <blockquote class="t1">sudo apt-get install zramswap-enabler</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>4 - Controle de frequência do processador.</h2>
+
+<p>No terminal, digite:</p>
+  <blockquote class="t1">sudo apt-get install cpufrequtils indicator-cpufreq</blockquote>
+O <i>cpufreq</i> ser&aacute; instalado e, atrav&eacute;s de um indicador localizado na parte superior da interface gr&aacute;fica, 
+a frequ&ecirc;ncia com que o processador opera poder&aacute; ser alterada. Ao aumentar a frequ&ecirc;ncia <i>default</i>, um overclock
+ser&acute; feito e, consequentemente, haver&aacute; um aumento no desempenho e na temperatura do processador. </p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>5 - Desabilitar a Interface Gr&aacute;fica</h2>
+
+<p>Se um usu&aacute;rio mais avan&ccedil;ado deseja diminuir o consumo de recursos ou a m&aacute;quina ser&aacute; utilizada como 
+servidor, talvez seja interessante desabilitar a interface gr&aacute;fica, digitando no terminal:</p>
+   <blockquote class="t1">sudo echo "manual" >> /etc/init/lightdm.override</blockquote>
+Caso o usu&aacute;rio precise iniciar a interface gr&aacute;fica, o seguinte comando deve ser utilizado:
+   <blockquote class="t1">sudo start lightdm</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

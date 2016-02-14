@@ -1,0 +1,78 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>gid</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="gid">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>GID</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<ul>
+<li>O termo <b>GID</b> significa <b>Group IDentification</b>, ou seja, identifica&ccedil;&atilde;o de grupo.
+<li>No Linux, os arquivos (e diret&oacute;rios) s&atilde;o organizados em grupos. O <b>GID</b> de um arquivo 
+    &eacute; inicialmente herdado do usu&aacute;rio que cria o arquivo. Entretanto, &eacute; poss&iacute;vel 
+    modificar o grupo de um arquivo usando o comando <a href="chgrp.html"><b>chgrp</b></a>.
+<li>Um grupo pode ter zero, um ou v&aacute;rios arquivos. Um arquivo pertence a um &uacute;nico grupo,mas os 
+    usu&aacute;rios do sistema podem ser membros de um ou mais grupos.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valores de GID</h2>
+
+<ul>
+<li>O valor de <b>GID</b> &eacute; n&atilde;o negativo, sendo que <b>valores entre zero e 999</b>
+    s&atilde;o tipicamente reservados para as contas do sistema e <b>valores maiores que 999</b> 
+    s&atilde;o alocados para os grupos de usu&aacute;rios do sistema.
+<li>O <b>GID zero</b> concede (a um usu&aacute;rio ou a um arquivo) acesso irrestrito ao sistema. 
+    Embora isso n&atilde;o seja o mesmo que ser o <b>root</b>, deve-se us&aacute;-lo com cuidado.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A lista dos grupos existentes no sistema &eacute; armazenada em <b><a href="dir_etc.html#group">/etc/group</a></b>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li>O comando <b><a href="groups.html">groups</a></b> permite listar os grupos aos quais faz parte um 
+    usu&aacute;rio, enquanto o comando <a href="id.html"><b>id</b></a> identifica o <b>GID</b> de usu&aacute;rios.
+<li>Al&eacute;m disso, o <b>root</b> (adminstrador do sistema) pode usar os comandos 
+    <a href="groupadd.html"><b>groupadd</b></a>, <a href="groupmod.html"><b>groupmod</b></a> e
+    <a href="groupdel.html"><b>groupdel</b></a> para, respectivamente, criar, modificar e deletar grupos.
+<li>Os comandos <a href="chgrp.html"><b>chgrp</b></a> e <a href="chown.html"><b>chown</b></a> permitem alterar
+    o grupo de um arquivo/diret&oacute;rio.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

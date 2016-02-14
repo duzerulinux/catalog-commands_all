@@ -1,0 +1,66 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>pid</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="pid">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>PID</h1>
+     
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Cada <a href="processo.html"><b>processo</b></a> sendo executado no Linux est&aacute; associado a um n&uacute;mero
+inteiro positivo que &eacute; conhecido como PID (<i>Process IDentification</i>).</p> 
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Existem alguns PIDs que s&atilde;o especiais. Por exemplo, o <i>PID 1</i> corresponde ao processo
+    <b><a href="init.html">init</a></b> que &eacute; o primeiro processo a ser inicializado pelo Linux.
+<li>Os n&uacute;meros de PID crescem at&eacute; um valor alto e ent&atilde;o reiniciam. Entretanto, 
+    dois processos nunca podem ter o mesmo n&uacute;mero de ID. &Eacute; responsabilidade do 
+    <a href="kernel.html"><b>kernel</b></a> do Linux garantir de que um novo processo obtenha seu pr&oacute;prio
+     n&uacute;mero &uacute;nico de ID.
+<li>O diret&oacute;rio <b><a href="dir_proc.html">/proc</a></b> possui a lista dos processos que est&atilde;o
+    executando no sistema.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="ppid.html">PPID</a></b> - n&uacute;mero de identifica&ccedil;&atilde;o (ID) do processo-pai.
+<li><b><a href="processo.html">processo</a></b> - programa em execu&ccedil;&atilde;o. 
+<li><b><a href="ps.html">ps</a></b> - exibe informa&ccedil;&otilde;es sobre os processos que est&atilde;o executando na m&aacute;quina.
+<li><b><a href="pstree.html">pstree</a></b> - apresenta, em formato de árvore, os processos em execu&ccedil;&atilde;o
+<li><b><a href="top.html">top</a></b> - utilit&aacute;rio que lista, em tempo real, os processos que est&atilde;o usando a cpu.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

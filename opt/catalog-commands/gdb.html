@@ -1,0 +1,73 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>gdb</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="gdb">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>gdb</h1> 
+<blockquote><font size="+1"><b>gdb [op&ccedil;&otilde;es] [programa]</b></font><br></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>GDB significa <i>GNU Debugger</i> e &eacute; utilizado para depura&ccedil;&atilde;o de programas C e C++.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-c arquivo</b>:  define o nome do arquivo a ser examinado pela ferramenta.
+<li><b>-cd=diret&oacute;rio</b> : define o diret&oacute;rio de trabalho para executar o GDB.
+<li><b>-h</b> : lista as op&ccedil;&otilde;es do aplicativo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios sobre o comando</h2>
+
+<ul>
+<li>&Eacute; poss&iacute;vel executar <i>gdb</i> sem argumentos ou op&ccedil;&otilde;es. Entretanto, o mais comum
+    &eacute; inicializar o aplicativo fornecendo o nome do programa execut&aacute;vel.
+    <blockquote class="t1">gdb programa</blockquote>
+<li>O uso da op&ccedil;&atilde;o <i>-c</i> na linha de comando sup&otilde;e a exist&ecirc;ncia do arquivo <i>core</i> 
+    gerado durante a execu&ccedil;&atilde;o do programa devido a ocorr&ecirc;ncia de erros (use a op&ccedil;&atilde;o 
+    <i>-g</i> na compila&ccedil;&atilde;o de programas C e C++ para gerar este arquivo quando um erro for detectado).</p>
+</ul>
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos de comandos do GDB</h2>
+
+<ul>
+<li><b>break fun&ccedil;&atilde;o</b> : p&aacute;ra (temporariamente) a execu&ccedil;&atilde;o do programa quando 
+    encontra a fun&ccedil;&atilde;o especificada.
+<li><b>c</b> : continua a execu&ccedil;&atilde;o ap&oacute;s a parada definida pelo comando <i>break</i>.
+<li><b>print vari&aacute;vel</b> : mostra o conte&uacute;do da vari&aacute;vel especificada.
+<li><b>run [par&acirc;metros]</b> : executa o programa (com a lista de par&acirc;metros se esta for definida).
+<li><b>quit</b> : encerra o <i>gdb</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

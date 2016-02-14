@@ -1,0 +1,69 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>bg</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="bg">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>bg</h1>
+<blockquote><b><font size="+1">bg [num]</font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+<p>Este comando faz com que um processo (identificado por <i>num</i>), que está sendo executado em primeiro plano, passe a ser
+executado em segundo plano.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios sobre o comando</h2>
+
+<ul>
+<li>Quando um processo está sendo executado em primeiro plano, n&atilde;o &eacute; poss&iacute;vel digitar qualquer comando no
+    prompt do Linux. Portanto, deve-se primeiro suspender o processo com CTRL+Z e, s&oacute; ent&atilde;o, usar o comando <i>bg</i>
+    para coloc&aacute;-lo em background.
+<li>Caso o n&uacute;mero do processo n&atilde;o seja fornecido, o sistema assume que o processo a ser colocado em <i>background</i>
+    &eacute; o &uacute;ltimo processo que foi suspenso pelo usu&aacute;rio.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A grande vantagem em se colocar um processo em <i>background</i> &eacute; deixar o terminal livre para a entrada de outros comandos,
+    ou seja, o processo est&aacute; sendo executado, mas ele n&atilde;o est&aacute; alocado a um terminal.
+<li>Podemos tamb&eacute;m inicializar um programa/comando em segundo plano usando o caractere <b>&amp;</b>. Por exemplo,
+    <blockquote class="t1">xcalc &amp;</blockquote>
+    faz com que a calculadora seja inicializada em segundo plano e portanto, o terminal em que o comando foi digitado continua livre para
+    receber novos comandos.
+<li>O comando <b><a href="fg.html">fg</a></b> faz com que um processo seja executado em primeiro plano.
+<li>O comando <b><a href="ps.html">ps</a></b> pode ser usado para obter a lista dos processos em execu&ccedil;&atilde;o e seus
+    respectivos n&uacute;meros.
+<li>Para maiores informa&ccedil;&otilde;es sobre <i>bg</i>, digite na linha de comandos do Linux
+    <blockquote class="t1">help bg</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

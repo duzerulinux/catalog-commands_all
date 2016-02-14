@@ -1,0 +1,225 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>access()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="access()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+<!-- Barra do governo -->
+<div id="barra-brasil">
+    <a href="http://brasil.gov.br" style="background:#7F7F7F; height: 20px; padding:4px 0 4px 10px; display: block; font-family:sans,sans-serif; text-decoration:none; color:white; ">Portal do Governo Brasileiro</a>
+</div>
+<script src="http://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
+<!---------------------->
+
+<h1>access( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta <a href="../chamadas.html"><b>chamada de sistema</b></a> verifica as <a href="../permissao.html"><b>permiss&otilde;es</b></a> de
+um processo em rela&ccedil;&atilde;o a um <a href="../arquivo.html"><b>arquivo</b></a>.</p>
+  
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<p>
+<blockquote class="t2">
+#include&lt;unistd.h&gt;<br>
+int access(const char *pathname, int mode);
+</blockquote>
+</p>
+
+<ul>
+<li>O par&acirc;metro <i>pathname</i> corresponde a uma string com o nome de um arquivo.
+<li>O par&acirc;metro <i>mode</i> ou &eacute; o valor <b>F_OK</b> (verifica se arquivo existe) ou &eacute; uma m&aacute;scara 
+    com as permiss&otilde;es a serem testadas.
+    <ul>
+    <li><b>R_OK</b> : permiss&atilde;o de leitura;
+    <li><b>W_OK</b> : permiss&atilde;o de escrita;
+    <li><b>X_OK</b> : permiss&atilde;o de execu&ccedil;&atilde;o
+    </ul>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Se a chamada <i>access( )</i> &eacute; executada com sucesso, o valor zero &eacute; retornado. Caso a chamada n&atilde;o
+seja bem sucedida, o valor -1 &eacute; retornado e o c&oacute;digo do erro &eacute; colocado na vari&aacute;vel externa 
+<b><a href="vr_errno.html">errno</a></b>. A tabela abaixo mostra os erros que podem ocorrer com esta chamada.</p>
+
+<p>
+<blockquote>
+<table class="t2" rules=all cellpadding=10 celspacing=10 align=center width=650>
+<tr class="t1"><td><b>Erro</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td>EACCES      </td><td>Acesso ao arquivo n&atilde;o &eacute; permitido</td></tr>
+<tr><td>EFAULT      </td><td>Nome do arquivo aponta para uma &aacute;rea de endere&ccedil;o n&atilde;o acess&iacute;vel</td></tr>
+<tr><td>EINVAL      </td><td>Par&acirc;metro <i>mode</i> foi especificado de maneira incorreta</td></tr>
+<tr><td>EIO         </td><td>Erro de I/O</td></tr>
+<tr><td>ELOOP       </td><td>Muitos links simb&oacute;licos encontrados na defini&ccedil;&atilde;o do nome do arquivo</td></tr>
+<tr><td>ENAMETOOLONG</td><td>Nome do arquivo longo demais</td></tr>
+<tr><td>ENOENT      </td><td>Um componente do nome do arquivo n&atilde;o existe ou n&atilde;o pode ser resolvido</td></tr>
+<tr><td>ENOMEM      </td><td>Mem&oacute;ria insuficiente</td></tr>
+<tr><td>ENOTDIR     </td><td>Um componente do nome do arquivo n&atilde;o &eacute; um diret&oacute;rio</td></tr>
+<tr><td>EROFS       </td><td>Permiss&atilde;o de escrita foi solicitada para um arquivo que s&oacute; permite leitura</td></tr>
+<tr><td>ETXTBSY     </td><td>Acesso de escrita foi requisitado para um arquivo que est&aacute; sendo executado</td></tr>
+</table>
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include&lt;stdio.h&gt;   <br>
+2. #include&lt;unistd.h&gt;  <br>
+3. int main (int argc, char* argv[]) <br>
+4. &nbsp; &nbsp; &nbsp;{ <br>
+5. &nbsp; &nbsp; &nbsp; char* path = argv[1]; <br>
+6. &nbsp; &nbsp; &nbsp; int val; <br>
+7. &nbsp; &nbsp; &nbsp; /* Verifica se arquivo existe */ <br>
+8. &nbsp; &nbsp; &nbsp; val = access (path, F_OK); <br>
+9. &nbsp; &nbsp; &nbsp; if (val == 0) <br>
+10.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;    printf ("%s existe\n", path); <br>
+11.&nbsp; &nbsp; &nbsp; else <br>
+12.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;   { <br>
+13.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;    printf ("%s nao existe\n", path); <br>
+14.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;    return 0; <br>
+15.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;   } <br>
+16.&nbsp; &nbsp; &nbsp; /* Verifica permissao de leitura */ <br>
+17.&nbsp; &nbsp; &nbsp; val = access (path, R_OK); <br>
+18.&nbsp; &nbsp; &nbsp; if (val == 0) <br>
+19.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;    printf ("%s pode ser lido\n", path); <br>
+20.&nbsp; &nbsp; &nbsp; else <br>
+21.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;    printf ("%s nao pode ser lido\n", path); <br>
+22.&nbsp; &nbsp; &nbsp; /* Verifica permissao de escrita */ <br>
+23.&nbsp; &nbsp; &nbsp; val = access (path, W_OK); <br>
+24.&nbsp; &nbsp; &nbsp; if (val == 0) <br>
+25.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;    printf ("%s pode ser alterado\n", path); <br>
+26.&nbsp; &nbsp; &nbsp; else <br>
+27.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;    printf ("%s nao pode ser alterado\n", path); <br>
+28.&nbsp; &nbsp; &nbsp; /* Verifica permissao de execucao */ <br>
+29.&nbsp; &nbsp; &nbsp; val = access (path, X_OK); <br>
+30.&nbsp; &nbsp; &nbsp; if (val == 0) <br>
+31.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;    printf ("%s pode ser executado\n", path); <br>
+32.&nbsp; &nbsp; &nbsp; else <br>
+33.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;    printf ("%s nao pode ser executado\n", path); <br>
+34.&nbsp; &nbsp; &nbsp; }
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/access.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 2 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>unistd.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das <a href="../chamadas.html"><b>chamadas de sistema</b></a>. 
+    </ul>
+<li><b>Linha 3 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 5 a linha 33.
+<li><b>Linha 5 :</b> cria a vari&aacute;vel <i>path</i> para armazenar o nome do arquivo passado na linha de comandos.
+<li><b>Linha 6 :</b> cria a vari&aacute;vel <i>val</i> que vai receber o valor retornado pela chamada <i>access( )</i>.
+<li><b>Linhas de 7 a 15 :</b> verifica se o arquivo existe. Caso o arquivo n&atilde;o exista, o programa &eacute; encerrado.
+<li><b>Linhas de 16 a 21 :</b> verifica se o processo pode ler o arquivo.
+<li><b>Linhas de 22 a 27 :</b> verifica se o processo pode escrever no arquivo.
+<li><b>Linhas de 28 a 33 :</b> verifica se o processo pode executar o arquivo.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+<blockquote class="t1">
+gcc -o access access.c
+</blockquote>
+e para verificar as permiss&otilde;es do arquivo <i>teste</i>, digite
+<blockquote class="t1">
+./access teste
+</blockquote>
+</p>
+
+<p>Suponha que as permiss&otilde;es dos arquivo <i>access</i> e <i>teste</i> s&atilde;o mostradas abaixo.
+<blockquote class="t2">
+-rwxrwxr-x 1 aluno aluno 8569 Mar 20 18:30 access<br>
+-rwxrw-r-- 1 aluno aluno 7743 Mar 20 17:51 teste
+</blockquote>
+Portanto, processos do usu&aacute;rio <i>aluno</i> podem ler, escrever e executar o arquivo <i>teste</i>. Se o usu&aacute;rio
+<i>aluno</i> executar <i>access</i> para o arquivo <i>teste</i>, a sa&iacute;da ser&aacute; como mostrada abaixo.
+<blockquote class="t2">
+teste existe <br>
+teste pode ser lido <br>
+teste pode ser alterado <br>
+teste pode ser executado
+</blockquote>
+</p>
+
+<p>Suponha agora que o comando <a href= "../chown.html"><b>chown</b></a> &eacute; usado para alterar o dono e o grupo do 
+arquivo <i>teste</i>.
+<blockquote class="t1">
+sudo chown root:root teste
+</blockquote>
+Com a mudan&ccedil;a, as novas permiss&otilde;es do arquivo <i>teste</i> s&atilde;o mostradas abaixo.
+<blockquote class="t2">
+-rwxrw-r-- 1 root     root     7743 Mar 20 17:51 teste
+</blockquote>
+Isto significa que agora o <i>root</i> &eacute; o dono do arquivo e tem permiss&atilde;o para ler, escrever e executar.
+Se o usu&aacute;rio <i>aluno</i> executar novamente <i>access</i> para o arquivo <i>teste</i>, a sa&iacute;da ser&aacute;
+<blockquote class="t2">
+teste existe <br>
+teste pode ser lido <br>
+teste nao pode ser alterado <br>
+teste nao pode ser executado
+</blockquote>
+A explica&ccedil;&atilde;o &eacute; simples: o usu&aacute;rio <i>aluno</i> faz agora parte dos <i>outros</i> (tem permiss&otilde;es
+de quem n&atilde;o &eacute; dono e nem pertence ao mesmo grupo) e s&oacute; tem autoriza&ccedil;&atilde;o para ler o arquivo.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A chamada <i>access( )</i> usa o <a href="../uid.html"><b>UID</b></a> e o <a href="../gid.html"><b>GID</b></a> reais do 
+    processo para fazer a verifica&ccedil;&atilde;o das permiss&otilde;es do arquivo cujo nome foi passado na linha de comandos.
+<li>Se o processo &eacute; privilegiado (o UID real &eacute; zero), ent&atilde;o o X_OK check &eacute; bem sucedido para um
+    arquivo regular quando existe permiss&atilde;o de execu&ccedil;&atilde;o para o dono, para o grupo ou para os outros.
+<li>Apenas os bits de acesso s&atilde;o testados pela chamada <i>access( )</i>. Nenhuma verifica&ccedil;&atilde;o &eacute; feita
+    para o tipo do arquivo ou para o seu conte&uacute;do.
+<li>&Eacute; poss&iacute;vel usar o operador l&oacute;gico | (OR) para juntar um ou mais tipos de acesso na chamada. 
+    Mas a chamada retorna -1 se qualquer uma das permiss&otilde;es n&atilde;o existe. 
+<li>Se <i>pathname</i> &eacute; um link simb&oacute;lico, as permiss&otilde;es testadas pela chamada <i>access( )</i> pertencem
+    ao arquivo apontado pelo link.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

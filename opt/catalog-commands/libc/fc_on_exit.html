@@ -1,0 +1,148 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>on_exit()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="on_exit()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>on_exit( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta fun&ccedil;&atilde;o define uma fun&ccedil;&atilde;o que ser&aacute; chamada quando o processo terminar normalmente.</p>
+   
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<p>
+<blockquote class="t2">
+#include&lt;stdlib.h&gt;<br>
+int on_exit(void (*function)(int , void *), void *arg);
+</blockquote>
+<ul>
+<li>Os argumentos <i>function</i> e <i>*arg</i> correspondem, respectivamente, &agrave; fun&ccedil;&atilde;o a ser chamada
+    e a um valor a ser passado para a fun&ccedil;&atilde;o chamada.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>A fun&ccedil;&atilde;o <i>on_exit( )</i> retorna zero em caso de sucesso e -1 em caso de erro. Quando um erro ocorre durante
+a execu&ccedil;&atilde;o, o sistema coloca o c&oacute;digo do erro na vari&aacute;vel externa <a href="vr_errno.html"><b>errno</b></a>.
+</p>
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include &lt;stdio.h&gt; <br>
+2. #include &lt;stdlib.h&gt; <br>
+3. void teste_onexit(int status, void *arg) <br>
+4. &nbsp;&nbsp;&nbsp;{ <br>
+5. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Programa terminou sem erros\n"); <br>
+6. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("status = %d, arg = %ld\n", status, (long) arg); <br>
+7. &nbsp;&nbsp;&nbsp;} <br>
+8. int main () <br>
+9. &nbsp;&nbsp;&nbsp;{ <br>
+10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; on_exit(teste_onexit, (void *) 50); <br>
+11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Teste on_exit\n"); <br>
+12.&nbsp;&nbsp;&nbsp;}
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/on_exit.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas 1 e 2 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da 
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>stdlib.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da fun&ccedil;&atilde;o <i>on_exit( )</i>.
+    </ul>
+<li><b>Linhas de 3 a 7 :</b> fun&ccedil;&atilde;o a ser chamada no final da execu&ccedil;&atilde;o.
+<li><b>Linha 8 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o
+    da linha 10 a linha 11.
+<li><b>Linha 10 :</b> define a fun&ccedil;&atilde;o.
+<li><b>Linha 11 :</b> frase final do programa.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar
+<blockquote class="t1">
+gcc -o on_exit on_exit.c 
+</blockquote>
+Para executar
+<blockquote class="t1">
+./on_exit
+</blockquote>
+<p>A sa&iacute;da gerada pelo programa ser&aacute;
+<blockquote class="t2">
+Teste on_exit <br>
+Programa terminou sem erros <br>
+status = 14, arg = 50
+</blockquote>
+Note que a fun&ccedil;&atilde;o chamada recebe o <i>status</i> do &uacute;ltimo comando executado na fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> antes do t&eacute;rmino normal.
+Neste exemplo, o <i>status</i> corresponde ao n&uacute;mero de caracteres impressos pela fun&ccedil;&atilde;o 
+<a href="fc_printf.html"><b>printf( )</b></a> (inclusive o espa&ccedil;o e o caractere de nova linha).
+&Eacute; tamb&eacute;m poss&iacute;vel ver o valor do argumento <i>status</i> digitando na linha de comandos
+<blockquote class="t1">
+echo $?
+</blockquote>
+Neste caso, a resposta &eacute;
+<blockquote class="t2">
+14
+</blockquote>
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>N&atilde;o h&aacute; necessidade da exist&ecirc;ncia de uma fun&ccedil;&atilde;o <a href="fc_exit.html"><b>exit( )</b></a>
+    no programa para que a fun&ccedil;&atilde;o definida em <i>on_exit( )</i> seja chamada. Basta que o t&eacute;rmino da
+    execu&ccedil;&atilde;o seja normal.
+<li>Se v&aacute;rias fun&ccedil;&otilde;es s&atilde;o registradas com <i>on_exit( )</i>, elas s&atilde;o chamadas na ordem inversa
+    em que foram registradas.
+<li>A fun&ccedil;&atilde;o <i>on_exit( )</i> n&atilde;o faz parte da <a href="../biblioteca_c.html"><b>biblioteca pad&atilde;o C</b></a>.
+    Por isso, &eacute; prefer&iacute;vel o uso da fun&ccedil;&atilde;o <a href="fc_atexit.html"><b>atexit( )</b></a>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

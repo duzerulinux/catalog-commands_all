@@ -1,0 +1,108 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>bzip2</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="mkdir">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>bzip2</h1>
+   
+<blockquote><font size="+1"><b>bzip2 [op&ccedil;&otilde;es] [arquivo(s)]</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>&Eacute; um programa de compacta&ccedil;&atilde;o/descompacta&ccedil;&atilde;o.</p> 
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-z</b> ou <b>--compress</b> : for&ccedil;a compacta&ccedil;&atilde;o do arquivo.
+<li><b>-d</b> ou <b> --decompress</b> : for&ccedil;a descompacta&ccedil;&atilde;o do arquivo. Pode-se usar tamb&eacute;m
+    "<i>bunzip2</i>" no lugar de "<i>bzip2 -d</i>".
+<li><b>-h</b> ou <b>--help</b> : exibe as op&ccedil;&otilde;es do comando.
+<li><b>-k, --keep</b> : mant&eacute;m (n&atilde;o deleta) os arquivos de entrada.
+<li><b>-t, --test </b> : testa a integridade do arquivo compactado.
+<li><b>-f, --force </b> : sobrescreve arquivos de sa&iacute;da.
+<li><b>-t, --test </b> : testa a integridade do arquivo compactado.
+<li><b>-[num] </b> : especifica a compacta&ccedil;&atilde;o que ser&aacute; feita utilizando n&uacute;meros entre 1 (menor e mais 
+    r&aacute;pida compacta&ccedil;&atilde;o) e 9 (maior e melhor compacta&ccedil;&atilde;o). Pode-se tamb&eacute;m usar <i>--fast</i>
+    no lugar de <i>-1</i> ou <i>--best</i> no lugar de <i>-9</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>&Eacute; poss&iacute;vel utilizar o bzip2 para a compacta&ccedil;&atilde;o sem a inser&ccedil;&atilde;o de op&ccedil;&otilde;es. 
+    Por exemplo a compacta&ccedil;&atilde;o do arquivo <i>Final.xls</i>, feita com e sem op&ccedil;&otilde;es:
+    <blockquote class="t1">bzip2 -z Final.xls</blockquote>
+    <blockquote class="t1">bzip2 Final.xls</blockquote>
+    Nos dois casos, o arquivo <i>Final.xls</i> deixar&aacute; de existir e no seu lugar entrar&aacute; o arquivo gerado <i>Final.xls.bz2</i>.
+<li>Para descompactar o arquivo vivaldi.htm, considerando que ele estava no formato <i>.bz2</i>, digite
+    <blockquote class="t1">bzip2 -d vivaldi.htm.bz2</blockquote>
+<li>&Eacute; poss&iacute;vel escolher o n&iacute;vel de compacta&ccedil;&atilde;o a ser utilizado usando valores de 1 a 9. Para compactar
+    o arquivo <i>texto.txt</i> usando a compactação m&aacute;xima, digite
+    <blockquote class="t1">bzip2 -9 texto.txt</blockquote>
+    Abaixo &eacute; apresentada uma tabela onde um arquivo de cerca de 4M foi compactado com os noves n&iacute;veis disponibilizados pelo
+    comando. Quando n&atilde;o foi informado o n&iacute;vel de compacta&ccedil;&atilde;o, o comando utilizou o n&iacute;vel 9. Isto 
+    significa que o comando tenta,  por padr&atilde;o, compactar o m&aacute;ximo poss&iacute;vel o arquivo (pode ser que n&atilde;o seja
+    poss&iacute;vel melhorar a compacta&ccedil;&atilde;o &agrave; medida que se aumenta o n&iacute;vel). 
+    <br><br>
+    <table class="t1" align="center" cellpadding=10 cellspacing=10 rules=all>
+    <tr class="t1"><td align="center"><b>N&iacute;vel de <br> compacta&ccedil;&atilde;o</b></td>
+    <td align="Center" valign="center"><b>Tamanho <br> (bytes)</b></td></tr>
+    <tr><td>Sem compacta&ccedil;&atilde;o</td><td align=right>4.209.804</td></tr>
+    <tr><td align=center> 1              </td><td align=right>1.042.061</td></tr>
+    <tr><td align=center> 2              </td><td align=right> 984.797</td></tr>
+    <tr><td align=center> 3              </td><td align=right> 953.252</td></tr>
+    <tr><td align=center> 4              </td><td align=right> 932.815</td></tr>
+    <tr><td align=center> 5              </td><td align=right> 858.208</td></tr>
+    <tr><td align=center> 6              </td><td align=right> 778.766</td></tr>
+    <tr><td align=center> 7              </td><td align=right> 712.746</td></tr>
+    <tr><td align=center> 8              </td><td align=right> 633.170</td></tr>
+    <tr><td align=center> 9              </td><td align=right> 610.610</td></tr>
+    </table>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A extens&atilde;o dos arquivos compactados pelo <i>bzip2</i> &eacute; <i>.bz2</i>. No processo de descompacta&ccedil;&atilde;o, se
+    o arquivo n&atilde;o possuir nenhuma das terminologias conhecidas (<i>.bz2</i>, <i>.bz</i>, <i>.tbz2</i> ou <i>.tbz</i>), ele recebe
+    o nome original com <i>.out</i> no final. Por exemplo, do arquivo <i>teste.xxx</i> compactado com <i>bzip2</i> ser&aacute; gerado o
+    arquivo descompactado <i>teste.xxx.out</i>.
+<li>O <i>bzip2</i> &eacute; muito utilizado em conjunto com o comando <a href="tar.html"><b>tar</b></a>. Para isso, deve-se utilizar o 
+    par&acirc;metro <i>-j</i> nas op&ccedil;&otilde;es do <i>tar</i>.
+<li>Quando comparado a outros compactadores dispon&iacute;veis no Linux, o <i>bzip2</i> normalmente &eacute; apontado como mais eficiente, 
+    mas &eacute; considerado mais lento e maior consumidor de processamento.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

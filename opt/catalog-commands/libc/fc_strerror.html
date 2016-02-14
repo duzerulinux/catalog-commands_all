@@ -1,0 +1,106 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>strerror()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="strerror()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>strerror( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Fun&ccedil;&atilde;o que fornece a mensagem de erro correspondente a um determinado c&oacute;digo.
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include&lt;string.h&gt;<br>
+char *strerror(int errnum);
+</blockquote>
+<ul>
+<li>O argumento <i>errnum</i> &eacute; o c&oacute;digo de erro. Caso o n&uacute;mero xxx fornecido como argumento da 
+    fun&ccedil;&atilde;o n&atilde;o exista, &eacute; retornada a mensagem "Unknown error xxx".
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Quando um erro ocorre durante a execu&ccedil;&atilde;o, o sistema coloca o c&oacute;digo do erro na vari&aacute;vel externa
+<a href="vr_errno.html"><b>errno</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+<ul>
+<li>Para listar a tabela das mensagens de erro, veja o programa <a href="exemplos/strerror.c" target="_blank"><b>strerror.c</b></a>.
+    <blockquote class="t2">
+    #include&lt;stdio.h&gt;  <br>
+    #include&lt;string.h&gt; <br>
+    int main() <br>
+    &nbsp;&nbsp;&nbsp;{ <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int i;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (i = 0; i <= 133; i++)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro %d - %s\n", i, strerror(i));<br>
+    &nbsp;&nbsp;&nbsp;}
+    </blockquote>
+<li>Para mostrar uma determinada mensagem de erro, veja o programa <a href="exemplos/strerror2.c" target="_blank"><b>strerror2.c</b></a>.
+    <blockquote class="t2">
+    #include&lt;stdio.h&gt;  <br>
+    #include&lt;string.h&gt;  <br>
+    #include&lt;errno.h&gt;  <br>
+    int main()  <br>
+    &nbsp;&nbsp;&nbsp;{  <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FILE *arq;  <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arq = fopen("arquivo_inexistente.txt", "r");  <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (arq == NULL )  <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {  <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro %d - %s\n", errno, strerror(errno));  <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return(1);  <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }  <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fclose(arq);  <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return(0);  <br>
+    &nbsp;&nbsp;&nbsp;}
+    </blockquote>
+    Este programa tenta abrir para leitura um arquivo que n&atilde;o existe. Abaixo a sa&iacute;da gerada.
+    <blockquote class="t1">
+    Erro 2 - No such file or directory
+    </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Pode-se tamb&eacute;m usar a fun&ccedil;&atilde;o <a href="fc_perror.html"><b>perror( )</b></a> para ver a 
+    mensagem do &uacute;ltimo erro armazenado em <i>errno</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

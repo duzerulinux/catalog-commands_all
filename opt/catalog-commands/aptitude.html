@@ -1,0 +1,115 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>aptitude</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="aptitude">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>aptitude</h1>
+
+<blockquote><b><font size="+1"> aptitude [op&ccedil;&otilde;es] </font></b></blockquote>
+<br>
+      
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<ul>
+<li>O aptitude é um front-end para o <a href="apt.html"><b>APT</b></a>. Este utilit&aacute;rio apresenta um menu que permite a
+    instala&ccedil;&atilde;o, atualiza&ccedil;&atilde;o e remo&ccedil;&atilde;o de pacotes do sistema.
+<li>Tamb&eacute;m &eacute;  poss&iacute;vel usar <i>aptitude</i> na linha de comandos.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es</h2>
+
+<p>Pode-se clicar nas op&ccedil;&otilde;es mostradas no cabe&ccedil;alho do menu ou
+usar uma das teclas configuradas.
+<ul>
+<li><b>"?"</b> : mostra todas as op&ccedil;&otilde;es do menu (digite "q" para voltar ao menu principal).
+<li><b>"+"</b> : adicionar ou atualizar um pacote.
+<li><b>"="</b> : n&atilde;o atualiza o pacote, mesmo que novas vers&otilde;es sejam disponibilizadas.
+<li><b>"-"</b> : remove um pacote.
+<li><b>"_"</b> : remove um pacote e seus arquivos de configura&ccedil;&atilde;o.
+<li><b>"m"</b> : marca um pacote como "manualmente instalado".
+<li><b>"M"</b> : marca um pacote como "automaticamente instalado".
+<li><b>"u"</b> : atualiza a lista de pacotes dispon&iacute;veis.
+<li><b>"U"</b> : marca todos os pacotes atualiz&aacute;veis para serem atualizados.
+<li><b>"q"</b> : sai do utilit&aacute;rio.
+</ul>
+
+<p>S&atilde;o algumas op&ccedil;&otilde;es da linha de comando:
+<ul>
+<li><b>install pacote+</b> : instala o pacote especificado.
+<li><b>install pacote+M</b> : instala o pacote e o marca como automaticamente instalado.
+<li><b>install pacote-</b> : remove o pacote especificado.
+<li><b>install pacote_</b> : remove o pacote e seus arquivos de configura&ccedil;&atilde;o.
+<li><b>install pacote=</b> : n&atilde;o atualiza o pacote especificado, mesmo que novas vers&otilde;es sejam disponibilizadas.
+<li><b>install pacote&M</b> : marca o pacote especificado como automaticamente instalado.
+<li><b>install pacote&m</b> : marca o pacote especificado como manualmente instalado.
+<li><b>remove pacote</b> : remove o pacote especificado.
+<li><b>upgrade</b> : atualiza os pacotes instalados no sistema se tiverem novas vers&otilde;es dispon&iacute;veis.
+<li><b>update</b> : atualiza a lista dos pacotes dispon&iacute;veis.
+<li><b>-h, --help</b> : mostra as op&ccedil;&otilde;es de comando.
+<li><b>--version</b> : exibe informa&ccedil;&otilde;es sobre o utilit&aacute;rio.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Para instalar o analisador de tr&aacute;fego de redes <a href="https://www.wireshark.org/"><b>wireshark</b></a>, digite
+    <blockquote class="t1">sudo aptitude install wireshark+</blockquote>
+    O utilit&aacute;rio ent&atilde;o avalia o que j&aacute; est&aacute; instalado e o que ainda precisa ser instalado. 
+    Abaixo, uma poss&iacute;vel resposta ao comando.
+    <blockquote class="t2">
+    Os NOVOS pacotes a seguir serão instalados:<br>     
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wireshark<br> 
+    Os pacotes a seguir serão REMOVIDOS:<br> 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;firefox-locale-de{u} firefox-locale-zh-hans{u} kde-l10n-de{u} kde-l10n-engb{u} 
+    kde-l10n-pt{u} kde-l10n-ptbr{u} kde-l10n-zhcn{u}<br>  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;language-pack-de{u} language-pack-de-base{u} language-pack-kde-de{u} 
+    language-pack-kde-de-base{u} language-pack-kde-en{u}<br>  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;language-pack-kde-en-base{u} language-pack-kde-pt{u} language-pack-kde-pt-base{u} 
+    language-pack-kde-zh-hans{u}<br> 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;language-pack-kde-zh-hans-base{u} language-pack-zh-hans{u} language-pack-zh-hans-base{u} 
+    linux-headers-3.2.0-29{u}<br> 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;linux-headers-3.2.0-29-generic-pae{u}<br> 
+    0 pacotes atualizados, 1 novos instalados, 21 a serem removidos e 4 não atualizados.<br>
+    É preciso obter 0 B/821 kB de arquivos. Depois do desempacotamento, 233 MB serão liberados.<br> 
+    Você deseja continuar? [Y/n/?]<br> 
+    </blockquote>
+<li>Para remover a ferramenta <i>wireshark</i>, digite
+    <blockquote class="t1">sudo aptitude install wireshark-</blockquote>
+    ou
+    <blockquote class="t1">sudo aptitude remove wireshark</blockquote>
+<li>&Eacute; poss&iacute;vel instalar e remover pacotes em um mesmo comando. Por exemplo, 
+    <blockquote class="t1">sudo aptitude install wireshark+ acpidump-</blockquote>
+    pede para instalar a ferramenta <i>wireshark</i> e remover o utilit&aacute;rio <i>acpidump</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

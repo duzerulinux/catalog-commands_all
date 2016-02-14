@@ -1,0 +1,76 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>rmdir</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="rmdir">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>rmdir</h1>
+
+<blockquote><b><font size="+1">rmdir [op&ccedil;&otilde;es] diret&oacute;rio</font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando remove diret&oacute;rios vazios.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-p, --parents</b> : remove uma hierarquia de diret&oacute;rios.
+<li><b>-v, --verbose</b> : exibe informa&ccedil;&otilde;es para cada diret&oacute;rio processado.
+<li><b>--help</b> : informa as op&ccedil;&otilde;es do aplicativo.
+<li><b>--version</b> : exibe a vers&atilde;o implementada do aplicativo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>O comando</p>
+    <blockquote class="t1">rmdir testes</blockquote>
+    remove o diret&oacute;rio <i>testes</i> dentro do diret&oacute;rio atual.
+<li>Para remover uma &aacute;rvore de diret&oacute;rios, use a op&ccedil;&atilde;o -p com o comando <i>rmdir</i>. 
+    Por exemplo, o comando
+    <blockquote class="t1">rmdir -p testes/linux</blockquote>
+    remove o subdiret&oacute;rio <i>linux</i> e, em seguida, remove o diret&oacute;rio <i>testes</i>. 
+    Se ocorrer falha na remo&ccedil;&atilde;o do primeiro diretório (n&atilde;o est&aacute; vazio), o segundo diret&oacute;rio
+    tamb&eacute;m n&atilde;o &eacute; apagado. Portanto, o diret&oacute;rio <i>testes</i> s&oacute; ser&aacute; removido
+    se ficar vazio ap&oacute;s a dele&ccedil;&atilde;o do diret&oacute;rio <i>linux</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>&Eacute; preciso ter <b><a href="permissao.html">permiss&atilde;o</a></b> de grava&ccedil;&atilde;o para remover um diret&oacute;rio.
+<li>O comando <b><a href="rm.html">rm</a></b> remove diret&oacute;rios n&atilde;o vazios.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

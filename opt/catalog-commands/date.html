@@ -1,0 +1,113 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>date</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="date">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>date</h1>
+ 
+<blockquote><b><font size="+1">date [op&ccedil;&otilde;es] </font></b></blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando exibe ou modifica a data e a hora do sistema.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>S&atilde;o algumas das op&ccedil;&otilde;es deste comando</h2>
+
+<ul>
+<li><b>-d</b> : fornece informa&ccedil;&atilde;o sobre a data.
+<li><b>--version</b> : exibe informa&ccedil;&atilde;o sobre o aplicativo <i>date</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>S&atilde;o alguns formatos usados pelo comando</h2>
+
+<ul>
+<li><b>%A</b> : dia da semana (domingo, ..., s&aacute;bado).
+<li><b>%B</b> : nome do m&ecirc;s (janeiro, ..., dezembro).
+<li><b>%H</b> : hora do dia (0 a 23).
+<li><b>%M</b> : minuto (0 a 59).
+<li><b>%S</b> : segundos (0 a 61).
+<li><b>%T</b> : hora no formato hh:mm:ss.
+<li><b>%Y</b> : ano.
+<li><b>%a</b> : dia da semana abreviado (dom, ..., sab).
+<li><b>%b</b> : nome do m&ecirc;s abreviado (jan, ..., dez).
+<li><b>%c</b> : dia da semana, data e hora.
+<li><b>%d</b> : dia do m&ecirc;s.
+<li><b>%j</b> : dia ano (1 a 366).
+<li><b>%m</b> : m&ecirc;s (1 a 12).
+<li><b>%s</b> : n&uacute;mero de segundos desde das zero horas de 01/01/1970.
+<li><b>%w</b> : dia da semana, onde 0 = domingo, 1 = segunda, ..., 6 = s&aacute;bado.
+<li><b>%x</b> : representa&ccedil;&atilde;o da data local.
+<li><b>%y</b> : os dois &uacute;ltimos d&iacute;gitos do ano.
+<li><b>MMDDhhmm[[CC]YY]</b> : altera o m&ecirc;s (MM), o dia (DD), a hora (hh), os minutos (mm), os dois primeiros d&iacute;gitos do ano (CC) 
+       e os dois &uacute;timos d&iacute;gitos do ano (YY), onde os dois &uacute;ltimos argumentos (CC e YY) s&atilde;o opcionais.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Para imprimir o dia da semana, basta digitar
+    <blockquote class="t1">date '+%A'</blockquote>
+<li>&Eacute; tamb&eacute;m poss&iacute;vel usar o comando <i>date</i> para calcular 
+    datas. Para isto, deve-se usar a op&ccedil;&atilde;o <i>-d</i> ou <i>--date</i>. 
+    Suponha que queremos saber a data de 2 meses e 15 dias a partir da data de hoje, 
+    ent&atilde;o podemos digitar
+    <blockquote class="t1">date -d '2 months 15 days'</blockquote>
+<li>Para saber a data de 2 meses e 15 dias atr&aacute;s, basta digitar 
+    <blockquote class="t1">date -d '2 months 15 days ago'</blockquote>
+<li>Para obter o dia da semana em que cai o natal de 2012, entre com
+    <blockquote class="t1">date -d '25 dec 2012' '+%A'</blockquote>
+<li>Para obter a hora do Unix (<i>Unix time</i>), ou seja, o tempo em segundos desde a 
+    meia-noite de 01/01/1970, digite
+    <blockquote class="t1">date +%s</blockquote>
+    Suponha que a resposta do comando seja
+    <blockquote class="t2">1356817284</blockquote>
+    Para converter a hora do Unix para o calend&aacute;rio gregoriano, basta digitar
+    <blockquote class="t1">date -d @1356817284</blockquote>
+    que fornecer&aacute; como sa&iacute;da neste exemplo
+    <blockquote class="t2">Sáb Dez 29 19:41:24 BRST 2012</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Ao digitar o comando <i>date</i>, sem par&acirc;metros, o sistema informa o dia 
+    da semana, a data, a hora e o fuso hor&aacute;rio utilizado.
+<li>Para que as altera&ccedil;&otilde;es feitas na data e na hora do sistema sejam permanentes, 
+    pode-se usar o comando <b><a href="hwclock.html">hwclock</a></b> da seguinte forma
+    <blockquote class="t1">hwclock -w</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

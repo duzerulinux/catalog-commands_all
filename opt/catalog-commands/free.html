@@ -1,0 +1,106 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>free</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="free">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>free</h1>
+
+<blockquote><p><b><font size="+1">free [op&ccedil;&otilde;es]</font></b><br></p></blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando mostra a quantidade de mem&oacute;ria livre e utilizada, a &aacute;rea de <a href="swap.html"><b>swap</b></a>
+no sistema, a mem&oacute;ria compartilhada e os buffers utilizados pelo <a href="kernel.html"><b>kernel</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-k</b> : as informa&ccedil;&otilde;es s&atilde;o dadas em Kbytes (&eacute; o padr&atilde;o).
+<li><b>-m</b> : as informa&ccedil;&otilde;es s&atilde;o dadas em Mbytes.
+<li><b>-o</b> : oculta a linha com as informa&ccedil;&otilde;es sobre os buffers utilizados pelo <b>kernel</b>.
+<li><b>-t</b> : mostra uma linha contendo a quantidade total de mem&oacute;ria do sistema, a quantidade de mem&oacute;ria 
+    livre e a quantidade de mem&oacute;ria em uso.
+<li><b>-s num</b> : mostra a quantidade de mem&oacute;ria livre usada a cada <b>num</b> segundos.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+
+<li> Ao entrar com o comando
+
+<blockquote class="t1">free -t</blockquote>
+
+uma poss&iacute;vel resposta &eacute;
+
+<blockquote class="t2">
+<table cellpadding=4>
+<tr><td></td><td align="right">total</td><td align="right">used</td><td align="right">free</td><td align="right">shared</td><td align="right">buffers</td><td align="right">cached</td></tr>
+<tr><td align="right">Mem:</td><td align="right">2052216</td><td align="right">1086480</td><td align="right">965736</td><td align="right">0     </td><td align="right">151080 </td><td align="right">483544</td></tr>
+<tr><td colspan=2>-/+ buffers/cache:</td><td align="right">451856</td><td align="right">1600360</td><td></td><td></td><td></td></tr>
+<tr><td>Swap:</td><td align="right">2085884</td><td align="right">0     </td><td align="right">2085884</td><td></td><td></td><td></td></tr>
+<tr><td>Total:</td><td align="right">4138100</td><td align="right">1088796</td><td align="right">3049304</td><td></td><td></td><td></td></tr>
+</table>
+</blockquote>
+O exemplo acima informa que o sistema tem 4GBytes de mem&oacute;ria: 2GBytes de mem&oacute;ria RAM e 2GBytes de &aacute;rea
+de <b><a href="swap.html">swap</a></b>.
+
+<li>Para mostrar, a cada 5 segundos, a quantidade de mem&oacute;ria livre e ocupada do sistema, digite
+
+<blockquote class="t1">free -s 5</blockquote>
+
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+<ul>
+<li>Tamb&eacute;m &eacute; poss&iacute;vel ver a quantidade de mem&oacute;ria f&iacute;sica no log do 
+    <b><a href="dmesg.html">dmesg</a></b> que fica no diret&oacute;rio <b><a href="dir_var.html">/var/log/</a></b>.
+    <blockquote class="t1">cat /var/log/dmesg | grep Memory</blockquote>
+    A sa&iacute;da abaixo mostra que a m&aacute;quina possui 2GBytes de mem&oacute;ria, sendo que parte dela &eacute;
+    reservada para uso do <b>Linux</b>.
+    <blockquote class="t2">Memory: 2037636k/2087744k available (5825k kernel code, 49656k reserved, 2849k data,
+        744k init, 1174344k highmem)</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="dmidecode.html">dmidecode -t memory</a></b> - exibe informa&ccedil;&otilde;es sobre a mem&oacute;ria.
+<li><b><a href="slabtop.html">slabtop</a></b> - exibe informa&ccedil;&otilde;es em tempo real sobre a mem&oacute;ria cache.
+<li><b><a href="vmstat.html">vmstat</a></b> - exibe estat&iacute;sticas sobre a mem&oacute;ria virtual.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

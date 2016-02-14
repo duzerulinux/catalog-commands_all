@@ -1,0 +1,104 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>vmstat</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="vmstat">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>vmstat</h1>
+
+<blockquote><b><font size="+1"> vmstat </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando exibe estat&iacute;sticas sobre a mem&oacute;ria virtual.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-d</b> : exibe estat&iacute;sticas do disco.
+<li><b>-D</b> : apresenta um resumo sobre as atividades do disco.
+<li><b>-s</b> : apresenta uma tabela com estat&iacute;sticas sobre a mem&oacute;ria e sobre os eventos.
+<li><b>-S unidade</b> : muda a unidade do relat&oacute;rio. Use <b>k</b> para 1000 bytes, <b>K</b> para 1024 bytes, 
+    <b>m</b> para 1000000 bytes e <b>M</b> para 1048576 bytes.
+<li><b>-V</b> : exibe informa&ccedil;&otilde;es sobre o aplicativo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<p>Para obter a tabela com estat&iacute;sticas sobre a mem&oacute;ria e sobre os eventos em MBytes, basta digitar
+
+<blockquote class="t1">vmstat -S M -s</blockquote>
+
+Uma poss&iacute;vel sa&iacute;da &eacute; apresentada abaixo.
+
+<blockquote class="t2">
+<table class="t2" cellpadding=3>
+<tr><td align=right>2004      </td><td>M total memory</td></tr>
+<tr><td align=right>1226      </td><td>M used memory</td></tr>
+<tr><td align=right>598       </td><td>M active memory</td></tr>
+<tr><td align=right>532       </td><td>M inactive memory</td></tr>
+<tr><td align=right>777       </td><td>M free memory</td></tr>
+<tr><td align=right>157       </td><td>M buffer memory</td></tr>
+<tr><td align=right>609       </td><td>M swap cache</td></tr>
+<tr><td align=right>2036      </td><td>M total swap</td></tr>
+<tr><td align=right>0         </td><td>M used swap</td></tr>
+<tr><td align=right>2036      </td><td>M free swap</td></tr>
+<tr><td align=right>29975     </td><td colspan=2>non-nice user cpu ticks</td></tr>
+<tr><td align=right>2930      </td><td colspan=2>nice user cpu ticks</td></tr>
+<tr><td align=right>10250     </td><td colspan=2>system cpu ticks</td></tr>
+<tr><td align=right>411779    </td><td colspan=2>idle cpu ticks</td></tr>
+<tr><td align=right>17846     </td><td colspan=2>IO-wait cpu ticks</td></tr>
+<tr><td align=right>14        </td><td colspan=2>IRQ cpu ticks</td></tr>
+<tr><td align=right>127       </td><td colspan=2>softirq cpu ticks</td></tr>
+<tr><td align=right>0         </td><td colspan=2>stolen cpu ticks</td></tr>
+<tr><td align=right>598055    </td><td colspan=2>pages paged in</td></tr>
+<tr><td align=right>406636    </td><td colspan=2>pages paged out</td></tr>
+<tr><td align=right>0         </td><td colspan=2>pages swapped in</td></tr>
+<tr><td align=right>0         </td><td colspan=2>pages swapped out</td></tr>
+<tr><td align=right>1526594   </td><td colspan=2> interrupts</td></tr>
+<tr><td align=right>2677717   </td><td colspan=2> CPU context switches</td></tr>
+<tr><td align=right>1358687676</td><td colspan=2>boot time</td></tr>
+<tr><td align=right>3216      </td><td colspan=2>forks</td></tr>
+</table>
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="dmidecode.html">dmidecode -t memory</a></b> - exibe informa&ccedil;&otilde;es sobre a mem&oacute;ria.
+<li><b><a href="free.html">free</a></b> - exibe a quantidade de mem&oacute;ria livre/usada no sistema.
+<li><b><a href="slabtop.html">slabtop</a></b> - exibe informa&ccedil;&otilde;es em tempo real sobre a mem&oacute;ria cache.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

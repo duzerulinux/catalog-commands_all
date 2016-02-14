@@ -1,0 +1,218 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>adjtimex()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="adjtimex()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>adjtimex( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta <a href="../chamadas.html"><b>chamada de sistema</b></a> permite ler/ajustar o rel&oacute;gio do 
+<a href="../kernel.html"><b>kernel</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<p>
+<blockquote class="t2">
+#include&lt;sys/timex.h&gt;<br>
+int adjtimex(struct timex *buf);
+</blockquote>
+</p>
+
+<ul>
+<li>O par&acirc;metro <i>buf</i> &eacute; um ponteiro para uma estrutura do tipo <b><a href="ed_timex.html">timex</a></b>.
+<li>O campo <i>modes</i> da estrutura <i>timex</i> determina quais os par&acirc;metros devem ser alterados. Ele possui a
+    combina&ccedil;&atilde;o de zero ou mais dos bits mostrados na tabela abaixo.
+    <br>
+    <table class="t2" align="center" rules=all cellpadding=10 cellspacing=10 width=650>
+    <tr class="t1"><td><b>Nome Simb&oacute;lico</b></td><td align=center><b>Valor</b></td><td><b>Defini&ccedil;&atilde;o</b></td></tr>
+    <tr><td>ADJ_OFFSET            </td><td align="center">0x0001&nbsp;</td><td>Tempo de compensa&ccedil;&atilde;o</td></tr>
+    <tr><td>ADJ_FREQUENCY         </td><td align="center">0x0002&nbsp;</td><td>Frequ&ecirc;ncia de compensa&ccedil;&atilde;o</td></tr>
+    <tr><td>ADJ_MAXERROR          </td><td align="center">0x0004&nbsp;</td><td>Tempo de erro m&aacute;ximo</td></tr>
+    <tr><td>ADJ_ESTERROR          </td><td align="center">0x0008&nbsp;</td><td>Tempo de erro estimado</td></tr>
+    <tr><td>ADJ_STATUS            </td><td align="center">0x0010&nbsp;</td><td>Estado do rel&oacute;gio</td></tr>
+    <tr><td>ADJ_TIMECONST         </td><td align="center">0x0020&nbsp;</td><td>Constante de tempo pll (<i>phase-locked loop</i>)</td></tr>
+    <tr><td>ADJ_TICK              </td><td align="center">0x4000&nbsp;</td><td>Valor do pulso</td></tr>
+    <tr><td>ADJ_OFFSET_SINGLESHOT </td><td align="center">0x8001&nbsp;</td><td>Adjtime antiquado</td></tr>
+    </table>
+    <br>
+<li>Usu&aacute;rios comuns est&atilde;o restritos ao valor zero no campo <i>modes</i>. Somente o <a href="root.html"><b>root</b></a>
+    pode selecionar qualquer par&acirc;metro.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Em caso de sucesso, a chamada <i>adjtimex( )</i> retorna o estado do atual do rel&oacute;gio do sistema.</p>
+
+<table class="t2" align="center" cellpadding=10 cellspacing=10 rules=all width=650>
+<tr class="t1"><td><b>Nome Simb&oacute;lico</b></td><td align="center"><b>Valor</b></td><td><b>Defini&ccedil;&atilde;o</b></td></tr>
+<tr><td>TIME_OK   </td><td align="center">0 </td><td>Rel&oacute;gio sincronizado      </td></tr>
+<tr><td>TIME_INS  </td><td align="center">1 </td><td>Insere segundo intercalado       </td></tr>
+<tr><td>TIME_DEL  </td><td align="center">2 </td><td>Remove segundo intercalado       </td></tr>
+<tr><td>TIME_OOP  </td><td align="center">3 </td><td>Segundo intercalado em progresso </td></tr>
+<tr><td>TIME_WAIT </td><td align="center">4 </td><td>Segundo intercalado ocorreu      </td></tr>
+<tr><td>TIME_BAD ou TIME_ERROR </td><td align="center">5 </td><td>Rel&oacute;gio n&atilde;o sincronizado</td></tr>
+</table>
+
+<p>Caso a chamada <i>adjtimex( )</i> n&atilde;o seja bem sucedida, o valor -1 &eacute; retornado e o c&oacute;digo de erro &eacute;
+colocado na vari&aacute;vel externa <b><a href="vr_errno.html">errno</a></b>. A tabela abaixo mostra os erros que podem ocorrer
+com esta chamada.</p>
+
+<blockquote>
+<table class="t2" rules=all cellpadding=10 cellspacing=10 align=center width=650>
+<tr class="t1"><td><b>Erro</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td>EFAULT</td><td>Par&acirc;metro <i>buf</i> n&atilde;o aponta para uma &aacute;rea de mem&oacute;ria com 
+    permiss&atilde;o para escrita</td></tr>
+<tr><td>EINVAL</td><td>Valor definido para campo do <i>buf</i> n&atilde;o &eacute; v&aacute;lido</td></tr>
+<tr><td>EPERM </td><td>Programa n&atilde;o tem permiss&atilde;o para alterar campo <i>mode</i> do <i>buf</i></td></tr>
+</table>
+</blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include&lt;sys/timex.h&gt; <br>
+2. #include&lt;stdio.h&gt;     <br>
+3. #include&lt;string.h&gt;    <br>
+4. #include&lt;errno.h&gt;     <br>
+5. int main()<br>
+6. {<br>
+7. &nbsp;&nbsp;&nbsp;&nbsp; struct timex tempo;<br>
+8. &nbsp;&nbsp;&nbsp;&nbsp; tempo.modes = ADJ_STATUS;<br>
+9. &nbsp;&nbsp;&nbsp;&nbsp; tempo.status   = 1;<br>
+10.&nbsp;&nbsp;&nbsp; tempo.maxerror = 0;<br>
+11.&nbsp;&nbsp;&nbsp; tempo.tick     = 0;<br>
+12.&nbsp;&nbsp;&nbsp; int retorno = adjtimex(&tempo);<br>
+13.&nbsp;&nbsp;&nbsp; printf("status = %d, maxerror = %ld, tick = %ld\n", tempo.status, tempo.maxerror, tempo.tick);<br>
+14.&nbsp;&nbsp;&nbsp; switch (retorno)<br>
+15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case -1 : printf("Erro %d - %s\n", errno, strerror(errno));<br>
+17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br>
+18.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case  0 : printf("Relogio sincronizado\n");<br>
+19.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br>
+20.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case  1 : printf("Insere segundo intercalado\n");<br>
+21.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br>
+22.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case  2 : printf("Remove segundo intercalado\n");<br>
+23.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br>
+24.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case  3 : printf("Segundo intercalado em progresso\n");<br>
+25.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br>
+26.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case  4 : printf("Segundo intercalado ocorreu\n");<br>
+27.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; break;<br>
+28.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; case  5 : printf("Relogio nao sincronizado\n");<br>
+29.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+30.}
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/adjtimex.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 4 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>timex.h</b> - cabe&ccedil;alho com as defini&ccedil;&otilde;es da chamada <i>adjtimex( )</i>. 
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror( )</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro.
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+    </ul>
+<li><b>Linha 5 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 7 a linha 29.
+<li><b>Linhas de 7 a 11 :</b> defini&ccedil;&atilde;o e inicializa&ccedil;&atilde;o das vari&aacute;veis. Note que apenas o
+    <i>status</i> do rel&oacute;gio foi escolhido para ser alterado (valor 1).
+<li><b>Linha 12 :</b> executa a chamada <i>adjtimex( )</i>.
+<li><b>Linha 13 :</b> imprime informa&ccedil;&otilde;es do rel&oacute;gio. 
+<li><b>Linhas de 14 a 29 :</b> verifica o valor retornado pela chamada <i>adjtimex( )</i>.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+<blockquote class="t1">
+gcc -o adjtimex adjtimex.c
+</blockquote>
+Para executar como usu&aacute;rio comum, basta digitar
+<blockquote class="t1">
+./adjtimex 
+</blockquote>
+Neste caso, provavelmente o usu&aacute;rio n&atilde;o ter&aacute; permiss&atilde;o para executar a chamada 
+<i>adjtimex( )</i> e os valores usados pelo rel&oacute;gio do sistema n&atilde;o ser&atilde;o atualizados.
+<blockquote class="t2">
+status = 1, maxerror = 0, tick = 0<br>
+Erro 1 - Operation not permitted
+</blockquote>
+Para executar como <i>root</i>, digite
+<blockquote class="t1">
+sudo ./adjtimex 
+</blockquote>
+Uma poss&iacute;vel resposta &eacute; mostrada abaixo. Note que o erro m&aacute;ximo aceito pelo rel&oacute;gio &eacute; de 16 segundos
+(16.000.000 microsegundos) e o tempo entre <i>ticks</i> do rel&oacute;gio &eacute; de 0,01 segundos (10.000 microsegundos). Al&eacute;m
+disso, o estado do rel&oacute;gio mostra que ele estava sincronizado quando a chamada <i>adjtimex( )</i> foi executada.
+<blockquote class="t2">
+status = 1, maxerror = 16000000, tick = 10000<br>
+Relogio sincronizado
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O Linux utiliza o algoritmo de ajuste do rel&oacute;gio de David L. Mill (veja RFC 1305). A chamada de sistema <i>adjtimex( )</i> 
+    l&ecirc;, e opcionalmente, seleciona os par&acirc;metros de ajuste para este algor&iacute;tmo. Ele pega um ponteiro para uma 
+    estrutura <b><a href="ed_timex.html">timex</a></b>, atualiza os par&acirc;metros de kernel a partir dos valores dos campos, e
+    devolve a mesma estrutura com o valor atual do kernel.
+<li>PLL (<i>phase-locked loop</i>) &eacute; um circuito eletr&ocirc;nico que gera uma forma de onda, de acordo com um sinal de
+    refer&ecirc;ncia, a uma taxa constante. Na placa-m&atilde;e, &eacute; usado para sincronizar as opera&ccedil;&otilde;es:  
+    &eacute; implementado em um circuito de la&ccedil;o fechado, onde o sinal de sa&iacute;da &eacute; usado para verificar se
+    h&aacute; necessidade de efetuar corre&ccedil;&otilde;es.
+    <p align=center><img src="../imagens/pll.png" width=458 height=101></p>
+<li>A chamada <i>adjtimex( )</i> apenas ajusta o rel&oacute;gio do sistema enquanto o sistema executa. Para manipular o rel&oacute;gio
+    da m&aacute;quina use o comando <a href="../hwclock.html"><b>hwclock</b></a>.
+<li>A chamada <i>adjtimex( )</i> &eacute; espec&iacute;fica do Linux (n&atilde;o h&aacute; portabilidade) e &eacute; usada pelo
+    servidor NTP (<i>Network Time Protocol</i>).
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

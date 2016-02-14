@@ -1,0 +1,129 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>atoi()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="atoi()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>atoi(  )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta fun&ccedil;&atilde;o converte uma string em um inteiro.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include&lt;stdlib.h&gt;<br>
+int atoi(const char *nptr);
+</blockquote>
+<ul>
+<li>O argumento <i>*nptr</i> &eacute; um ponteiro para uma string.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>O valor convertido.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include &lt;stdio.h&gt; <br>
+2. #include &lt;stdlib.h&gt; <br>
+3. int main(int argc, char *argv[]) <br>
+4. &nbsp;&nbsp;&nbsp;{ <br>
+5. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  int num; <br>
+6. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  if (argc != 2) <br>
+7. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    { <br>
+8. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Forneca um numero\n"); <br>
+9. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 1; <br>
+10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    } <br>
+11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  else <br>
+12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; num = atoi(argv[1]); <br>
+13.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  printf("Numero recebido = %d\n", num); <br>
+14.&nbsp;&nbsp;&nbsp;} 
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/atoi.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 2 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>stdlib.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da fun&ccedil;&atilde;o <i>atoi( )</i>.
+    </ul>
+<li><b>Linha 3 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 5 a linha 13.
+<li><b>Linhas de 6 a 10 :</b> verifica se o n&uacute;mero foi fornecido.
+<li><b>Linha 12 :</b> converte n&uacute;mero.
+<li><b>Linha 13 :</b> exibe n&uacute;mero.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+   <blockquote class="t1">
+   gcc -o atoi atoi.c
+   </blockquote>
+Para executar, basta digitar, por exemplo,
+   <blockquote class="t1">
+   ./atoi 4
+   </blockquote>
+A resposta &eacute;
+   <blockquote class="t2">
+   Numero recebido = 4
+   </blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Os espa&ccedil;os em branco no in&iacute;cio da string s&atilde;o ignorados.
+<li>Se a string &eacute; composta por conjuntos de caracteres separados por espa&ccedil;os em branco, apenas o primeiro conjunto
+    de caracteres &eacute; considerado na convers&atilde;o.
+<li>Se a string &eacute; um conjunto vazio ou possui caracteres n&atilde;o num&eacute;ricos, a fun&ccedil;&atilde;o retorna o valor
+    zero.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

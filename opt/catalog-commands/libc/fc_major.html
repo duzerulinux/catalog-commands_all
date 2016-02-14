@@ -1,0 +1,82 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>major()/minor()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="major()/minor()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>major( ) / minor( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Estas fun&ccedil;&otilde;es ajudam a gerenciar o n&uacute;mero do <i>device</i>.
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<p>
+<blockquote class="t2">
+#include &lt;sys/types.h&gt; <br>
+unsigned int major(dev_t dev); <br>
+unsigned int minor(dev_t dev);
+</blockquote>
+<ul>
+<li>O argumento <i>dev</i> corresponde ao valor decimal da combina&ccedil;&atilde;o do <i>major device number</i> 
+    com o <i>minor device number</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>Veja a discuss&atilde;o do programa <a href="exemplos/lstat.c"><b>lstat.c</b></a> nas chamadas de sistema 
+<a href="cs_stat.html"><b>stat()/lstat()/fstat()</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<p>O n&uacute;mero do <i>device</i> &eacute; composto de duas partes:
+<ol>
+<li>O <i>major device number</i> que identifica o <i>driver</i> associado com o device;
+<li>O <i>minor device number</i> que identifica o <i>device</i>.
+</ol>
+A parti&ccedil;&atilde;o /dev/sda5 em um disco SCSI tem <i>major number</i> igual a 8 (padr&atilde;o para SCI) e
+<i>minor number</i> igual a 5. O comando <a href="../stat.html"><b>stat</b></a> pode ser usado para verificar os valores
+desses campos.
+<blockquote class="t2">
+Arquivo: “/dev/sda5” <br>
+Tamanho: 0 &nbsp;&nbsp;&nbsp; Blocos: 0 &nbsp;&nbsp;&nbsp;  Bloco IO: 4096 &nbsp;&nbsp;&nbsp; arquivo especial de bloco <br>
+Dispositivo: 5h/5d &nbsp;&nbsp;&nbsp; Inode: 9012 &nbsp;&nbsp;&nbsp; Links: 1 &nbsp;&nbsp;&nbsp; Tipo de dispositivo: 8,5 <br>
+Acesso: (0660/brw-rw----) &nbsp;&nbsp;&nbsp; Uid: (    0/    root) &nbsp;&nbsp;&nbsp;  Gid: (    6/    disk) <br>
+Acessar: 2015-01-19 16:59:58.155287975 -0200 <br>
+Modificar: 2015-01-19 16:59:58.155287975 -0200 <br>
+Alterar: 2015-01-19 16:59:58.155287975 -0200 <br>
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

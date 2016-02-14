@@ -1,0 +1,119 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>gcc</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="gcc">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>gcc</h1>
+
+<blockquote><font size="+1"><b>gcc [op&ccedil;&otilde;es]</b></font><br></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este aplicativo compila programas escritos nas linguagens C e C++.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-c</b> : compila e converte para a liguagem de m&aacute;quina sem linkar (n&atilde;o cria o programa execut&aacute;vel).
+<li><b>-D macro</b> : define nome de macro a ser usada dentro do programa (podemos tamb&eacute;m definir 
+    uma macro dentro do programa C atrav&eacute;s da inclus&atilde;o da linha "#define macro"). O uso de 
+    macros permite selecionar quais partes do c&oacute;digo C devem ser compiladas. Por exemplo,
+    <blockquote class="t2">                                            
+    #ifdef teste_macro<br>
+    conjunto de instru&ccedil;&otilde;es 1<br>
+    #else<br>
+    conjunto de instru&ccedil;&otilde;es 2<br>
+    #endif<br>
+    </blockquote>
+    O compilador usar&aacute; o conjunto de instru&ccedil;&otilde;es 1 se a macro <i>teste_macro</i> tiver 
+    sido definida, sen&atilde;o usar&aacute; o conjunto de instru&ccedil;&otilde;es 2.
+<li><b>-E</b> : faz apenas o pr&eacute;-processamento do c&oacute;digo-fonte. N&atilde;o compila.
+<li><b>-I diret&oacute;rio </b> ou <b>-Idiret&oacute;rio </b>: adiciona diret&oacute;rio a lista dos diret&oacute;rios
+    pesquisados na busca por arquivos definidos por um comando <i>include</i>.
+<li><b>-l biblioteca</b> ou <b>-lbiblioteca</b>: adiciona biblioteca durante a linkedi&ccedil;&atilde;o. 
+<li><b>-L diret&oacute;rio</b> ou <b>-Ldiret&oacute;rio</b>: adiciona diret&oacute;rio a lista dos diret&oacute;rios 
+    pesquisados na busca por arquivos definidos como bibliotecas compartilhadas. Use -L. para incluir o 
+    diret&oacute;rio corrente.
+<li><b>-o arquivo</b> : nome do arquivo de sa&iacute;da (o nome padr&atilde;o para o arquivo execut&aacute;vel &eacute; <i>a.out</i>).
+<li><b>-S</b> : compila o arquivo pr&eacute;-processado e cria o c&oacute;digo assembly.
+<li><b>-save-temps</b> : n&atilde;o deleta os arquivos tempor&aacute;rios gerados na compila&ccedil;&atilde;o.
+<li><b>-shared</b> : produz um objeto compartilhado que pode ent&atilde;o ser linkeditado com outros objetos para 
+    formar um execut&aacute;vel.
+<li><b>-v</b> : informa os comandos usados pelo GCC na compila&ccedil;&atilde;o do arquivo.
+<li><b>-w</b> : omite todas as mensagens de advert&ecirc;ncia da compila&ccedil;&atilde;o.
+<li><b>-Wall</b> : exibe todas as mensagens de advert&ecirc;ncia da compila&ccedil;&atilde;o.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<p>O comando
+    <blockquote class="t1">gcc teste.c -o teste -lm</blockquote> 
+compila o arquivo <i>teste.c</i> e cria, caso n&atilde;o haja erro de compila&ccedil;&atilde;o, o arquivo
+execut&aacute;vel <i>teste</i>. Neste caso, o comando usa a biblioteca de matem&aacute;tica na linkedi&ccedil;&atilde;o.</p>
+
+<p>Na realidade, o GCC executa 4 passos para obter o execut&aacute;vel de um programa. &Eacute; poss&iacute;vel executar cada um
+desses passos separadamente. Vejamos como isto pode ser feito para o arquivo <i>teste.c</i>.
+<ul>
+<li><b>Pr&eacute;-processamento</b> - processa cabe&ccedil;alhos e macros.
+    <blockquote class="t1">gcc -E teste.c -o teste.i</blockquote> 
+<li><b>Compila&ccedil;&atilde;o</b> - compila e converte o arquivo <i>teste.i</i> para a linguagem assembly.
+    <blockquote class="t1">gcc -S teste.i -o teste.s</blockquote> 
+<li><b>Assemble</b> - cria o arquivo objeto (c&oacute;digo de m&aacute;quina).
+    <blockquote class="t1">gcc -c teste.s -o teste.o</blockquote> 
+<li><b>Linkedi&ccedil;&atilde;o</b> - cria o execut&aacute;vel adicionando as bibliotecas.
+    <blockquote class="t1">gcc teste.o -o teste -lm</blockquote> 
+</ul>
+</p>
+
+<p align=center><img src="imagens/gcc.png" width=226 height=377></p>
+
+<p>Os comandos acima d&atilde;o a falsa ideia que o GCC faz tudo sozinho. Na realidade, o GCC usa programas externos para executar
+estas tarefas. Para descobrir quais os programas chamados pelo GCC na cria&ccedil;&atilde;o do arquivo <i>teste</i>, digite
+    <blockquote class="t1">gcc -v -save-temps teste.c -o teste</blockquote>
+Note que os arquivos tempor&aacute;rios n&atilde;o foram deletados. Isto se deve &agrave; op&ccedil;&atilde;o de depura&ccedil;&atilde;o
+<i>save-temps</i> usada no exemplo.
+</p>
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A <a href="biblioteca_c.html"><b>biblioteca padr&atilde;o de C</b></a> no Linux &eacute; a 
+    <a href="http://www.gnu.org/software/libc/" target="_blanc"><b>glibc</b></a>.
+<li><a href="https://gcc.gnu.org/" target="_blanc"><b>GCC</b></a> &eacute; um compilador do 
+    <a href="http://www.gnu.org/" target="_blanc"><b>projeto GNU</b></a> para C e C++. Mas j&aacute; existem
+    interfaces dispon&iacute;veis no GCC para outras linguagens como Java e Fortran.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

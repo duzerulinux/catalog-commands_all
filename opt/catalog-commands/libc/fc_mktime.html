@@ -1,0 +1,149 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>mktime()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="mktime()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>mktime( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta fun&ccedil;&atilde;o converte data e hora do formato <a href="ed_tm.html"><b>tm</a></b> para o formato <i>time_t</i> 
+(inteiro longo).</p> 
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include&lt;time.h&gt;<br>
+time_t mktime(struct tm *tm);
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>A fun&ccedil;&atilde;o <i>mktime( )</i> recebe uma data e uma hora e gera um valor que representa a quantidade de segundos
+passados desde &agrave;s 00:00:00 de 01/01/1970 (<a href="../tempo_unix.html"><b>tempo do Unix</b></a>).
+Se a chamada da subrotina n&atilde;o for bem sucedida, &eacute; retornado o valor <i>(time_t)(-1)</i>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<blockquote class="t2">
+1. #include&lt;stdio.h&gt; <br>
+2. #include&lt;time.h&gt;<br>
+3. int main()<br>
+4. &nbsp; {<br>
+5. &nbsp;&nbsp; &nbsp; time_t data_atual;<br>
+6. &nbsp;&nbsp; &nbsp; time_t data_final;<br>
+7. &nbsp;&nbsp; &nbsp; struct tm data;<br>
+8. &nbsp;&nbsp; &nbsp; time(&amp;data_atual);<br> 
+9. &nbsp;&nbsp; &nbsp; data.tm_sec = 0;<br>
+10.&nbsp; &nbsp; data.tm_min   = 0;<br>
+11.&nbsp; &nbsp; data.tm_hour  = 0;<br>
+12.&nbsp; &nbsp; data.tm_mday  = 1;<br>
+13.&nbsp; &nbsp; data.tm_mon   = 0;<br>
+14.&nbsp; &nbsp; data.tm_year  = 116;<br>
+15.&nbsp; &nbsp; data.tm_isdst = 0;<br>
+16.&nbsp; &nbsp; data_final = mktime(&amp;data);<br>
+17.&nbsp; &nbsp; if (data_final &gt; data_atual)<br>
+18.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; printf("Faltam %d dias para a chegada de 2016\n", (int)(data_final-data_atual)/(24*60*60));<br>
+19.&nbsp; &nbsp; else<br>
+20.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; printf("O ano de 2015 ja terminou\n");<br>
+21.&nbsp; }
+</blockquote>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/mktime.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas 1 e 2 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da 
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>time.h</b> - cabe&ccedil;alho com as fun&ccedil;&otilde;es para manipular datas e horas.
+    </ul>
+<li><b>Linha 3 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o
+    da linha 5 a linha 20.
+<li><b>Linhas 5 e 6:</b> s&atilde;o definidas duas vari&aacute;veis do tipo <i>time_t</i> (inteiro longo).
+<li><b>Linha 7 :</b> &eacute; definida uma estutura de dados do tipo <a href="ed_tm.html"><b>tm</b></a>.
+<li><b>Linha 8 :</b> usa a chamada de sistema <a href="cs_time.html"><b>time( )</b></a> para obter a quantidade de segundos passados
+    desde &agrave;s 00:00:00 de 01/01/1970. Este valor &eacute; armazenado na vari&aacute;vel data_atual. Podemos substituir esta
+    linha por
+    <blockquote>data_atual=time(0)</blockquote>
+    para obter o mesmo resultado.
+<li><b>Linhas de 9 a 11 :</b> define a hora 00:00:00.
+<li><b>Linhas de 12 a 14 :</b> define a data 01/01/2016. Note que o m&ecirc;s de janeiro &eacute; representado por 
+    zero e que o ano de 2016 &eacute; representado por 116 (n&uacute;mero de anos ap&oacute;s o ano de 1900).
+<li><b>Linha 15 :</b> define que n&atilde;o estamos no hor&aacute;rio de ver&atilde;o.
+<li><b>Linha 16 :</b> usa a fun&ccedil;&atilde;o <i>mktime( )</i> para converter os valores armazenados
+    na estrutura <i>data</i> em um valor do tipo <i>time_t</i> e armazen&aacute;-lo na vari&aacute;vel <i>data_final</i>.
+<li><b>Linha 17 :</b> verifica se a data 01/01/2016 &eacute; maior que a data corrente. Em caso afirmativo, executa a
+    linha 18. Em caso negativo, executa a linha 20.
+<li><b>Linha 18 :</b> informa quantos dias faltam para o ano 2016. Note que as vari&aacute;veis <i>data_final</i> e <i>data_atual</i>
+    trabalham com segundos. Portanto, &eacute; preciso converter a diferen&ccedil;a dos valores destas duas vari&aacute;veis para a
+    quantidade de dias.
+<li><b>Linha 20 :</b> apenas informa que o ano 2015 j&aacute; acabou.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar
+<blockquote class="t1">
+gcc -o mktime mktime.c 
+</blockquote>
+Para executar
+<blockquote class="t1">
+./mktime
+</blockquote>
+Abaixo uma poss&iacute;vel sa&iacute;da.
+<blockquote class="t2">
+Faltam 295 dias para a chegada de 2016
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A fun&ccedil;&atilde;o <i>mktime( )</i> ignora os campos <i>tm_wday</i> e <i>tm_yday</i> da estrutura <i>tm</i> para gerar
+    o valor no formato <i>time_t</i>.
+<li>Se os valores dos campos da estrutura <i>tm</i> estiverem fora do limite v&aacute;lido, esses valores s&atilde;o
+    normalizados. Por exemplo, 40 de outubro de 2015 corresponde a 9 de novembro de 2015.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

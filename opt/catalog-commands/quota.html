@@ -1,0 +1,81 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>quota</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT=quota">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>quota</h1>
+  
+<blockquote><b><font size="+1">quota [op&ccedil;&otilde;es]</font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando fornece informa&ccedil;&otilde;es sobre o sistema de cotas do disco.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-u [usu&aacute;rio]</b> : informa&ccedil;&otilde;es sobre a cota do usu&aacute;rio.</li>
+<li><b>-g [grupo]</b> : informa&ccedil;&otilde;es sobre a cota de um grupo do qual o usu&aacute;rio &eacute; membro.</li>
+<li><b>--help</b> : lista as op&ccedil;&otilde;es dispon&iacute;veis com o comando. 
+<li><b>--version</b> : exibe informa&ccedil;&atilde;o sobre o aplicativo <i>env</i>. 
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>O comando
+
+<blockquote class="t1">quota -u aluno</blockquote>
+
+exibe informa&ccedil;&otilde;es sobre a cota do usu&aacute;rio <i>aluno</i>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>&Eacute; preciso usar o comando <b><a href="sudo.html">sudo</a></b> para obter informa&ccedil;&otilde;es sobre
+    o sistema de cotas de outros usu&aacute;rios.
+<li>O comando <i>quota</i> exibe informa&ccedil;&otilde;es sobre as quotas de todos os sistemas de arquivos listados em
+    <b><a href="dir_etc.html#mtab">/etc/mtab</a></b>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="cotas.html">cotas de disco</a></b> - define a quantidade de espa&ccedil;o em disco que cada usu&aacute;rio/grupo
+    pode usar.
+<li><b><a href="quotaoff.html">quotaoff</a></b> - desabilita o sistema de cotas.
+<li><b><a href="quotaon.html">quotaon</a></b> - habilita o sistema de cotas.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

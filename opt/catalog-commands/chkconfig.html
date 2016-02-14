@@ -1,0 +1,94 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>chkconfig</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="chkconfig">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>chkconfig</h1>
+
+<blockquote><b><font size="+1"> chkconfig [op&ccedil;&otilde;es] </font></b></blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este utilit&aacute;rio habilita ou desabilita servi&ccedil;os do sistema</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-t servi&ccedil;o, --terse servi&ccedil;o</b> : informa se o servi&ccedil;o especificado est&aacute; habilitado ou desabilitado.
+<li><b>-l servi&ccedil;o, --list servi&ccedil;o</b> : informa, para cada <b>runlevel</b>, se o servi&ccedil;o fica habilitado ou desabilitado.
+<li><b>servi&ccedil;o on</b> : habilita o servi&ccedil;o.
+<li><b>servi&ccedil;o off</b> : desabilita o servi&ccedil;o.
+<li><b>-a servi&ccedil;o, --add servi&ccedil;o</b> : adiciona o servi&ccedil;o.
+<li><b>-d servi&ccedil;o, --del servi&ccedil;o</b> : deleta o servi&ccedil;o.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li> O comando
+     <blockquote class="t1">chkconfig --list</blockquote>
+     lista a configura&ccedil;&atilde;o de todos os servi&ccedil;os em todos os n&iacute;veis de execu&ccedil;&atilde;o.
+<li> Para ver a configura&ccedil;&atilde;o do servi&ccedil;o <b>cron</b> nos diversos n&iacute;veis de execu&ccedil;&atilde;o, digite
+     <blockquote class="t1">chkconfig --list cron</blockquote>
+     Suponha que a resposta seja
+     <blockquote class="t2">cron  0:off  1:off  2:off  3:off  4:off  5:off  6:off</blockquote>
+     Para habilitar o <b>cron</b> nos <b>runlevels</b> 2, 3, 4 e 5, basta digitar
+     <blockquote class="t1">sudo chkconfig cron 2345</blockquote>
+     Isto significa que o servi&ccedil;o <b>cron</b> ser&aacute; inicializado sempre que os <b>runlevels</b> de 2 a 5 forem usados.
+     Para verificar a nova configura&ccedil;&atilde;o, repita o primeiro comando e a resposta ser&aacute;
+     <blockquote class="t2">cron 0:off  1:off  2:on   3:on   4:on   5:on   6:off</blockquote>
+     Para desabilitar o servi&ccedil;o digite
+     <blockquote class="t1">sudo chkconfig cron off</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>&Eacute; poss&iacute;vel que o comando <b>chkconfig</b> apresente a seguinte mensagem: 
+    <blockquote class="t2">/sbin/insserv: Arquivo ou diretório não encontrado</blockquote>
+    Isto apenas significa que est&aacute; faltando um link. Para resolver este problema, basta digitar:
+    <blockquote class="t1">sudo ln -s /usr/lib/insserv/insserv /sbin/insserv</blockquote>
+<li>Quando o nome do servi&ccedil;o n&atilde;o &eacute; informado, o aplicativo assume que o comando
+    deve ser aplicado para todos os servi&ccedil;os.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="init.html">init</a></b> - processo de controle da inicializa&ccedil;&atilde;o do sistema.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

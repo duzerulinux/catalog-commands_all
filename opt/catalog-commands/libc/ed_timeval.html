@@ -1,0 +1,80 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>timeval</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="timeval">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>timeval</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Estrutura usada para armazenar intervalo de tempo.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Cabe&ccedil;alho</h2>
+
+<p>Para usar esta estrutura de dados deve-se incluir o cabe&ccedil;alho <i>sys/time.h</i> no programa.</p>
+
+<blockquote class="t2">
+#include &lt;sys/time.h&gt;
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<p>
+<blockquote class="t2">
+<table cellpadding=3 class="t2">
+<tr><td colspan=2>struct timeval </td></tr>
+<tr><td colspan=2>{              </td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; int time_t  tv_sec;  </td><td> /* seconds */      </td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; suseconds_t tv_usec; </td><td> /* microseconds */ </td></tr>
+<tr><td colspan=2>};                                                         </td></tr>
+</table>
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Campos</h2>
+
+<ul>
+<li><b>tv_sec</b> - o n&uacute;mero de segundos do tempo contabilizado.
+<li><b>tv_usec</b> - o resto do tempo contabilizado em microsegundos.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A estrutura <i>timeval</i> &eacute; usada pela estrutura <b><a href="ed_itimerval.html">itimerval( )</a></b>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

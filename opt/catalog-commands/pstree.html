@@ -1,0 +1,77 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>pstree</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="pstree">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>pstree</h1>
+   
+<blockquote><font size="+1"><b>tree [op&ccedil;&otilde;es] [argumentos]</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este utilit&aacute;rio lista os <b><a href="processo.html">processos</a></b> em execu&ccedil;&atilde;o usando
+o formato de &aacute;rvore.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es e argumentos do comando</h2>
+
+<ul>
+<li><b>-H &lt;processo&gt;</b> : destaca o processo especificado dentro da estrutura de &aacute;rvore;
+<li><b>-n</b> : ordena a sa&iacute;da pelos n&uacute;meros dos <a href="pid.html"><b>PIDs</b></a> dos processos.
+<li><b>-p</b> : mostra os <a href="pid.html"><b>PIDs</b></a> dos processos.
+<li><b>-V</b> ou <b>--version</b>: mostra informa&ccedil;&otilde;es sobre o utilit&aacute;rio.
+<li><b>&lt;usu&aacute;rio&gt;</b> : mostra apenas os ramos com os processos inicializados pelo usu&aacute;rio especificado.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>O comando
+    <blockquote class="t1">pstree -np</blockquote>
+    exibe os processos e seus PIDs onde os ramos de um n&iacute;vel s&atilde;o ordenados por ordem crescente dos PIDs.
+<li>Para ver a &aacute;rvore com os processos inicializados pelo usu&aacute;rio <i>aluno</i>, basta digitar
+    <blockquote class="t1">pstree aluno</blockquote>
+<li>Suponha que o <a href="shell.html"><b>shell</b></a> usado tem <a href="pid.html"><b>PID</b></a> igual a 4030. Ent&atilde;o o comando
+    <blockquote class="t1">pstree -s 4030</blockquote>
+    fornece uma sa&iacute;da similar &agrave; mostrada abaixo.
+    <blockquote class="t2">init───lightdm───lightdm───init───gnome-terminal───bash───pstree</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O comando <b><a href="ps.html">ps</a></b> exibe informa&ccedil;&otilde;es sobre os processos em execu&ccedil;&atilde;o.
+<li>O comando <b><a href="top.html">top</a></b> lista os processos que est&atilde;o utilizando a CPU.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

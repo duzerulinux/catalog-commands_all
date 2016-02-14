@@ -1,0 +1,299 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>awk</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="awk">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>awk</h1>
+
+<blockquote><b><font size="+1">awk [padr&atilde;o a&ccedil;&atilde;o textos]</font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<ul>
+<li>A linguagem de programa&ccedil;&atilde;o AWK permite a manipula&ccedil;&atilde;o de textos a partir de uma sequ&ecirc;ncia de
+    padr&otilde;es. &Eacute; uma liguagem interpretada (n&atilde;o h&aacute; necessidade de compila&ccedil;&atilde;o).
+<li>O nome AWK vem dos sobrenomes dos tr&ecirc;s criadores da linguagem: Alfred V. <b class="t1">A</b>ho, 
+    Peter J. <b class="t1">W</b>einberger e Brian W. <b class="t1">K</b>ernighan.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-f</b> : especifica o nome do arquivo com os comandos a serem executados.
+<li><b>-F</b> : define quem &eacute; o separador de campos (o padr&atilde;o &eacute; o espa&ccedil;o).
+<li><b>-h</b> ou <b>--help</b> : informa as op&ccedil;&otilde;es do utilit&aacute;rio.
+<li><b>-V</b> ou <b>--version</b> : informa a vers&atilde;o do utilit&aacute;rio.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Suponha que queremos obter a lista dos usu&aacute;rios do sistema e o <b><a href="shell.html">shell</a></b> usado por cada um dos
+    usu&aacute;rios. Estas duas informa&ccedil;&otilde;es fazem parte do arquivo <b><a href="dir_etc.html#passwd">/etc/passwd</a></b>
+    onde existe uma entrada para cada usu&aacute;rio do sistema com as seguintes informa&ccedil;&otilde;es: nome, senha, UID, GID,
+    informa&ccedil;&otilde;es do usu&aacute;rio, diret&oacute;rio home e o <i>shell</i> padr&atilde;o. Por exemplo, a linha abaixo mostra
+    a entrada para o usu&aacute;rio <i>aluno</i> que usa o <i>shell bash</i> como padr&atilde;o.</p>
+    <blockquote class="t2">aluno:x:1001:1001::/home/aluno:/bin/bash</blockquote><p></p>
+    Note que os campos s&atilde;o separados por dois pontos (":"). Podemos ent&atilde;o, digitar o seguinte comando
+    para obter os nomes e os <i>shells</i> dos usu&aacute;rios:</p> 
+    <blockquote class="t1">awk -F:&nbsp; '{print $1 " =&gt; " $7}'&nbsp; /etc/passwd</blockquote>
+    A op&ccedil;&atilde;o -F define o caractere ":" como separador dos campos. O comando <i>print</i> define a exibi&ccedil;&atilde;o
+    de tr&ecirc;s argumentos: o primeiro campo de cada linha ($1), a string " =&gt; " e o s&eacute;timo campo de cada linha ($7). Portanto, a
+    sa&iacute;da do comando acima para a entrada do usu&aacute;rio <i>aluno</i> &eacute;</p> 
+    <blockquote>aluno =&gt; /bin/bash</blockquote><p></p>
+<li>Tamb&eacute;m podemos executar o comando abaixo para obter o mesmo resultado do exemplo anterior:
+    <blockquote class="t1">awk -F: -f lista_usu /etc/passwd</blockquote>
+    onde <i>lista_usu</i> &eacute; um arquivo texto com o seguinte conte&uacute;do
+    <blockquote class="t2">{print $1 " =&gt; " $7}</blockquote>
+<li>Outra forma &eacute; criar um arquivo e torn&aacute;-lo execut&aacute;vel com o comando <a href="chmod.html"><b>chmod</b></a>. 
+    Por exemplo, suponha que o arquivo <i>teste</i> possui o conte&uacute;do mostrado abaixo. Note que agora o separador de campos &eacute;
+    definido na vari&aacute;vel FS (<i>Field Separator</i>) e que uma frase &eacute; exibida antes de processar o arquivo de entrada
+    (bloco BEGIN) e outra frase &eacute; exibida no final da execu&ccedil;&atilde;o (bloco END). Apenas os comandos do bloco central 
+    s&atilde;o executados de forma repetitiva (ler uma linha do arquivo de entrada e executa o bloco central). Portanto, neste exemplo,
+    o n&uacute;mero de vezes que o comando <i>print</i> do bloco central &eacute; executado depende do n&uacute;mero de linhas do arquivo
+    /etc/passwd usado como entrada.
+    <blockquote class="t2">
+    #!/usr/bin/awk -f <br>
+    BEGIN { FS=":"; print "*** inicio ***\n" } <br>
+    &nbsp;&nbsp;&nbsp; { <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print $1 " => " $7 <br>
+    &nbsp;&nbsp;&nbsp;   } <br>
+    END { print "*** fim ***" }
+    </blockquote>
+    Antes de execut&aacute;-lo, devemos alterar a <a href="permissao.html"><b>permiss&atilde;o</b></a> do arquivo com
+    <blockquote class="t1">chmod u+x teste</blockquote>
+    Em seguida, basta digitar
+    <blockquote class="t1">./teste /etc/passwd</blockquote>
+    O resultado ser&aacute; o mesmo dos dois primeiros exemplos, exceto que aparecer&atilde;o duas frases: uma no in&iacute;cio e outra
+    no fim da execu&ccedil;&atilde;o.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Mais Exemplos</h2>
+
+<ul>
+<li>O exemplo abaixo exibe o resultado da soma de dois valores recebidos na linha de comandos. Da mesma forma da fun&ccedil;&atilde;o 
+    <a href="libc/fc_main.html"><b>main( )</b></a>, as vari&aacute;veis ARGC e ARGV cont&eacute;m, respectivamente, o número de     
+    par&acirc;metors e os argumentos passados na linha de comandos (o par&acirc;metro ARGV[0] possui "awk"). Observe que todos
+    os comandos est&atilde;o dentro do bloco BEGIN (isto significa que os comandos ser&atilde;o executados uma &uacute;nica vez).
+    <blockquote class="t2">
+    #!/usr/bin/awk -f <br>
+    BEGIN { <br>
+    &nbsp;&nbsp;&nbsp; if (ARGC != 3) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print "Forneca 2 numeros\n" <br>
+    &nbsp;&nbsp;&nbsp; else <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; soma=ARGV[1]+ARGV[2] <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print "Soma = " soma <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+     }
+    </blockquote>
+<li>Abaixo &eacute; apresentado um exemplo que calcula o fatorial de um n&uacute;mero passado na linha de comandos.
+    <blockquote class="t2">
+    #!/usr/bin/awk -f <br>
+    BEGIN { <br>
+    &nbsp;&nbsp;&nbsp; fat = 1 <br>
+    &nbsp;&nbsp;&nbsp; for (i = 1; i <= ARGV[1]; i++) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fat = fat * i <br>
+    &nbsp;&nbsp;&nbsp; print "Fatorial de " ARGV[1] " = " fat <br>
+    }
+    </blockquote>
+<li>O exemplo abaixo calcula a raiz quadrada de um n&uacute;mero. Note que o programa verifica se o par&acirc;metro
+    passado pelo usu&aacute;rio &eacute; realmente um n&uacute;mero.
+    <blockquote class="t2">
+    #!/usr/bin/awk -f <br>
+    BEGIN { <br>
+    &nbsp;&nbsp;&nbsp; if (ARGC != 2 ) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print "Forneca um numero" <br>
+    &nbsp;&nbsp;&nbsp; else <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (ARGV[1] ~ /[0-9]/) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; raiz=sqrt(ARGV[1]) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print "Raiz quadrada de", ARGV[1], "=", raiz
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print "Valor nao numerico" <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+    }
+    </blockquote>
+
+<li>Um exemplo de uso de <i>arrays</i> &eacute; mostrado a seguir. Note que o &iacute;ndice do <i>array</i> n&atilde;o precisa ser um
+    valor num&eacute;rico.
+    <blockquote class="t2">
+    #!/usr/bin/awk -f <br>
+    BEGIN { <br>
+    &nbsp;&nbsp;&nbsp; vetor[0] = 1 <br>
+    &nbsp;&nbsp;&nbsp; vetor[1] = 2 <br>
+    &nbsp;&nbsp;&nbsp; vetor[2] = 3 <br>
+    &nbsp;&nbsp;&nbsp; dicionario["teste"] = "socorro" <br>
+    &nbsp;&nbsp;&nbsp; dicionario["AOU"] = "Linux" <br>
+    &nbsp;&nbsp;&nbsp; for (i = 0; i < 3; i++) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print "vetor[" i "] = " vetor[i] <br>
+    &nbsp;&nbsp;&nbsp; print "teste = " dicionario["teste"] <br>
+    &nbsp;&nbsp;&nbsp; print "AOU   = " dicionario["AOU"] <br>
+    }
+    </blockquote>
+<li>O exemplo abaixo mostra outra forma de ler o arquivo /etc/passwd e exibir o nome do usu&aacute;rio (primeiro campo = $1)
+    e o <i>shell</i> usado pelo usu&aacute;rio (s&eacute;timo campo = $7). Os nomes dos usu&aacute;rios s&atilde;o usados como
+    &iacute;ndices do vetor e cada posi&ccedil;&atilde;o do vetor armazena o <i>shell</i> do usu&aacute;rio. A vari&aacute;vel 
+    NF cont&eacute;m o n&uacute;mero de campos da linha que, neste caso, &eacute; igual a 7.
+    <blockquote class="t2">
+    #!/usr/bin/awk -f <br>
+    BEGIN { FS=":" } <br>
+    { <br>
+    &nbsp;&nbsp;&nbsp; usuario[$1]=$NF <br>
+    } <br>
+    END { <br>
+    &nbsp;&nbsp;&nbsp; for (i in usuario) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print i,"=>", usuario[i] <br>
+    }
+    </blockquote>
+<li>O programa <i>teste</i> mostrado abaixo faz a multiplica&ccedil;&atilde;o de duas matrizes armazenadas em arquivos distintos (os
+    nomes dessas matrizes s&atilde;o fornecidos na linha de comandos). Observe que o comando <i>getline</i>, usado para ler uma linha
+    de arquivo, retorna 1 quando &eacute; executado com sucesso e zero quando nenhuma linha &eacute; lida. Neste caso, $0 corresponde 
+    &agrave; linha toda lida, $1 corresponde ao primeiro campo da linha, $2 ao segundo campo da linha, e assim por diante.
+    <blockquote class="t2">
+    #!/usr/bin/awk -f <br>
+    BEGIN{ <br>
+    &nbsp;&nbsp;&nbsp;  # Ler primeira matriz <br>
+    &nbsp;&nbsp;&nbsp;  valor = getline < ARGV[1] <br>
+    &nbsp;&nbsp;&nbsp;  lin_A = 0 <br>
+    &nbsp;&nbsp;&nbsp;  while (valor == 1) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lin_A++ <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (i = 1; i <= NF; i++) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A[lin_A][i] = $i <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; valor = getline < ARGV[1] <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+    &nbsp;&nbsp;&nbsp; col_A = NF  <br>
+    &nbsp;&nbsp;&nbsp; # Ler segunda matriz <br>
+    &nbsp;&nbsp;&nbsp; valor = getline < ARGV[2] <br>
+    &nbsp;&nbsp;&nbsp; lin_B = 0 <br>
+    &nbsp;&nbsp;&nbsp; while (valor == 1) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lin_B++ <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (i = 1; i <= NF; i++) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; B[lin_B][i] = $i <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; valor = getline < ARGV[2] <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+    &nbsp;&nbsp;&nbsp; col_B = NF <br>
+    &nbsp;&nbsp;&nbsp; if (col_A != lin_B) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf "Numero de colunas de A dever ser igual a numero de linhas de B\n" <br>
+    &nbsp;&nbsp;&nbsp; else <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (i = 1; i <= lin_A; i++) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (j = 1; j <= col_B; j++) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        C[i][j] = 0; <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        for (k = 1; k <= col_A; k++) <br>    
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp; { <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; C[i][j] += A[i][k] * B[k][j] <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp; } <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   printf C[i][j] " " <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  } <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf "\n" <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+    }
+    </blockquote>
+    Suponha que o arquivos A e B tenham os conte&uacute;dos mostrados abaixo.
+    <blockquote class="t2"> 
+    <table class="t2" cellpadding=3>
+    <tr><td colspan=4><b>Arquivo A</b>
+    <tr><td>&nbsp;</td><td>1</td><td>3</td><td>1</td></tr>
+    <tr><td>&nbsp;</td><td>2</td><td>3</td><td>2</td></tr>
+    </table>
+    <table class="t2" cellpadding=3>
+    <tr><td colspan=3><b>Arquivo B</b>
+    <tr><td>&nbsp;</td><td>2</td><td>1</td></tr>
+    <tr><td>&nbsp;</td><td>3</td><td>1</td></tr>
+    <tr><td>&nbsp;</td><td>1</td><td>2</td></tr>
+    </table>
+    </blockquote>
+    Ao executar o programa com 
+    <blockquote class="t1">./teste A B</blockquote>
+    o AWK fornece a seguinte resposta:
+    <blockquote class="t2"> 
+    <table class="t2" cellpadding=3>
+    <tr><td>&nbsp;</td><td>12</td><td>6</td></tr>
+    <tr><td>&nbsp;</td><td>15</td><td>9</td></tr>
+    </table>
+    </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Vari&aacute;veis internas</h2>
+
+<p>O AWK possui vari&aacute;veis internas que podem ser usadas pelo programador. A tabela abaixo mostra algumas dessas vari&aacute;veis.</p>
+<p>
+<table class="t1" align="center" cellpadding=10 cellspacing=10 width=650 rules=all>
+<tr class="t1"><td><b>Vari&aacute;vel</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td>ARGC        </td><td>N&uacute;mero de argumentos da linha de comandos                                        </td></tr>
+<tr><td>ARGV        </td><td>Vetor com os argumentos da linha de comandos                                            </td></tr>
+<tr><td>ENVIRON     </td><td>Vetor com as vari&aacute;veis de ambiente                                               </td></tr>
+<tr><td>ERRNO       </td><td>Armazena mensagem de erro                                                               </td></tr>
+<tr><td>FILENAME    </td><td>Nome do arquivo de entrada sendo processado no bloco central                            </td></tr>
+<tr><td>FNR         </td><td>N&uacute;mero de linhas j&aacute; processadas de um determinado arquivo                 </td></tr>
+<tr><td>FS          </td><td>Separador dos campos da linha de entrada (o espa&ccedil;o &eacute; o padr&atilde;o)     </td></tr>
+<tr><td>NF          </td><td>N&uacute;mero de campos na linha sendo processada                                       </td></tr>
+<tr><td>NR          </td><td>N&uacute;mero de linhas j&aacute; processadas considerando todos os arquivos de entrada </td></tr>
+</table>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A linguagem AWK &eacute; muito rica pois permite, por exemplo, o uso de 
+   <ul>
+   <li>comandos de decis&atilde;o (if, else);
+   <li>la&ccedil;os (for, while, do while);
+   <li>expres&otilde;es aritm&eacute;ticas (+, -, *, /, %, ++, --, =, +=, -=, &gt;, &gt;=, &lt;, &lt;=, !=, etc);
+   <li>fun&ccedil;&otilde;es (exp, log, sqrt, split, substr, getline, etc);
+   <li>vari&aacute;veis, constantes e vetores. 
+   </ul>
+   Para obter mais informa&ccedil;&otilde;es, consulte o <a href="man.html"><b>manual on-line</b></a> (digite "man awk"). 
+<li>O <i>mawk</i> &eacute; um interpretador para a linguagem AWK. Veja o site oficial do 
+   <b><a href="http://invisible-island.net/mawk/" target="_blank">mawk</a></b> ou consulte o manual on-line.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

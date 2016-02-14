@@ -1,0 +1,73 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>lastlog</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="lastlog">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>lastlog</h1>
+
+
+<blockquote><b><font size="+1">lastlog [op&ccedil;&otilde;es] </font></b></blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando exibe informa&ccedil;&otilde;es referentes ao &uacute;ltimo <b>login</b> de cada usu&aacute;rio.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-u usu&aacute;rio</b> : exibe informa&ccedil;&otilde;es referentes apenas ao usu&aacute;rio especificado.
+<li><b>-t dias</b> : exibe informa&ccedil;&otilde;es referentes aos &uacute;ltimos <b>t</b> dias.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>O comando
+    <blockquote class="t1">lastlog -u aluno</blockquote>
+    informa o dia e a hora que o usu&aacute;rio <b>aluno</b> logou no sistema pela &uacute;tima vez. 
+<li>O comando
+    <blockquote class="t1">lastlog -t 3</blockquote>
+    exibe a lista dos usu&aacute;rios que logaram no sistema nos &uacute;timos 3 dias e informa
+    o dia e a hora do &uacute;timo acesso de cada um desses usu&aacute;rios.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Caso nenhum argumento seja passado, o comando <b>lastlog</b> exibe todas as informa&ccedil;&otilde;es 
+    armazenadas no arquivo <b><a href="dir_var.html">/var/log/lastlog</a></b> de todos os usu&aacute;rios do sistema.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

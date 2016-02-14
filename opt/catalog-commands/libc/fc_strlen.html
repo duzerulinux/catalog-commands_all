@@ -1,0 +1,121 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>strlen()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="strlen()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>strlen( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Fun&ccedil;&atilde;o que fornece o tamanho de uma string.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include&lt;string.h&gt;<br>
+size_t strlen(const char *s);
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>A fun&ccedil;&atilde;o retorna o n&uacute;mero de bytes da string s.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+<blockquote class="t2">
+1. #include&lt;stdio.h&gt;   <br>
+2. #include&lt;string.h&gt;  <br>
+3. int main () <br>
+4. &nbsp;&nbsp;&nbsp;{ <br>
+5. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char str[50]; <br>
+6. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int len; <br>
+7. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; strcpy(str, "Teste da funcao strlen()"); <br>
+8. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; len = strlen(str); <br>
+9. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Tamanho = %d\n", len); <br>
+10.&nbsp;&nbsp;&nbsp;}
+</blockquote>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/strlen.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 4 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <i>strlen( )</i>.
+   </ul>
+<li><b>Linha 3 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 5 a linha 9.
+<li><b>Linhas 5 e 6 :</b> define vari&aacute;veis.
+<li><b>Linha 7 :</b> copia frase para a string.
+<li><b>Linha 8 :</b> ver tamanho da string.
+<li><b>Linha 9 :</b> exibe tamanho da string.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+    <blockquote class="t1">
+    gcc -o strlen strlen.c 
+    </blockquote>
+Para executar, entre com
+    <blockquote class="t1">
+    ./strlen
+    </blockquote>
+Resposta do programa:
+    <blockquote class="t2">
+    Tamanho = 24
+    </blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<p>
+<ul>
+<li>A fun&ccedil;&atilde;o calcula o tamanho da string excluindo o byte null ('\0') que indica o fim da string.
+<li>o tipo <i>size_t</i> corresponde ao tipo int (inteiro).
+<li>O valor m&aacute;ximo que uma vari&aacute;vel do tipo <i>size_t</i> pode armazenar &eacute; definido por SIZE_MAX 
+    em <i>/usr/include/stdint.h</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

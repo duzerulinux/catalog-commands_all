@@ -1,0 +1,155 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>printf()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="printf()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>printf( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Fun&ccedil;&atilde;o que formata e imprime dados.
+   
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include&lt;stdio.h&gt;<br>
+int printf(const char *formato, lista)
+</blockquote>
+<ul>
+<li>Os argumentos <i>formato</i> e <i>lista</i> correspondem, respectivamente, a uma string com o formato dos dados a
+    serem exibidos e a uma lista de dados (vari&aacute;veis e/ou valores).
+<li>A fun&ccedil;&atilde;o <i>printf( )</i> imprime a cadeia de caracteres definida no argumento <i>formato</i>, 
+    interpretando as diretivas '%' e as teclas de escape '\'.
+<li>S&atilde;o exemplos de diretivas que podem ser usadas na fun&ccedil;&atilde;o <i>printf( )</i>:<br><br>
+    <table class="t1" rules=all align="center" cellpadding=5 cellspacing=5>
+    <tr class="t1"><td><b>Formato</b></td><td><b>Significado</b></td></tr>
+    <tr><td align="center">%a</td><td>hexadecimal ponto flutuante, letra min&uacute;scula</td></tr> 
+    <tr><td align="center">%A</td><td>hexadecimal ponto flutuante, letra mai&uacute;scula</td></tr> 
+    <tr><td align="center">%c</td><td>caractere (tipo <i>char</i>)</td></tr> 
+    <tr><td align="center">%d</td><td>valor inteiro (tipo <i>int</i>)</td></tr>
+    <tr><td align="center">%e</td><td>nota&ccedil;&atilde;o cient&iacute;fica, letra min&uacute;scula</td></tr>
+    <tr><td align="center">%E</td><td>nota&ccedil;&atilde;o cient&iacute;fica, letra mai&uacute;scula</td></tr>
+    <tr><td align="center">%f</td><td>valor com ponto flutuante (tipo <i>float</i>), letra min&uacute;scula</td></tr> 
+    <tr><td align="center">%F</td><td>valor com ponto flutuante (tipo <i>float</i>), letra mai&uacute;scula</td></tr> 
+    <tr><td align="center">%g</td><td>usa a menor representa&ccedil;&atilde;o (%e ou %f)</td></tr> 
+    <tr><td align="center">%G</td><td>usa a menor representa&ccedil;&atilde;o (%E ou %F)</td></tr> 
+    <tr><td align="center">%i</td><td>valor inteiro (tipo <i>int</i>)</td></tr>
+    <tr><td align="center">%ld</td><td>valor inteiro longo (tipo <i>long int</i>)</td></tr>
+    <tr><td align="center">%lu</td><td>valor decimal longo (tipo <i>unsigned long int</i>)</td></tr>
+    <tr><td align="center">%o</td><td>valor octal (tipo <i>unsigned int</i>)</td></tr> 
+    <tr><td align="center">%s</td><td>string (tipo <i>*char</i>)</td></tr> 
+    <tr><td align="center">%u</td><td>valor decimal sem sinal (tipo <i>unsigned int</i>)</td></tr> 
+    <tr><td align="center">%x</td><td>valor hexadecimal (tipo <i>unsigned int</i>)</td></tr> 
+    </table>
+<li>S&atilde;o exemplos de teclas de escape na fun&ccedil;&atilde;o <i>printf( )</i>
+    <table class="t1" rules=all align="center" cellpadding=5>
+    <tr class="t1"><td><b>Tecla</b></td><td><b>Significado</b></td></tr>
+    <tr><td align="center">\\</td><td>caractere de barra invertida</td></tr> 
+    <tr><td align="center">\'</td><td>ap&oacute;strofo</td></tr> 
+    <tr><td align="center">\"</td><td>aspas</td></tr> 
+    <tr><td align="center">\?</td><td>interroga&ccedil&atilde;o</td></tr> 
+    <tr><td align="center">\a</td><td>caractere de aviso sonoro</td></tr> 
+    <tr><td align="center">\b</td><td>caractere de retrocesso</td></tr> 
+    <tr><td align="center">\f</td><td>caractere de avan&ccedil;o</td></tr> 
+    <tr><td align="center">\n</td><td>nova linha</td></tr> 
+    <tr><td align="center">\r</td><td>retorno de carro</td></tr> 
+    <tr><td align="center">\t</td><td>tabula&ccedil;&atilde;o horizontal</td></tr> 
+    <tr><td align="center">\v</td><td>tabula&ccedil;&atilde;o vertical</td></tr> 
+    </table>
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1.  #include&lt;stdio.h&gt;   <br>
+2. int main() <br>
+3. &nbsp;&nbsp;&nbsp;{ <br>
+4. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  printf("Processo: PID = %ld, PPID = %ld\n", (long)getpid(), (long)getppid()); <br>
+5. &nbsp;&nbsp;&nbsp;}
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/printf.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linha 1 :</b> &eacute; feita a inclus&atilde;o do arquivo <i>header</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    </ul>
+<li><b>Linha 2 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 3 a linha 5.
+<li><b>Linha 4 :</b> exibe o <a href="../pid.html"><b>PID</b></a> e o <a href="../ppid.html"><b>PPID</b></a> do processo.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+<blockquote class="t1">
+gcc -o printf printf.c
+</blockquote>
+e para executar, digite
+<blockquote class="t1">
+./printf
+</blockquote>
+</p>
+
+<p>Uma poss&iacute;vel sa&iacute;da para a execu&ccedil;&atilde;o do programa &eacute;
+mostrada abaixo. 
+<blockquote class="t2">
+Processo: PID = 2527, PPID = 2262
+</blockquote>
+
+<p>Podemos tamb&eacute;m observar que o PPID do processo-pai &eacute;, neste exemplo, 2262. Este valor correponde 
+ao PID do shell, j&aacute; que o programa &eacute; executado a partir da linha de comandos. Para obter o PID do shell,
+use o comando <a href="../ps.html"><b>ps</b></a>. Para o exemplo acima, o sistema apresenta uma resposta semelhante a
+<blockquote class="t2">
+<table cellpadding=3 class="t2">
+<tr><td>PID</td><td>TTY</td><td>TIME</td><td>CMD</td></tr>
+<tr><td>2262</td><td>pts/0</td><td>00:00:00</td><td>bash</td></tr>
+<tr><td>3370</td><td>pts/0</td><td>00:00:00</td><td>ps  </td></tr>
+</table>
+</blockquote>
+onde podemos notar que o usu&aacute;rio usa o <a href="../shell.html"><b>shell</b></a> <i>bash</i>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,93 @@
+
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>inxi</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="inxi">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>inxi</h1>
+
+<blockquote><b><font size="+1"> inxi [op&ccedil;&otilde;es] </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>O <i>inxi</i> &eacute; uma s&eacute;rie de scripts que detectam uma grande variedade de informa&ccedil;&otilde;es sobre hardware, incluindo informa&ccedil;&otilde;es de fornecedor, configura&ccedil;ão de drivers etc. </p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-A</b> : informa&ccedil;&otilde;es sobre &aacute;udio.
+<li><b>-b</b> : informa&ccedil;&otilde;es b&aacute;sicas sobre o sistema.
+<li><b>-d</b> : exibe lista dos drives &oacute;pticos (leitor e gravador de CD, DVD por exemplo).
+<li><b>-D</b> : exibe informa&ccedil;&otilde;es sobre detalhes do HD, como modelo e capacidade.
+<li><b>-F</b> : informa&ccedil;&otilde;es mais detalhadas sobre o sistema.
+<li><b>-G</b> : informa&ccedil;&otilde;es sobre v&iacute;deo.
+<li><b>-n</b> : informa&ccedil;&otilde;es sobre as interfaces de rede.
+<li><b>-p</b> : informa&ccedil;&otilde;es sobre as parti&ccedil;&otilde;es do HD. 
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2> Exemplos </h2>
+
+<ul>
+<li>Exemplo de sa&iacute;da usando 
+	<blockquote class="t1">inxi -F</blockquote>
+    <blockquote class="t2">
+    <table class="t2">
+	<tr><td>System:</td><td>Host: dhcppc3 Kernel: 2.6.32-358.11.1.el6.x86_64 x86_64 (64 bit)</td></tr>
+	<tr><td>&nbsp;</td><td>Console: tty 0 Distro: CentOS release 6.4 (Final)</td>
+	<tr><td>Machine:</td><td>System: innotek product: VirtualBox version: 1.2 serial: 0</td></tr>
+	<tr><td>&nbsp;</td><td>Mobo: Oracle model: VirtualBox version: 1.2 serial: 0 Bios: innotek version: VirtualBox date: 12/01/2006</td>
+	<tr><td>CPU:</td><td>Single core Intel Core2 Quad CPU Q8400 (-UP-) cache: 6144 KB flags: (lm nx sse sse2 sse3 ssse3) clocked at 2653.954 MHz</td></tr>
+	<tr><td>Graphics:</td><td>Card: InnoTek Systemberatung VirtualBox Graphics Adapter</td>	
+    <tr><td>&nbsp;</td><td>X-Vendor: N/A driver: N/A tty size: 76x26 Advanced Data: N/A for root out of X</td>       
+    <tr><td>Audio:</td><td>Card: Intel 82801AA AC'97 Audio Controller driver: Intel ICH Sound: ALSA ver: 1.0.21</td></tr>
+    <tr><td>Network:</td><td>Card: Intel 82540EM Gigabit Ethernet Controller driver: e1000</td>	
+    <tr><td>&nbsp;</td><td>IF: eth0 state: up speed: 1000 Mbps duplex: full mac: 08:00:27:54:e4:c6</td>        
+    <tr><td>Drives:</td><td>HDD Total Size: 4.3GB (32.6% used) 1: id: /dev/sda model: VBOX_HARDDISK size: 4.3GB</td></tr>    
+	<tr><td>Partition:</td><td>ID: / size: 2.5G used: 1.3G (53%) fs: ext4 ID: /boot size: 485M used: 52M (12%) fs: ext4</td>	
+    <tr><td>&nbsp;</td><td>ID: swap-1 size: 1.04GB used: 0.00GB (0%) fs: swap</td>
+    <tr><td>RAID:</td><td>No RAID devices detected - /proc/mdstat and md_mod kernel raid module present</td></tr>       
+    <tr><td>Sensors:</td><td>None detected - is lm-sensors installed and configured?</td></tr>
+    <tr><td>Info:</td><td>Processes: 76 Uptime: 34 min Memory: 92.1/490.6MB Runlevel: 3 Client: Shell (bash) inxi: 1.9.14</td></tr>
+    </table>
+    </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Para usar <i>inxi</i>, &eacute; preciso instal&aacute;-lo, atrav&eacute;s do comando
+    <blockquote class="t1">sudo apt-get install inxi</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

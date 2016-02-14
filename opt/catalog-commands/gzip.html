@@ -1,0 +1,89 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>gzip</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="gzip">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>gzip</h1>
+
+<blockquote><font size="+1"><b>gzip [op&ccedil;&otilde;es] [arquivos]</b></font><br></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<ul>
+<li>Este comando compacta/descompacta arquivos.
+<li>O arquivo (ou conjunto de arquivos) &eacute; substitu&iacute;do por um arquivo compactado com
+    a extens&atilde;o <i>.gz</i>. Entretanto, s&atilde;o mantidos o dono, as permiss&otilde;es e as
+    datas de modifica&ccedil;&atilde;o do arquivo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-c</b> : grava o resultado na sa&iacute;da padr&atilde;o e mant&eacute;m o arquivo original inalterado.
+<li><b>-d</b> : descompacta (igual ao comando <i>gunzip</i>).
+<li><b>-l</b> : lista informa&ccedil;&otilde;es sobre os arquivos compactados/descompactados.
+<li><b>-r</b> : compacta/descompacta recursivamente (navega a estrutura de diret&oacute;rios recursivamente).
+<li><b>-t</b> : verifica a integridade do arquivo compactado.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Para compactar o arquivo <i>teste1.txt</i>, basta digitar
+    <blockquote class="t1">gzip teste1.txt</blockquote>
+    Neste caso, o arquivo <i>teste1.txt.gz</i> substitui o arquivo original.
+<li>&Eacute; tamb&eacute;m poss&iacute;vel concatenar v&aacute;rios arquivos juntos. Os comandos
+    <blockquote class="t1">
+    gzip -c teste1.txt &gt; teste.gz<br> 
+    gzip -c teste2.txt &gt;&gt; teste.gz
+    </blockquote>
+    criam o arquivo <i>teste.gz</i> que cont&eacute;m os arquivos <i>teste1.txt</i> e <i>teste2.txt</i>.
+<li>Para descompactar o arquivo acima, basta digitar
+    <blockquote class="t1">gzip -d teste</blockquote>
+    ou
+    <blockquote class="t1">gunzip teste</blockquote>
+    O arquivo <i>teste</i> &eacute; a concatena&ccedil;&atilde;o dos arquivos <i>teste1.txt</i> e <i>teste2.gz</i>. 
+    Portanto, podemos tamb&eacute;m criar o arquivo <i>teste</i> com o comando
+    <blockquote class="t1">cat teste1.txt teste2.txt &gt; teste</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>S&atilde;o tamb&eacute;m ferramentas para compacta&ccedil;&atilde;o/descompacta&ccedil;&atilde;o de arquivos:
+    <a href="bzip2.html"><b>bzip2</a></b>, <a href="compress.html"><b>compress</b></a> e <a href="zip.html"><b>zip</b></a>.
+<li>Para agrupar/desagrupar arquivos em um reposit&oacute;rio use <b><a href="tar.html">tar</a></b>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

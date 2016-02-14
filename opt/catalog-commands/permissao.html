@@ -1,0 +1,320 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>permiss&atilde;o de acesso</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="permissao de acesso">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>permiss&atilde;o de acesso</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Cada <a href="arquivo.html"><b>arquivo</b></a> do sistema est&aacute; associado a um usu&aacute;rio (dono) e a 
+um grupo. O dono de um arquivo pode definir quem tem acesso ao arquivo e qual tipo de acesso &eacute; permitido 
+(leitura, grava&ccedil;&atilde;o e/ou execu&ccedil;&atilde;o). Isto &eacute; chamado de permiss&atilde;o de acesso.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>N&iacute;veis de acesso</h2>
+
+<p>As permiss&otilde;es dos arquivos no Linux s&atilde;o definidas por quatro d&iacute;gitos que representam:
+   
+<ol>
+<li>permiss&otilde;es especiais;
+<li>permiss&otilde;es da pessoa que criou o arquivo ou o diret&oacute;rio (dono ou <i>user</i>);
+<li>permiss&otilde;es dos usu&aacute;rios membros do mesmo grupo do dono do arquivo ou do diret&oacute;rio (grupo ou <i>group</i>);
+<li>permiss&otilde;es do resto dos usu&aacute;rios do sistema (outros ou <i>others</i>).
+</ol>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Permiss&otilde;es comuns</h2>
+
+<p>As permiss&otilde;es comuns para o <i>dono</i>, o <i>grupo</i> e os <i>outros</i> s&atilde;o de 3 tipos:
+<ol type="a">           
+<li><b>leitura (r)</b> - permite ler o conte&uacute;do de um arquivo/diret&oacute;rio.
+<li><b>escrita (w)</b> - permite alterar um arquivo/diret&oacute;rio.
+<li><b>execu&ccedil;&atilde;o (x)</b> - permite executar um  arquivo ou acessar um diret&oacute;rio.
+</ol>
+</p>
+
+<p>A tabela abaixo mostra as combina&ccedil;&otilde;es poss&iacute;veis para se definir uma permiss&atilde;o.</p>
+
+<p>
+<table class="t1" align="center" cellpadding=3 rules=all>
+<tr class="t1">
+<td valign="Top"><b>Valor Octal</b></td>
+<td align="Center" valign="Top"><b>Valor Bin&aacute;rio</b><br> <b>rwx</b></td>
+<td align="Center" valign="Top"><b>Caracteres</b></td>
+<td valign="Top"><b>Significado</b></td>
+</tr>
+<tr>
+<td align="Center">0</td>
+<td align="Center">000</td>
+<td align="Center">---</td>
+<td>nenhuma permiss&atilde;o de acesso</td>
+</tr>
+<tr>
+<td align="Center">1</td>
+<td align="Center">001</td>
+<td align="Center">--x</td>
+<td>permiss&atilde;o de execu&ccedil;&atilde;o</td>
+</tr>
+<tr>
+<td align="Center">2</td>
+<td align="Center">010</td>
+<td align="Center">-w-</td>
+<td>permiss&atilde;o de grava&ccedil;&atilde;o</td>
+</tr>
+<tr>
+<td align="Center">3</td>
+<td align="Center">011</td>
+<td align="Center">-wx</td>
+<td>permiss&atilde;o de grava&ccedil;&atilde;o e execu&ccedil;&atilde;o</td>
+</tr>
+<tr>
+<td align="Center">4</td>
+<td align="Center">100</td>
+<td align="Center">r--</td>
+<td>permiss&atilde;o de leitura</td>
+</tr>
+<tr>
+<td align="Center">5</td>
+<td align="Center">101</td>
+<td align="Center">r-x</td>
+<td>permiss&atilde;o de leitura e execu&ccedil;&atilde;o</td>
+</tr>
+<tr>
+<td align="Center">6</td>
+<td align="Center">110</td>
+<td align="Center">rw-</td>
+<td>permiss&atilde;o de leitura e grava&ccedil;&atilde;o</td>
+</tr>
+<tr>
+<td align="Center">7</td>
+<td align="Center">111</td>
+<td align="Center">rwx</td>
+<td>permiss&atilde;o de leitura, grava&ccedil;&atilde;o e execu&ccedil;&atilde;o</td>
+</tr>
+</table>
+</p>
+
+<p>Por exemplo, suponha que a resposta ao comando "ls -l teste" seja a seguinte: 
+   <blockquote class="t2">
+   -rw-rw-r-- 1 aluno curso     1024 Fev 13 10:55 teste
+   </blockquote>
+   A primeira coluna mostra as permiss&otilde;es de acesso dos subdiret&oacute;rios e arquivos.              
+   <ul>
+   <li>O primeiro caractere diz qual &eacute; o tipo do objeto:
+     <ul>
+     <li><b>-</b> para arquivo comum;</li>
+     <li><b>b</b> para dispositivos de bloco (oferecem grandes quantidades de dados de cada vez).</li>
+     <li><b>c</b> para dispositivo de caracteres (oferecem dados de um caractere de cada vez);</li>
+     <li><b>d</b> para diret&oacute;rio;</li> 
+     <li><b>l</b> para link simb&oacute;lico;</li> 
+     <li><b>p</b> para FIFO ou Named Pipe;</li> 
+     <li><b>s</b> para socket mapeado em arquivo;</li> 
+     </ul>
+   <li>Os tr&ecirc;s caracteres seguintes mostram as permiss&otilde;es do dono (permiss&atilde;o de leitura e escrita).
+   <li>O quinto, o sexto e o s&eacute;timo caracteres dizem quais as permiss&otilde;es do grupo (permiss&atilde;o de leitura e escrita).
+   <li>Os tr&ecirc;s &uacute;ltimos caracteres especificam as permiss&otilde;es dos outros (permiss&atilde;o de leitura). 
+   </ul>
+Como n&atilde;o h&aacute; qualquer permiss&atilde;o especial definida no exemplo, &eacute; poss&iacute;vel dizer que
+o arquivo teste tem permiss&atilde;o 0664.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<a name="especial"></a>
+<h2>Permiss&otilde;es especiais</h2>
+
+<p>Para executar um processo, o Linux usa as permiss&otilde;es do usu&aacute;rio que o iniciou. Isso significa que os privil&eacute;gios do
+usu&aacute;rio se aplicam a todas as a&ccedil;&otilde;es do processo. O problema &eacute; que somente o <a href="root.html"><b>root</b></a>
+pode fazer tudo no sistema e um usu&aacute;rio pode, por exemplo, n&atilde;o ter permiss&atilde;o para usar um navegador da Internet.</p>
+
+<p>Para contornar este problema, o Linux divide a identifica&ccedil;&atilde;o (ID) do usu&aacute;rio e do grupo do usu&aacute;rio em real e
+efetivo: o primeiro indica qual o <a href="uid.html"><b>UID</b></a> e o <a href="gid.html"><b>GID</b></a> do usu&aacute;rio no sistema;
+enquanto o segundo indica quais UID e GID est&atilde;o sendo realmente utilizados pelo usu&aacute;rio. A alteração dos IDs durante a execu&ccedil;&atilde;o de programas &eacute; feita atrav&eacute;s de tr&ecirc;s 
+permiss&otilde;es especiais:                   
+<ul>
+<li><b>SUID</b> - com esta permiss&atilde;o, o usu&aacute;rio executa o arquivo como se fosse o dono (n&atilde;o funciona em diret&oacute;rio).
+    Isto significa que ser&aacute; usado o <b><a href="uid.html">UID</a></b> do dono do arquivo ao inv&eacute;s do UID do usu&aacute;rio
+    que executa o programa.
+<li><b>SGID</b> - com esta permiss&atilde;o, o usu&aacute;rio executa o arquivo ou acessa o diret&oacute;rio como membro do grupo ao qual 
+    pertence o arquivo/diret&oacute;rio. Isto significa que o usu&aacute;rio assume o <b><a href="gid.html">GID</a></b> do grupo
+    (ele &eacute; membro desse grupo, mas &eacute; outro o seu grupo padr&atilde;o).
+<li><b>sticky bit</b> - o usu&aacute;rio pode criar/alterar/deletar (apenas) os seus pr&oacute;prios arquivos no diret&oacute;rio 
+    que possui esta permiss&atilde;o, mesmo que n&atilde;o seja o dono do diret&oacute;rio e nem membro do grupo ao qual o 
+    diret&oacute;rio pertence. Quando o <i>sticky bit</i> &eacute;  usado em um arquivo, significa que este arquivo &eacute; compartilhado
+    por v&aacute;rios usu&aacute;rios.
+</ul>
+</p>
+
+<p>Note que estas permiss&otilde;es se referem a execu&ccedil;&atilde;o de um arquivo ou a autoriza&ccedil;&atilde;o de acesso a um 
+diret&oacute;rio. Portanto, elas est&atilde;o relacionadas a permiss&atilde;o <b>x</b>. Os seguintes valores s&atilde;o usados para 
+identificar o uso de permiss&atilde;o especial em um arquivo/diret&oacute;rio:</p>
+
+<p>
+<table class="t1" align="center" cellpadding=3 rules=all>
+<tr class="t1">
+<td valign="Top"><b>Valor Octal</b></td>
+<td align="Center" valign="Top"><b>Valor Bin&aacute;rio</b><br> <b>ugo</b></td>
+<td valign="Top"><b>Significado</b></td>
+</tr>
+<tr>
+<td align="Center">0</td>
+<td align="Center">000</td>
+<td>nenhuma permiss&atilde;o especial</td>
+</tr>
+<tr>
+<td align="Center">1</td>
+<td align="Center">001</td>
+<td>sticky bit</td>
+</tr>
+<tr>
+<td align="Center">2</td>
+<td align="Center">010</td>
+<td>SGID</td>
+</tr>
+<tr>
+<td align="Center">3</td>
+<td align="Center">011</td>
+<td>SGID e sticky bit</td>
+</tr>
+<tr>
+<td align="Center">4</td>
+<td align="Center">100</td>
+<td>SUID</td>
+</tr>
+<tr>
+<td align="Center">5</td>
+<td align="Center">101</td>
+<td>SUID e sticky bit</td>
+</tr>
+<tr>
+<td align="Center">6</td>
+<td align="Center">110</td>
+<td>SUID e SGID</td>
+</tr>
+<tr>
+<td align="Center">7</td>
+<td align="Center">111</td>
+<td>SUID, SGID e sticky bit</td>
+</tr>
+</table>
+</p>
+
+<p>Por exemplo, suponha que a resposta ao comando "ls -l teste" seja a seguinte: 
+   <blockquote class="t2">
+   -rwSrwSr-- 1 aluno curso     1024 Fev 13 10:55 teste
+   </blockquote>
+A string "-rwSrwSr--" indica que: 
+<ul>
+<li>&eacute; um arquivo comum (primeiro "-");
+<li>"rwS" define permiss&atilde;o de leitura, escrita e SUID (quem executar o programa usar&aacute; a UID do aluno);
+<li>"rwS" define permiss&atilde;o de leitura, escrita e SGID (quem executar o programa usar&aacute; a GID do curso);
+<li>"r--" define permiss&atilde;o de leitura para os outros.
+</ul>
+Para esse exemplo, &eacute; poss&iacute;vel dizer que o arquivo teste tem permiss&atilde;o 6664.</p>
+
+<p>A tabela abaixo mostra o significado das letras quando existem permiss&otilde;es especiais. Note que a a permiss&atilde;o especial
+s&oacute; informa como a execu&ccedil;&atilde;o ser&aacute; feita, n&atilde;o autoriza a execu&ccedil;&atilde;o. Portanto,
+no exemplo acima com  permiss&otilde;es "-rwSrwSr--", ningu&eacute;m conseguir&aacute; executar o arquivo teste, pois
+ningu&eacute;m tem permiss&atilde;o para isto.
+  
+<p>
+<table class="t1" align="center" cellpadding=3 rules=all>
+<tr class="t1">
+<td><b>Permiss&atilde;o</b></td>
+<td><b>N&iacute;vel</b></td>
+<td><b>Significado</b></td>
+</tr>
+<tr>
+<td align="Center">S</td>
+<td align="Center">dono</td>
+<td>SUID</td>
+</tr>
+<tr>
+<td align="Center">s</td>
+<td align="Center">dono</td>
+<td>SUID + permiss&atilde;o de execu&ccedil;&atilde;o para o dono</td>
+</tr>
+<tr>
+<td align="Center">S</td>
+<td align="Center">grupo</td>
+<td>SGID</td>
+</tr>
+<tr>
+<td align="Center">s</td>
+<td align="Center">grupo</td>
+<td>SGID + permiss&atilde;o de execu&ccedil;&atilde;o para o grupo</td>
+</tr>
+<tr>
+<td align="Center">T</td>
+<td align="Center">outros</td>
+<td>sticky bit</td>
+</tr>
+<tr>
+<td align="Center">t</td>
+<td align="Center">outros</td>
+<td>sticky bit + permiss&atilde;o de execu&ccedil;&atilde;o para outros</td>
+</tr>
+</table>
+</p>
+
+<p>S&atilde;o exemplos do uso das permiss&otilde;es especiais no Linux:
+<ul>
+<li>O comando <i>ping</i> precisa de permiss&otilde;es de <i>root</i> (um soquete de rede precisa ser aberto para a transmiss&atilde;o de
+    pacotes ICMP). Neste caso, &eacute; usada a permiss&atilde;o SUID e o comando tem permiss&otilde;es 4755.
+    <blockquote class="t2">
+    -rwsr-xr-x 1 root root 44168 Mai  7  2014 /bin/ping
+    </blockquote>
+<li>A ferramenta <a href="crontab.html"><b>crontab</b></a> usa SGID para permitir que os usu&aacute;rios agendem tarefas. As 
+    permiss&otilde;es usadas s&atilde;o 2755.
+    <blockquote class="t2">
+    -rwxr-sr-x 1 root crontab 35984 Fev  9  2013 /usr/bin/crontab
+    </blockquote>
+<li>O diret&oacute;rio <a href="dir_tmp.html"><b>/tmp</b></a> tem permiss&atilde;o <i>sticky bit</i> (todos os usu&aacute;rio do sistema
+    podem criar, ler, alterar e deletar arquivos desde que sejam os donos).
+    <blockquote class="t2">
+    drwxrwxrwt   8 root root  4096 Fev 13 11:40 tmp
+    </blockquote>
+    De acordo com o que j&aacute; foi discutido, as permiss&otilde;es do diret&oacute;rio <i>/tmp</i> s&atilde;o 1777.</p>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Para aumentar a seguran&ccedil;a do sistema, &eacute; sempre prefer&iacute;vel usar os atibutos de  
+    <a href="capacidades.html"><b>capacidade</b></a> dos <i>threads</i> ao inv&eacute;s de usar permiss&otilde;es especiais.
+<li>Os comandos <a href="chgrp.html"><b>chgrp</b></a>, <a href="chmod.html"><b>chmod</b></a> e <a href="chown.html"><b>chown</b></a>
+    permitem alterar, respectivamente, grupo, permiss&otilde;es e dono dos arquivos.
+<li>O comando <a href="umask.html"><b>umask</b></a> define as permiss&otilde;es que n&atilde;o est&atilde;o
+    dispon&iacute;veis, por padr&atilde;o, aos usu&aacute;rios do sistema.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

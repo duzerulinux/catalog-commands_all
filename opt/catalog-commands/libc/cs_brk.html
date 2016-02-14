@@ -1,0 +1,199 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>brk(), sbrk()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="brk(), sbrk()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>brk( ), sbrk( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Estas <a href="../chamadas.html"><b>chamadas de sistema</b></a> alteram o tamanho do segmento de dados da 
+<a href="../processo.html#memoria"><b>mem&oacute;ria</b></a> alocado para um processo.
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<p>
+<blockquote class="t2">
+#include&lt;unistd.h&gt;<br>
+int brk(void *addr);<br>
+void *sbrk(intptr_t increment);
+</blockquote>
+</p>
+
+<ul>
+<li>As chamadas <i>brk( )</i> e <i>sbrk( )</i> definem onde termina o segmento de dados de um <a href="../processo.html"><b>processo</b></a>
+    (<i>program break</i>). Aumentar o valor desta posi&ccedil;&atilde;o tem o efeito de alocar mem&oacute;ria para o processo, enquanto
+    diminuir o valor corresponde a liberar mem&oacute;ria.
+<li>A chamada <i>brk( )</i> altera o final do segmento de dados para o valor especificado por <i>addr</i>.
+<li>A chamada <i>sbrk( )</i> incrementa bytes ao espa&ccedil;o do processo. Se o argument <i>increment</i> for zero, a chamada retorna a
+    posi&ccedil;&atilde;o atual de <i>program break</i>.
+</ul>
+
+<p align=center><img src="../imagens/memoria.png" width=314 height=258></p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<ul>
+<li>Se a chamada <i>brk( )</i> &eacute; executada com sucesso, o valor zero &eacute; retornado. Em caso de erro, o valor -1 &eacute;
+    retornado e o c&oacute;digo de erro ENOMEM &eacute; colocado na vari&aacute;vel <b><a href="vr_errno.html">errno</a></b>.
+<li>Se a chamada <i>sbrk( )</i> &eacute; executada com sucesso, o valor anterior do <i>program break</i> &eacute; retornado 
+    (in&iacute;cio da nova &aacute;rea alocada). Em caso de erro, o valor (void *) -1 &eacute; retornado e o c&oacute;digo de erro
+    ENOMEM &eacute; colocado na vari&aacute;vel <b><a href="vr_errno.html">errno</a></b>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+01. #include&lt;unistd.h&gt; <br>
+02. #include&lt;errno.h&gt;  <br>
+03. #include&lt;stdio.h&gt;  <br>
+04. #include&lt;string.h&gt; <br>
+05. extern char etext, edata, end; <br>
+06. int main (int argc, char * const argv[], char * const envp[]) <br>
+07. { <br>
+08. &nbsp;&nbsp;&nbsp; printf("(1) etext     = %10p\n", &etext);  <br>
+09. &nbsp;&nbsp;&nbsp; printf("(1) edata     = %10p\n", &edata);  <br>
+10. &nbsp;&nbsp;&nbsp; printf("(1) end       = %10p\n", &end);    <br>
+11. &nbsp;&nbsp;&nbsp; printf("(1) Pr. break = %10p\n", sbrk(0)); <br>
+12. &nbsp;&nbsp;&nbsp; printf("(1) main      = %10p\n", &main);   <br>
+13. &nbsp;&nbsp;&nbsp; printf("(1) printf    = %10p\n", &printf); <br>
+14. &nbsp;&nbsp;&nbsp; if (sbrk(500) != (void *) -1) <br>
+15. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("(2) Pr. break = %10p\n", sbrk(0)); <br>
+16. &nbsp;&nbsp;&nbsp; else <br>
+18. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro sbrk %d - %s\n", errno, strerror(errno)); <br>
+19. &nbsp;&nbsp;&nbsp; char *memo = (char *) sbrk(0) + 678; <br>
+20. &nbsp;&nbsp;&nbsp; if (brk(memo) == 0) <br>
+21. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("(3) Pr. break = %10p\n", sbrk(0)); <br>
+22. &nbsp;&nbsp;&nbsp; else <br>
+23. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro brk %d - %s\n", errno, strerror(errno)); <br>
+24. }
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/brk.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 4 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>unistd.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das <a href="../chamadas.html"><b>chamadas de sistema</b></a>. 
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror( )</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro.
+    </ul>
+<li><b>Linha 5 :</b> os s&iacute;mbolos externos <i>etext</i>, <i>edata</i> e <i>end</i> indicam onde terminam os endere&ccedil;os de
+    segmentos do programa.
+    <ul>
+    <li><b>etext</b> - primeiro endere&ccedil;o ap&oacute;s o fim do segmento de texto.
+    <li><b>edata</b> - primeiro endere&ccedil;o ap&oacute;s o fim do segmento de dados inicializados.
+    <li><b>end</b>   - primeiro endere&ccedil;o ap&oacute;s o fim do segmento de dados n&atilde;o inicializados.
+    </ul>
+<li><b>Linha 6 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 8 a linha 23.
+<li><b>Linhas de 8 a 10 :</b> imprime os valores de <i>etext</i>, <i>edata</i> e <i>end</i>.
+<li><b>Linha 11 :</b> usa <i>sbrk(0)</i> para descobrir o valor atual de <i>program break</i>.
+<li><b>Linhas 12 e 13 :</b> imprime os endere&ccedil;os da fun&ccedil;&otilde;es <i>main( )</i> e <i>printf( )</i>. Note que esses
+       endere&ccedil;os precisam ser menores que <i>etext</i>.
+<li><b>Linhas de  14 a 18:</b> aloca 500 bytes com a fun&ccedil;&atilde;o <i>sbrk( )</i>. Em caso de sucesso, informa o novo valor de
+    de <i>program break</i>. Em caso de falha, </b> informa o erro ocorrido na execu&ccedil;&atilde;o da chamada. 
+<li><b>Linha 19 :</b> o ponteiro <i>memo</i> aponta para a &aacute;rea de mem&oacute;ria que correponde ao atual valor de 
+    <i>program break</i> mais 678 bytes.
+<li><b>Linhas de 20 a 23 :</b> move o valor de <i>program break</i> para a &aacute;rea apontada por <i>memo</i>. Em caso de sucesso, 
+    informa o novo valor de <i>program break</i>. Em caso de falha, </b> informa o erro ocorrido na execu&ccedil;&atilde;o da chamada. 
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+<blockquote class="t1">
+gcc -o brk brk.c
+</blockquote>
+e para executar, digite
+<blockquote class="t1">
+./brk
+</blockquote>
+</p>
+<p>A seguir &eacute; mostrada a sa&iacute;da obtida com a execu&ccedil;&atilde;o do programa.</p>
+<blockquote class="t2">
+<table class="t2" cellpadding=3>
+<tr><td>(1) etext     </td><td>=   </td><td>0x40083d</td></tr>
+<tr><td>(1) edata     </td><td>=   </td><td>0x601060</td></tr>
+<tr><td>(1) end       </td><td>=   </td><td>0x601068</td></tr>
+<tr><td>(1) Pr. break </td><td>=   </td><td>0xdd6000</td></tr>
+<tr><td>(1) main      </td><td>=   </td><td>0x40065d</td></tr>
+<tr><td>(1) printf    </td><td>=   </td><td>0x400510</td></tr>
+<tr><td>(2) Pr. break </td><td>=   </td><td>0xdd61f4</td></tr>
+<tr><td>(3) Pr. break </td><td>=   </td><td>0xdd649a</td></tr>
+</table>
+</blockquote>
+
+<p>A figura abaixo mostra como o valor de <i>program break</i> &eacute; afetado pelas chamadas <i>sbrk( )</i> e <i>break( )</i>.
+Inicialmente o valor &eacute; 0xdd6000. Ent&atilde;o mais 500 bytes s&atilde;o alocados com a chamada <i>sbrk( )</i> e o valor de
+<i>program break</i> passa a ser 0xdd61f4. Podemos ver que 0xdd61f4 - 0xdd6000 = 0x1f4, onde 1f4 na base hexadecimal corresponde a 
+500 na base decimal. Por &uacute;ltimo, mais 678 bytes s&atilde;o alocados com a chamada <i>brk( )</i> e o valor de <i>program break</i>
+passa a ser 0xdd649a. Fazendo a opera&ccedil;&atilde;o 0xdd649a - 0xdd61f4, temos que a diferen&ccedil;a &eacute; 0x2A6 que corresponde
+a 678 na base decimal.</p>
+
+<p align=center><img src="../imagens/processo_mem.png" width=439 height=235></p>
+
+<p>Note que os endere&ccedil;os de <i>main( )</i> (0x40065d) e de <i>printf( )</i> (0x400510) s&atilde;o menores que o valor
+de <i>etext</i> (0x40083d), pois estas duas fun&ccedil;&otilde;es est&atilde;o dentro da &aacute;rea de c&oacute;digo do programa.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O tamanho alocado de mem&oacute;ria n&atilde;o pode exceder ao definido como tamanho m&aacute;ximo de dados para um processo. 
+    Para ver qual o limite definido no sistema, use o comando <a href="../ulimit.html"><b>ulimit</b></a>.
+    <blockquote class="t1">ulimit -m</blockquote>
+<li>As chamadas <i>brk( )</i> e <i>sbrk( )</i> n&atilde;o s&atilde;o port&aacute;veis para outros sistemas (h&aacute; diferen&ccedil;as
+    nas defini&ccedil;&otilde;es). Para alocar mem&oacute;ria em tempo de execu&ccedil;&atilde;o use, preferencialmente, as
+    fun&ccedil;&otilde;es <a href="fc_malloc.html"><b>malloc( )</b></a> e <a href="fc_malloc.html"><b>calloc( )</b></a>.
+<li>Tamb&eacute;m &eacute; poss&iacute;vel usar o comando <a href="../readelf.html"><b>readelf</b></a> para obter as mesmas
+    informa&ccedil;&otilde;es obtidas com o exemplo acima.
+    <blockquote class="t1">readelf -a brk</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

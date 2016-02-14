@@ -1,0 +1,169 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>execve()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="execve()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>execve( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta <a href="../chamadas.html"><b>chamada de sistema</b></a> executa um outro programa, ou seja, substitui o c&oacute;digo
+do programa sendo executado pelo <a href="../processo.html"><b>processo</b></a> por outro c&oacute;digo.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<p>
+<blockquote class="t2">
+#include&lt;unistd.h&gt;<br>
+int execve (const  char  *filename, char *const argv [ ], char *const envp[ ]);
+</blockquote>
+<ul>
+<li>O argumento <i>filename</i> &eacute; um ponteiro para o programa a ser executado (bin&aacute;rio ou script).
+<li>O argumento <i>argv[ ]</i> &eacute; a lista dos argumentos do programa.
+<li>O argumento <i>envp[ ]</i> &eacute; a lista das <a href="../variaveis_ambiente.html"><b>vari&aacute;veis de ambiente</b></a>.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Se a chamada <i>execve( )</i> &eacute; executada com sucesso, o valor zero &eacute; retornado. Caso a chamada n&atilde;o
+seja bem sucedida, o valor -1 &eacute; retornado e o c&oacute;digo do erro &eacute; colocado na vari&aacute;vel externa 
+<b><a href="vr_errno.html">errno</a></b>. A tabela abaixo mostra alguns erros que podem ocorrer com esta chamada.</p>
+
+<p>
+<blockquote>
+<table class="t2" rules=all cellpadding=10 celspacing=10 align=center width=650>
+<tr class="t1"><td><b>Erro</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td>EACCES      </td><td>Acesso ao arquivo n&atilde;o &eacute; permitido</td></tr>
+<tr><td>EFAULT      </td><td>Nome do arquivo aponta para uma &aacute;rea de endere&ccedil;o n&atilde;o acess&iacute;vel</td></tr>
+<tr><td>EINVAL      </td><td>Par&acirc;metro <i>mode</i> foi especificado de maneira incorreta</td></tr>
+<tr><td>EIO         </td><td>Erro de I/O</td></tr>
+<tr><td>EISDIR      </td><td>&Eacute; um diret&oacute;rio</td></tr>
+<tr><td>ELIBBAD     </td><td>Formato n&atilde;o reconhecido</td></tr>
+<tr><td>ELOOP       </td><td>Muitos links simb&oacute;licos encontrados na defini&ccedil;&atilde;o do nome do arquivo</td></tr>
+<tr><td>EMFILE      </td><td>Alcan&ccedil;ado o limite de arquivos abertos</td></tr>
+<tr><td>ENAMETOOLONG</td><td>Nome do arquivo longo demais</td></tr>
+<tr><td>ENOENT      </td><td>Um componente do nome do arquivo n&atilde;o existe ou n&atilde;o pode ser resolvido</td></tr>
+<tr><td>ENOEXEC     </td><td>N&atilde;o pode ser executado</td></tr>
+<tr><td>ENOMEM      </td><td>Mem&oacute;ria insuficiente</td></tr>
+<tr><td>ENOTDIR     </td><td>Um componente do nome do arquivo n&atilde;o &eacute; um diret&oacute;rio</td></tr>
+<tr><td>EPERM       </td><td>Problema de permiss&atilde;o </td></tr>
+<tr><td>ETXTBSY     </td><td>Acesso de escrita foi requisitado para um arquivo que est&aacute; sendo executado</td></tr>
+</table>
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include&lt;stdio.h&gt;   <br>
+2. #include&lt;errno.h&gt;   <br>
+3. #include&lt;string.h&gt;  <br>
+4. int main(int argc, char * const argv[], char * const envp[]) <br>
+5. &nbsp;&nbsp;&nbsp; { <br>
+6. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  execve("./teste", argv, envp); <br>
+7. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  printf("Erro execve %d: %s\n", errno, strerror(errno)); <br>
+8. &nbsp;&nbsp;&nbsp; }
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/execve.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 3 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror()</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro e <a href="fc_strlen.html"><b>strlen()</b></a> que retorna o tamanho 
+        de uma string.
+    </ul>
+<li><b>Linha 4 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 6 a linha 7.
+<li><b>Linha 6 :</b> passa o controle da execu&ccedil;&atilde;o para o script <i>teste</i> mostrado abaixo. Ele apenas exibe
+    o nome do script e informa que a chamada <i>execve( )</i> foi executada com sucesso. O programa &eacute; encerrado ao final do
+    script.
+    <blockquote class="t2">
+    #!/bin/sh <br>
+    echo "O nome do script = " $0 <br>
+    echo "Chamada execve() executada com sucesso" <br>
+    exit
+    </blockquote>
+<li><b>Linha 7 :</b> exibe mensagem de erro caso a chamada <i>execve( )</i> n&atilde;o seja executada com sucesso.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+<blockquote class="t1">
+gcc -o execve execve.c
+</blockquote>
+e para executar, basta digitar
+<blockquote class="t1">
+./execve
+</blockquote>
+Abaixo &eacute; mostrada a sa&iacute;da do programa. &Eacute; importante observar que o script <i>teste</i> precisa ter
+<a href="../permissao.html"><b>permiss&atilde;o</b></a> de execu&ccedil;&atilde;o para que n&atilde;o ocorra erro (use 
+o comando "chmod u+x teste").
+<blockquote class="t2">
+O nome do script =  ./teste <br>
+Chamada execve() executada com sucesso
+</blockquote>
+</p>
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A chamada <i>execve( )</i> n&atilde;o retorna ao programa que o chamou em caso de sucesso. Texto, dados e pilhas do 
+    processo original s&atilde;o sobrescritos pelo programa chamado. 
+<li>O programa chamado herda o <a href="../pid.html"><b>PID</b></a> do processo original e qualquer descritor de arquivo 
+    aberto que n&atilde;o tenha sido definido como <i>close-on-exec</i>. Sinais pendentes no processo original s&atilde;o
+    apagados e &eacute; assumido o tratamento padr&atilde;o para novos sinais.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

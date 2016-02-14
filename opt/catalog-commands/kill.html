@@ -1,0 +1,131 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>kill</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="kill">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>kill</h1>
+
+<blockquote><font size="+1"><b>kill [op&ccedil;&otilde;es] [pid]</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando envia um <b><a href="sinal.html">sinal</a></b> para um <b><a href="processo.html">processo</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-l</b> - lista os sinais que podem ser enviados a um processo junto com o comando <i>kill</i>.
+<li><b>-l n&uacute;mero</b> - fornece o nome do sinal identificado pelo n&uacute;mero fornecido.
+<li><b>-s sinal</b> - especifica o sinal a ser enviado, onde <i>sinal</i> pode ser um nome ou um n&uacute;mero.
+<li><b>-sinal</b> - especifica o sinal a ser enviado, onde <i>sinal</i> &eacute; um n&uacute;mero.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios sobre o comando</h2>
+
+<p>Suponha que o resultado do comando <b><a href="ps.html">ps</a></b> seja como mostrado abaixo.</p>
+<blockquote class="t2">
+<table class="t2" cellppading=3>
+<td>PID</td><td>TTY</td><td>TIME</td><td>CMD</td>
+</tr><tr>
+<td>841</td><td>pts/0</td><td>00:00:00</td><td>bash</td>
+</tr><tr>
+<td>1314</td><td>pts/0</td><td>00:00:00</td><td>teste</td>
+</tr>
+</table>
+</blockquote>
+
+<p>Neste exemplo temos dois processos sendo executados: <i>bash</i> e <i>teste</i>. Para 
+finalizar o processo <i>teste</i>, basta digitar
+<blockquote class="t1">kill 1314</blockquote>
+que corresponde a enviar o <b><a href="sinal.html">sinal</a></b> SIGTERM (ou 15) ao processo.</p>
+
+<p>Caso o processo n&atilde;o seja encerrado, voc&ecirc; pode for&ccedil;ar o t&eacute;rmino
+do processo com o seguinte comando
+<blockquote class="t1">kill -9 1314</blockquote>
+
+O comando acima corresponde a enviar o sinal SIGKILL ao processo.
+Esta op&ccedil;&atilde;o informa ao sistema que o comando <i>kill</i> n&atilde;o pode 
+ser ignorado, ele deve ser imediatamente processado. Neste caso, o sistema n&atilde;o se
+preocupa em salvar dados ou apagar arquivos tempor&aacute;rios criados durante a 
+execu&ccedil;&atilde;o do processo.</p>
+
+<p>S&atilde;o exemplos de sinais que podem ser enviados com o comando <i>kill</i>:
+<ul>
+<li><b>SIGHUP (1)</b> : reinicializa o processo (o processo ler novamente os seus arquivos de configura&ccedil;&atilde;o).
+<li><b>SIGTSTP (20)</b> : suspende a execu&ccedil;&atilde;o de um processo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Os nomes e os n&uacute;meros dos sinais</h2>
+
+<ul>
+
+<li>Para obter a lista dos sinais do Linux, basta digitar
+    <blockquote class="t1">kill -l</blockquote>
+    Abaixo, uma poss&iacute;vel sa&iacute;da.
+
+<blockquote class="t2">
+<table class="t2" align="center" cellpadding=3>
+<tr><td>1)  SIGHUP     </td><td>2) SIGINT      </td><td> 3)  SIGQUIT    </td><td>4)  SIGILL     </td><td> 5) SIGTRAP      </td></tr>
+<tr><td>6)  SIGABRT    </td><td>7) SIGBUS      </td><td> 8)  SIGFPE     </td><td>9)  SIGKILL    </td><td> 10) SIGUSR1     </td></tr>
+<tr><td>11) SIGSEGV    </td><td>12) SIGUSR2    </td><td> 13) SIGPIPE    </td><td>14) SIGALRM    </td><td> 15) SIGTERM     </td></tr>
+<tr><td>16) SIGSTKFLT  </td><td>17) SIGCHLD    </td><td> 18) SIGCONT    </td><td>19) SIGSTOP    </td><td> 20) SIGTSTP     </td></tr>
+<tr><td>21) SIGTTIN    </td><td>22) SIGTTOU    </td><td> 23) SIGURG     </td><td>24) SIGXCPU    </td><td> 25) SIGXFSZ     </td></tr>
+<tr><td>26) SIGVTALRM  </td><td>27) SIGPROF    </td><td> 28) SIGWINCH   </td><td>29) SIGIO      </td><td> 30) SIGPWR      </td></tr>
+<tr><td>31) SIGSYS     </td><td>34) SIGRTMIN   </td><td> 35) SIGRTMIN+1 </td><td>36) SIGRTMIN+2 </td><td> 37) SIGRTMIN+3  </td></tr>
+<tr><td>38) SIGRTMIN+4 </td><td>39) SIGRTMIN+5 </td><td> 40) SIGRTMIN+6 </td><td>41) SIGRTMIN+7 </td><td> 42) SIGRTMIN+8  </td></tr>
+<tr><td>43) SIGRTMIN+9 </td><td>44) SIGRTMIN+10</td><td> 45) SIGRTMIN+11</td><td>46) SIGRTMIN+12</td><td> 47) SIGRTMIN+13 </td></tr>
+<tr><td>48) SIGRTMAX+14</td><td>49) SIGRTMAX+15</td><td> 50) SIGRTMAX-14</td><td>51) SIGRTMAX-13</td><td> 52) SIGRTMAX-12 </td></tr>
+<tr><td>53) SIGRTMAX-11</td><td>54) SIGRTMAX-10</td><td> 55) SIGRTMAX-9 </td><td>56) SIGRTMAX-8 </td><td> 57) SIGRTMAX-7  </td></tr>
+<tr><td>58) SIGRTMAX-6 </td><td>59) SIGRTMAX-5 </td><td> 60) SIGRTMAX-4 </td><td>61) SIGRTMAX-3 </td><td> 62) SIGRTMAX-2  </td></tr>
+<tr><td>63) SIGRTMAX-1 </td><td>63) SIGRTMAX   </td><td>&nbsp;          </td><td>&nbsp;         </td><td>&nbsp;           </td></tr>
+</table>
+</blockquote>
+
+<li>O comando 
+    <blockquote class="t1">kill -l 9</blockquote>
+    fornece o nome do sinal idenficado pelo n&uacute;mero 9:
+    <blockquote class="t2">TERM</blockquote>
+
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O comando <b><a href="killall.html">killall</a></b> envia um determinado sinal a um conjunto de processos que usam o mesmo nome.
+<li>O comando <b><a href="ps.html">ps</a></b> exibe informa&ccedil;&otilde;es sobre os processos em execu&ccedil;&atilde;o.
+<li>O comando <b><a href="top.html">top</a></b> lista os processos que est&atilde;o utilizando a CPU.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

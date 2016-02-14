@@ -1,0 +1,70 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>userdel</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="userdel">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<p>&nbsp;</p>
+
+<a name="inicio"></a>
+
+<h1>userdel</h1>
+   
+<blockquote><font size="+1"><b>userdel [op&ccedil;&otilde;es] usu&aacute;rio</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando remove usu&aacute;rio e seus respectivos arquivos do sistema.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-h, --help</b> : exibe as op&ccedil&otilde;es do comando.
+<li><b>-r, --remove</b> : deleta o diret&oacute;rio <b><a href="dir_home.html">home</a></b> e todos os seus arquivos.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>Para deletar o usu&aacute;rio <i>aluno</i>, basta digitar
+    <blockquote class="t1">userdel aluno</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O comando <i>userdel</i> deleta todas as entradas relacionadas ao usu&aacute;rio especificado nos seguintes arquivos: 
+    <b><a href="dir_etc.html#passwd">/etc/passwd</a></b>, <b><a href="dir_etc.html#shadow">/etc/shadow</a></b> e 
+    <b><a href="dir_etc.html#group">/etc/group</a></b>.
+<li>O comando <a href="deluser.html"><b>deluser</b></a> tamb&eacute;m deleta usu&aacute;rios do sistema.
+<li>Os comandos <a href="adduser.html"><b>adduser</b></a> e <a href="useradd.html"><b>useradd</b></a> criam usu&aacute;rios.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

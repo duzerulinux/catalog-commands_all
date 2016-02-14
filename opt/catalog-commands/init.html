@@ -1,0 +1,118 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>init</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="init">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+
+<h1>init</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<ul>
+<li>O <i>init</i> &eacute; o pai de todos os processos no sistema. Ele &eacute; executado pelo 
+    <b><a href="kernel.html">kernel</a></b> e &eacute; respons&aacute;vel por inicializar todos os outros
+    processos.
+<li>O processo <i>init</i> herda os processos-filhos dos processos que morrem, ou seja, torna-se respons&aacute;vel por eles.
+<li>Os processos inicializados pelo <i>init</i> s&atilde;o conhecidos como <i>jobs</i> e s&atilde;o configurados
+    por arquivos que est&atilde;o no diret&oacute;rio <b><a href="dir_etc.html#init">/etc/init</a></b>.
+<li>Por pad&atilde;o, o processo <i>init</i> &eacute; identificado no sistema com o n&uacute;mero 1, ou seja, 
+    o ID do processo <i>init</i> &eacute; 1 (a identifica&ccedil;&atilde;o dos processos em execu&ccedil;&atilde;o
+    pode ser visto no diret&oacute;rio <b><a href="dir_proc.html">/proc</a></b>).
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>N&iacute;vel de execu&ccedil;&atilde;o do sistema</h2>
+
+<p>O <i>init</i> distingue v&aacute;rios n&iacute;veis de execu&ccedil;&atilde;o (<i>runlevels</i>), onde 
+cada n&iacute;vel possui o seu pr&oacute;prio conjunto de processos a serem iniciados.  
+<ul>
+<li>O <b>n&iacute;vel 0</b> encerra o sistema.
+<li>O <b>n&iacute;vel 1</b> inicializa o sistema em modo monousu&aacute;rio.
+<li>O <b>n&iacute;vel 2</b> inicializa o sistema em modo multiusu&aacute;rio. &Eacute; o padr&atilde;o.
+<li>Os <b>n&iacute;veis 3 a 5 </b> s&atilde;o id&ecirc;nticos ao n&iacute;vel 2.
+<li>O <b>n&iacute;vel 6</b> reinicializa o sistema.
+<li>O <b>n&iacute;vel S ou s</b> &eacute; usado para jogar o sistema no modo monousu&aacute;rio sem antes parar os processos
+    em execu&ccedil;&atilde;o (portanto, o bom senso diz para n&atilde;o usar este n&iacute;vel).
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Para ver o n&iacute;vel de de execu&ccedil;&atilde;o que est&aacute; sendo utilizado, digite
+    <blockquote class="t1">runlevel</blockquote>
+    Uma poss&iacute;vel resposta &eacute;
+    <blockquote class="t2">N 2</blockquote>
+    que significa: o <i>runlevel</i> n&atilde;o foi alterado desde a inicializa&atilde;o (N = No) e o
+    n&iacute;vel de de execu&ccedil;&atilde;o &eacute; 2.
+<li>&Eacute; poss&iacute;vel parar o sistema usando o comando
+    <blockquote class="t1">sudo init 0</blockquote>
+    ou reinicializar o sistema com o comando</p>
+    <blockquote class="t1">sudo init 6</blockquote>
+<li>Para alterar o <i>runlevel</i> para o n&iacute;vel 5, basta digitar
+    <blockquote class="t1">sudo init 5</blockquote>
+    Agora a resposta ao comando <i>runlevel</i> poder&aacute;, por exemplo, ser
+    <blockquote class="t2">2 5</blockquote>
+    Isto significa que o <i>runlevel</i> agora &eacute; 5, mas anteriormente era 2. Mas esta altera&ccedil;&atilde;o
+    n&atilde;o &eacute; definitiva. Na pr&oacute;xima inicializa&ccedil;&atilde;o, o sistema usar&aacute; o
+    <i>runlevel</i> definido no arquivo de configura&ccedil;&atilde;o do processo <i>init</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O diret&oacute;rio <b><a href="dir_etc.html#init">/etc/init/</a></b> possui os arquivos de 
+    configura&ccedil;&atilde;o dos processos inicializados pelo <i>init</i>.
+<li>O DuZeru 2.1 define como padr&atilde;o o <i>runlevel</i> 2. Isto pode ser visto no
+    arquivo rc-sysinit.conf do diret&oacute;rio /etc/init/.
+    <blockquote class="t2">env DEFAULT_RUNLEVEL=2</blockquote>
+<li>Os scripts executados quando o sistema entra no <i>runlevel</i> X est&atilde;o no diret&oacute;rio 
+    <b><a href="dir_etc.html#rcd">/etc/rcX.d</a></b>, onde X pode ter valor de 0 a 6 ou o valor S.
+    Na realidade, estes diret&oacute;rios apenas cont&eacute;m links simb&oacute;licos para os scrips 
+    localizados no diret&oacute;rio <b><a href="dir_etc.html#initd">/etc/init.d</a></b>.
+<li>Na configura&ccedil;&atilde;o inicial do DuZeru 2.1, os diret&oacute;rios de /etc/rc2.d
+    a /etc/rc5.d s&atilde;o id&ecirc;nticos, ou seja, os arquivos destes diret&oacute;rios apontam
+    para os mesmos arquivos /etc/init.d. N&atilde;o h&aacute; diferen&ccedil;a em usar qualquer um
+    deles.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="chkconfig.html">chkconfig</a></b> - habilita ou desabilita servi&ccedil;os do sistema.</li>
+<li><b><a href="shutdown.html">shutdown</a></b> - encerra/reinicializa o sistema.</li>
+<li><a href="telinit.html"><b>telinit</b></a> - altera o o n&iacute;vel de execu&ccedil;&atilde;o 
+    (<i>runlevel</i>) do sistema.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

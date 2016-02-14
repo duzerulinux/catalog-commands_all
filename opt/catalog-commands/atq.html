@@ -1,0 +1,83 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>atq</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="atq">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>atq</h1>
+
+<blockquote><b><font size="+1">atq [op&ccedil;&otilde;es]</font></b></blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+<p>Este comando lista as tarefas agendadas para execu&ccedil;&atilde;o pelo comando <b>at</b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Op&ccedil;&otilde;es do comando</h2>
+<ul>
+<li><b>-V</b> : fornece a vers&atilde;o do comando <b>at</b> e informa para quem se deve reportar erro.
+<li><b>-q fila</b> : lista apenas as tarefas que est&atilde;o na fila especificada. Por padr&atilde;o,
+    a fila com as tarefas agendadas pelo comando <b>at</b> &eacute; a fila "a".
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios sobre o comando</h2>
+
+<p>O comando <b>atq</b> informa o n&uacute;mero da tarefa agendada, a data e a hora da execu&ccedil;&atilde;o, o nome da fila de execu&ccedil;&atilde;o 
+(o padr&atilde;o &eacute; a fila "a") e o nome do usu&aacute;rio. Por exemplo,
+
+<blockquote class="t2">
+<table cellpadding=3>
+<tr><td>14</td><td>Fri</td><td>Nov</td><td>9 </td><td>16:00:00 2012 a aluno</td></tr>
+</table>
+</blockquote>
+
+nos diz que existe uma tarefa agendada para ser executada &agrave;s 16 horas do dia 9 de novembro de 2012. 
+O usu&aacute;rio que a agendou foi <b>aluno</b>, o n&uacute;mero de identifica&ccedil;&atilde;o da tarefa &eacute; 14
+e a fila é "a".</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O comando <b>atq</b> &eacute; um <b><a href="alias.html">alias</a></b> para <b>at -l</b>.</li>
+<li>As tarefas agendadas ficam armazenadas em <b>/var/spool/cron/atjobs</b>.</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="at.html">at</a></b> : agenda tarefas.</li>
+<li><b><a href="atrm.html">atrm</a></b> : remove tarefas agendadas.</li>
+</ul>
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

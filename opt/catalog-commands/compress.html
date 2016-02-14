@@ -1,0 +1,74 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>compress</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="compress">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>compress</h1>
+<blockquote><b><font size="+1"> compress [op&ccedil;&otilde;es] [arquivo]</font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este aplicativo compacta/descompacta arquivos.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-f</b> : for&ccedil;a a compactação, mesmo que n&atilde;o seja poss&iacute;vel reduzir o tamanho 
+    do arquivo ou que j&aacute; exista o arquivo com extens&atilde;o .Z.</li>
+<li><b>-r</b> : compacta todos os arquivos dos diret&oacute;rios que est&atilde;o no caminho especificado pelo comando.</li>
+<li><b>-v</b> : escreve na sa&iacute;da padr&atilde;o de erro o percentual de redu&ccedil;&atilde;o.</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li> Para compactar o arquivo "teste", digite
+     <blockquote class="t1">compress teste</blockquote>
+     O arquivo original &eacute; substitui&iacute;do por um arquivo compactado com a extens&atilde;o <i>.Z</i>.</p>
+<li>Para descompactar o arquivo, digite
+    <blockquote class="t1">uncompress teste.Z</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Normalmente o aplicativo <i>compress</i> n&atilde;o vem instalado com o Linux. Para instal&aacute;-lo digite:
+    <blockquote class="t1">sudo apt-get install ncompress</blockquote>
+<li>S&atilde;o tamb&eacute;m ferramentas para compacta&ccedil;&atilde;o/descompacta&ccedil;&atilde;o de arquivos:
+    <b><a href="gzip.html">gzip</a></b>, <a href="bzip2.html"><b>bzip2</a></b> e <a href="zip.html"><b>zip</b></a>.
+<li>Para agrupar/desagrupar arquivos em um reposit&oacute;rio use <b><a href="tar.html">tar</a></b>.
+<li>O aplicativo <b><a href="zgrep.html">zgrep</a></b> procura padr&otilde;es em um arquivo compactado com <i>compress</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>ar</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="ar">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>ar</h1>
+
+<blockquote><b><font size="+1">ar [op&ccedil;&otilde;es] reposit&oacute;rio arquivo</font></b></blockquote>
+<ul>
+<li>O argumento <i>reposit&oacute;rio</i> corresponde ao nome de um agrupamento de arquivos.
+<li>O argumento <i>arquivo</i> corresponde ao nome de um ou mais arquivos.
+</ul>
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando permite:
+<ul>
+<li> agrupar arquivos em um reposit&oacute;rio (arquivo maior);
+<li> extrair arquivo de um reposit&oacute;rio de arquivos;
+<li> modificar/deletar arquivo armazenado em um reposit&oacute;rio de arquivos.
+</ul>
+</p>
+
+<p>O reposit&oacute;rio armazena de cada arquivo:
+<ul>
+<li> o conte&uacute;do;
+<li> as permiss&otilde;es;
+<li> a data do arquivo (<i>timestamp</i>);
+<li> a identifica&ccedil;&atilde;o do dono e do grupo.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<p>S&atilde;o opera&ccedil;&otilde;es que podem ser executadas:
+<ul>
+<li><b>c</b> : cria o reposit&oacute;rio (mesmo que j&aacute; exista).
+<li><b>d</b> : deleta arquivo(s) do reposit&oacute;rio.
+<li><b>m</b> : altera posi&ccedil;&atilde;o de arquivo dentro do reposit&oacute;rio.
+<li><b>p</b> : lista o conte&uacute;do dos arquivos do reposit&oacute;rio.
+<li><b>q</b> : adiciona arquivo no final do reposit&oacute;rio.
+<li><b>r</b> : substitui/adiciona arquivo ao reposit&oacute;rio.
+<li><b>t</b> : lista a tabela do reposit&oacute;rio.
+<li><b>x</b> : extrai arquivos do reposit&oacute;rio.
+</ul>
+</p>
+
+<p>São exemplos de modificadores para as opera&ccedil;&otilde;es com o reposit&oacute;rio:
+<ul>
+<li><b>a</b> : adiciona um novo arquivo ap&oacute;s um determinado arquivo do reposit&oacute;rio.
+<li><b>b</b> : adiciona um novo arquivo antes de um determinado arquivo do reposit&oacute;rio.
+<li><b>o</b> : mant&eacute;m c&oacute;pia do arquivo no reposit&oacute;rio ap&oacute; extra&ccedil;&atilde;o.
+<li><b>v</b> : fornece mais informa&ccedil;&otilde;es da opera&ccedil;&atilde;o sendo executada no reposit&oacute;rio.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul> 
+<li>Para criar o reposit&oacute;rio <i>teste</i> e copiar todos os arquivos com 
+extens&atilde;o <i>html</i> do diret&oacute;rio atual para o reposit&oacute;rio, digite
+
+<blockquote class="t1">ar r teste *.html</blockquote>
+
+<li>Para ver a lista dos arquivos deste reposit&oacute;rio, basta digitar
+
+<blockquote class="t1">ar t teste</blockquote>
+
+Considere que voc&ecirc; obteve a seguinte sa&iacute;da:</p>
+
+<blockquote class="t2">
+dicas_linux<br>
+gsl-ref.ps<br>
+linux_instalacao.odt<br>
+</blockquote>
+
+Se voc&ecirc; usar o modificador "v" no comando
+
+<blockquote class="t1">ar tv teste</blockquote>
+
+a sa&iacute;da mostrar&aacute; mais informa&ccedil;&otilde;es 
+
+<blockquote class="t2">
+rw-r--r-- 1000/1000    624 Sep 10 19:20 2012 dicas_linux<br>
+rw-r--r-- 1000/1000 4108966 Oct 27 15:53 2006 gsl-ref.ps<br>
+rw-r--r-- 1000/1000  27095 Sep  4 19:01 2012 linux_instalacao.odt<br>
+</blockquote>
+
+<li>Para extrair o arquivo "prova" do reposit&oacute;rio "teste", entre com
+
+<blockquote class="t1">ar x teste prova</blockquote>
+
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&atilde;o</h2>
+
+<p>N&atilde;o &eacute; obrigat&oacute;rio o uso do operador "-" em conjunto com a op&ccedil;&atilde;o especificada
+no comando <i>ar</i>. Isto significa que tanto faz digitar
+ 
+<blockquote class="t1">ar t teste</blockquote>
+
+como
+
+<blockquote class="t1">ar -t teste</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="tar.html">tar</a></b> - armazena e extrai arquivos em um reposit&oacute;rio.</li>
+<li><b><a href="zip.html">zip</a></b> - agrupa e compacta arquivos.</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

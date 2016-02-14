@@ -1,0 +1,151 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>_exit()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="_exit()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>_exit( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta <a href="../chamadas.html"><b>chamada de sistema</b></a> termina o <a href="../processo.html"><b>processo</b></a> corrente.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include&lt;unistd.h&gt;<br>
+void _exit(int status);
+</blockquote>
+
+<ul>
+<li>O argumento <i>status</i> corresponde ao c&oacute;digo de sa&iacute;da do processo. 
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Esta chamada n&atilde;o retorna valor.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include&lt;time.h&gt;   <br>
+2. #include&lt;stdio.h&gt;  <br>
+3. #include&lt;unistd.h&gt; <br>
+4. int main() <br>
+5. &nbsp;&nbsp;&nbsp; { <br>
+6. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; time_t tp;    <br>
+7. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; struct tm lt; <br>
+8. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; time(&tp); <br>
+9. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lt = *localtime(&tp); <br>
+10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int dia = lt.tm_mday; <br>
+11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Dia = %d\n", dia); <br>
+12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _exit(dia); <br>
+13.&nbsp;&nbsp;&nbsp; }
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/_exit.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<ul>
+<li><b>Linhas de 1 a 3 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>time.h</b> - cabe&ccedil;alho com as fun&ccedil;&otilde;es para manipular datas e horas.
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>unistd.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das <a href="../chamadas.html"><b>chamadas de sistema</b></a>. 
+    </ul>
+<li><b>Linha 4 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 6 a linha 12.
+<li><b>Linhas 6 e 7 :</b> defini&ccedil;&otilde;es das vari&aacute;veis.
+<li><b>Linha 8 :</b> usa a chamada <a href="cs_time.html"><b>time( )</b></a> para recuperar o n&uacute;mero de segundos desde às zero
+    horas de 01/01/1970 (<a href="../tempo_unix.html"><b>tempo do Unix</b></a>).
+<li><b>Linha 9 :</b> usa a fun&ccedil;&atilde;o <a href="fc_localtime.html"><b>localtime( )</b></a> para converter o tempo do Unix em 
+    um formato leg&iacute;vel (estrutura <a href="ed_tm.html"><b>tm</b></a>).
+<li><b>Linha 10 :</b> armazena o dia do m&ecirc;s.
+<li><b>Linha 11 :</b> exibe o dia do m&ecirc;s.
+<li><b>Linha 12 :</b> encerra o programa usando o dia do m&ecirc;s como c&oacute;digo de sa&iacute;da do programa.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+<blockquote class="t1">
+gcc -o _exit _exit.c
+</blockquote>
+e para executar, basta digitar
+<blockquote class="t1">
+./_exit
+</blockquote>
+Supondo que o programa &eacute; executado no dia 10 de um m&ecirc;s qualquer, a sa&iacute;da &eacute; como mostrada abaixo.
+<blockquote class="t2">
+Dia = 10
+</blockquote>
+Para ver o c&oacute;digo de sa&iacute;da do &uacute;ltimo processo, basta entrar na linha de comandos
+<blockquote class="t1">
+$?
+</blockquote>
+Neste caso, o <a href="../shell.html"><b>shell</b></a> informa qual foi a sa&iacute;da e tenta interpret&aacute;-la. Como
+n&atilde;o existe comando correspondente ao dia do m&ecirc;s, um erro &eacute; retornado pelo <i>shell</i>.
+<blockquote class="t2">
+10: comando não encontrado
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O processo que emite a chamada <i>_exit()</i> &eacute; encerrado imediatamente. Al&eacute;m disso,
+    <ul>
+    <li> se existem arquivos ainda abertos pelo processo, estes arquivos s&atilde;o fechados;</li>
+    <li> se existem processos-filhos ainda executando, eles s&atilde;o herdados pelo processo <a href="../init.html"><b>init</b></a>
+    (<a href="../pid.html"><b>PID</b></a>=1) e um <b><a href="../sinal.html">sinal</a></b> SIGCHLD (valor 17)  &eacute; enviado ao
+    processo-pai.
+    </ul>
+<li>A chamada <i>_exit( )</i> &eacute; semelhante &agrave; fun&ccedil;&atilde;o <a href="fc_exit.html"><b>exit( )</b></a>, embora
+    n&atilde;o chame as fun&ccedil;&otilde;es registradas com <a href="fc_atexit.html"><b>atexit( )</b></a> e 
+    <a href="fc_on_exit.html"><b>on_exit( )</b></a>.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

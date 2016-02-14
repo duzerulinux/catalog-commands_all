@@ -1,0 +1,175 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>main()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="main()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+
+
+<h1>main()</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>
+<ul>
+<li>&Eacute; a fun&ccedil;&atilde;o por onde se inicia a execu&ccedil;&atilde;o do programa. 
+<li>&Eacute; a primeira fun&ccedil;&atilde;o de um programa C a ser executada e a &uacute;nica fun&ccedil;&atilde;o que n&atilde;o 
+    precisa ser explicitamente chamada. 
+<li>Normalmente, o programa termina no final de <i>main()</i>.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+int main() <br>
+int main(void) <br>
+int main(int argc, char * const argv[ ]) <br>
+int main(int argc, char * const argv[ ], char * const envp[ ])
+</blockquote>
+
+<p>As primeiras duas defini&ccedil&otilde;es acima de <i>main( )</i> s&atilde;o usadas quando nenhum argumento &eacute;
+passado para o programa. Enquanto a terceira e a quarta defini&ccedil;&otilde;es fornecem, respectivamente, dois e tr&ecirc;s
+argumentos. Os argumentos, quando declarados, s&atilde;o sempre os seguintes:
+<ol>
+<li><b>argc</b> - &eacute; o contador de argumentos. Ele informa quantos argumentos foram passados juntos com o nome do programa.
+    Se o valor &eacute; 1, ent&atilde;o argumentos n&atilde;o foram fornecidos junto com o nome do programa.
+<li><b>argv</b> - &eacute; um vetor de ponteiros, onde cada ponteiro indica um argumento passado. O nome do programa &eacute;
+    armazenado em argv[0].
+<li><b>envp</b> - &eacute; um ponteiro para um vetor de <i>strings</i> com informa&ccedil;&otilde;es sobre o ambiente do processo.
+</ol>
+Por padr&atilde;o, os nomes <i>argc</i>, <i>argv[ ]</i> e <i>envp[ ]</i> s&atilde;o sempre usados. Entretanto, n&atilde;o h&aacute;
+problema em voc&ecirc; usar outros nomes (ex: <i>contador</i>, <i>argumetos[ ]</i> e <i>ambiente[ ]</i>) desde que voc&ecirc; 
+n&atilde;o altere os tipos de dados. </p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include&lt;stdio.h&gt; <br>
+2. int main(int argc, char * const argv[], char * const envp[]) <br>
+3. &nbsp;&nbsp;&nbsp;{ <br>
+4. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* imprime o valor de argc */ <br>
+5. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("****** ARGC[] ******\n"); <br>
+6. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("argc = %d\n", argc); <br>
+7. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int i = 0; <br>
+8. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* imprime os valores do vetor argv[] */ <br>
+9. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("\n****** ARGV[] ******\n"); <br>
+10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while (argv[i] != NULL) <br>
+11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  { <br>
+12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("argv[%d] = %s\n", i, argv[i]); <br>
+13.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i++; <br>
+14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  } <br>
+15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* imprime os valores do vetor envp[] */ <br>
+16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("\n****** ENVP[] ******\n"); <br>
+17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i = 0; <br>
+18.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while (envp[i] != NULL) <br>
+19.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  { <br>
+20.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("envp[%d] = %s\n", i, envp[i]); <br>
+21.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    i++; <br>
+22.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  } <br>
+23.&nbsp;&nbsp;&nbsp;}
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/main.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linha 1:</b> &eacute; feita a inclus&atilde;o do arquivo <i>header</i> da <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    </ul>
+<li><b>Linha 2 :</b> in&iacute;cio da fun&ccedil;&atilde;o <i>main( )</i> cujos comandos v&atilde;o da linha 4 a linha 22.
+<li><b>Linha 6 :</b> exibe a quantidade de argumentos.
+<li><b>Linhas 7 a 14 :</b> exibe os argumentos.
+<li><b>Linhas 15 a 22 :</b> exibe as vari&aacute;veis de ambiente.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Copie o exemplo acima para um arquivo chamado <i>main.c</i>. Para compilar, digite
+<blockquote class="t1">
+gcc -o main main.c
+</blockquote>
+e para executar, digite
+<blockquote class="t1">
+./main teste1 teste2
+</blockquote>
+</p>
+
+<p>O quadro abaixo mostra a sa&iacute;da obtida com a execu&ccedil;&atilde;o do programa. O primeiro argumento
+informa que tr&ecirc;s par&acirc;metros foram passados: o nome do programa e as strings "teste1" e "teste2".
+Em seguida, s&atilde;o mostrados os tr&ecirc;s par&acirc;metros armazenados em <i>argv[]</i>. Por &uacute;ltimo, o
+conte&uacute;do do vetor <i>envp[]</i> &eacute; exibido (a listagem abaixo mostra apenas os tr&ecirc;s primeiros e os
+tr&ecirc;s &uacute;ltimos valores).
+ 
+<blockquote class="t2">
+****** ARGC[] ****** <br>
+argc = 3 <br>
+<br>
+****** ARGV[] ****** <br>
+argv[0] = ./main <br>
+argv[1] = teste1 <br>
+argv[2] = teste2 <br>
+<br>
+****** ENVP[] ****** <br>
+envp[0] = XDG_VTNR=7 <br>
+envp[1] = XDG_SESSION_ID=c1 <br>
+envp[2] = CLUTTER_IM_MODULE=xim <br>
+... <br>
+envp[58] = XAUTHORITY=/home/aluno/.Xauthority <br>
+envp[59] = OLDPWD=/home/aluno/estacao <br>
+envp[60] = _=./main
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A fun&ccedil;&atilde;o <i>main( )</i> retorna um valor para quem o executou. Se o programa foi executado a partir do <i>prompt</i>
+    do <a href="../shell.html"><b>shell</b></a>, basta digitar
+    <blockquote class="t1">echo $?</blockquote>
+    para saber o c&oacute;digo de retorno.
+<li>Quando o programa &eacute; executado sem erros, o sistema retorna zero. Quando h&aacute; algum erro que provoca o t&eacute;rmino
+    anormal da execu&ccedil;&atilde;o do programa, o sistema retorna um valor maior que zero. Para ver o significado do c&oacute;digo
+    de erro da <a href="../biblioteca_c.html"><b>biblioteca C</b></a>, veja a tabela de <a href="vr_errno.html"><b>errno</b></a>.
+<li>O programador tamb&eacute;m pode definir um valor para o c&oacute;digo de retorno usando a fun&ccedil;&atilde;o 
+    <a href="fc_exit.html"><b>exit( )</b></a> do cabe&ccedil;alho <i>stdlib.h</i>.
+</ul>
+ 
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

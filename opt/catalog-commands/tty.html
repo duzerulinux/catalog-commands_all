@@ -1,0 +1,80 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>tty</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="tty">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>tty</h1>
+
+<blockquote><b><font size="+1"> tty</font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando mostra o nome do arquivo conectado &agrave; entrada padr&atilde;o.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>--help</b> : lista as op&ccedil;&otilde;es dispon&iacute;veis com o comando. 
+<li><b>--version</b> : exibe informa&ccedil;&atilde;o sobre o comando. 
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<ul>
+<li>O comando 
+    <blockquote class="t1">tty</blockquote>
+    fornece normalmente a seguite sa&iacute;da
+    <blockquote class="t2">/dev/pts/0</blockquote>
+    Isto significa que o terminal, em que o comando foi digitado, est&aacute; associado &agrave; entrada
+    padr&atilde;o 0 (na realidade, 0 &eacute; um descritor do arquivo).
+    Se o usu&aacute;rio abrir outros terminais, eles ter&atilde;o sequencialmente a numera&ccedil;&atilde;o 1, 4, 5, 6, ...
+    Os n&uacute;meros 2 e 3 n&atilde;o s&atilde;o usados na cria&ccedil;&atilde;o de novos terminais no DuZeru, pois 
+    est&atilde;o associados, respectivamente, ao <i>modem-manager</i> (controla fun&ccedil;&otilde;es de modem)
+    e ao LightDM (gerenciador de janelas X).
+<li>Suponha que um usu&aacute;rio abriu dois terminais: 0 e 1. No terminal 0, se ele digitar
+    <blockquote class="t1">ls > /dev/pts/1</blockquote>
+    a resposta do comando aparecer&aacute; no outro terminal, o terminal 1.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li><i>TTY</i> significa "TeleTYpe" que corresponde ao tipo dos primeiros terminais usados com os computadores.
+<li>Quando um processo abre /dev/ptmx, ele obt&eacute;m um descritor de arquivo para um PTM (pseudoterminal master) e 
+    um descritor de arquivo para PTS (pseudoterminal slave) &eacute; criado. Cada descritor de arquivo obtido pela
+    abertura do /dev/ptmx &eacute; um PTM independente com o seu pr&oacute;prio PTS.
+<li>Para obter mais informa&ccedil;&otilde;es sobre o comando <i>tty</i>, digite
+    <blockquote class="t1">info tty</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

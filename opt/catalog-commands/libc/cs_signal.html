@@ -1,0 +1,158 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>signal()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="signal()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>signal( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta <a href="../chamadas.html"><b>chamada de sistema</b></a> define um conjunto de a&ccedil;&otilde;es 
+quando do recebimento de um determinado <a href="../sinal.html"><b>sinal</b></a>.
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<p>
+<blockquote class="t2">
+#include&lt;signal.h&gt;<br>
+typedef void (*sighandler_t)(int);<br>
+sighandler_t signal(int signum, sighandler_t handler);
+</blockquote>
+</p>
+
+<ul>
+<li>O par&acirc;metro <i>signum</i> &eacute; o sinal a ser tratado.
+<li>O par&acirc;metro <i>handler</i> &eacute; a fun&ccedil;&atilde;o/a&ccedil;&atilde;o para o tratamento do sinal.
+<li>O par&acirc;metro do tipo <i>integer</i> (inteiro) que &eacute; passado para a fun&ccedil;&atilde;o de tratamento do sinal
+    corresponde ao n&uacute;mero do sinal. Portanto, &eacute; poss&iacute;vel usar uma mesma fun&ccedil;&atilde;o para manipular
+    v&aacute;rios sinais.
+<li>Quando o sinal &eacute; entregue ao processo:
+    <ul>
+    <li>Se <i>handler</i> foi definido como SIG_IGN, o sinal definido &eacute; ignorado.
+    <li>Se <i>handler</i> foi definido como SIG_DFL, a a&ccedil;&atilde;o padr&atilde;o associada com o sinal &eacute; executada.
+    <li>Se no <i>handler</i> &eacute; definida uma fun&ccedil;&atilde;o, ela &eacute; chamada.
+    </ul>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<ul>
+<li>A chamada <i>signal( )</i> retorna o valor do sinal tratado ou SIG_ERR em caso de erro.
+<li>A vari&aacute;vel externa <b><a href="vr_errno.html">errno</a></b> &eacute; setada com EINVAL quando o sinal
+    &eacute; inv&aacute;lido.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include&lt;stdio.h&gt;     <br>
+2. #include&lt;stdlib.h&gt;    <br>
+3. #include&lt;signal.h&gt;    <br>
+4. #include&lt;unistd.h&gt;    <br>
+5. void trata_sinal(int signo) <br>
+6. &nbsp;&nbsp;&nbsp; { <br>
+7. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (signo == SIGINT) <br>
+8. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("\nRecebido SIGINT\n"); <br>
+9. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(0); <br>
+10.&nbsp;&nbsp;&nbsp; } <br>
+11.int main(void) <br>
+12.&nbsp;&nbsp;&nbsp; { <br>
+13.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (signal(SIGINT, trata_sinal) == SIG_ERR) <br>
+14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("\nNao captura SIGINT\n"); <br>
+15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while(1) <br>
+16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pause(); <br>
+17.&nbsp;&nbsp;&nbsp; }
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/signal.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 4 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>stdlib.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o de alguns tipos de vari&aacute;veis e com v&aacute;rias
+        fun&ccedil;&otilde;es de uso geral como, por exemplo, <a href="fc_exit.html"><b>exit()</b></a>.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror()</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro.
+    <li><b>signal.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o dos <a href="../sinal.html"><b>sinais</b></a>.
+    <li><b>unistd.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das <a href="../chamadas.html"><b>chamadas de sistema</b></a>. 
+    </ul>
+<li><b>Linhas de 5 a 10 :</b> a fun&ccedil;&atilde;o <i>trata_sinal( )</i> &eacute; chamada quando um sinal SIGINT &eacute; capturado
+    pelo processo. Esta fun&ccedil;&atilde;o exibe mensagem e encerra programa.
+<li><b>Linha 11 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 13 a linha 16.
+<li><b>Linhas de 13 e 14 :</b> define a fun&ccedil;&atilde;o <i>trata_sinal( )</i> para tratar o sinal recebido.
+<li><b>Linhas de 15 e 16 :</b> loop &agrave; espera do sinal.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+<blockquote class="t1">
+gcc -o signal signal.c
+</blockquote>
+Para executar o programa, basta digitar
+<blockquote class="t1">
+./signal
+</blockquote>
+O programa aguarda que o usu&aacute;rio tecle CTRL+C para mandar sinal.
+<blockquote class="t2">
+^C<br>
+Recebido SIGINT
+</blockquote>
+</p>
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>N&atilde;o &eacute; poss&iacute;vel usar a chamada <i>signal( )</i> para tratar os sinais SIGKILL e SIGSTOP.
+<li>O comportamento de <i>signal( )</i> pode variar dentro das diferentes vers&otilde;es do <a href="../linux.html"><b>Linux</b></a>.
+<li>Veja as chamadas <b><a href="cs_alarm.html">alarm( )</a></b> e <b><a href="cs_setitimer.html">setitimer( )</a></b>
+    para outros exemplos do uso de <i>signal( )</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>du</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="du">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>du</h1>
+
+<blockquote><b><font size="+1"> du [op&ccedil;&otilde;es]</font></b><br></blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando exibe informa&ccedil;&otilde;es sobre o espa&ccedil;o usado pelos diret&oacute;rios.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+<ul>
+<li><b>-a</b> : mostra tamb&eacute;m o espa&ccedil;o ocupado pelos arquivos (de forma recursiva).
+<li><b>-b</b> : mostra o espa&ccedil;o ocupado em bytes.
+<li><b>-c</b> : mostra o total do espa&ccedil;o ocupado.
+<li><b>-h</b> : apresenta o espa&ccedil;o ocupado em formato compreens&iacute;vel para o ser humano (1K, 1M, 1G, etc).
+<li><b>-k</b> : mostra o espa&ccedil;o ocupado em Kbytes (&eacute; o padr&atilde;o).
+<li><b>-m</b> : mostra o espa&ccedil;o ocupado em Mbytes.
+<li><b>-s</b> : mostra apenas o total ocupado (sum&aacute;rio).
+<li><b>--version</b> : exibe informa&ccedil;&otilde;es sobre o aplicativo. 
+</ul>
+ 
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Para ver o tamanho do arquivo <i>teste.txt</i> em bytes, digite
+    <blockquote class="t1">du -b teste.txt</blockquote>
+<li>Para obter o tamanho, em Kbytes, de todos os arquivos do diret&oacute;rio corrente com extens&atilde;o <i>txt</i>
+    e o total de espa&ccedil;o ocupado por estes arquivos, basta digitar
+    <blockquote class="t1">du -c *.txt<br></blockquote>
+<li>Para verificar o total de espa&ccedil;o ocupado pelo diret&oacute;rio <i>testes</i>, digite
+    <blockquote class="t1">du -sh testes</blockquote>
+    Abaixo, o resultado mostra que o diret&oacute;rio <i>testes</i> ocupa 32Mbytes do espa&ccedil;o do disco.
+    <blockquote class="t2">32M	testes</blockquote>
+    Se o nome do diret&oacute;rio n&atilde;o for fornecido, o comando retorna o espa&ccedil;o ocupado pelo diret&oacute;rio corrente.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O comando <i>du</i>, sem qualquer op&ccedil;&atilde;o e sem nome de arquivo ou diret&oacute;rio, fornece a quantidade
+    de espa&ccedil;o ocupada por cada subdiret&oacute;rio que se encontra hierarquicamente abaixo do diret&oacute;rio atual.
+<li>O comando <a href="df.html"><b>df</b></a> exibe informa&ccedil;&otilde;es sobre os espa&ccedil;os livres e utilizados 
+    das parti&ccedil;&otilde;es.
+<li>O comando <b><a href="fdisk.html">fdisk</a></b> &eacute; utilizado para particionar discos.</li>
+<li>O comando <b><a href="hdparm.html">hdparm</a></b> exibe/altera os par&acirc;metros de discos SATA/IDE do sistema.
+<li>O comando <b><a href="smartctl.html">smartctl</a></b> exibe relat&oacute;rio detalhado sobre os discos IDE/SCSI existentes
+    no sistema.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

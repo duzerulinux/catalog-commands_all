@@ -1,0 +1,79 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>su</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="su">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>su</h1>
+   
+<blockquote><font size="+1"><b>su [op&ccedil;&otilde;es] [usu&aacute;rio]</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<ul>
+<li>Este comando permite mudar de usu&aacute;rio em um ambiente <b><a href="shell.html">shell</a></b>.
+<li>Caso o nome do usu&aacute;rio n&atilde;o seja fornecido, assume-se que o objetivo &eacute; se tornar
+    o usu&aacute;rio <b><a href="root.html">root</a></b>.
+<li>Na distribui&ccedil;&atilde;o DuZeru, usa-se o comando <b><a href="sudo.html">sudo</a></b> quando se deseja executar
+    comandos com os privil&eacute;gios de outro usu&aacute;rio. Portanto, deve-se usar <i>sudo</i> antes de <i>su</i> caso o 
+    objetivo seja se tornar o usu&aacute;rio <i>root</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-c, --command COMMAND</b> : um comando &eacute; executado usando os privil&eacute;gios do usu&aacute;rio especificado.
+<li><b>-s, --shell SHELL</b> : define o ambiente <i>shell</i> a ser usado com o usu&aacute;rio especificado.
+<li><b>-h, --help</b> : exibe as op&ccedil;&otilde;es do comando.
+</ul>
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Para se tornar o <i>root</i> existem duas formas. O comando
+    <blockquote class=" t1">sudo su</blockquote>
+    faz o usu&aacute;rio se transformar em <i>root</i> mantendo a maioria da defini&ccedil;&otilde;es do ambiente,
+    enquanto o comando
+    <blockquote class=" t1">sudo su -</blockquote>
+    assume todas as defini&ccedil;&otilde;es do ambiente do usu&aacute;rio <i>root</i> (corresponde a iniciar uma 
+    sess&atilde;o como <i>root</i>).
+<li>O comando
+    <blockquote class=" t1">sudo su -s /bin/dash</blockquote>
+    faz com que o <i>shell dash</i> seja utilizado com o usu&aacute;rio <i>root</i>.
+<li>Para ver as senhas armazenadas em <i>/etc/shadow</i> &eacute; preciso ter privil&eacute;gio de <i>root</i>. Portanto, digite
+   <blockquote class=" t1">sudo more /etc/shadow</blockquote>
+    O sistema solicitar&aacute; a senha do <i>root</i> antes de mostrar o arquivo.
+    
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

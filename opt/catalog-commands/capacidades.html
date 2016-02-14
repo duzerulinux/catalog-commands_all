@@ -1,0 +1,254 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>capacidades</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="capacidades">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>capacidades</h1>
+
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<ul>
+<li>Capacidades s&atilde;o atributos dos <i>threads</i> (<a href="processo.html"><b>processos</b></a> em execu&ccedil;&atilde;o). 
+<li>Para executar um processo, o Linux usa as permiss&otilde;es do usu&aacute;rio que o iniciou. Isso significa que os 
+    privil&eacute;gios do usu&aacute;rio se aplicam a todas as a&ccedil;&otilde;es do processo.
+    Processos n&atilde;o privilegiados (<a href="uid.html"><b>UID</b></a> diferente de zero) est&atilde;o sujeitos ao
+    controle das <a href="permissao.html"><b>permiss&otilde;es</b></a> do sistema (normalmente: <a href="uid.html"><b>UID</b></a> efetivo,
+    <a href="gid.html"><b>GID</b></a> efetivo e lista de grupos adicionais).
+<li>Quando uma determinada capacidade est&aacute; habilitada, o <i>thread</i> ganha privil&eacute;gios de <a href="root.html"><b>root</b></a>
+    para executar as tarefas associadas com a correspondente capacidade. 
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Conjunto de capacidades</h2>
+
+<p>Existem tr&ecirc;s conjuntos de capacidades por <i>thread</i>, onde cada conjunto &eacute; representado no sistema por um mapa de bits.
+<ul>
+<li><b>Efetivas</b> (<i>effective</i>) - s&atilde;o usadas pelo <a href="kernel.html"><b>kernel</b></a> para verificar as permiss&otilde;es
+    para o <i>thread</i>. Quando um processo tenta fazer uma opera&ccedil;&atilde;o privilegiada, o sistema verifica a permiss&atilde;o 
+    (valor 1) correspondente no mapa de bits do processo.
+<li><b>Permitidas</b> (<i>permitted</i>) - s&atilde;o as capacidades que o <i>thread</i> pode assumir. Este conjunto limita as capacidades
+    efetivas que o <i>thread</i> pode ter. Uma capacidade habilitada neste mapa, mas desabilitada no mapa das capacidades efetivas, indica
+    que o processo pode habilitar esta capacidade quando precisar. Se alguma capacidade &eacute; descartada, ela n&atilde;o pode ser
+    readquirida (exceto no caso de usu&aacute;rio <i>root</i>).
+<li><b>Heredit&aacute;rias</b> (<i>inheritable</i>) - s&atilde;o herdadas do processo-pai atrav&eacute;s da chamada de sistema 
+    <a href="libc/cs_execve.html"><b>execve( )</b></a>.  
+</ul>
+<p>Al&eacute;m disso, existe o mapa de bits bset </b> (<i>bounding  set</i>) que indica quais as capacidades suportadas pelo sistema.
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Implementa&ccedil;&atilde;o</h2>
+
+<p>Uma implementa&ccedil;&atilde;o completa das capacidades requer que:
+<ol>
+<li>Para todas as opera&ccedil;&otilde;es privilegiadas, o kernel verifique se o <i>thred</i> tem a capacidade
+    correspondente no seu conjunto de capacidades efetivas.
+<li>O kernel forne&ccedil;a <a href="chamadas.html"><b>chamadas de sistema</b></a> que permitam alterar o conjunto de
+    capacidades dos <i>threads</i>.
+<li>O sistema de arquivos suporte altera&ccedil;&otilde;es nas capacidades durante a execu&ccedil;&atilde;o de um arquivo.
+</ol>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Lista das capacidades</h2>
+
+<p>A tabela abaixo mostra um resumo das capacidades usadas no Linux. Para obter mais detalhes, veja o arquivo 
+<i>/usr/include/linux/capability.h</i> ou use o comando "man capabilities".</p>
+
+<table class="t2" rules=all align=center cellpadding="10" cellspacing="10" width=700>
+<tr class="t1"><td><b>Bit</b></td><td><b>Nome</b> </td><td><b>Descri&ccedil;&atilde;o</b>                         </td></tr>
+<tr><td align=center> 0</td><td>CAP_CHOWN           </td><td>Altera UID e GID do arquivo                          </td></tr>
+<tr><td align=center> 1</td><td>CAP_DAC_OVERRIDE    </td><td>N&atilde;o verifica permiss&otilde;es do arquivo para
+     ler, escrever e executar (DAC significa "discretionary access control")                                      </td></tr>
+<tr><td align=center> 2</td><td>CAP_DAC_READ_SEARCH </td><td>N&atilde;o verifica permiss&otilde;es de leitura e 
+    faz pesquisa em arquivos e diret&oacute;rios (DAC significa "discretionary access control")                   </td></tr>
+<tr><td align=center> 3</td><td>CAP_FOWNER          </td><td>N&atilde;o verifica se o UID do usu&aacute;rio 
+    &eacute; igual ao UID do processo                                                                             </td></tr>
+<tr><td align=center> 4</td><td>CAP_FSETID          </td><td>Ignora a necessidade do UID do usu&aacute;rio ser
+    igual ao UID do processo quando os bits S_ISUID e S_ISGID est&atilde;o marcados                               </td></tr>
+<tr><td align=center> 5</td><td>CAP_KILL            </td><td>N&atilde;o verifica permiss&otilde;es para enviar 
+    sinal                                                                                                         </td></tr>
+<tr><td align=center> 6</td><td>CAP_SETGID          </td><td>Altera o GID do processo                             </td></tr>
+<tr><td align=center> 7</td><td>CAP_SETUID          </td><td>Altera o UID do processo                             </td></tr>
+<tr><td align=center> 8</td><td>CAP_SETPCAP         </td><td>Remove todas as capacidades ou autoriza todas as 
+    capacidades                                                                                                   </td></tr>
+<tr><td align=center> 9</td><td>CAP_LINUX_IMMUTABLE </td><td>Modifica os atributos S_IMMUTABLE e S_APPEND
+    dos arquivos                                                                                                  </td></tr>
+<tr><td align=center>10</td><td>CAP_NET_BIND_SERVICE</td><td>Abre um soquete de rede com um n&uacute;mero 
+    de porta menor que 1024 (portas privilegiadas)                                                                </td></tr>
+<tr><td align=center>11</td><td>CAP_NET_BROADCAST   </td><td>Envia mensagens <i>broadcasts</i> (para 
+    todos) e receber mensagens <i>multicasts</i> (de todos)                                                       </td></tr>
+<tr><td align=center>12</td><td>CAP_NET_ADMIN       </td><td>Executa v&aacute;rias opera&ccedil;&otilde;es de
+    rede                                                                                                          </td></tr>
+<tr><td align=center>13</td><td>CAP_NET_RAW         </td><td>Abre soquetes de rede                                </td></tr>
+<tr><td align=center>14</td><td>CAP_IPC_LOCK        </td><td>Bloqueia compartilhamento de mem&oacute;ria          </td></tr>
+<tr><td align=center>15</td><td>CAP_IPC_OWNER       </td><td>N&atilde;o verifica permiss&otilde;es nas 
+    opera&ccedil;&otilde;es de comunica&ccedil;&atilde;o entre processos                                          </td></tr>
+<tr><td align=center>16</td><td>CAP_SYS_MODULE      </td><td>Carrega/descarrega m&oacute;dulos do kernel          </td></tr>
+<tr><td align=center>17</td><td>CAP_SYS_RAWIO       </td><td>Executa v&aacute;rias opera&ccedil;&otilde;es de
+    I/O                                                                                                           </td></tr>
+<tr><td align=center>18</td><td>CAP_SYS_CHROOT      </td><td>Altera o diret&oacute;rio do root                    </td></tr>
+<tr><td align=center>19</td><td>CAP_SYS_PTRACE      </td><td>Permite observar e controlar a execu&ccedil;&atilde;o 
+    de um outro processo                                                                                          </td></tr>
+<tr><td align=center>20</td><td>CAP_SYS_PACCT       </td><td>Configura auditoria dos processos                    </td></tr>
+<tr><td align=center>21</td><td>CAP_SYS_ADMIN       </td><td>Executa v&aacute;rias opera&ccedil;&otilde;es de 
+    administra&ccedil;&atilde;o do sistema                                                                        </td></tr>
+<tr><td align=center>22</td><td>CAP_SYS_BOOT        </td><td>Reinicializa o sistema                               </td></tr>
+<tr><td align=center>23</td><td>CAP_SYS_NICE        </td><td>Altera prioridades de execução de processos          </td></tr>
+<tr><td align=center>24</td><td>CAP_SYS_RESOURCE    </td><td>Configura recursos do sistema                        </td></tr>
+<tr><td align=center>25</td><td>CAP_SYS_TIME        </td><td>Altera rel&oacute;gio do sistema                     </td></tr>
+<tr><td align=center>26</td><td>CAP_SYS_TTY_CONFIG  </td><td>Executa v&aacute;rias opera&ccedil;&otilde;es em
+    terminais virtuais                                                                                            </td></tr>
+<tr><td align=center>27</td><td>CAP_MKNOD           </td><td>Cria um arquivo especial (caracteres, blocos ou FIFO)</td></tr>
+<tr><td align=center>28</td><td>CAP_LEASE           </td><td>Estabelece loca&ccedil;&atilde;o em outros arquivos  </td></tr>
+<tr><td align=center>29</td><td>CAP_AUDIT_WRITE     </td><td>Grava registros no log de auditoria do kernel        </td></tr>
+<tr><td align=center>30</td><td>CAP_AUDIT_CONTROL   </td><td>Habilita/desabilita auditoria do processo pelo kernel</td></tr>
+<tr><td align=center>31</td><td>CAP_SETFCAP         </td><td>Altera as capacidades do arquivo                     </td></tr>
+<tr><td align=center>32</td><td>CAP_MAC_OVERRIDE    </td><td>Configura o controle para acesso aos recursos
+    (<i>Mandatory Access Control</i>)                                                                             </td></tr>
+<tr><td align=center>33</td><td>CAP_MAC_ADMIN       </td><td>Ignora a pol&iacute;tica de controle para acesso aos
+        recursos (<i>Mandatory Access Control</i>)                                                                </td></tr>
+<tr><td align=center>34</td><td>CAP_SYSLOG          </td><td>Configura o syslog do kernel                         </td></tr>
+<tr><td align=center>35</td><td>CAP_WAKE_ALARM      </td><td>Inicializa rel&oacute;gio para despertar o sistema   </td></tr>
+<tr><td align=center>36</td><td>CAP_BLOCK_SUSPEND   </td><td>Impede que o sistema seja suspenso                   </td></tr>
+</table>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>A melhor forma de mostrar a utiliza&ccedil;&atilde;o das capacidades e a melhoria que este tipo de implementa&ccedil;&atilde;o
+traz para a seguran&ccedil;a do sistema &eacute; por meio de um exemplo. Para isto, vamos usar o programa <i>ping</i>.</p>
+
+<p>O comando <i>ping</i> precisa de privil&eacute;gio de <i>root</i> para abrir um soquete de redes e, assim, transmitir/receber
+pacotes ICMP. Por isto, o comando ganha, normalmente, <a href="permissao.html#especial"><b>permiss&atilde;o especial</b></a> SUID.
+Este tipo de permiss&atilde;o &eacute; representada pela letra "s" no grupo de permiss&otilde;es do dono do arquivo
+e autoriza qualquer pessoa a executar o programa como se fosse o pr&oacute;prio <i>root</i>.
+
+<blockquote class="t2">-rwsr-xr-x 1 root root 44168 Mai  7  2014 /bin/ping</blockquote>
+
+Podemos, por exemplo, usar comando <i>ping</i> para verificar a p&aacute;gina do Google.
+<blockquote class="t1">ping www.google.com.br</blockquote>
+Abaixo uma poss&iacute;vel sa&iacute;da para o comando.
+<blockquote class="t2">
+PING www.google.com.br (173.194.42.184) 56(84) bytes of data.
+64 bytes from rio01s06-in-f24.1e100.net (173.194.42.184): icmp_seq=1 ttl=55 time=9.41 ms<br>
+64 bytes from rio01s06-in-f24.1e100.net (173.194.42.184): icmp_seq=2 ttl=55 time=9.69 ms<br>
+64 bytes from rio01s06-in-f24.1e100.net (173.194.42.184): icmp_seq=3 ttl=55 time=10.7 ms
+</blockquote>
+
+Note que o SUID permite que QUALQUER comando dentro do <i>ping</i> seja executado como <i>root</i>. Isto pode representar uma falha grave
+de seguran&ccedil;a. Vamos ent&atilde;o usar o comando <a href="chmod.html"><b>chmod</b></a> para remover o bit SUID das permiss&otilde;es.
+<blockquote class="t1">sudo chmod u-s /bin/ping</blockquote>
+O novo conjunto de permiss&otilde;es do <i>ping</i> &eacute; mostrado abaixo. N&atilde;o existe mais a permiss&atilde;o SUID.
+<blockquote class="t2">-rwxr-xr-x 1 root root 44168 Mai  7  2014 /bin/ping</blockquote>
+
+Se testarmos novamente o comando <i>ping</i>, veremos que ocorre um erro.
+<blockquote class="t2">ping: icmp open socket: Operation not permitted</blockquote>
+
+Isto significa que o programa precisa de permiss&atilde;o para abrir soquetes de rede. Este tipo de permis&atilde;o &eacute; fornecida
+pela capacidade <i>cap_net_raw</i> (bit 13). Podemos ent&atilde;o usar o comando <a href="setcap.html"><b>setcap</b></a> para 
+adicion&aacute;-la ao conjunto das capacidades permitidas (p) do programa.
+<blockquote class="t1">sudo setcap cap_net_raw+p /bin/ping</blockquote>
+
+Podemos usar o comando <a href="getcap.html"><b>getcap</b></a> para verificar as capacidades do comando <i>ping</i>.
+<blockquote class="t1">getcap /bin/ping</blockquote>
+
+A resposta obtida &eacute; mostrada abaixo.
+<blockquote class="t2">/bin/ping = cap_net_raw+p</blockquote>
+
+Se usarmos novamente o comando <i>ping</i>, veremos que ele n&atilde;o mais apresenta problema de permiss&atilde;o.
+<blockquote class="t2">
+PING www.google.com.br (173.194.42.184) 56(84) bytes of data.
+64 bytes from rio01s06-in-f24.1e100.net (173.194.42.184): icmp_seq=1 ttl=55 time=12.2 ms<br>
+64 bytes from rio01s06-in-f24.1e100.net (173.194.42.184): icmp_seq=2 ttl=55 time=11.6 ms<br>
+64 bytes from rio01s06-in-f24.1e100.net (173.194.42.184): icmp_seq=3 ttl=55 time=11.4 ms
+</blockquote>
+
+Da discuss&atilde;o acima podemos deduzir que n&atilde;o h&aacute; necessidade de dar permiss&atilde;o geral para o programa
+<i>ping</i> executar como <i>root</i>. Basta permitir que o programa use soquetes de rede.
+</p>
+
+<table align="center" width=80%>
+<tr><td><img src="imagens/tux.jpg" width="150" height="166"></td>
+<td>
+<blockquote class="t3">
+A substitui&ccedil;&atilde;o da permiss&atilde;o SUID pela capacidade <i>cap_net_raw</i> trouxe mais seguran&ccedil;a ao
+sistema. O <i>ping</i> n&atilde;o tem mais permiss&atilde;o para executar qualquer comando como se fosse o <i>root</i>.
+Ele agora s&oacute; tem permiss&atilde;o para agir como <i>root</i> quando for abrir um soquete de rede.
+</blockquote>
+</td></tr>
+</table>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Desde o Linux 2.6.33, as capacidades fazem parte do kernel. Mas em algumas 
+    <a href="distribuicao.html"><b>distribui&ccedil;&otilde;es</b></a> Linux &eacute; preciso
+    instalar a biblioteca <i>libcap</i> para ter acesso &agrave;s fun&ccedil;&otilde;es e aos comandos que manipulam as capacidades.
+<li>O arquivo <i>/proc/sys/kernel/cap_last_cap</i> informa a quantidade de bits usada em cada mapa.
+<li>Para descobrir quais os conjuntos de capacidades de um <i>thread</i>, verifique o arquivo /proc/PID/task/TID/status, onde
+    PID &eacute; o n&uacute;mero do processo e TID &eacute; o n&uacute;mero do <i>thread</i>. Normalmente, PID = TID. 
+    Por exemplo, suponha um processo com PID = 2127 sendo executado em uma m&aacute;quina de 64 bits. Logo,
+    <blockquote class="t1">more /proc/2127/task/2127/status</blockquote> 
+    pode mostrar algo como
+    <blockquote class="t2">
+    <table class="t2">
+    <tr><td>CapInh: </td><td>0000000000000000</td></tr>
+    <tr><td>CapPrm: </td><td>0000000000000000</td></tr>
+    <tr><td>CapEff: </td><td>0000000000000000</td></tr>
+    <tr><td>CapBnd: </td><td>0000003fffffffff</td></tr>
+    </table>
+    </blockquote>
+    onde a primeira linha mostra as capacidades heredit&aacute;rias; a segunda linha mostra as capacidades permitidas; a terceira
+    linha mostra as capacidades efetivas; e a &uacute;ltima linha mostra o <i>bset</i> com 38 posi&ccedil;&otilde;es
+    (numeradas de zero a 37). Para decodificar um mapa de bits, basta usar o comando <a href="capsh.html"><b>capsh</b></a>.
+    <blockquote class="t1">capsh --decode=ffffffffffffffff</blockquote>
+    Abaixo s&atilde;o mostradas as capacidades correspondentes aos bits de zero a 36. Note que, conforme j&aacute; dicutido,
+    apenas os 37 primeiros bits tem capacidades alocadas atualmente. Os bits de 37 a 63 est&atilde;o livres.  
+    <blockquote class="t2">
+    0xffffffffffffffff=cap_chown,cap_dac_override,cap_dac_read_search,cap_fowner,cap_fsetid,cap_kill,cap_setgid,<br>
+    cap_setuid,cap_setpcap,cap_linux_immutable,cap_net_bind_service,cap_net_broadcast,cap_net_admin,cap_net_raw,<br>
+    cap_ipc_lock,cap_ipc_owner,cap_sys_module,cap_sys_rawio,cap_sys_chroot,cap_sys_ptrace,cap_sys_pacct,<br>
+    cap_sys_admin,cap_sys_boot,cap_sys_nice,cap_sys_resource,cap_sys_time,cap_sys_tty_config,cap_mknod,cap_lease,<br>
+    cap_audit_write,cap_audit_control,cap_setfcap,cap_mac_override,cap_mac_admin,cap_syslog,cap_wake_alarm,<br>
+    cap_block_suspend,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63
+    </blockquote>
+    Para ver apenas as 37 capacidades, digite
+    <blockquote class="t1">capsh --decode=0000001fffffffff</blockquote>
+<li>Um <i>thread</i> pode manipular suas capacidades usando as chamadas de sistema <a href="libc/cs_capget.html"><b>capget( )</b></a> e
+    <a href="libc/cs_capget.html"><b>capset( )</b></a>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

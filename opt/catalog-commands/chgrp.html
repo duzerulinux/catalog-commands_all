@@ -1,0 +1,74 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>chgrp</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="chgrp">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>chgrp</h1>
+
+<blockquote><b><font size="+1">chgrp [op&ccedil;&otilde;es] grupo arquivo</font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando altera o nome do grupo de <a href="arquivo.html"><b>arquivos</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+<ul>
+<li><b>-c </b> : informa quais arquivos est&atilde;o tendo o nome de grupo alterado.
+<li><b>-v </b> : informa quais arquivos est&atilde;o sendo processados (n&atilde;o necessariamente alterados).
+<li><b>-R </b> : altera, recursivamente, o nome de grupo dos arquivos.
+<li><b>--help</b> : exibe op&ccedil;&otilde;es do comando.
+<li><b>--version</b> : exibe informa&ccedil;&otilde;es sobre o aplicativo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>Suponha, por exemplo, a exist&ecirc;ncia de um diret&oacute;rio de nome <i>teste</i>. 
+Queremos que este diret&oacute;rio e todo o seu conte&uacute;do passe a pertencer ao grupo 
+<i>desenvolvimento</i>. Podemos, ent&atilde;o, digitar o comando 
+
+<blockquote class="t1">chgrp -Rc desenvolvimento teste</blockquote>
+
+para alterar o grupo do diret&oacute;rio <i>teste</i> e de todos os arquivos e diret&oacute;rios
+que est&atilde;o hierarquicamente abaixo do diret&oacute;rio <i>teste</i>. Como a op&ccedil;&atilde;o
+-c &eacute; usada, ser&aacute; mostrada a lista dos arquivos e diret&oacute;rios que tiveram o nome do
+grupo alterado.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O comando <b><a href="chown.html">chown</a></b> altera o dono e/ou o grupo de arquivos.
+<li>O comando <b><a href="chmod.html">chmod</a></b> altera as permiss&otilde;es de arquivos.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

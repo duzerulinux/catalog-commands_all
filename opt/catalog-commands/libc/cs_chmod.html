@@ -1,0 +1,181 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>chmod()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="chmod()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>chmod( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta <a href="../chamadas.html"><b>chamada de sistema</b></a> altera as <a href="../permissao.html"><b>permiss&otilde;es</b></a> do 
+<a href="../arquivo.html"><b>arquivo</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<p>
+<blockquote class="t2">
+#include&lt;sys/stat.h&gt;<br>
+int chmod(const char *path, mode_t mode);
+</blockquote>
+</p>
+<ul>
+<li>O argumento <i>path</i> &eacute; uma string com o nome de um arquivo.
+<li>O argumento <i>mode</i> &eacute; o conjunto das permiss&otilde;es de acesso do arquivo.
+</ul>
+
+<p>Note que o segundo argumento da chamada <i>chmod( )</i> &eacute; do tipo <i>mode_t</i> que 
+corresponde ao tipo unsigned int (inteiro sem sinal).</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Se a chamada &eacute; executada com sucesso, o valor zero &eacute; retornado. Caso a chamada n&atilde;o
+seja bem sucedida, o valor -1 &eacute; retornado e o c&oacute;digo do erro &eacute; colocado na vari&aacute;vel externa 
+<b><a href="vr_errno.html">errno</a></b>. A tabela abaixo mostra alguns erros que podem ocorrer com esta chamada.</p>
+
+<blockquote>
+<table class="t2" rules=all cellpadding=10 cellspacing=10 align=center width=650>
+<tr class="t1"><td><b>Erro</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td>EACCES       </td><td>Permiss&atilde;o de acesso negada</td></tr>
+<tr><td>EFAULT       </td><td>Problema com o endere&ccedil;o de mem&oacute;ria</td></tr>
+<tr><td>EIO          </td><td>Erro de I/O</td></tr>
+<tr><td>ELOOP        </td><td>Muitos links simb&oacute;licos no caminho do arquivo</td></tr>
+<tr><td>ENAMETOOLONG </td><td>Caminho longo demais</td></tr>
+<tr><td>ENOENT       </td><td>Arquivo n&atilde;o existe</td></tr>
+<tr><td>ENOMEM       </td><td>Mem&oacute;ria dispon&iacute;vel insuficiente</td></tr>
+<tr><td>ENOTDIR      </td><td>Um componente no caminho do arquivo n&atilde;o &eacute; diret&oacute;rio</td></tr>
+<tr><td>EPERM        </td><td>Erro de permiss&atilde;o</td></tr>
+<tr><td>EROFS        </td><td>Sistema de arquivos apenas para leitura</td></tr>
+</table>
+</blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Permiss&atilde;o de acesso</h2>
+
+<p>As permiss&otilde;es de acesso s&atilde;o especificadas atrav&eacute;s de uma opera&ccedil;&atilde;o l&oacute;gica
+<i>OR</i> usando os valores mostrados na tabela abaixo.</p>
+
+<blockquote>
+<table class="t2" rules=all cellpadding=10 cellspacing=10 align=center width=650>
+<tr class="t1"><td><b>Permiss&atilde;o</b></td><td><b>Valor octal</b></td><td><b>Significado</b></td></tr>
+<tr><td>S_ISUID</td><td>04000</td><td>permiss&atilde;o especial SUID</td></tr>
+<tr><td>S_ISGID</td><td>02000</td><td>permiss&atilde;o especial SGID</td></tr>
+<tr><td>S_ISVTX</td><td>01000</td><td>permiss&atilde;o especial sticky bit</td></tr>
+<tr><td>S_IRUSR</td><td>00400</td><td>permiss&atilde;o de leitura para o dono</td></tr>
+<tr><td>S_IWUSR</td><td>00200</td><td>permiss&atilde;o de grava&ccedil;&atilde;o para o dono</td></tr>
+<tr><td>S_IXUSR</td><td>00100</td><td>permiss&atilde;o de execu&ccedil;&atilde;o para o dono</td></tr>
+<tr><td>S_IRGRP</td><td>00040</td><td>permiss&atilde;o de leitura para o grupo</td></tr>
+<tr><td>S_IWGRP</td><td>00020</td><td>permiss&atilde;o de grava&ccedil;&atilde;o para o grupo</td></tr>
+<tr><td>S_IXGRP</td><td>00010</td><td>permiss&atilde;o de execu&ccedil;&atilde;o para o grupo</td></tr>
+<tr><td>S_IROTH</td><td>00004</td><td>permiss&atilde;o de leitura para os outros usu&aacute;rios</td></tr>
+<tr><td>S_IWOTH</td><td>00002</td><td>permiss&atilde;o de grava&ccedil;&atilde;o para os outros usu&aacute;rios</td></tr>
+<tr><td>S_IXOTH</td><td>00001</td><td>permiss&atilde;o de execu&ccedil;&atilde;o para os outros usu&aacute;rios</td></tr>
+</table>
+</blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include&lt;stdio.h&gt;    <br>
+2. #include&lt;errno.h&gt;    <br>
+3. #include&lt;string.h&gt;   <br>
+4. #include&lt;sys/stat.h&gt; <br>
+5. int main() <br>
+6. &nbsp;&nbsp;&nbsp;{ <br>
+7. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int rt; <br>
+8. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rt = chmod("teste", S_IRUSR|S_IRGRP|S_IROTH); <br>
+9. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (rt == -1) <br>
+10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  printf("Erro chmod() %d: %s\n", errno, strerror(errno)); <br>
+11.&nbsp;&nbsp;&nbsp;}
+</blockquote>
+</p>
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/chmod.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 5 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror( )</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro.
+    <li><b>sys/stat.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da chamada <i>chmod( )</i>.
+   </ul>
+<li><b>Linha 5 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 6 a linha 11.
+<li><b>Linha 8 :</b> o arquivo "teste" recebe permiss&atilde;o apenas de leitura para dono, grupo e outros.
+<li><b>Linhas 9 e 10 :</b> verifica se houve erro na execu&ccedil;&atilde;o da chamada <i>chmod( )</i>.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+    <blockquote class="t1">
+    gcc -o chmod chmod.c
+    </blockquote>
+E para executar, basta dgitar
+    <blockquote class="t1">
+    ./chmod 
+    </blockquote>
+Considere que o arquivo <i>teste</i> tem as seguintes permiss&otilde;es:
+
+<blockquote class="t2">
+-rw-rw-r-- 1 aluno aluno 7743 Jul  2 07:54 teste
+</blockquote>
+Ap&oacute;s a execu&ccedil;&atilde;o do programa, teremos
+<blockquote class="t2">
+-r--r--r-- 1 aluno aluno 7743 Jul  2 07:54 teste
+</blockquote>
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O arquivo definido por <i>path</i> tem as permiss&otilde;es de acesso alteradas de acordo com a defini&ccedil;&atilde;o
+    de <i>mode</i>.
+<li>O UID efetivo do processo que executa a chamada <i>chmod( )</i> deve ser zero ou deve ser igual ao do dono do arquivo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

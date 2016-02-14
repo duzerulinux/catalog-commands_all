@@ -1,0 +1,264 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>errno</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="errno">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>errno</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<ul>
+<li>&Eacute; uma vari&aacute;vel externa onde se armazena o c&oacute;digo do &uacute;ltimo erro.
+<li>O valor de <i>errno</i> pode ser alterado por uma <a href="../chamadas.html"><b>chamada de sistema</b></a> ou por 
+    algumas fun&ccedil;&otilde;es da <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+<li>O valor de <i>errno</i> somente &eacute; atualizado depois que um erro ocorre. Este valor nunca &eacute; configurado
+    como zero para uma opera&ccedil;&atilde;o bem sucedida.
+<li>O valor de <i>errno</i> &eacute; significativo apenas quando o valor retornado da chamada &eacute; -1 ou o valor
+    retornado da fun&ccedil;&atilde;o da biblioteca &eacute; nulo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include &lt;errno.h&gt;
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include&lt;errno.h&gt;   <br>
+2. #include&lt;stdio.h&gt;   <br>
+3. #include&lt;unistd.h&gt;  <br>
+4. int main (int argc, char* argv[]) <br>
+5. &nbsp; &nbsp; &nbsp; { <br>
+6. &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; char* path = argv[1]; <br>
+7. &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; int val; <br>
+8. &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; val = access(path, F_OK); <br>
+9. &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; if (val == 0) <br>
+10.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;    printf ("%s existe\n", path); <br>
+11.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; else <br>
+12.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;   { <br>
+13.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;      if (errno == ENOENT) <br>
+14.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;         printf ("%s nao existe\n", path); <br>
+15.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;      else <br>
+16.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;        if (errno == EACCES) <br>
+17.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;printf ("%s nao acessivel\n", path); <br>
+18.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;    } <br>
+19.&nbsp; &nbsp; &nbsp;}
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/errno.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 3 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <i>errno</i> que armazena 
+        o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>unistd.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das <a href="../chamadas.html"><b>chamadas de sistema</b></a> 
+        usadas neste exemplo.
+    </ul>
+<li><b>Linha 4 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 6 a linha 18.
+<li><b>Linha 6 :</b> cria a vari&aacute;vel <i>path</i> para armazenar o nome do arquivo passado na chamada do programa.
+<li><b>Linha 7 :</b> cria a vari&aacute;vel <i>val</i> que vai receber o valor retornado pela chamada <i>access( )</i>.
+<li><b>Linha 8 :</b> usa a chamada de sistema <a href="cs_access.html"><b>access( )</b></a> para verificar se o arquivo existe.
+<li><b>Linha 9 :</b> verifica se o valor retornado pela chamada <i>access( )</i> &eacute; zero (o arquivo existe).
+<li><b>Linha 13 :</b> verifica se o erro ocorreu porque o arquivo n&atilde;o existe.
+<li><b>Linha 16 :</b> verifica se o erro ocorreu porque o programa n&atilde;o tem acesso ao arquivo.
+</ul>
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Tabela de erros</h2>
+
+<p>
+<table class="t1" align=center cellpadding=10 cellspacing=10 rules=all width=650>
+<tr class="t1"><td><b>N&uacute;mero</b></td><td><b>Nome</b></td><td><b>Mensagem</b></td></tr>
+<tr><td align=center>  0</td><td> &nbsp;       </td><td>  Success </td></tr>
+<tr><td align=center>  1</td><td> EPERM        </td><td>  Operation not permitted </td></tr>
+<tr><td align=center>  2</td><td> ENOENT       </td><td>  No such file or directory </td></tr>
+<tr><td align=center>  3</td><td> ESRCH        </td><td>  No such process </td></tr>
+<tr><td align=center>  4</td><td> EINTR        </td><td>  Interrupted system call </td></tr>
+<tr><td align=center>  5</td><td> EIO          </td><td>  Input/output error </td></tr>
+<tr><td align=center>  6</td><td> ENXIO        </td><td>  No such device or address </td></tr>
+<tr><td align=center>  7</td><td> E2BIG        </td><td>  Argument list too long </td></tr>
+<tr><td align=center>  8</td><td> ENOEXEC      </td><td>  Exec format error </td></tr>
+<tr><td align=center>  9</td><td> EBADF        </td><td>  Bad file descriptor </td></tr>
+<tr><td align=center> 10</td><td> ECHILD       </td><td>  No child processes </td></tr>
+<tr><td align=center> 11</td><td> EAGAIN       </td><td>  Resource temporarily unavailable </td></tr>
+<tr><td align=center> 12</td><td> ENOMEM       </td><td>  Cannot allocate memory </td></tr>
+<tr><td align=center> 13</td><td> EACCES       </td><td>  Permission denied </td></tr>
+<tr><td align=center> 14</td><td> EFAULT       </td><td>  Bad address </td></tr>
+<tr><td align=center> 15</td><td> ENOTBLK      </td><td>  Block device required </td></tr>
+<tr><td align=center> 16</td><td> EBUSY        </td><td>  Device or resource busy </td></tr>
+<tr><td align=center> 17</td><td> EEXIST       </td><td>  File exists </td></tr>
+<tr><td align=center> 18</td><td> EXDEV        </td><td>  Invalid cross-device link </td></tr>
+<tr><td align=center> 19</td><td> ENODEV       </td><td>  No such device </td></tr>
+<tr><td align=center> 20</td><td> ENOTDIR      </td><td>  Not a directory </td></tr>
+<tr><td align=center> 21</td><td> EISDIR       </td><td>  Is a directory </td></tr>
+<tr><td align=center> 22</td><td> EINVAL       </td><td>  Invalid argument </td></tr>
+<tr><td align=center> 23</td><td> ENFILE       </td><td>  Too many open files in system </td></tr>
+<tr><td align=center> 24</td><td> EMFILE       </td><td>  Too many open files </td></tr>
+<tr><td align=center> 25</td><td> ENOTTY       </td><td>  Inappropriate ioctl for device </td></tr>
+<tr><td align=center> 26</td><td> ETXTBSY      </td><td>  Text file busy </td></tr>
+<tr><td align=center> 27</td><td> EFBIG        </td><td>  File too large </td></tr>
+<tr><td align=center> 28</td><td> ENOSPC       </td><td>  No space left on device </td></tr>
+<tr><td align=center> 29</td><td> ESPIPE       </td><td>  Illegal seek </td></tr>
+<tr><td align=center> 30</td><td> EROFS        </td><td>  Read-only file system </td></tr>
+<tr><td align=center> 31</td><td> EMLINK       </td><td>  Too many links </td></tr>
+<tr><td align=center> 32</td><td> EPIPE        </td><td>  Broken pipe </td></tr>
+<tr><td align=center> 33</td><td> EDOM         </td><td>  Numerical argument out of domain </td></tr>
+<tr><td align=center> 34</td><td> ERANGE       </td><td>  Numerical result out of range </td></tr>
+<tr><td align=center> 35</td><td> EDEADLK      </td><td>  Resource deadlock avoided </td></tr>
+<tr><td align=center> 36</td><td> ENAMETOOLONG </td><td>  File name too long </td></tr>
+<tr><td align=center> 37</td><td> ENOLCK       </td><td>  No locks available </td></tr>
+<tr><td align=center> 38</td><td> ENOSYS       </td><td>  Function not implemented </td></tr>
+<tr><td align=center> 39</td><td> ENOTEMPTY    </td><td>  Directory not empty </td></tr>
+<tr><td align=center> 40</td><td> ELOOP        </td><td>  Too many levels of symbolic links </td></tr>
+<tr><td align=center> 41</td><td> EWOULDBLOCK  </td><td>  Unknown error 41 </td></tr>
+<tr><td align=center> 42</td><td> ENOMSG       </td><td>  No message of desired type </td></tr>
+<tr><td align=center> 43</td><td> EIDRM        </td><td>  Identifier removed </td></tr>
+<tr><td align=center> 44</td><td> ECHRNG       </td><td>  Channel number out of range </td></tr>
+<tr><td align=center> 45</td><td> EL2NSYNC     </td><td>  Level 2 not synchronized </td></tr>
+<tr><td align=center> 46</td><td> EL3HLT       </td><td>  Level 3 halted </td></tr>
+<tr><td align=center> 47</td><td> EL3RST       </td><td>  Level 3 reset </td></tr>
+<tr><td align=center> 48</td><td> ELNRNG       </td><td>  Link number out of range </td></tr>
+<tr><td align=center> 49</td><td> EUNATCH      </td><td>  Protocol driver not attached </td></tr>
+<tr><td align=center> 50</td><td> ENOCSI       </td><td>  No CSI structure available </td></tr>
+<tr><td align=center> 51</td><td> EL2HLT       </td><td>  Level 2 halted </td></tr>
+<tr><td align=center> 52</td><td> EBADE        </td><td>  Invalid exchange </td></tr>
+<tr><td align=center> 53</td><td> EBADR        </td><td>  Invalid request descriptor </td></tr>
+<tr><td align=center> 54</td><td> EXFULL       </td><td>  Exchange full </td></tr>
+<tr><td align=center> 55</td><td> ENOANO       </td><td>  No anode </td></tr>
+<tr><td align=center> 56</td><td> EBADRQC      </td><td>  Invalid request code </td></tr>
+<tr><td align=center> 57</td><td> EBADSLT      </td><td>  Invalid slot </td></tr>
+<tr><td align=center> 58</td><td> EDEADLOCK    </td><td>  Unknown error 58 </td></tr>
+<tr><td align=center> 59</td><td> EBFONT       </td><td>  Bad font file format </td></tr>
+<tr><td align=center> 60</td><td> ENOSTR       </td><td>  Device not a stream </td></tr>
+<tr><td align=center> 61</td><td> ENODATA      </td><td>  No data available </td></tr>
+<tr><td align=center> 62</td><td> ETIME        </td><td>  Timer expired </td></tr>
+<tr><td align=center> 63</td><td> ENOSR        </td><td>  Out of streams resources </td></tr>
+<tr><td align=center> 64</td><td> ENONET       </td><td>  Machine is not on the network </td></tr>
+<tr><td align=center> 65</td><td> ENOPKG       </td><td>  Package not installed </td></tr>
+<tr><td align=center> 66</td><td> EREMOTE      </td><td>  Object is remote </td></tr>
+<tr><td align=center> 67</td><td> ENOLINK      </td><td>  Link has been severed </td></tr>
+<tr><td align=center> 68</td><td> EADV         </td><td>  Advertise error </td></tr>
+<tr><td align=center> 69</td><td> ESRMNT       </td><td>  Srmount error </td></tr>
+<tr><td align=center> 70</td><td> ECOMM        </td><td>  Communication error on send </td></tr>
+<tr><td align=center> 71</td><td> EPROTO       </td><td>  Protocol error </td></tr>
+<tr><td align=center> 72</td><td> EMULTIHOP    </td><td>  Multihop attempted </td></tr>
+<tr><td align=center> 73</td><td> EDOTDOT      </td><td>  RFS specific error </td></tr>
+<tr><td align=center> 74</td><td> EBADMSG      </td><td>  Bad message </td></tr>
+<tr><td align=center> 75</td><td> EOVERFLOW    </td><td>  Value too large for defined data type </td></tr>
+<tr><td align=center> 76</td><td> ENOTUNIQ     </td><td>  Name not unique on network </td></tr>
+<tr><td align=center> 77</td><td> EBADFD       </td><td>  File descriptor in bad state </td></tr>
+<tr><td align=center> 78</td><td> EREMCHG      </td><td>  Remote address changed </td></tr>
+<tr><td align=center> 79</td><td> ELIBACC      </td><td>  Can not access a needed shared library </td></tr>
+<tr><td align=center> 80</td><td> ELIBBAD      </td><td>  Accessing a corrupted shared library </td></tr>
+<tr><td align=center> 81</td><td> ELIBSCN      </td><td>  .lib section in a.out corrupted </td></tr>
+<tr><td align=center> 82</td><td> ELIBMAX      </td><td>  Attempting to link in too many shared libraries </td></tr>
+<tr><td align=center> 83</td><td> ELIBEXEC     </td><td>  Cannot exec a shared library directly </td></tr>
+<tr><td align=center> 84</td><td> EILSEQ       </td><td>  Invalid or incomplete multibyte or wide character </td></tr>
+<tr><td align=center> 85</td><td> ERESTART     </td><td>  Interrupted system call should be restarted </td></tr>
+<tr><td align=center> 86</td><td> ESTRPIPE     </td><td>  Streams pipe error </td></tr>
+<tr><td align=center> 87</td><td> EUSERS       </td><td>  Too many users </td></tr>
+<tr><td align=center> 88</td><td> ENOTSOCK     </td><td>  Socket operation on non-socket </td></tr>
+<tr><td align=center> 89</td><td> EDESTADDRREQ </td><td>  Destination address required </td></tr>
+<tr><td align=center> 90</td><td> EMSGSIZE     </td><td>  Message too long </td></tr>
+<tr><td align=center> 91</td><td> EPROTOTYPE   </td><td>  Protocol wrong type for socket </td></tr>
+<tr><td align=center> 92</td><td> ENOPROTOOPT  </td><td>  Protocol not available </td></tr>
+<tr><td align=center> 93</td><td> EPROTONOSUPPORT </td><td>  Protocol not supported </td></tr>
+<tr><td align=center> 94</td><td> ESOCKTNOSUPPORT </td><td>  Socket type not supported </td></tr>
+<tr><td align=center> 95</td><td> EOPNOTSUPP   </td><td>  Operation not supported </td></tr>
+<tr><td align=center> 96</td><td> EPFNOSUPPORT </td><td>  Protocol family not supported </td></tr>
+<tr><td align=center> 97</td><td> EAFNOSUPPORT </td><td>  Address family not supported by protocol </td></tr>
+<tr><td align=center> 98</td><td> EADDRINUSE   </td><td>  Address already in use </td></tr>
+<tr><td align=center> 99</td><td> EADDRNOTAVAIL</td><td>  Cannot assign requested address </td></tr>
+<tr><td align=center>100</td><td> ENETDOWN     </td><td>  Network is down </td></tr>
+<tr><td align=center>101</td><td> ENETUNREACH  </td><td>  Network is unreachable </td></tr>
+<tr><td align=center>102</td><td> ENETRESET    </td><td>  Network dropped connection on reset </td></tr>
+<tr><td align=center>103</td><td> ECONNABORTED </td><td>  Software caused connection abort </td></tr>
+<tr><td align=center>104</td><td> ECONNRESET   </td><td>  Connection reset by peer </td></tr>
+<tr><td align=center>105</td><td> ENOBUFS      </td><td>  No buffer space available </td></tr>
+<tr><td align=center>106</td><td> EISCONN      </td><td>  Transport endpoint is already connected </td></tr>
+<tr><td align=center>107</td><td> ENOTCONN     </td><td>  Transport endpoint is not connected </td></tr>
+<tr><td align=center>108</td><td> ESHUTDOWN    </td><td>  Cannot send after transport endpoint shutdown </td></tr>
+<tr><td align=center>109</td><td> ETOOMANYREFS </td><td>  Too many references: cannot splice </td></tr>
+<tr><td align=center>110</td><td> ETIMEDOUT    </td><td>  Connection timed out </td></tr>
+<tr><td align=center>111</td><td> ECONNREFUSED </td><td>  Connection refused </td></tr>
+<tr><td align=center>112</td><td> EHOSTDOWN    </td><td>  Host is down </td></tr>
+<tr><td align=center>113</td><td> EHOSTUNREACH </td><td>  No route to host </td></tr>
+<tr><td align=center>114</td><td> EALREADY     </td><td>  Operation already in progress </td></tr>
+<tr><td align=center>115</td><td> EINPROGRESS  </td><td>  Operation now in progress </td></tr>
+<tr><td align=center>116</td><td> ESTALE       </td><td>  Stale file handle </td></tr>
+<tr><td align=center>117</td><td> EUCLEAN      </td><td>  Structure needs cleaning </td></tr>
+<tr><td align=center>118</td><td> ENOTNAM      </td><td>  Not a XENIX named type file </td></tr>
+<tr><td align=center>119</td><td> ENAVAIL      </td><td>  No XENIX semaphores available </td></tr>
+<tr><td align=center>120</td><td> EISNAM       </td><td>  Is a named type file </td></tr>
+<tr><td align=center>121</td><td> EREMOTEIO    </td><td>  Remote I/O error </td></tr>
+<tr><td align=center>122</td><td> EDQUOT       </td><td>  Disk quota exceeded </td></tr>
+<tr><td align=center>123</td><td> ENOMEDIUM    </td><td>  No medium found </td></tr>
+<tr><td align=center>124</td><td> EMEDIUMTYPE  </td><td>  Wrong medium type </td></tr>
+<tr><td align=center>125</td><td> ECANCELED    </td><td>  Operation canceled </td></tr>
+<tr><td align=center>126</td><td> ENOKEY       </td><td>  Required key not available </td></tr>
+<tr><td align=center>127</td><td> EKEYEXPIRED  </td><td>  Key has expired </td></tr>
+<tr><td align=center>128</td><td> EKEYREVOKED  </td><td>  Key has been revoked </td></tr>
+<tr><td align=center>129</td><td> EKEYREJECTED </td><td>  Key was rejected by service </td></tr>
+<tr><td align=center>130</td><td> EOWNERDEAD   </td><td>  Owner died </td></tr>
+<tr><td align=center>131</td><td> ENOTRECOVERABLE </td><td>  State not recoverable </td></tr>
+<tr><td align=center>132</td><td> ERFKILL      </td><td>  Operation not possible due to RF-kill </td></tr>
+<tr><td align=center>133</td><td> EHWPOISON    </td><td>  Memory page has hardware error </td></tr>
+</table>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Para verificar qual a mensagem correspondente a um determinado valor de <i>errno</i>, pode-se usar a fun&ccedil;&atilde;o 
+    <a href="fc_strerror.html"><b>strerror( )</b></a> ou a fun&ccedil;&atilde;o <a href="fc_perror.html"><b>perror( )</b></a>.
+<li>A tabela dos erros (n&uacute;mero e nome) est&atilde;o nos arquivos /usr/include/asm-generic/errno-base.h e
+    /usr/include/asm-generic/errno.h.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>sistemas de arquivos</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="sistemas de arquivos">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>sistemas de arquivos</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Parti&ccedil;&otilde;es</h2>
+
+<p>Podemos dividir um disco r&iacute;gido em v&aacute;rias partes ou parti&ccedil;&otilde;es,
+onde cada parti&ccedil;&atilde;o &eacute; independente das outras, ou seja, cada 
+parti&ccedil;&atilde;o pode ter o seu pr&oacute;prio sistema de arquivo. Isto significa que 
+uma parti&ccedil;&atilde;o do disco n&atilde;o interfere nas outras parti&ccedil;&otilde;es.
+Podemos, por exemplo, instalar o Linux em uma parti&ccedil;&atilde;o e o Windows
+em outra parti&ccedil;&atilde;o.</p>
+
+<p>Um disco pode ser dividido em at&eacute; 4 parti&ccedil;&otilde;es. Uma parti&ccedil;&atilde;o
+pode ser prim&aacute;ria ou estendida. Sendo que, no m&aacute;ximo, apenas uma parti&ccedil;&atilde;o 
+pode ser do tipo estendida. Isto significa que voc&ecirc; pode ter 4 parti&ccedil&otilde;es
+prim&aacute;rias ou 3 parti&ccedil;&otilde;es prim&aacute;rias e uma parti&ccedil;&atilde;o 
+estendida. &Eacute; poss&iacute;vel dividir uma parti&ccedil;&atilde;o estendida em
+parti&ccedil;&otilde;es menores chamadas de parti&ccedil;&otilde;es l&oacute;gicas
+(a parti&ccedil;&atilde;o estendida n&atilde;o armazena dados e sim, outras parti&ccedil;&otilde;es
+l&oacute;gicas). N&atilde;o &eacute; poss&iacute;vel, entretanto, dividir uma parti&ccedil;&atilde;o 
+prim&aacute;ria.</p>
+
+<p>A tabela onde s&atilde;o armazenadas as informa&ccedil;&otilde;es sobre as parti&ccedil;&otilde;es
+fica no primeiro setor do disco e chama-se <b><a href="mbr.html">MBR</a></b> (<i>Master Boot Record</i>). 
+Por quest&otilde;es hist&oacute;ricas, esta tabela possui apenas 4 entradas onde cada entrada descreve uma 
+&uacute;nica parti&ccedil;&atilde;o.</p>
+
+<p>Deve-se colocar o Windows em uma parti&ccedil;&atilde;o prim&aacute;ria, pois este sistema operacional 
+n&atilde;o consegue inicializar numa parti&ccedil;&atilde;o l&oacute;gica, enquanto o Linux n&atilde;o 
+possui nenhuma restri&ccedil;&atilde;o.
+Por outro lado, o Linux requer na sua instala&ccedil;&atilde;o a cria&ccedil;&atilde;o de pelo menos 
+duas parti&ccedil;&otilde;es, uma para instalar o pr&oacute;prio Linux 
+(parti&ccedil;&atilde;o Linux nativo) e a outra para servir de mem&oacute;ria auxiliar 
+para o Linux (parti&ccedil;&atilde;o de <a href="swap.html"><b>swap</b></a> ou troca). 
+A parti&ccedil;&atilde;o Linux nativo &eacute; conhecida por diret&oacute;rio <i>raiz</i>
+do Linux e &eacute; representada por <b>/</b>.</p>
+
+<p>O programa mais comumente usado no Linux para particionar discos &eacute; o <a href="fdisk.html"><b>fdisk</b></a>. 
+O problema com este aplicativo &eacute; que ele destr&oacute;i os dados armazenados ao particionar o disco.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Sistemas de arquivos</h2>
+
+<ul>
+<li>Um sistema de arquivos &eacute; um conjunto de estrturas l&oacute;gicas que permite o sistema operacional controlar o acesso a um  
+    dispositivo de armazenamento como disco r&iacute;gido, pen drive, cd-room, etc. Diferentes sistemas operacionais podem usar
+    diferentes sistemas de arquivos.
+<li>Atualmente, o NTFS (<i>New Technology File System</i>) &eacute; o sistema de arquivos padr&atilde;o do Windows, enquanto o
+    ext4 &eacute; o do Linux.
+<li>Para verificar quais os sistemas de arquivos que o seu Linux suporta, basta verificar o conte&uacute;do do arquivo 
+    <b><a href="dir_proc.html#filesystems">/proc/filesystems</a></b>. 
+<li>O suporte para diferentes sistemas de arquivos pode ser obtido atrav&eacute;s de <b><a href="modulos.html">m&oacute;dulos</a></b>
+    de <a href="kernel.html"><b> kernel</b></a> carreg&aacute;veis no diret&oacute;rio /lib/modules/XXX/kernel/fs, onde <b>XXX</b>
+    &eacute; a vers&atilde;o atual do Linux.</p>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Sistema de arquivos do Linux</h2>
+
+<p>No Linux, um diret&oacute;rio (corresponde ao conceito de pasta do Windows) pode ter outros diret&oacute;rios ou arquivos. Dizemos
+que um diret&oacute;rio &eacute; filho de outro diret&oacute;rio quando ele est&aacute; logo abaixo do diret&oacute;rio em quest&atilde;o.
+O diret&oacute;rio que est&aacute; um n&iacute;vel acima &eacute; chamado de diret&oacute;rio pai.
+
+<p>O diret&oacute;rio <i>raiz</i> do Linux (ou diret&oacute;rio <b>/</b>) &eacute; o diret&oacute;rio com maior hierarquia entre todos os
+diret&oacute;rios do sistema. Isto significa que todos os diret&oacute;rios do Linux ficam abaixo deste diret&oacute;rio. 
+A seguir s&atilde;o apresentados alguns exemplos de diret&oacute;rios que ficam abaixo do diret&oacute;rio raiz do DuZeru.
+
+<ul>
+<li><a href="dir_bin.html"><b>bin</b></a> - diret&oacute;rio com os arquivos bin&aacute;rios de comandos dispon&iacute;veis para todos os usu&aacute;rios.
+<li><a href="dir_boot.html"><b>boot</b></a> - diret&oacute;rio com os arquivos do boot de inicializa&ccedil;&atilde;o.
+<li><b>cdrom</b> - diret&oacute;rio usado para montagem de cd-rom.
+<li><a href="dir_dev.html"><b>dev</b></a> - diret&oacute;rio com as defini&ccedil;&otilde;es dos dispositivos de entrada/sa&iacute;da.
+<li><a href="dir_etc.html"><b>etc</b></a> - diret&oacute;rio com os arquivos de configura&ccedil;&atilde;o do sistema.
+<li><a href="dir_home.html"><b>home</b></a> - diret&oacute;rio que armazena os diret&oacute;rios dos usu&aacute;rios do sistema.
+<li><b><a href="dir_lib.html">lib</a></b> - diret&oacute;rio com as bibliotecas e m&oacute;dulos (carreg&aacute;veis) do sistema.
+<li><b>lost+found</b> - diret&oacute;rio utilizado para armazenar arquivos que apresentaram falhas no sistema de arquivos. 
+<li><b>media</b> - diret&oacute;rio usado para montagem de dispositivos como pen drive, disquete, etc.
+<li><a href="dir_mnt.html"><b>mnt</b></a> - diret&oacute;rio usado para montagem de parti&ccedil;&otilde;es.
+<li><b>opt</b> - diret&oacute;rio usado para instalar pacotes opcionais que n&atilde;o fazem parte da distribui&ccedil;&atilde;o Linux.
+<li><a href="dir_proc.html"><b>proc</b></a> - diret&oacute;rio com informa&ccedil;&otilde;es sobre os processos do sistema.
+<li><a href="dir_root.html"><b>root</b></a> - diret&oacute;rio <i>home</i> do <b><a href="root.html">root</a></b>.
+<li><b>run</b> - diret&oacute;rio usado para armazenar arquivos tempor&aacute;rios do sistema como, por exemplo, soquetes. 
+<li><a href="dir_sbin.html"><b>sbin</b></a> - diret&oacute;rio com os arquivos bin&aacute;rios usados na administra&ccedil;&atilde;o do
+    sistema.
+<li><a href="dir_tmp.html"><b>tmp</b></a> - diret&oacute;rio com arquivos tempor&aacute;rios.
+<li><a href="dir_usr.html"><b>usr</b></a> - diret&oacute;rio com aplicativos e arquivos utilizados pelos usu&aacute;rios como,
+    por exemplo, o sistema de janelas X, jogos, bibliotecas compartilhadas, programas de usu&aacute;rios e de administra&ccedil;&atilde;o, etc.
+<li><b><a href="dir_var.html">var</a></b> - diret&oacute;rio com arquivos de dados vari&aacute;veis (spool, logs,  etc).
+<li><b>vmlinuz</b> - &eacute; um link para o <b><a href="kernel.html">kernel</a></b> do Linux utilizado na inicializa&ccedil;&atilde;o do
+    sistema.
+</ul>
+
+<p>Conv&eacute;m tamb&eacute;m observar que &eacute; poss&iacute;vel colocar os subdiret&oacute;rios 
+do diret&oacute;rio raiz em parti&ccedil;&otilde;es separadas. O objetivo &eacute; facilitar a manuten&ccedil;&atilde;o do
+sistema e aumentar a seguran&ccedil;a dos dados. Portanto, a distribui&ccedil;&atilde;o do diret&oacute;rio raiz em v&aacute;rias 
+parti&ccedil;&otilde;es &eacute; uma escolha pessoal do administrador do sistema. Normalmente, &eacute; sugerido que os seguintes
+diret&oacute;rios possuam uma parti&ccedil;&atilde;o pr&oacute;pria: /home, /opt, /tmp, /usr e /usr/local.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="fdisk.html">fdisk</a></b> - aplicativo utilizado para particionar discos.
+<li><b><a href="grub.html">grub</a></b> - carregador de inicializa&ccedil;&atilde;o do Linux.
+<li><b><a href="lilo.html">lilo</a></b> - carregador de inicializa&ccedil;&atilde;o do Linux.
+<li><b><a href="mbr.html">MBR</a></b> - possui informa&ccedil;&otilde;es sobre as parti&ccedil;&otilde;es e sobre o sistema operacional
+    a ser carregado.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

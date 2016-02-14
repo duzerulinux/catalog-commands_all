@@ -1,0 +1,89 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>sudo</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="sudo">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>sudo</h1>
+   
+<blockquote><font size="+1"><b>sudo [op&ccedil;&otilde;es] [comando]</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando permite executar um comando como se fosse o superusuário (<b><a href="root.html">root</a></b>) ou um 
+outro usu&aacute;rio.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-h</b> : exibe as op&ccedil;&otilde;es do comando.
+<li><b>-l</b> : lista os comandos permitidos (e os comandos proibidos) para o usu&aacute;rio no ambiente de trabalho atual.
+<li><b>-u usu&aacute;rio</b> : o <i>sudo</i> executa o comando com os privil&eacute;gios do usu&aacute;rio especificado.
+<li><b>-V</b> : fornece informa&ccedil;&otilde;es sobre o comando.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>O comando
+    <blockquote class="t1">sudo vipw</blockquote>
+    permitir&aacute; que o usu&aacute;rio execute o aplicativo <b><a href="vipw.html">vipw</a></b> como se fosse o 
+    <b><a href="root.html">root</a></b>.
+
+<li>Para saber quais comandos s&atilde;o permitidos ao usu&aacute;rio com o comando <i>sudo</i>, digite
+    <blockquote class="t1">sudo -l</blockquote>
+    Abaixo &eacute; mostrada uma poss&iacute;vel sa&iacute;da para o usu&aacute;rio <i>aluno</i>. Neste exemplo, 
+    o usu&aacute;rio tem amplos poderes na m&aacute;quina em que digitou o comando.
+    <blockquote class="t2">
+    Entradas correspondentes padrões para aluno nesta máquina:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;env_reset, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin<br>
+    <br>
+    Usuário aluno pode executar os seguintes comandos nessa máquina:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(ALL : ALL) ALL
+    </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Para executar um comando <i>sudo</i>, &eacute; preciso que exista a autoriza&ccedil;&atilde;o no arquivo 
+    <b><a href="dir_etc.html#group">/etc/group</a></b>. Por exemplo, a linha abaixo mostra uma configura&ccedil;&atilde;o
+    onde o usu&aacute;rio <i>aluno</i> est&aacute; no grupo <i>sudo</i>.
+    <blockquote class="t2">sudo:x:27:aluno</blockquote>
+<li>Outra forma de permitir que um usu&aacute;rio execute algumas (ou todas) tarefas como <i>root</i> &eacute; alterando o arquivo
+    <b><a href="dir_etc.html#sudoers">/etc/sudoers</a></b>.
+<li>O comando <b><a href="su.html">su</a></b> executa um <a href="shell.html"><b>shell</b></a> com substitui&ccedil;&atilde;o de
+    usu&aacute;rio e grupo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

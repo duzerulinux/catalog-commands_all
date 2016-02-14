@@ -1,0 +1,92 @@
+
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>lsblk</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="lsblk">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>lsblk</h1>
+
+<blockquote><b><font size="+1"> lsblk [op&ccedil;&otilde;es] [dispositivo] </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando exibe informa&ccedil;&otilde;es sobre as parti&ccedil;&otilde;es do HD e outros dispositivos de armazenamento
+como pen drives e CDs em formato de árvore. </p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-a</b> ou <b>--all</b> : lista também dispositivos vazios (que por padrão não são exibidos)</i>.
+<li><b>-i</b> ou <b>--ascii</b> : usa caracteres ASCII para a formata&ccedil;ão da árvore.
+<li><b>-l</b> ou <b>--list</b> : produz a saída em formato de lista.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2> Exemplos </h2>
+
+<ul>
+<li>Exemplo de sa&iacute;da padr&atilde;o 
+	<blockquote class="t1">lsblk</blockquote>
+    <blockquote class="t2">
+    <table class="t2">
+	<tr><td><pre>NAME                      MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+sr0                        11:0    1  1024M  0 rom
+vda                       252:0    0    20G  0 rom
+|-vda1                    252:1    0   500M  0 part /boot
+`-vda2                    252:2    0  19.5G  0 part
+  |-vg_kvm-lv_root (dm-0) 253:0    0    18G  0 lvm  /
+  `-vg_kvm-lv_swap (dm-1) 253:1    0   1.5G  0 lvm  [SWAP]</pre></td></tr>
+    </table>
+    </blockquote>
+<li>Exemplo de sa&iacute;da usando lista
+	<blockquote class="t1">lsblk -l</blockquote>
+    <blockquote class="t2">
+    <table class="t2">
+	<tr><td><pre>NAME                  MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+sr0                    11:0    1  1024M  0 rom
+vda                   252:0    0    20G  0 rom
+vda1                  252:1    0   500M  0 part /boot
+vda2                  252:2    0  19.5G  0 part
+vg_kvm-lv_root (dm-0) 253:0    0    18G  0 lvm  /
+vg_kvm-lv_swap (dm-1) 253:1    0   1.5G  0 lvm  [SWAP]</pre></td></tr>
+    </table>
+    </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O comando l&ecirc; o arquivo de sistema <i>sysfs</i> e o BD <i>udev</i> para coletar as informa&ccedil;&otilde;es.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

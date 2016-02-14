@@ -1,0 +1,203 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>find</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="find">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>find</h1>
+ 
+<blockquote><font size="+1"><b>find [caminho] [express&atilde;o]</b></font></blockquote>
+<ul>
+<li><b>caminho</b> fornece o nome do diret&oacute;rio por onde a pesquisa deve 
+ser iniciada.</li>
+<li><b>express&atilde;o</b> &eacute; feita  de 
+<ul>
+<li><b>op&ccedil;&otilde;es</b> - que afetam  toda a opera&ccedil;&atilde;o e  sempre  retorna  verdadeiro;
+<li><b>testes</b> - que retorna um valor falso ou verdadeiro;
+<li><b>a&ccedil;&otilde;es</b> - que tem efeitos  colaterais  e  retornam  um  valor  falso ou verdadeiro.
+</ul>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando pesquisa arquivos em uma hier&aacute;rquia de diret&oacute;rios.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas Op&ccedil;&otilde;es</h2>
+
+<ul>
+<li><b>-daystart</b> : medem o tempo do in&iacute;cio do dia ou de at&eacute; 24 horas atr&aacute;s.
+<li><b>-depth</b> : processa o conte&uacute;do de cada diret&oacute;rio antes do diret&oacute;rio em si.
+<li><b>-follow</b> : resolve as liga&ccedil;&otilde;es simb&oacute;licas.
+<li><b>-help</b>: imprime um resumo do uso das linhas de comando de <i>find</i> e finaliza.
+<li><b>-inum n</b> : acha arquivo com <a href="inode.html"><b>inode</b></a> <i>n</i>.
+<li><b>-maxdepth n</b> : desce no m&aacute;ximo em <i>n</i> n&iacute;veis (um inteiro n&atilde;o  negativo) de diret&oacute;rios
+    sob os argumentos da linha de comando. A op&ccedil;&atilde;o "<i>-maxdepth 0</i>" significa a aplica&ccedil;&atilde;o dos 
+    testes e a&ccedil;&otilde;es somente nos argumentos da linha de comandos.
+<li><b>-mindepth n</b> : n&atilde;o aplica qualquer teste ou a&ccedil;&atilde;o a n&iacute;veis menores que <i>n</i> 
+    n&iacute;veis (um inteiro n&atilde;o negativo). A op&ccedil;&atilde;o "<i>-mindepth 1</i>" significa testar todos os 
+    arquivos exceto os argumentos da linha de comandos.
+<li><b>-version</b> : lista o n&uacute;mero da vers&atilde;o do comando <i>find</i> e finaliza.
+<li><b>-xdev</b> :  n&atilde;o desce diret&oacute;rios em outros sistema de arquivos.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Alguns Testes</h2>
+
+<ul>
+<li><b>-amin n</b> : arquivo foi acessado h&aacute; <i>n</i> minutos.
+<li><b>-atime n</b> : procura por arquivos acessados h&aacute; <i>n</i> dias.
+<li><b>-cmin n</b> : o status do arquivo foi alterado em at&eacute; <i>n</i> minutos atr&aacute;s.
+<li><b>-cnewer arq</b> : o status do arquivo foi alterado mais recentemente do que <i>arq</i> foi modificado.
+<li><b>-ctime n</b> : o status do arquivo foi  mudado nos &uacute;ltimos <i>n</i> dias.
+<li><b>-empty</b> : o arquivo est&aacute; vazio e &eacute; ou um arquivo regular ou um diret&oacute;rio.
+<li><b>-gid n</b> : o <b><a href="gid.html">GID</a></b> (Group Identification) do arquivo &eacute; <i>n</i>.
+<li><b>-group gname</b> : arquivo  pertence  ao grupo <i>gname</i> (pode-se tamb&eacute;m usar aqui o <i>GID</i> do grupo).
+<li><b>-inum n</b> : procura por arquivo com <b><a href="inode.html">inode</a></b> <i>n</i>.
+<li><b>-mmin n</b> : os dados dos arquivos foram modificados h&aacute; <i>n</i> minutos.
+<li><b>-mtime n</b> : os dados foram modificados em at&eacute; <i>n</i> dias atr&aacute;s.
+<li><b>-name arquivo</b> : procura pelo arquivo especificado. 
+<li><b>-path padr&atilde;o</b> : define o padr&atilde;o do caminho do arquivo.
+<li><b>-size n[bckw]</b> : procura por arquivos que tem <i>n</i> unidades de espa&ccedil;o. Ao usar + (-) antes de <i>n</i> 
+    procura-se por um arquivo maior (menor) que <i>n</i>. As unidades s&atilde;o 
+    <ul>
+    <li><b>b</b> - blocos de 512 bytes (padr&atilde;o);
+    <li><b>c</b> - bytes;
+    <li><b>k</b> - kilobytes;
+    <li><b>w</b> - palavras de 2 bytes.
+    </ul> 
+<li><b>-type tipo</b> : procura arquivos de um determinado tipo. S&atilde;o tipos poss&iacute;veis
+    <ul>
+    <li><b>b</b> - blocos especiais (buffer)
+    <li><b>c</b> - caracteres especiais
+    <li><b>d</b> - diret&oacute;rios
+    <li><b>p</b> - conector definido (FIFO)
+    <li><b>f</b> - arquivo regular
+    <li><b>l</b> - liga&ccedil;&atilde;o simb&oacute;lica
+    <li><b>s</b> - socket
+    </ul>
+<li><b>-uid n</b> : o <b><a href="uid.html">UID</a></b> do dono do arquivo &eacute; igual a <i>n</i>.
+<li><b>-user nome</b> : arquivo pertence ao usu&aacute;rio especificado em <i>nome</i> (pode-se tamb&eacute;m usar aqui o 
+    <i>UID</i> do dono).
+</ul>
+
+<p>O argumento <i>n</i> dos testes acima pode assumir:
+<ul>
+<li><b>+n</b> : valores maiores que n.
+<li><b>-n</b> : valores menores que n.
+<li><b>n</b> : valor exatamente igual a n.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas A&ccedil;&otilde;es</h2>
+
+<ul>
+<li><b>-exec comando</b> : executa <i>comando</i> se o status de sa&iacute;da zero for retornado. Todos os argumentos 
+    para <i>find</i> ser&atilde;o considerados como argumentos do comando at&eacute; que um argumento consistido 
+    por ';' seja encontrado.
+<li><b>-fprint arq</b> : verdadeiro; lista o nome  completo em um arquivo <i>arq</i>. Caso <i>arq</i> n&atilde;o exista 
+    quando <i>find</i> est&aacute; sendo executado, ele ser&aacute; criado; caso ele exista, ser&aacute; recriado sem 
+    conte&uacute;do.
+<li><b>-print</b> : verdadeiro; imprime  o nome completo do arquivo na sa&iacute;da padr&atilde;o, seguido de nova linha.
+<li><b>-prune</b> : caso <i>-depth</i>  n&atilde;o  seja informado, ser&aacute; verdadeiro; n&atilde;o descendo a partir
+    do diret&oacute;rio atual. Caso <i>-depth</i> seja informado, ser&aacute; falso e n&atilde;o ter&aacute; efeito.
+</ul>
+</ul>
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Operadores</h2>
+
+<p>Listados em ordem de preced&ecirc;ncia decrescente:</p>
+<ul>
+<li><b>( expr )</b> - for&ccedil;a a preced&ecirc;ncia.</li>
+<li><b>! expr</b> - verdadeiro se <b>expr</b> for falsa.</li>
+<li><b>-not expr</b> - o mesmo que <b>! expr</b>.</li>
+<li><b>expr1 expr2</b> - a <b>expr2</b> n&atilde;o ser&aacute; avaliada se <b>expr1</b> for falsa.</li>
+<li><b>expr1 -a expr2</b> - o mesmo que <b>expr1 expr2</b>.</li>
+<li><b>expr1 -and expr2</b> - o mesmo que <b>expr1 expr2</b>.</li>
+<li><b>expr1 -o expr2</b> - <b>expr2</b> n&atilde;o &eacute; avaliada se <b>expr1</b> for verdadeira.</li>
+<li><b>expr1 -or expr2</b> - o mesmo que <b>expr1 -o expr2</b>.</li>
+<li><b>expr1 , expr2</b> - <b>expr1</b> e <b>expr2</b> s&atilde;o avaliadas.</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+
+<li>Para procurar o arquivo <i>teste.tex</i> no diret&oacute;rio atual e em todos subdiret&oacute;rios abaixo do diret&oacute;rio atual:
+    <blockquote class="t1">find -name teste.tex</blockquote>
+<li>Para procurar o arquivo <i>teste.tex</i> a partir do diret&oacute;rio <i>Linux</i> que &eacute; um subdiret&oacute;rio do 
+    diret&oacute;rio atual:
+    <blockquote class="t1">find -path './Linux/*' -name teste.tex</blockquote>
+<li>Para procurar o arquivo <i>teste.tex</i> a partir do diret&oacute;rio <a href="dir_home.html"><b>/home</b></a>
+    (~/) descendo no m&aacute;ximo 3 n&iacute;veis de diret&oacute;rios:
+    <blockquote class="t1">find ~/ -maxdepth 3 -name teste.tex</blockquote>
+<li>Para listar todos os arquivos encontrados a partir do diret&oacute;rio corrente exceto os arquivos que 
+    est&atilde;o no diret&oacute;rio <i>testes</i> ou em algum dos seus subdiret&oacute;rios:
+    <blockquote class="t1">find . -path  './testes'  -prune  -o -print </blockquote>
+<li>Para listar os arquivos com mais de 1000k de tamanho a partir do diret&oacute;rio atual:
+    <blockquote class="t1">find . -size +1000k</blockquote>
+<li>Para localizar os arquivos SUID (usa <b><a href="permissao.html">permiss&otilde;es</a></b> do dono), digite
+    <blockquote class="t1">find / -perm +4000</blockquote>
+<li>Para localizar os arquivos SGID (usa <b><a href="permissao.html">permiss&otilde;es</a></b> do grupo), basta digitar
+    <blockquote class="t1">find / -perm /g=s</blockquote>
+<li>Use a op&ccedil;&atilde;o <i>atime</i> para localizar programas novos ou acessados com mais freq&uuml;&ecirc;ncia. Por exemplo,
+    o comando
+    <blockquote class="t1">find /etc -atime -1</blockquote>
+    lista os arquivos do diret&oacute;rio <a href="dir_etc.html"><b>/etc</b></a> que foram acessados h&aacute; um dia ou menos, 
+    enquanto o comando
+    <blockquote class="t1">find ~/ -atime +10</blockquote>
+    lista os arquivos, a partir do diret&oacute;rio <b><a href="dir_home.html">/home</a></b> do usu&aacute;rio, que foram acessados
+    pela &uacute;ltima vez h&aacute; 10 dias ou mais.
+<li>Para procurar por todos os links perdidos e os imprimir na sa&iacute;da padr&atilde;o:
+    <blockquote class="t1">find / -type l -print |perl -nle '-e || print';</blockquote>
+<li>O comando
+    <blockquote class="t1">find . -user aluno1 -exec chown aluno2 {}</blockquote>
+    altera o dono (veja comando <b><a href="chown.html">chown</a></b>) de todos os arquivos e subdiret&oacute;rios a partir do 
+    diret&oacute;rio corrente de <i>aluno1</i> para <i>aluno2</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O uso do comando <i>find</i>, sem argumentos, faz com seja exibida a lista de todos os arquivos que ficam hierarquicamente abaixo
+    do diret&oacute;rio corrente.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="locate.html">locate</a></b> - lista os arquivos cujos nomes coincidem com o padr&atilde;o informado.
+<li><b><a href="whereis.html">whereis</a></b> - lista a localiza&ccedil;&atilde;o de programas bin&aacute;rios, fontes e documenta&ccedil;&atilde;o.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

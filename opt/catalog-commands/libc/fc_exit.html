@@ -1,0 +1,146 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>exit()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="exit()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>exit( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta fun&ccedil;&atilde;o termina o processo corrente.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include&lt;stdlib.h&gt;<br>
+void exit(int status);
+</blockquote>
+<ul>
+<li>O argumento <i>status</i> corresponde ao c&oacute;digo de sa&iacute;da do processo. Este par&acirc;metro &eacute;
+    retornado ao processo-pai.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<blockquote class="t2">
+1. #include&lt;stdio.h&gt; <br>
+2. #include&lt;stdlib.h&gt; <br>
+3. int main(int argc, char * const argv[]) <br>
+4. &nbsp;&nbsp;&nbsp;{ <br>
+5. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int num; <br>
+6. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (argc != 2) <br>
+7. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <br>
+8. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("Forneca um numero\n"); <br>
+9. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exit(-1); <br>
+10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else <br>
+12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num = atoi(argv[1]); <br>
+13.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (num < 0) <br>
+14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <br>
+15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("numero menor que zero\n"); <br>
+16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exit(1); <br>
+17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+18.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else <br>
+19.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (num <= 100) <br>
+20.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <br>
+21.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("numero entre zero e 100\n"); <br>
+22.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exit(2); <br>
+23.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+24.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else <br>
+25.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <br>
+26.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("numero maior que 100\n"); <br>
+27.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exit(3); <br>
+28.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+29.&nbsp;&nbsp;&nbsp;}
+</blockquote>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/exit.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 2 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>stdlib.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da fun&ccedil;&atilde;o <i>atoi( )</i>.
+    </ul>
+<li><b>Linha 3 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 5 a linha 28.
+<li><b>Linha 5 :</b> define vari&aacute;vel.
+<li><b>Linhas de 6 a 10 :</b> verifica se o n&uacute;mero foi fornecido.
+<li><b>Linha 12 :</b> converte n&uacute;mero usando a fun&ccedil;&atilde;o <a href="fc_atoi.html"><b>atoi( )</b></a>.
+<li><b>Linhas de 13 a 17 :</b> verifica se n&uacute;mero &eacute; menor que zero.
+<li><b>Linhas de 19 a 23 :</b> verifica se n&uacute;mero &eacute; menor que ou igual a cem.
+<li><b>Linhas de 24 a 28 :</b> verifica se n&uacute;mero &eacute; maior que cem.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+   <blockquote class="t1">
+   gcc -o exit exit.c
+   </blockquote>
+   Para executar, forne&ccedil;a o nome do programa e um n&uacute;mero. Por exemplo,
+   <blockquote class="t1">
+   ./exit 200
+   </blockquote>
+   Para verificar, o valor retornado com a fun&ccedil;&atilde;o <i>exit( )</i>, digite
+   <blockquote class="t1">
+   echo $?
+   </blockquote>
+   No exemplo acima, a resposta &eacute;
+   <blockquote class="t2">
+   3
+   </blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<p>O processo que executa a fun&ccedil;&atilde;o <i>exit( )</i> &eacute; encerrado imediatamente. Al&eacute;m disso,
+<ul>
+<li> se existem arquivos ainda abertos, estes arquivos s&atilde;o fechados;
+<li> todas as fun&ccedil;&otilde;es registradas com <b><a href="fc_atexit.html">atexit( )</a></b> e 
+     <b><a href="fc_on_exit.html">on_exit()</a></b> s&atilde;o chamadas na ordem inversa em que foram
+     registradas;
+<li> o buffer padr&atilde;o de E/S &eacute; limpo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

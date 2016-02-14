@@ -1,0 +1,205 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>setitimer()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="setitimer()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+
+<h1>setitimer( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta <a href="../chamadas.html"><b>chamada de sistema</b></a> altera o valor de um temporizador de intervalo.
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+   
+<p>
+<blockquote class="t2">
+#include&lt;sys/time.h&gt;<br>
+int setitimer(int which, const struct itimerval *new_value, struct itimerval *old_value);
+</blockquote>
+</p>
+
+<ul>
+<li><b>which</b> &eacute; o temporizador de intervalo que ter&aacute; o valor alterado. O sistema aloca tr&ecirc;s temporizadores
+    de intervalo para cada processo, onde cada temporizador &eacute; decrementado de maneira distinta. Quando qualquer temporizador
+    expira, um sinal &eacute; enviado ao processo e o temporizador &eacute; (provavelmente) reinicializado.
+    <ul>
+    <li><b>ITIMER_REAL</b> : decrementa no tempo real e envia o sinal SIGALRM quando expira.
+    <li><b>ITIMER_VIRTUAL</b> : decrementa apenas quando o processo est&aacute; executando e envia o sinal SIGVTALRM quando expira.
+    <li><b>ITIMER_PROF</b> : decrementa quando o processo est&aacute; executando e quando o sistema est&aacute; executando alguma
+        tarefa a pedido do processo. Junto com o ITIMER_VIRTUAL, este temporizador &eacute; usado para definir o tempo gasto pela
+        aplica&ccedil;&atilde;o no espa&ccedil;o do usu&aacute;rio e do <a href="../kernel.html"><b>kernel</b></a>. Quando o tempo
+        expira, o sinal SIGPROF &eacute; enviado.
+    </ul>
+<li><b>new_value</b> &eacute; um ponteiro para uma estrutura do tipo <b><a href="ed_itimerval.html">itimerval</a></b> que
+    possui o novo valor do temporizador.
+<li><b>old_value</b> &eacute; um ponteiro para uma estrutura do tipo <b><a href="ed_itimerval.html">itimerval</a></b> que
+    armazenar&aacute; o valor antigo do temporizador.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Se a chamada de sistema <i>setitimer( )</i> &eacute; executada com sucesso, o valor zero &eacute; retornado. Se ocorre um erro na
+execu&ccedil;&atilde;o desta chamada, o valor -1 &eacute; retornado e o c&oacute;digo de erro &eacute; colocado na vari&aacute;vel
+externa <b><a href="vr_errno.html">errno</a></b>. A tabela abaixo mostra os erros que podem ocorrer com esta chamada.</p>
+
+<blockquote>
+<table class="t2" rules=all cellpadding=10 cellspacing=10 align=center width=650>
+<tr class="t1"><td><b>Nome do erro</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td>EFAULT</td><td>O par&acirc;metro <i>new_value</i>, <i>old_value</i> ou <i>curr_value</i> n&atilde;o possui um ponteiro 
+    v&aacute;lido</td></tr>
+<tr><td>EINVAL</td><td>O temporizador informado ou um campo de <i>new_value</i> n&atilde;o &eacute; v&aacute;lido </td></tr>
+</table>
+</blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include&lt;stdio.h&gt;    <br>
+2. #include&lt;stdlib.h&gt;   <br>
+3. #include&lt;string.h&gt;   <br>
+4. #include&lt;time.h&gt;     <br>
+5. #include&lt;sys/time.h&gt; <br>
+6. #include&lt;unistd.h&gt;   <br>
+7. #include&lt;signal.h&gt;   <br>
+8. #include&lt;errno.h&gt;    <br>
+9. void mensagem(int signum) <br>
+10.&nbsp; &nbsp; &nbsp;{ <br>
+11.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; time_t tp; <br>
+12.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; time(&tp); <br>
+13.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; printf("%s", ctime(&tp)); <br>
+14.&nbsp; &nbsp; &nbsp;} <br>
+15.int main() <br>
+16.&nbsp; &nbsp; &nbsp;{ <br>
+17.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; struct itimerval it_val; <br>
+18.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (signal(SIGALRM, mensagem) == SIG_ERR) <br>
+19.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { <br>
+20.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+   printf("Erro signal() %d: %s\n", errno, strerror(errno)); <br>
+21.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; exit(1); <br>
+22.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } <br>
+23.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; it_val.it_value.tv_sec  = 5; <br>
+24.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; it_val.it_value.tv_usec = 0; <br>
+25.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; it_val.it_interval      = it_val.it_value; <br>
+26.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mensagem(0); <br>
+27.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (setitimer(ITIMER_REAL, &it_val, NULL) == -1) <br>
+28.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { <br>
+29.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+   printf("Erro setitimer() %d: %s\n", errno, strerror(errno)); <br>
+30.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; exit(1); <br>
+31.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } <br>
+32.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; while (1) <br>
+33.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; pause(); <br>
+34.&nbsp; &nbsp; &nbsp; }
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/setitimer.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 8 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>stdlib.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o de alguns tipos de vari&aacute;veis e com v&aacute;rias
+        fun&ccedil;&otilde;es de uso geral como, por exemplo, <a href="fc_exit.html"><b>exit()</b></a>.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror()</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro.
+    <li><b>time.h</b> - cabe&ccedil;alho com as fun&ccedil;&otilde;es para manipular datas e horas.
+    <li><b>sys/types.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o de 
+        <a href="../biblioteca_c.html#tipos_dados"><b>tipos de dados</b></a> como <i>time_t</i>.
+    <li><b>unistd.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das <a href="../chamadas.html"><b>chamadas de sistema</b></a>. 
+    <li><b>signal.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o dos <a href="../sinal.html"><b>sinais</b></a>.
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+    </ul>
+<li><b>Linhas de 9 a 14 :</b> a fun&ccedil;&atilde;o <i>mensagem( )</i> &eacute; chamada quando um sinal SIGALRM &eacute; capturado
+    pelo processo. Esta fun&ccedil;&atilde;o apenas imprime o dia e a hora local obtidos com a chamada de sistema
+    <a href="cs_time.html"><b>time( )</b></a> e formatada com a fun&ccedil;&atilde;o <a href="fc_ctime.html"><b>ctime( )</b></a>.
+<li><b>Linha 15 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 17 a linha 33.
+<li><b>Linha 17 :</b> define uma estrutura do tipo <a href="ed_itimerval.html"><b>itimerval</b></a>.
+<li><b>Linha 18 :</b> usa a chamada <a href="cs_signal.html"><b>signal( )</b></a> para definir que a fun&ccedil;&atilde;o 
+    <i>mensagem( )</i> deve ser executada quando o sinal SIGALRM &eacute; capturado pelo processo.
+<li><b>Linhas de 19 a 22 :</b> exibe mensagem de erro caso a execu&ccedil;&atilde;o da chamada 
+    <a href="cs_signal.html"><b>signal( )</b></a> n&atilde;o tenha sido bem sucedida.
+<li><b>Linhas de 23 a 25 :</b> formata o intervalo de espera para 5 segundos.
+<li><b>Linha 26 :</b> executa a fun&ccedil;&atilde;o <i>mensagem( )</i> para exibir o hor&aacute;rio inicial do programa.
+<li><b>Linha 27 :</b> usa a chamada <i>setitimer( )</i> para definir que o temporizador de tempo real emita um sinal SIGALRM
+    a cada 5 segundos.
+<li><b>Linhas de 28 a 31 :</b> exibe mensagem de erro caso a execu&ccedil;&atilde;o da chamada <i>setitimer( )</i> n&atilde;o
+    tenha sido bem sucedida.
+<li><b>Linhas de 32 a 33 :</b> define um loop infinito.
+<li><b>Linha 33 :</b> usa a chamada <a href="cs_pause.html"><b>pause( )</b></a> para suspender o processo at&eacute; o recebimento
+    de um sinal (neste exemplo, a espera &eacute; pelo sinal SIGALRM).
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+<blockquote class="t1">
+gcc -o setitimer setitimer.c
+</blockquote>
+Para executar o programa, basta digitar
+<blockquote class="t1">
+./setitimer
+</blockquote>
+Abaixo &eacute; mostrada uma poss&iacute;vel sa&iacute;da. As teclas CTRL+C s&atilde;o usadas para cancelar o programa.
+<blockquote class="t2">
+Fri Mar 27 17:59:45 2015 <br>
+Fri Mar 27 17:59:50 2015 <br>
+Fri Mar 27 17:59:55 2015 <br>
+Fri Mar 27 18:00:00 2015 <br>
+^C
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>As chamadas <a href="cs_alarm.html"><b>alarm( )</b></a> e <i>setitimer( )</i> compartilham o mesmo temporizador. Isto significa
+    que uma chamada feita por um deles ir&aacute; interferir no uso do outro.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

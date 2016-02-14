@@ -1,0 +1,512 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>Biblioteca C</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="biblioteca c">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+
+<h1>Biblioteca C</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Uma Biblioteca da Linguagem C &eacute; composta por dois tipos de arquivos: 
+<ul>
+<li><b>Cabe&ccedil;alho</b> (<i>header</i>) - tem extens&atilde;o <i>.h</i> e possui a defini&ccedil;&atilde;o de
+    fun&ccedil;&otilde;es, macros, vari&aacute;veis e/ou constantes. Este tipo de arquivo usa a linguagem C
+    e &eacute; essencial para a compila&ccedil;&atilde;o dos programas que usam a biblioteca.
+<li><b>Objeto pr&eacute;-compilado</b> (bin&aacute;rio) - pode ter extens&atilde;o <i>.a</i> (biblioteca est&aacute;tica) ou 
+    </i>.so</i> (biblioteca compartilhada) e corresponde ao execut&aacute;vel da biblioteca (os cabe&ccedil;alhos apenas 
+    declaram as fun&ccedil;&otilde;es). 
+</ul>
+
+<p>Por exemplo, suponha um cabe&ccedil;alho com as defini&ccedil;&otilde;es das fun&ccedil;&otilde;es de E/S.
+Quando um programa precisa acessar um arquivo, este cabe&ccedil;alho &eacute; incluido no c&oacute;digo.
+O cabe&ccedil;alho ser&aacute; importante para o compilador encontrar todas as refer&ecirc;ncias feitas no programa C.
+Mas na hora de gerar o arquivo execut&aacute;vel, o compilador incluir&aacute; o objeto pr&eacute;-compilado correspondente.
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Linguagem C</h2>
+
+<p>A hist&oacute;ria da linguagem C pode ser resumida nas seguintes fases:
+
+<ul>
+<li>A linguagem foi desenvolvida entre 1969 e 1973 nos <i>AT&T Bell Labs</i> por Dennis Ritchie. O objetivo era criar uma linguagem de
+    programa&ccedil;&atilde;o de alto n&iacute;vel para escrever o sistema operacional <i>Unix</i> (em substitui&ccedil;&atilde;o 
+    &agrave; linguagem de montagem <i>Assembly</i>).
+<li>Em 1978, a linguagem se popularizou gra&ccedil;as ao sucesso do livro "The C Programming Language" de Brian <b>K</b>erningham e
+    Dennis <b>R</b>itchie . Nesta fase a linguagem era conhecida como <i>K&R C</i>.
+<li>Em 1989, a ANSI (<i>American National Standards Institute</i>) liberou o primeiro padr&atilde;o da linguagem C nos EUA chamado
+    de C89 or ANSI-C.
+<li>Em 1990, a ISO (<i>International Organization for Standardization</i>) aceitou o padr&atilde;o americano. Embora fosse o mesmo
+    padr&atilde;o C89/ANSI-C, ele foi chamado de C90 e oficialmente substituiu o padr&atilde;o americano.
+<li>Em 1999, foi feita uma revis&atilde;o e lan&ccedil;ado o padr&atilde;o C99.
+<li>Em 2011, uma nova revis&atilde;o foi feita e o padr&atilde;o C11 foi lan&ccedil;ado. Este &eacute; o padr&atilde;o atual da linguagem C.
+</ul>
+<p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>GNU C Library (glibc)</h2>
+
+<p>A <i>GNU C Library</i>, ou <a href="http://www.gnu.org/software/libc/" target="_blanc"><b>glibc</b></a>, &eacute; a 
+biblioteca padr&atilde;o C do <a href="http://www.gnu.org/" target="_blanc"><b>projeto GNU</b></a>.</p>
+
+<p>A glibc adota v&aacute;rios padr&otilde;es como C11 para a linguagem C e POSIX.1-2008 (<i>Portable Operating System Interface</i>)
+para os cabe&ccedil;alhos do sistema operacional. Portanto, a glibc possui a implementa&ccedil;&atilde;o de diferentes propostas
+para a bibliotecas C.
+</p>
+
+<p>Outra interessante biblioteca C do projeto GNU &eacute; a <a href="http://www.gnu.org/software/gsl/" target="_blanc"><b>gsl</b></a>
+(<i>GNU Scientific Library</i>). Esta biblioteca fornece mais de mil fun&ccedil;&otilde;es matem&aacute;ticas para trabalhar com 
+n&uacute;meros complexos, &aacute;lgebra linear, vetores, matrizes, n&uacute;meros aleat&oacute;rios, etc. </p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Linux</h2>
+
+<p>O <a href="kernel.html"><b>kernel</b></a> do Linux &eacute; escrito na linguagem C com algumas se&ccedil;&otilde;es
+escritas na linguagem assembly (determinadas fun&ccedil;&otilde;es exigem o uso das instru&ccedil;&otilde;es intr&iacute;nsecas do
+processador como, por exemplo, boot, interrup&ccedil;&otilde;es e exce&ccedil;&otilde;es). Existem dois tipos de API
+(<i>application programming interface</i>) no kernel:
+<ul>
+<li>para comunica&ccedil;&atilde;o entre o espa&ccedil;o do usu&aacute;rio e o espa&ccedil;o do kernel (<i>kernel-user space</i>) - 
+permite que os programas dos usu&aacute;rios acessem os recursos e os servi&ccedil;os do kernel atrav&eacute;s das 
+<a href="chamadas.html"><b>chamadas de sistema</b></a> e das subrotinas da glibc (esses dois conjuntos formam a API do LINUX).
+<li>para uso dentro do espa&ccedil;o do kernel (<i>kernel internal</i>) - permite que os subsistemas do Linux se comuniquem entre si e
+com os <a href="modulos.html"><b>m&oacute;dulos</b></a> adicionados ao kernel. Muitos dos cabe&ccedil;alhos usados s&atilde;o criados
+para uso espec&iacute;fico do Linux e n&atilde;o seguem qualquer padroniza&ccedil;&atilde;o. 
+</ul>
+Portanto, existem v&aacute;rias bibliotecas C dispon&iacute;veis para o Linux. Mas nem todas est&atilde;o inicialmente instaladas
+no sistema.</p>
+
+<p align="center">
+<img width="512" height=384 alt="Linux kernel System Call Interface and glibc" src="imagens/interface.png"/><br>
+<b>Fonte:</b> http://commons.wikimedia.org/wiki/File%3ALinux_kernel_System_Call_Interface_and_glibc.svg
+</p>
+
+<p>A glibc e o <a href="gcc.html"><b>gcc</b></a> s&atilde;o, por padr&atilde;o, a biblioteca C e o compilador C do Linux:
+usados tanto por quem desenvolve o Linux, quanto por quem usa o Linux como ambiente de desenvolvimento.
+Para saber a vers&atilde;o da glibc que voc&ecirc; est&aacute; usando, basta digitar
+<blockquote class="t1">ldd --version</blockquote>
+E para saber a vers&atilde;o do gcc digite
+<blockquote class="t1">gcc --version</blockquote>
+</p>
+
+<p>A diretiva de compila&ccedil;&atilde;o <i>&lt;include&gt;</i> &eacute; usada para incluir um cabe&ccedil;alho (de qualquer
+biblioteca C) em um programa C. Na realidade, a glibc &eacute; pr&eacute;-compilada e &eacute; ligada ao execut&aacute;vel do seu
+programa pelo <i>ld-linux.so</i> (este programa acha e carrega as bibliotecas solicitadas).
+
+<p>No Linux, os cabe&ccedil;alhos da biblioteca C costumam ser instalados em /usr/include, enquanto os cabe&ccedil;alhos do kernel
+s&atilde;o colocados no diret&oacute;rio /usr/src/&lt;vers&atilde;o do Linux&gt;/. 
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Tipos de biblioteca</h2>
+
+<p>No Linux, uma biblioteca pode ser
+<ul>
+<li><b>Est&aacute;tica</b> - o c&oacute;digo da biblioteca &eacute; copiado e inserido no execut&aacute;vel (bin&aacute;rio) do programa.
+    Isto significa que, mesmo que a biblioteca seja alterada e/ou descontinuada, isto n&atilde;o afetar&aacute; o programa. Este tipo de
+    biblioteca tem extens&atilde;o ".a".
+<li><b>Din&acirc;mica</b> (<b>compartilhada</b>) - o c&oacute;digo da biblioteca n&atilde;o &eacute; inserido no execut&aacute;vel
+    do programa. O bin&aacute;rio tem apenas refer&ecirc;ncias &agrave; biblioteca desejada (assim o arquivo execut&aacute;vel tem um
+    tamanho menor). Estas refer&ecirc;ncias s&atilde;o resolvidas durante a execu&ccedil;&atilde;o do programa. Al&eacute;m disso,
+    a biblioteca pode ser usada (compartilhada) por v&aacute;rios programas. Este tipo de biblioteca tem extens&atilde;o ".so".
+</ul>
+
+<p>Os bin&aacute;rios das bibliotecas compartilhadas do sistema ficam em /lib, enquanto os bin&aacute;rios das bibliotecas dos programas
+dos usu&aacute;rios (n&atilde;o essenciais ao sistema) ficam em /usr/lib ou /usr/local/lib.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Criando uma biblioteca</h2>
+
+<p>A melhor forma de entender como funcionam as bibliotecas no Linux &eacute; atrav&eacute;s de um exemplo.
+Em primeiro lugar, vamos definir um cabe&ccedil;alho (<i>header</i>) que ter&aacute; a declara&ccedil;&atilde;o das fun&ccedil;&otilde;es.
+Vamos chamar este cabe&ccedil;alho de <a href="libc/exemplos/nova_bib.h" target="_blank"><b>nova_bib.h</b></a>.</p>
+
+<blockquote class="t2">
+#ifndef _NOVA_BIBLIOTECA <br>
+#define _NOVA_BIBLIOTECA <br>
+#include &lt;stdio.h&gt; <br>
+int fatorial(int); <br>
+int fibonacci(int); <br>
+#endif
+</blockquote>
+</p>
+
+<p>Inicialmente, o cabe&ccedil;alho verifica se a macro _NOVA_BIBLIOTECA ainda n&atilde;o foi definida no c&oacute;digo.
+Se n&atilde;o foi, ent&atilde; a macro &eacute; definida e o resto do c&oacute;digo &eacute; lido. Se j&aacute; foi definida,
+o resto do c&oacute;digo &eacute; ignorado. Isto evita m&uacute;tiplas defini&ccedil;&otilde;es da mesma biblioteca
+(cada cabe&ccedil;alho precisa ter um nome diferente no in&iacute;cio do c&oacute;digo). 
+Na terceira linha, &eacute; inclu&iacute;do o cabe&ccedil;alho <i>stdio.h</i> que cont&eacute;m fun&ccedil;&otilde;es,
+macros e tipos de dados necess&aacute;rios para as opera&ccedil;&otilde;es de E/S como, por exemplo, a fun&ccedil;&atilde;o
+<a href="libc/fc_printf.html"><b>printf( )</b></a>. Em seguida s&atilde;o declaradas duas fun&ccedil;&otilde;es, <i>fatorial( )</i> e
+<i>fibonacci( )</i>, que recebem um par&acirc;metro inteiro e retornam um valor inteiro. 
+A &uacute;ltima linha define o t&eacute;rmino da macro _NOVA_BIBLIOTECA.</p>
+
+<p>Em segundo lugar, vamos criar o arquivo <a href="libc/exemplos/nova_bib.c" target="_blank"><b>nova_bib.c</b></a> 
+com as fun&ccedil;&otilde;es <i>fatorial( )</i> e <i>fibonacci( )</i>. Note que o novo cabe&ccedil;alho &eacute; incluido na primeira
+linha. Em seguida, temos os c&oacute;digos das duas fun&ccedil;&otilde;es.</p>
+
+<blockquote class="t2">
+#include "nova_bib.h" <br>
+<br>
+int fatorial(int num) <br>
+{ <br>
+&nbsp;&nbsp;&nbsp;  int i; <br>
+&nbsp;&nbsp;&nbsp;  int fat = 1; <br>
+&nbsp;&nbsp;&nbsp;  for (i = 2; i <= num; i++) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fat = fat * i; <br>
+&nbsp;&nbsp;&nbsp;  return fat; <br>
+} <br>
+<br>
+int fibonacci(int num) <br>
+{ <br>
+&nbsp;&nbsp;&nbsp;  int i; <br>
+&nbsp;&nbsp;&nbsp;  int fib   = 0; <br>
+&nbsp;&nbsp;&nbsp;  int fib_a = 0; <br>
+&nbsp;&nbsp;&nbsp;  int fib_b = 1; <br>
+&nbsp;&nbsp;&nbsp;  for (i = 2; i <= num;i++) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fib   = fib_a + fib_b; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fib_a = fib_b; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fib_b = fib; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    } <br>
+&nbsp;&nbsp;&nbsp;  return fib; <br>
+}
+</blockquote>
+</p>
+
+<p>Em terceiro lugar, vamos definir o arquivo <a href="libc/exemplos/teste_lib.c" target="_blank"><b>teste_lib.c</b></a> que chama as
+fun&ccedil;&otilde;es da biblioteca (poderia ser apenas uma das fun&ccedil;&otilde;es). Inicialmente &eacute; incluido o cabe&ccedil;alho
+<i>nova_bib.h</i> que possui as fun&ccedil;&otilde;es <i>fatorial( )</i> e <i>fibonacci( )</i>.
+Note que o cabe&ccedil;alho est&aacute; entre aspas. Isto significa que o sistema vai primeiro procurar o arquivo no diret&oacute;rio
+corrente e depois, se n&atilde;o encontrar o cabe&ccedil;alho, vai percorrer a lista dos diret&oacute;rios fornecida. Quando se usa
+"<" e ">" no lugar das aspas, o cabe&ccedil;alhos &eacute; procurado primeiro na lista. Note tamb&eacute;m que o cabe&ccedil;alho
+<i>stdlib.h</i> que possui a fun&ccedil;&atilde;o <a href="libc/fc_atoi.html"><b>atoi( )</b></a> (converte uma string em um inteiro)
+n&atilde;o &eacute; especificada. Isto ocorre porque o compilador a inclui automaticamente.</p>
+
+<p>Quando o usu&aacute;rio executar o programa <i>teste_lib.c</i>, ele dever&aacute; informar
+um n&uacute;mero. Se o n&uacute;mero &eacute; fornecido na linha de comando, as fun&ccedil;&otilde;es <i>fatorial( )</i> e 
+<i>fibonacci( )</i> s&atilde;o chamadas e o n&uacute;mero recebido &eacute; passado como par&acirc;metro. Note que
+o programa assume que foi passado um par&acirc;metro num&eacute;rico, quando o correto &eacute; verificar o tipo de 
+par&acirc;metro passado antes de chamar as fun&ccedil;&otilde;es.</p>
+
+<blockquote class="t2">
+#include "nova_bib.h" <br>
+<br>
+int main(int argc, char *argv[]) <br>
+{ <br>
+&nbsp;&nbsp;&nbsp;  int num; <br>
+&nbsp;&nbsp;&nbsp;  if (argc != 2) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    { <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Forneca um numero\n"); <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 1; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    } <br>
+&nbsp;&nbsp;&nbsp;  else <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; num = atoi(argv[1]); <br>
+<br>
+&nbsp;&nbsp;&nbsp;  printf("\n*** fatorial\n"); <br>
+&nbsp;&nbsp;&nbsp;  int fat = fatorial(num); <br>
+&nbsp;&nbsp;&nbsp;  printf("Fatorial de %d = %d\n", num, fat); <br>
+<br>
+&nbsp;&nbsp;&nbsp;  printf("\n'*** fibonacci\n"); <br>
+&nbsp;&nbsp;&nbsp;  int fib = fibonacci(num); <br>
+&nbsp;&nbsp;&nbsp;  printf("Soma dos %d primeiros numeros de Fibonacci = %d\n\n", num, fib); <br>
+} 
+</blockquote>
+
+<p>A seguir, vamos ver como gerar o execut&aacute;vel com uma biblioteca est&aacute;tica.
+<ol>
+<li>Compilar a nova biblioteca sem linkar (apenas cria o arquivo objeto).
+    <blockquote class="t1">
+    gcc -c nova_bib.c -o nova_bib.o
+    </blockquote>
+<li>Criar o reposit&oacute;rio da biblioteca com  o aplicativo <a href="ar.html"><b>ar</b></a>.
+    Para cada arquivo adicionado ao reposit&oacute;rio, o <i>ar</i> inclui informa&ccedil;&otilde;es sobre
+    permiss&otilde;es, data e identifica&ccedil;&atilde;o do dono e do grupo. No nosso exemplo, o
+    reposit&oacute;rio criado &eacute; chamado de <i>libnova_bib.a</i> e s&oacute; tem um arquivo (se existissem
+    outros arquivos, os nomes seriam colocados ap&oacute;s <i>nova_bib.o</i>).
+    <blockquote class="t1">
+    ar rc libnova_bib.a nova_bib.o
+    </blockquote>
+    <ul>
+    <li><b>r</b> - adiciona/substitui arquivos no reposit&oacute;rio.
+    <li><b>c</b> - cria o reposit&oacute;rio (se j&aacute; existe um arquivo com o mesmo nome, ele &eacute; deletado).
+    </ul>
+
+<li>Para executar o arquivo <i>teste_lib.c</i> &eacute; preciso gerar o execut&aacute;vel com a nova biblioteca.
+    <blockquote class="t1">
+    gcc teste_lib.c -o teste_lib -L. -lnova_bib
+    </blockquote>
+    <ul>
+    <li><b>-L.</b> - inclui o diret&oacute;rio corrente na lista de busca pela biblioteca.
+    <li><b>-lnova_bib</b> - diz para linkar a biblioteca <i>libnova_bib.a</i> ao programa. Note que nem o prefixo "lib" e nem
+        a extens&atilde;o ".a" s&atilde;o informados no comando, pois fazem parte do padr&atilde;o do nome da biblioteca. 
+        Caso o nome da biblioteca n&atilde;o seguisse o padr&atilde;o, o comando usado seria
+        <blockquote class="t1">
+        gcc teste_lib.c -o teste_lib -L. &nbsp; <i>biblioteca</i>
+        </blockquote>
+    </ul>
+<li>Para ver as bibliotecas compartilhadas que s&atilde;o usadas pelo arquivo <i>teste_lib</i>, basta digitar
+    <blockquote class="t1">
+    ldd teste_lib
+    </blockquote>
+    A sa&iacute;da abaixo mostra que est&atilde;o sendo usadas tr&ecirc;s bibliotecas na execu&ccedil;&atilde;o do arquivo <i>teste_lib</i>
+    (al&eacute;m da biblioteca est&aacute;tica <i>libnova_bib.a</i>).
+    <blockquote class="t2">   
+    linux-vdso.so.1 =>  (0x00007ffffade4000) <br>
+    libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fe1611d3000) <br>
+    /lib64/ld-linux-x86-64.so.2 (0x00007fe1615bc000)
+    </blockquote>
+<li>Caso voc&ecirc; queira distribuir a nova biblioteca, basta fornecer os arquivos <i>nova_bib.h</i> e <i>libnova_bib.a</i>.
+</ol>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Biblioteca Padr&atilde;o C</h2>
+
+<p>A Biblioteca Padr&atilde;o C (padr&atilde;o C11) &eacute; composta por 21 cabe&ccedil;alhos (<i>headers</i>).</p>
+<table class="t1" align=center cellpadding=5 rules=all width=600>
+<tr class="t1">
+<td><b>Cabe&ccedil;alhos</b></td>
+<td><b>Descri&ccedil;&atilde;o</b></td>
+</tr><tr>
+<td>assert.h</td>
+<td>Utilizado nas depura&ccedil;&otilde;es de programas</td>
+</tr><tr>
+<td>complex.h</td>
+<td>Define v&aacute;rias fun&ccedil;&otilde;es para manipular n&uacute;meros complexos</td>
+</tr><tr>
+<td>ctype.h</td>
+<td>Utilizado para testar e converter caracteres</td>
+</tr><tr>
+<td>errno.h</td>
+<td>Utilizado na identifica&ccedil;&atilde;o e no tratamento de erros</td>
+</tr><tr>
+<td>fenv.h</td>
+<td>Define fun&ccedil;&otilde;es e macros para manipula&ccedil;&atilde;o de ponto flutuante</td>  
+</tr><tr>
+<td>float.h</td>
+<td>Especifica as caracter&iacute;sticas do ponto flutuante no sistema</td>
+</tr><tr>
+<td>inttypes.h</td>
+<td>Define fun&ccedil;&otilde;es e macros para convers&atilde;o entre tipos inteiros</td>
+</tr><tr>
+<td>limits.h</td>
+<td>Especifica as caracter&iacute;sticas dos tipos de dados (byte, char, int)</td>
+</tr><tr>
+<td>locale.h</td>
+<td>Define informa&ccedil;&otilde;es sobre localiza&ccedil;&atilde;o (pa&iacute;s, l&iacute;ngua, mensagens, moeda, etc)</td>
+</tr><tr>
+<td>math.h</td>
+<td>Define v&aacute;rias fun&ccedil;&otilde;es matem&aacute;ticas</td>
+</tr><tr>
+<td>setjmp.h</td>
+<td>Permite definir "non-local jumps" (interrompe a sequ&ecirc;ncia normal, executa outras tarefas e retorna ao fluxo normal)</td>
+</tr><tr>
+<td>signal.h</td>
+<td>Permite definir tratamento de sinais</td>
+</tr><tr>
+<td>stdarg.h</td>
+<td>Permite acessar os argumentos de uma fun&ccedil;&atilde;o quando o n&uacute;mero de argumentos &eacute; desconhecido</td>
+</tr><tr>
+<td>stdbool.h</td>
+<td>Define o tipo de dado booleano</td>
+</tr><tr>
+<td>stddef.h</td>
+<td>Apresenta defini&ccedil;&otilde;es de tipos padr&atilde;o (muitas dessas defini&ccedil;&otilde;es s&atilde;o tamb&eacute;m
+    encontradas em outros cabe&ccedil;alhos)
+</td>
+</tr><tr>
+<td>stdint.h</td>
+<td>Define o tipos de dados inteiros</td>
+</tr><tr>
+<td>stdio.h</td>
+<td>Permite realizar opera&ccedil;&otilde;es de entrada/sa&iacute;da</td>
+</tr><tr>
+<td>stdlib.h</td>
+<td>Define v&aacute;rias fun&ccedil;&otilde;es de prop&oacute;sito geral como gerenciamento de mem&oacute;ria din&acirc;mica,
+    gera&ccedil;&atilde;o de n&uacute;mero aleat&oacute;rio, comunica&ccedil;&atilde;o com o ambiente, aritm&eacute;tica de 
+    inteiros, busca, ordena&ccedil;&atilde;o e convers&atilde;o</td>
+</tr><tr>
+<td>string.h</td>
+<td>Define fun&ccedil;&otilde;es para manipula&ccedil;&atilde;o de strings</td>
+</tr><tr>
+<td>tgmath.h</td>
+<td>Define macros para uso em diversas opera&ccedil;&otilde;es matem&aacute;ticas</td>
+</tr><tr>
+<td>time.h</td>
+<td>Define fun&ccedil;&otilde;es para ler e converter datas e horas</td>
+</tr>
+</table>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Fun&ccedil;&otilde;es</h2>
+
+<p>A tabela abaixo apresenta algumas fun&ccedil;&otilde;es dispon&iacute;veis na glibc.</p>
+
+<table class="t1" align="center" cellpadding=10 cellspacing=10 rules=all width=650>
+<tr class="t1"><td width=20%><b>Nome</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr><tr>
+<td><b><a href="libc/fc_atexit.html">atexit( )</a></b></td>
+<td>Chama uma determinada função quando o processo termina normalmente</td></tr>
+<tr><td><b><a href="libc/fc_atoi.html">atoi( )</a></b></td>
+    <td>Converte uma string em um inteiro</td></tr>
+<tr><td><b><a href="libc/fc_ctime.html">ctime( )</a></b></td>
+    <td>Converte um tempo do Unix para um formato compreens&iacute;vel ao ser humano</td></tr>
+<tr><td><b><a href="libc/fc_exit.html">exit( )</a></b></td>
+    <td>Provoca o t&eacute;rmino do processo</td></tr>
+<tr><td><b><a href="libc/fc_getenv.html">getenv( )</a></b></td>
+    <td>Fornece o valor de uma vari&aacute;vel de ambiente</td></tr>
+<tr><td><b><a href="libc/fc_localtime.html">localtime( )</a></b></td>
+    <td>Converte um tempo do Unix para um formato compreens&iacute;vel ao ser humano</td></tr>
+<tr><td><b><a href="libc/fc_main.html">main( )</a></b></td>
+    <td>Inicia a execu&ccedil;&atilde;o do programa</td></tr>
+<tr><td><b><a href="libc/fc_major.html">major( ) <br> minor( )</a></b></td>
+    <td valign=center>Ajudam a gerenciar o n&uacute;mero do <i>device</i></td></tr>
+<tr><td><b><a href="libc/fc_malloc.html">malloc( ) <br> calloc( ) <br> free( ) <br> realloc( )</a></b></td>
+    <td valign=center>Aloca/libera mem&oacute;ria dinamicamente</i></td></tr>
+<tr><td><b><a href="libc/fc_mkstemp.html">mkstemp( )</a></b></td>
+    <td>Cria e abre um arquivo tempor&aacute;rio &uacute;nico</td></tr>
+<tr><td><b><a href="libc/fc_mktime.html">mktime( )</a></b></td>
+    <td>Converte um hor&aacute;rio para o tempo do Unix</td></tr>
+<tr><td><b><a href="libc/fc_on_exit.html">on_exit( )</a></b></td>
+    <td>Chama uma determinada função quando o processo termina normalmente</td></tr>
+<tr><td><b><a href="libc/fc_perror.html">perror( )</a></b></td>
+    <td>Fornece a mensagem do &uacute;ltimo erro</td></tr>
+<tr><td><b><a href="libc/fc_printf.html">printf( )</a></b></td>
+    <td>Formata e imprime dados</td></tr>
+<tr><td><b><a href="libc/fc_sprintf.html">sprintf( )</a></b></td>
+    <td>Formata uma string</td></tr>
+<tr><td><b><a href="libc/fc_strerror.html">strerror( )</a></b></td>
+    <td>Informa a mensagem de erro correspondente a um determinado c&oacute;digo</td></tr>
+<tr><td><b><a href="libc/fc_strlen.html">strlen( )</a></b></td>
+    <td>Fornece o tamanho de uma string</td></tr>
+<tr><td><b><a href="libc/fc_system.html">system( )</a></b></td>
+    <td>Executa um comando shell</td></tr>
+</table>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Vari&aacute;veis</h2>
+
+<br>
+<table class="t1" align="center" cellpadding=10 cellspacing=10 rules=all width=650>
+<tr class="t1">
+<td><b>Nome</b></td>
+<td><b>Descri&ccedil;&atilde;o</b></td>
+</tr><tr>
+<td><b><a href="libc/vr_errno.html">errno</a></b></td>
+<td>Armazena o c&oacute;digo do &uacute;ltimo erro de um processo</td>
+</tr>
+</table>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<a name="tipos_dados"></a>
+<h2>Tipos de dados</h2>
+
+<p>Para facilitar a portabilidade (diferentes arquiteturas e/ou vers&otilde;es), o Linux define alguns tipos de
+dados para o sistema. Na realidade, esses tipos nada mais s&atilde;o que tipos de dados simples (ex: int, double, float, etc)
+chamados por outro nome. O Linux faz normalmente a declara&ccedil;&atilde;o desses tipos de dados no cabe&ccedil;alho
+<i>types.h</i> do diret&oacute;rio /usr/include/sys/. Abaixo, s&atilde;o apresentados alguns exemplos.</p>
+<br>
+<table class="t1" align="center" cellpadding=5 rules=all width=600>
+<tr class="t1">
+<td><b>Nome</b></td>
+<td><b>Descri&ccedil;&atilde;o</b></td>
+</tr><tr>
+<td>blkcnt_t</td>
+<td>Armazena o n&uacute;mero de blocos do arquivo</td>
+</tr><tr>
+<td>blksize_t</td>
+<td>Armazena o tamanho do bloco do arquivo</td>
+</tr><tr>
+<td>dev_t</td>
+<td>Armazena o n&uacute;mero do <i>device</i></td>
+</tr><tr>
+<td>gid_t</td>
+<td>Armazena o GID</td>
+</tr><tr>
+<td>ino_t</td>
+<td>Armazena o n&uacute;mero do inode do arquivo</td>
+</tr><tr>
+<td>mode_t</td>
+<td>Armazena o tipo e as permiss&otilde;es do arquivo</td>
+</tr><tr>
+<td>nlink_t</td>
+<td>Armazena o n&uacute;mero de links diretos do arquivo</td>
+</tr><tr>
+<td>off_t</td>
+<td>Armazena o tamanho ou o <i>offset</i> de um arquivo</td>
+</tr><tr>
+<td>pid_t</td>
+<td>Armazena a identifica&ccedil;&atilde;o de um processo, do grupo de um processo ou de uma sess&atilde;o</td>
+</tr><tr>
+<td>sighandler_t</td>
+<td>Armazena um sinal</td>
+</tr><tr>
+<td>size_t</td>
+<td>Armazena o tamanho de um objeto em bytes</td>
+</tr><tr>
+<td>ssize_t</td>
+<td>Armazena um contador de bytes ou uma indica&ccedil;&atilde;o de erro (negativo)</td>
+</tr><tr>
+<td>time_t</td>
+<td>Armazena um hor&aacute;rio no formato do tempo de &eacute;poca</td>
+</tr><tr>
+<td>uid_t</td>
+<td>Armazena o UID</td>
+</tr>
+</table>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Estrutura de dados</h2>
+
+<p>O Linux tamb&eacute;m define algumas estruturas para armazenamento e recupera&ccedil;&atilde;o de dados. Abaixo, 
+s&atilde;o apresentados alguns exemplos.</p>
+<br>
+<table class="t1" align="center" cellpadding=5 rules=all width=600>
+<tr class="t1"><td><b>Nome</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td><b><a href="libc/ed_acct.html">acct</a></b></td>
+    <td>Armazena informa&ccedil;&otilde;es sobre processos</td></tr>
+<tr><td><b><a href="libc/ed_itimerval.html">itimerval</a></b></td>
+    <td>Armazena informa&ccedil;&otilde;es sobre intervalo de tempo</td></tr>
+<tr><td><b><a href="libc/ed_stat.html">stat</a></b></td>
+    <td>Armazena informa&ccedil;&otilde;es sobre arquivos</td></tr>
+<tr><td><b><a href="libc/ed_timeval.html">timeval</a></b></td>
+    <td>Armazena informa&ccedil;&otilde;es sobre intervalo de tempo</td></tr>
+<tr><td><b><a href="libc/ed_timex.html">timex</a></b></td>
+    <td>Armazena informa&ccedil;&otilde;es sobre o relógio do kernel</td></tr>
+<tr><td><b><a href="libc/ed_tm.html">tm</a></b></td>
+    <td>Armazena data e hora</td></tr>
+</table>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

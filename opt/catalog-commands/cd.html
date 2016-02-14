@@ -1,0 +1,114 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>cd</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="cd">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>cd</h1>
+
+<blockquote><b><font size="+1">cd [diret&oacute;rio]</font></b></blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando permite ao usu&aacute;rio mudar o diret&oacute;rio de trabalho. A mudan&ccedil;a
+de diret&oacute;rio pode ser feita de forma sequencial (de diret&oacute;rio pai para 
+diret&oacute;rio filho ou vice-versa) ou pode ser feita de forma aleat&oacute;ria (de um 
+diret&oacute;rio qualquer para outro diret&oacute;rio qualquer).</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<p>S&atilde;o exemplos de uso deste comando:</p>
+
+<ul>
+<li>Para ir para o seu diret&oacute;rio <b><a href="dir_home.html">home</a></b>, digite
+
+<blockquote class="t1">cd</blockquote>
+ou      
+<blockquote class="t1">cd ~/</blockquote></li>
+
+<li>Para ir para o diret&oacute;rio <i>raiz</i> do Linux, digite
+        
+<blockquote class="t1">cd /</blockquote></li>
+        
+<li>Para ir para um diret&oacute;rio filho do diret&oacute;rio atual, digite
+        
+<blockquote class="t1">cd <i>nome-do-diret&oacute;rio</i></blockquote></li>
+        
+<li>Para ir para o diret&oacute;rio pai do diret&oacute;rio atual, digite
+        
+<blockquote class="t1">cd ..</blockquote></li>
+        
+<li>Para ir para um diret&oacute;rio do mesmo n&iacute;vel (diret&oacute;rio irm&atilde;o) 
+do diret&oacute;rio atual, digite
+        
+<blockquote class="t1">cd ../<i>nome-do-diret&oacute;rio</i></blockquote></li>
+        
+<li>Para voltar ao &uacute;ltimo diret&oacute;rio visitado antes do diret&oacute;rio atual, 
+digite
+        
+<blockquote class="t1">cd -</blockquote></li>
+        
+<li>voc&ecirc; pode tamb&eacute;m fornecer o caminho completo do diret&oacute;rio para onde 
+quer ir. Por exemplo,
+        
+<blockquote class="t1">cd /usr/lib</blockquote>
+
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+
+<li> Se a vari&aacute;vel de ambiente <b>CDPATH</b> for definida (veja <b><a href="shell.html">shell</a></b> para mais detalhes), 
+o sistema faz a busca pelo diret&oacute;rio de acordo com o conte&uacute;do desta vari&aacute;vel. Por exemplo,
+        
+<blockquote class="t1">CDPATH=.:~:/etc</blockquote>
+
+faz com que o sistema procure pelo diret&oacute;rio especificado na seguinte ordem: 
+
+<ol>
+<li>a partir do diret&oacute;rio atual (representado na defini&ccedil;&atilde;o pelo caractere ":");</li>
+<li>a partir do diret&oacute;rio raiz do usu&aacute;rio (representado na defini&ccedil;&atilde;o pelo caractere <b>~</b>);</li>
+<li>a partir do diret&oacute;rio <b>/etc</b>.</li>
+</ol>
+
+Note que as tr&ecirc;s op&ccedil;&otilde;es definidas na vari&aacute;vel 
+est&atilde;o separadas por dois pontos (":").
+
+<li> Para saber mais informa&ccedil;&otilde;es sobre o comando <b>cd</b>, digite
+
+<blockquote class="t1">help cd</blockquote>
+
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

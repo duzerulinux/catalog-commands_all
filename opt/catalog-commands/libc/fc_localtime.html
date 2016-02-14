@@ -1,0 +1,132 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>localtime()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="localtime()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>localtime( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta fun&ccedil;&atilde;o converte data e hora do formato <i>time_t</i> (inteiro longo) para a estrutura 
+<b><a href="ed_tm.html">tm</a></b>.</p> 
+   
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include&lt;stdlib.h&gt;<br>
+struct tm *localtime(const time_t *timep);
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<blockquote class="t2">
+1. #include&lt;stdio.h&gt; <br>
+2. #include&lt;time.h&gt;<br>
+3. int main()<br>
+4. &nbsp;&nbsp; {<br>
+5. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; time_t tp;<br>
+6. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; struct tm lt;<br>
+7. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; time(&amp;tp);<br>
+8. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lt = *localtime(&amp;tp); <br>
+9. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Dia  = %i\n", lt.tm_mday); <br>
+10.&nbsp;&nbsp;&nbsp;&nbsp;       printf("Mes  = %i\n", lt.tm_mon); <br>
+11.&nbsp;&nbsp;&nbsp;&nbsp;       printf("Ano  = %i\n", lt.tm_year); <br>
+12.&nbsp;&nbsp;&nbsp;&nbsp;       printf("Hora = %i\n", lt.tm_hour); <br>
+13.&nbsp;&nbsp;&nbsp;&nbsp;       printf("Min  = %i\n", lt.tm_min); <br>
+14.&nbsp; }
+</blockquote>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/localtime.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas 1 e 2 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da 
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf()</b></a>.
+    <li><b>time.h</b> - cabe&ccedil;alho com as fun&ccedil;&otilde;es para manipular datas e horas.
+    </ul>
+<li><b>Linha 3 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main()</b></a> cujos comandos v&atilde;o 
+    da linha 5 a linha 13.
+<li><b>Linha 5 :</b> &eacute; definida a vari&aacute;vel <i>tp</i> como sendo do tipo <i>time_t</i> (inteiro longo).
+<li><b>Linha 6 :</b> &eacute; definida a estrutura de dados <i>lt</i>.
+<li><b>Linha 7 :</b> usa a chamada de sistema <a href="cs_time.html"><b>time( )</b></a> para obter a quantidade de segundos
+    passados desde &agrave;s 00:00:00 de 01/01/1970. Este valor &eacute; armazenado na vari&aacute;vel <i>tp</i>. Podemos 
+    substituir esta linha por
+    <blockquote>tp=time(0)</blockquote>
+    para obter o mesmo resultado.
+<li><b>Linha 8 :</b> usa a fun&ccedil;&atilde;o <i>localtime( )</i> para converter o valor da vari&aacute;vel <i>tp</i> em uma
+    estrutura do tipo <a href="ed_tm.html"><b>tm</b></a>. Este valor &eacute; armazenado em <i>lt</i>.
+<li><b>Linha 9 a 13:</b> exibe campos da estrutura <i>lt</i>.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar
+<blockquote class="t1">
+gcc -o localtime localtime.c 
+</blockquote>
+Para executar
+<blockquote class="t1">
+./localtime
+</blockquote>
+Abaixo uma poss&iacute;vel sa&iacute;da.
+<blockquote class="t2">
+<table class="t2">
+<tr><td>Dia  </td><td>=</td><td> 10  </td></tr>
+<tr><td>Mes  </td><td>=</td><td> 2   </td></tr>
+<tr><td>Ano  </td><td>=</td><td> 115 </td></tr>
+<tr><td>Hora </td><td>=</td><td> 13  </td></tr>
+<tr><td>Min  </td><td>=</td><td> 11  </td></tr>
+</table>
+</blockquote>
+Os dados representam 13:11 do dia 10 de mar&ccedil;o (m&ecirc;s 2, janeiro &eacute; zero) de 2015 (115 anos desde 1900).
+</p>
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li> O argumento do tipo <i>time_t</i> representa a quantidade de segundos passados desde &agrave;s 00:00:00 de 01/01/1970 
+     e corresponde ao <a href="../tempo_unix.html"><b>tempo do Unix</a></b>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

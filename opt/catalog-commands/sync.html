@@ -1,0 +1,62 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>sync</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="sync">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>sync</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Quando voc&ecirc; acessa um arquivo, o Linux faz uma c&oacute;pia deste arquivo e coloca esta 
+c&oacute;pia na mem&oacute;ria <i>cache</i>. &Eacute; com esta c&oacute;pia que o Linux trabalha, pois
+o acesso &agrave; mem&oacute;ria &eacute; mais r&aacute;pido que o acesso a uma unidade de disco (r&iacute;gido
+ou flex&iacute;vel).</p> 
+
+<p>Portanto, quando voc&ecirc; modifica o arquivo, o Linux modifica, na realidade, a c&oacute;pia do arquivo
+armazenada na <i>cache</i>, e n&atilde;o o arquivo real. De tempos em tempos, o Linux grava os dados da mem&oacute;ria
+nas unidades de disco.</p>
+
+<p>O comando <i>sync</i> &eacute; utilizado para for&ccedil;ar a atualiza&ccedil;&atilde;o destes dados. 
+Por exemplo, se voc&ecirc; gravou um arquivo no pen drive, antes de remov&ecirc;-lo, &eacute;
+importante garantir que a c&oacute;pia realmente seja feita. Para isto basta digitar o comando 
+<i>sync</i> (voc&ecirc; tamb&eacute;m pode especificar a op&ccedil;&atilde;o <i>sync</i> durante a 
+<a href="mount.html"><b>montagem</b></a> do dispositivo). </p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>--help</b> : apresenta as op&ccedil;&otilde;es do comando. </li>
+<li><b>--version</b> : lista a vers&atilde;o do programa.</li>
+</ul>
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

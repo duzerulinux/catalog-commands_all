@@ -1,0 +1,150 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>pause()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="pause()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>pause( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta <a href="../chamadas.html"><b>chamada de sistema</b></a> aguarda a chegada de um <a href="../sinal.html"><b>sinal</b></a>.
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<p>
+<blockquote class="t2">
+#include&lt;unistd.h&gt;<br>
+int pause(void);
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>A chamada <i>pause( )</i> s&oacute; retorna quando o <a href="../sinal.html"><b>sinal</b></a> &eacute; capturado. Se a 
+chamada retorna o valor -1, a vari&aacute;vel externa <b><a href="vr_errno.html">errno</a></b> &eacute; setada para EINTR.
+
+<p>
+<blockquote>
+<table class="t2" rules=all cellpadding=10 cellspacing=10 align=center width=650>
+<tr class="t1"><td><b>Erro</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td>EINTR </td><td>Um sinal foi capturado e a fun&ccedil;&atilde;o de captura de sinal retornou</td></tr>
+</table>
+</blockquote>
+<p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<blockquote class="t2">
+1. #include&lt;unistd.h&gt; <br>
+2. #include&lt;signal.h&gt; <br>
+3. #include&lt;stdio.h&gt;  <br>
+4. #include&lt;stdlib.h&gt; <br>
+5. #include&lt;string.h&gt; <br>
+6. #include&lt;errno.h&gt;  <br>
+7. void mensagem(int signum) <br>
+8. &nbsp;&nbsp;&nbsp;{ <br>
+9. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("\nSinal capturado\n"); <br>
+10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       exit(0); <br>
+11.&nbsp;&nbsp;&nbsp;} <br>
+12.int main() <br>
+13.&nbsp;&nbsp;&nbsp;{ <br>
+14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (signal(SIGINT, mensagem) == SIG_ERR) <br>
+15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Nao e possivel capturar sinal\n"); <br>
+17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(1); <br>
+18.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+19.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while (1) <br>
+20.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pause(); <br>
+21.&nbsp;&nbsp;&nbsp;}
+</blockquote>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/pause.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 6 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da 
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>unistd.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das <a href="../chamadas.html"><b>chamadas de sistema</b></a>. 
+    <li><b>signal.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o dos <a href="../sinal.html"><b>sinais</b></a>.
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>stdlib.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es 
+        <a href="fc_system.html"><b>system( )</b></a> e <a href="fc_getenv.html"><b>getenv( )</b></a>.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror( )</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro.
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+    </ul>
+<li><b>Linha 7 :</b> fun&ccedil;&atilde;o <i>mensagem( )</i> que captura sinal cujos comandos vão da linha 8 a linha 11.
+<li><b>Linha 12 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da
+    linha 14 a linha 20.
+<li><b>Linha 14 :</b> define a fun&ccedil;&atilde;o <i>mensagem( )</i> para capturar os sinais.
+<li><b>Linhas 19 e 20 :</b> fica em loop at&eacute; que um sinal seja capturado.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar
+<blockquote class="t1">
+gcc -o pause pause.c 
+</blockquote>
+Para executar
+<blockquote class="t1">
+./pause
+</blockquote>
+Para cancelar a espera, basta teclar CTRL+C. O programa ent&atilde;o responde:
+<blockquote class="t2">
+^C<br>
+Sinal capturado
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A chamada <i>pause( )</i> faz com o que processo que a chama, aguarde a chegada de um sinal.
+<li>O sinal recebido termina o processo ou chama uma fun&ccedil;&atilde;o para tratar o sinal.
+<li>Veja as chamadas <b><a href="cs_alarm.html">alarm( )</a></b> e <b><a href="cs_setitimer.html">setitimer( )</a></b>
+    para outros exemplos do uso de <i>pause( )</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

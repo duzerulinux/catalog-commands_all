@@ -1,0 +1,99 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>less</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="less">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>less</h1>
+ 
+<blockquote><font size="+1"><b>less [op&ccedil;&otilde;es] [arquivo]</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+<p>Este comando permite fazer a pagina&ccedil;&atilde;o de <a href="arquivo.html"><b>arquivos</b></a> ou da entrada padr&atilde;o.</p>
+  
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>+</b> : se a op&ccedil;&atilde;o come&ccedil;a com este sinal, ent&atilde;o a op&ccedil;&atilde;o &eacute; usada 
+    como um comando inicial para o aplicativo <i>less</i>.
+<li><b>-?</b> ou <b>--help</b>: lista um sum&aacute;rio das op&ccedil;&otilde;es do aplicativo <i>less</i>. 
+<li><b>+num</b> : mostra arquivo a partir da linha <i>num</i>.
+<li><b>-N</b> : numera as linhas do arquivo.
+<li><b>-n</b> : n&atilde;o numera as linhas do arquivo (&eacute; o padr&atilde;o).
+<li><b>+F</b> : continua indefinidamente tentando ler caracteres no final do arquivo (assume que o arquivo est&aacute; 
+    crescendo). O comportamento &eacute; semelhante ao comando <b><a href="tail.html">tail -f</a></b>.
+<li><b>+G</b> : posiciona no final do arquivo.
+</ul>
+     
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Teclas dispon&iacute;veis</h2>
+
+<ul>
+<li>Use as teclas Page-Down, Ctrl+F ou Space para avan&ccedil;ar nas p&aacute;ginas.
+<li>Use as teclas Page-Up ou Ctrl+B para voltar as p&aacute;ginas.
+<li>Use Enter para avan&ccedil;ar apenas uma linha por vez.
+<li>Digite h para ver a lista das teclas dispon&iacute;veis para navega&ccedil;&atilde;o no aplicativo
+    (digite q para voltar ao texto).
+<li>Para procurar uma palavra, digite <b>/</b> e, em seguida, entre com a palavra. Para procurar a pr&oacute;xima 
+    palavra e a palavra anterior no texto use, respectivamente, n e N.
+<li>Para sair do aplicativo digite q.
+</ul>
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Para visualizar o arquivo <i>teste</i>, basta digitar
+    <blockquote class="t1">less teste</blockquote>
+<li>Para redirecionar a sa&iacute;da de um comando para o <i>less</i> use o <b><a href="redirecionadores.html">pipe</a></b>.
+    Por exemplo, o comando
+    <blockquote class="t1">ls | less</blockquote>
+    faz com que a listagem dos arquivos do diret&oacute;rio corrente seja paginada pelo aplicativo <i>less</i>.
+<li>Para ver o manual on-line sobre o comando <b><a href="ls.html">ls</a></b>, numerando as suas linhas e mostrando 
+    a partir da linha 20, basta digitar
+    <blockquote class="t1">man ls | less -N +20</blockquote>
+<li>Para examinar arquivos que est&atilde;o sendo constantemente atualizados use a op&ccedil;&atilde;o <b>F</b>. 
+    Por exemplo,
+    <blockquote class="t1">last | less +F</blockquote>
+    mostra as &uacute;ltimas linhas do arquivo que armazena informa&ccedil;&otilde;es sobre <i>login</i> e <i>logout</i>
+    dos usu&aacute;rios. Para sair tecle CTRL+C (para cancelar) e depois q (de <i>quit</i>).
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Na realidade, o aplicativo <i>less</i> &eacute; uma vers&atilde;o melhorada do aplicativo <a href="more.html"><b>more</b></a>.
+<li>Para personalizar as teclas a serem usadas no aplicativo <i>less</i> use o comando <a href="lesskey.html"><b>lesskey</b></a>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>readelf</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="readelf">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>readelf</h1>
+
+<blockquote><b><font size="+1">readelf [op&ccedil;&otilde;es] arquivo</font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando exibe informa&ccedil;&otilde;es sobre <a href="arquivo.html"><b>arquivos</b></a> com formato
+<a href="libc/ed_elf.html"><b>ELF</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2> Algumas op&ccedil;&otilde;es do comando </h2>
+
+<ul>
+<li><b>-a</b> ou <b>--all</b> : equivale a usar as op&ccedil;&otilde;es <i>--file-header</i>, <i>--program-headers</i>, 
+    <i>--sections</i>, <i>--symbols</i>, <i>--relocs</i>, <i>--dynamic</i>, <i>--notes</i> e <i>--version-info</i>.
+<li><b>-A</b> ou <b>--arch-specific</b> : exibe informa&ccedil;&atilde;o sobre a arquitetura da m&aacute;quina, se existe
+    esta informa&ccedil;&atilde;o.
+<li><b>-h</b> ou <b>--file-header</b> : exibe as informa&ccedil;&otilde;es do cabe&ccedil;alho ELF inicial.
+<li><b>-H</b> ou <b>--help</b> : mostra as op&ccedil;&otilde;es do comando.
+<li><b>-l</b> ou <b>--program-headers</b> ou <b>--segments</b> : exibe as informa&ccedil;&otilde;es dos cabe&ccedil;alhos
+    de programa do arquivo.
+<li><b>-S</b> ou <b>--sections</b> ou <b>--section-headers</b> : exibe as informa&ccedil;&otilde;es dos cabe&ccedil;alhos
+    de se&ccedil;&atilde;o do arquivo.
+<li><b>-s</b> ou <b>--symbols</b> ou <b>--syms</b> : exibe as tabelas de s&iacute;mbolos do arquivo.
+<li><b>-v</b> ou <b>--version</b> : informa a vers&atilde;o do utilit&aacute;rio.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>O comando 
+    <blockquote class="t1">readelf -h teste</blockquote>
+    mostra o cabe&ccedil;alho ELF inicial do arquivo execut&aacute;vel <i>teste</i>.
+    Abaixo &eacute; apresentada uma poss&iacute;vel sa&iacute;da.
+    <blockquote class="t2">
+    Cabeçalho ELF: <br>
+    &nbsp;&nbsp;&nbsp;M&aacute;gico:&nbsp;&nbsp;&nbsp;7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00  <br>
+    &nbsp;&nbsp;&nbsp;Classe: ELF64 <br>
+    &nbsp;&nbsp;&nbsp;Dados: complemento de 2, little endian <br>
+    &nbsp;&nbsp;&nbsp;Vers&atilde;o: 1 (current) <br>
+    &nbsp;&nbsp;&nbsp;OS/ABI:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UNIX - System V <br>
+    &nbsp;&nbsp;&nbsp;Vers&atilde;o ABI: 0 <br>
+    &nbsp;&nbsp;&nbsp;Tipo: EXEC (Arquivo executável) <br>
+    &nbsp;&nbsp;&nbsp;M&aacute;quina: Advanced Micro Devices X86-64 <br>
+    &nbsp;&nbsp;&nbsp;Vers&atilde;o: 0x1 <br>
+    &nbsp;&nbsp;&nbsp;Endere&ccedil;o do ponto de entrada:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x400570 <br>
+    &nbsp;&nbsp;&nbsp;Início dos cabe&ccedil;alhos de programa:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;64 (bytes dentro do arquivo) <br>
+    &nbsp;&nbsp;&nbsp;Princ&iacute;pio do cabe&ccedil;alho da se&ccedil;&atilde;o:&nbsp;&nbsp;&nbsp;4496 (bytes dentro do arquivo) <br>
+    &nbsp;&nbsp;&nbsp;Sinaliza&ccedil;&otilde;es: 0x0 <br>
+    &nbsp;&nbsp;&nbsp;Tamanho deste cabe&ccedil;alho: 64 (bytes) <br>
+    &nbsp;&nbsp;&nbsp;Tamanho dos cabe&ccedil;alho dos  programas: 56 (bytes) <br>
+    &nbsp;&nbsp;&nbsp;N&uacute;mero do cabe&ccedil;alho do programa: 9 <br>
+    &nbsp;&nbsp;&nbsp;Tamanho do cabe&ccedil;alho da se&ccedil;&atilde;o: 64 (bytes) <br>
+    &nbsp;&nbsp;&nbsp;N&uacute;mero do cabe&ccedil;alho da se&ccedil;&atilde;o: 30 <br>
+    &nbsp;&nbsp;&nbsp;Sequ&ecirc;ncia do &iacute;ndice da tabela cabe&ccedil;alho da seção: 27
+    </blockquote>
+<li>Para ver os cabe&ccedil;alhos de se&ccedil;&atilde;o do arquivo execut&aacute;vel <i>teste</i>, digite
+    <blockquote class="t1">readelf -S teste</blockquote>
+<li>Para ver os todos os cabe&ccedil;alhos do arquivo execut&aacute;vel <i>teste</i>, basta digitar
+    <blockquote class="t1">readelf -a teste</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Tamb&eacute;m &eacute; poss&iacute;vel verificar informa&ccedil;&otilde;es sobre a aloca&ccedil;&atilde;o de 
+    <a href="processo.html#memoria"><b>mem&oacute;ria</b></a> das se&ccedil;&otilde;es usando o comando
+    <a href="size.html"><b>size</b></a>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>usermod</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="usermod">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<p>&nbsp;</p>
+
+<a name="inicio"></a>
+
+<h1>usermod</h1>
+   
+<blockquote><font size="+1"><b>usermod [op&ccedil;&otilde;es] usu&aacute;rio</b></font></blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando  modifica uma conta de usu&aacute;rio do sistema.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-d diret&oacute;rio [-m]</b> : cria um novo diret&oacute;rio <b><a href="dir_home.html">home</a></b> para o usu&aacute;rio. A op&ccedil;&atilde;o 
+       <b>-m</b> faz com que os arquivos do diret&oacute;rio atual do usu&aacute;rio seja movido para o novo diret&oacute;rio.
+<li><b>-e yyyy-mm-dd</b> : altera a data de expira&ccedil;&atilde;o da conta do usu&aacute;rio.
+<li><b>-g grupo</b> : altera o <b><a href="gid.html">GID</a></b> do grupo padr&atilde;o do usu&aacute;rio para o valor especificado.
+<li><b>-G grupo1[,grupo2, ...]</b> : define o GID dos outros grupos aos quais o usu&aacute;rio pertence.
+<li><b>-l nome</b> : altera o nome de identifica&ccedil;&atilde;o do usu&aacute;rio (o usu&aacute;rio n&atilde;o pode estar logado).
+<li><b>-s shell</b> : altera o <a href="shell.html"><b>shell</b></a> do usu&aacute;rio.
+<li><b>-u uid</b> : altera o n&uacute;mero de <a href="uid.html"><b>UID</b></a> do usu&aacute;rio.</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>O comando
+
+<blockquote class="t1">usermod -s /bin/ash aluno</blockquote>
+
+faz com que o <b><a href="shell.html">shell</a></b> padr&atilde;o do usu&aacute;rio <b>aluno</b> passe a ser o <b>/bin/ash</b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Este comando altera (se necess&aacute;rio) as entradas relacionadas ao usu&aacute;rio especificado nos seguintes arquivos: 
+    <b><a href="dir_etc.html#passwd">/etc/passwd</a></b>, <b><a href="dir_etc.html#shadow">/etc/shadow</a></b> e 
+    <b><a href="dir_etc.html#group">/etc/group</a></b>.</p>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="adduser.html">adduser</a></b> - cria um novo usu&aacute;rio.
+<li><b><a href="chsh.html">chsh</a></b> - altera o <b>shell</b> padr&atilde;o do usu&aacute;rio.
+<li><b><a href="useradd.html">useradd</a></b> - cria um novo usu&aacute;rio sem alocar recursos.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

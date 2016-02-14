@@ -1,0 +1,92 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>mount</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="mount">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>mount</h1>
+
+<blockquote><b><font size="+1">mount [op&ccedil;&otilde;es] [dispositivo] [ponto_de_montagem]</font></b></blockquote>
+<ul>
+<li>O argumento <i>dispositivo</i> &eacute; o dispositivo a ser montado;
+<li>O argumento <i>ponto_de_montagem</i> &eacute; o diret&oacute;rio abaixo do qual ser&aacute; colocado o sistema de 
+    arquivos do dispositivo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<ul>
+<li>Em um sistema Linux, os arquivos est&atilde;o organizados em uma grande &aacute;rvore, onde o diret&oacute;rio raiz
+    (pai de todos os outros diret&oacute;rios) &eacute; representado como <b>/</b>. Estes arquivos podem estar distribu&iacute;dos
+    por diversos dispositivos como HDs, cd-rooms, pendrivers, etc. 
+<li>O comando <a href="mount.html"><b>mount</b></a> &eacute; usado para incluir o sistema de arquivos de um dispositivo qualquer no
+    <b><a href="sistemas_de_arquivos.html">sistema de arquivos</a></b> do Linux.</p>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-a</b> : monta todos os sistemas de arquivos especificados no arquivo <b><a href="dir_etc.html#fstab">/etc/fstab</a></b>.</li>
+<li><b>-h</b> ou <b>--help</b> : exibe as op&ccedil;&otilde;es do comando.
+<li><b>-r</b> : monta a parti&ccedil;&atilde;o somente para leitura.</li>
+<li><b>-t tipo</b> : especifica o tipo de sistema de arquivo que ser&aacute; montado como, por exemplo, ext, ext2, ext3, ext4,  
+    minix, msdos, nfs, ntfs, etc.
+<li><b>-v</b> : lista o sistema de arquivo de cada dispositivo montado.</li>
+<li><b>-w</b> : monta a parti&ccedil;&atilde;o para leitura/grava&ccedil;&atilde;o (&eacute; o padr&atilde;o).</li>
+<li><b>-V</b> ou <b>--version</b> : exibe informa&ccedil;&otilde;es sobre o comando.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>Para montar um <i>pen drive</i>, que possui sistema de arquivos do tipo <b>vfat</b>,
+   em uma interface SCSI e abaixo do diret&oacute;rio <b>/media/teste</b> (j&aacute; existente),
+   basta digitar
+    <blockquote class="t1">mount -t vfat /dev/sdb1 /media/TESTE</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O arquivo <b><a href="dir_etc.html#mtab">/etc/mtab</a></b> possui a lista de todos os sistemas de arquivos
+    atualmente montados no Linux.</p>
+<li>O comando <b>mount</b> sem par&acirc;metros faz o sistema listar o conte&uacute;do do arquivo <b>/etc/mtab</b>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="umount.html">umount</a></b> - desmonta sistemas de arquivos.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

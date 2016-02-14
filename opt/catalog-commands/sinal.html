@@ -1,0 +1,172 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>Sinal</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="sinal">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>Sinal</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<ul>
+<li>&Eacute; um mecanismo usado para notificar um processo da ocorr&ecirc;ncia de um evento.
+<li>&Eacute; um interrup&ccedil;&atilde;o de software.
+<li>Um sinal &eacute; definido como um n&uacute;mero inteiro, mas recebe um nome simb&oacute;lico com prefixo "SIG"
+    (o n&uacute;mero pode variar nos sistemas <i>Unix-like</i>, mas o nome &eacute; sempre o mesmo).
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Tipos de sinal</h2>
+
+<p>No <a href="linux.html"><b>Linux</b></a>, existem duas categorias de sinal:
+<ul>
+<li><b>Padr&atilde;o</b> (<i>standard</i>) - os sinais recebem numera&ccedil;&atilde;o de 1 a 31. Apenas um dos sinais do mesmo
+       tipo &eacute; enfileirado para ser processado, o resto &eacute; ignorado.
+<li><b>Tempo real</b> (<i>realtime</i>) - os sinais recebem numera&ccedil;&atilde;o acima de 31. Todos os sinais s&atilde;o 
+       enfileirados e processados na ordem de chegada.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>A&ccedil;&otilde;es</h2>
+
+<p>Cada sinal tem uma disposi&ccedil;&atilde;o que determina como o processo se comporta quando recebe um sinal.
+<ul>
+<li><b>Term</b> - a a&ccedil;&atilde;o padr&atilde;o &eacute; terminar o processo.
+<li><b>Ign</b> - a a&ccedil;&atilde;o padr&atilde;o &eacute; ignorar o sinal.
+<li><b>Core</b> - a a&ccedil;&atilde;o padr&atilde;o &eacute; terminar o processo e gerar um <i>dump core</i>.
+<li><b>Stop</b> - a a&ccedil;&atilde;o padr&atilde;o &eacute; parar a execu&ccedil;&atilde;o do processo at&eacute; receber
+    uma outra ordem (para continuar ou terminar).
+<li><b>Cont</b> - a a&ccedil;&atilde;o padr&atilde;o &eacute; continuar a execu&ccedil;&atilde;o do processo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Comandos</h2>
+
+<p>A lista dos sinais do Linux que voc&ecirc; est&aacute; usando pode ser obtida com os seguintes comandos:
+<ul>
+<li><a href="man.html"><b>man</b></a> - a se&ccedil;&atilde;o 2 do manual fornece informa&ccedil;&otilde;es sobre a 
+    <a href="chamadas.html"><b>chamada de sistema</b></a> <i>signal( )</i>, enquanto a se&ccedil;&atilde;o 7 apresenta
+    uma vis&atilde;o geral sobre sinais.
+    <blockquote class="t1">man 7 signal</blockquote>
+<li><a href="kill.html"><b>kill</b></a> - &eacute; poss&iacute;vel que o seu <a href="shell.html"><b>shell</b></a> (interpretador
+    de comandos) tenha uma implementa&ccedil;&atilde;o pr&oacute;pria (e diferente) para este comando. Portanto, forne&ccedil;a o
+    caminho completo do aplicativo.
+    <blockquote class="t1">/bin/kill -l</blockquote>
+    Abaixo uma poss&iacute;vel sa&iacute;da. Note que o prefixo "SIG" n&atilde;o &eacute mostrado.
+    <blockquote class="t2">
+    HUP INT QUIT ILL TRAP ABRT BUS FPE KILL USR1 SEGV USR2 PIPE ALRM TERM STKFLT <br>
+    CHLD CONT STOP TSTP TTIN TTOU URG XCPU XFSZ VTALRM PROF WINCH POLL PWR SYS
+    </blockquote>
+    Se o comando <i>kill</i> embutido no <i>shell bash</i> for usado, a sa&iacute;da corresponde aos nomes de todos os sinais
+    usados no sistema, inclusive os sinais da categoria <i>realtime</i>.
+    <blockquote class="t2">
+    <table class="t2" cellpadding=3 cellspacing=3 align=center width=650>
+    <tr><td> 1) SIGHUP	   </td><td>2) SIGINT	   </td><td> 3) SIGQUIT	   </td><td>4) SIGILL	   </td><td>5) SIGTRAP     </td></tr>
+    <tr><td> 6) SIGABRT	   </td><td>7) SIGBUS	   </td><td> 8) SIGFPE	   </td><td>9) SIGKILL	   </td><td>10) SIGUSR1    </td></tr>
+    <tr><td>11) SIGSEGV	   </td><td>12) SIGUSR2    </td><td>13) SIGPIPE	   </td><td>14) SIGALRM	   </td><td>15) SIGTERM    </td></tr>
+    <tr><td>16) SIGSTKFLT  </td><td>17) SIGCHLD	   </td><td>18) SIGCONT	   </td><td>19) SIGSTOP	   </td><td>20) SIGTSTP    </td></tr>
+    <tr><td>21) SIGTTIN    </td><td>22) SIGTTOU    </td><td>23) SIGURG	   </td><td>24) SIGXCPU	   </td><td>25) SIGXFSZ    </td></tr>
+    <tr><td>26) SIGVTALRM  </td><td>27) SIGPROF	   </td><td>28) SIGWINCH   </td><td>29) SIGIO	   </td><td>30) SIGPWR     </td></tr>
+    <tr><td>31) SIGSYS     </td><td>34) SIGRTMIN   </td><td>35) SIGRTMIN+1 </td><td>36) SIGRTMIN+2 </td><td>37) SIGRTMIN+3 </td></tr>
+    <tr><td>38) SIGRTMIN+4 </td><td>39) SIGRTMIN+5 </td><td>40) SIGRTMIN+6 </td><td>41) SIGRTMIN+7 </td><td>42) SIGRTMIN+8 </td></tr>
+    <tr><td>43) SIGRTMIN+9 </td><td>44) SIGRTMIN+10</td><td>45) SIGRTMIN+11</td><td>46) SIGRTMIN+12</td><td>47) SIGRTMIN+13</td></tr>
+    <tr><td>48) SIGRTMIN+14</td><td>49) SIGRTMIN+15</td><td>50) SIGRTMAX-14</td><td>51) SIGRTMAX-13</td><td>52) SIGRTMAX-12</td></tr>
+    <tr><td>53) SIGRTMAX-11</td><td>54) SIGRTMAX-10</td><td>55) SIGRTMAX-9 </td><td>56) SIGRTMAX-8 </td><td>57) SIGRTMAX-7 </td></tr>
+    <tr><td>58) SIGRTMAX-6 </td><td>59) SIGRTMAX-5 </td><td>60) SIGRTMAX-4 </td><td>61) SIGRTMAX-3 </td><td>62) SIGRTMAX-2 </td></tr>
+    <tr><td>63) SIGRTMAX-1 </td><td>64) SIGRTMAX   </td><td> &nbsp;        </td><td>   &nbsp;      </td><td>  &nbsp;       </td></tr>
+    </table>
+    </blockquote>
+
+
+<li><a href="fuser.html"><b>fuser</b></a>
+    <blockquote class="t1">fuser -l</blockquote>
+    Abaixo o resultado do comando. Note que existem diferen&ccedil;as em rela&ccedil;&atilde;o ao comando anterior que podem ser 
+    explicadas pelo fato de um sinal ter mais de um nome (sin&ocirc;nimos): ABRT = IOT; POLL = IO; SYS = UNUSED.
+    <blockquote class="t2">
+    HUP INT QUIT ILL TRAP ABRT IOT BUS FPE KILL USR1 SEGV USR2 PIPE ALRM TERM<br>
+    STKFLT CHLD CONT STOP TSTP TTIN TTOU URG XCPU XFSZ VTALRM PROF WINCH IO PWR SYS<br>
+    UNUSED
+    </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Lista</h2>
+
+<p>A tabela abaixo mostra os sinais da categoria <i>standard</i> usados pelo <a href="kernel.html"><b>Kernel</b></a> 3.18 do 
+Linux na arquitetura x86.</p>
+
+<table class="t2" rules=all cellpadding=10 cellspacing=10 align=center width=650>
+<tr class="t1"><td align=center><b>N&uacute;mero</b></td><td><b>Nome</b></td><td align=center><b>&nbsp;A&ccedil;&atilde;o&nbsp;</b></td>
+<td><b>Evento</b></td></tr>
+<tr><td align=center> 1</td><td>SIGHUP     </td><td>Term</td><td>Fechamento do terminal associado ao processo ou t&eacute;rmino do
+                                                                 processo de controle</td></tr>
+<tr><td align=center> 2</td><td>SIGINT     </td><td>Term</td><td>Solicitada a interrup&ccedil;&atilde;o (t&eacute;rmino) do processo
+                                                                 </td></tr>
+<tr><td align=center> 3</td><td>SIGQUIT    </td><td>Core</td><td>Solicitado o t&eacute;rmino do processo e a gera&ccedil;&atilde;o de um 
+                                                                 <i>core dump</i></td></tr>
+<tr><td align=center> 4</td><td>SIGILL     </td><td>Core</td><td>Instru&ccedil;&atilde;o inv&aacute;lida, incorretamente formatada ou
+                                                                 sem permiss&atilde;o</td></tr>
+<tr><td align=center> 5</td><td>SIGTRAP    </td><td>Core</td><td>Encontrada condi&ccedil;&atilde;o marcada pelo <i>debugger/trace</i>
+                                                                 </td></tr>
+<tr><td align=center> 6</td><td>SIGABRT    </td><td>Core</td><td>Solicitado o t&eacute;rmino anormal do processo</td></tr>
+<tr><td align=center> 7</td><td>SIGBUS     </td><td>Core</td><td>Erro no acesso a um endere&ccedil;o de mem&oacute;ria</td></tr>
+<tr><td align=center> 8</td><td>SIGFPE     </td><td>Core</td><td>Erro aritm&eacute;tico</td></tr>
+<tr><td align=center> 9</td><td>SIGKILL    </td><td>Term</td><td>Ordena o t&eacute;rmino imediato do processo</td></tr>
+<tr><td align=center>10</td><td>SIGUSR1    </td><td>Term</td><td>Livre (uso a ser definido pelo programador)</td></tr>
+<tr><td align=center>11</td><td>SIGSEGV    </td><td>Core</td><td>Acesso a um endere&ccedil;o de mem&oacute;ria inv&aacute;lido</td></tr>
+<tr><td align=center>12</td><td>SIGUSR2    </td><td>Term</td><td>Livre (uso a ser definido pelo programador)</td></tr>
+<tr><td align=center>13</td><td>SIGPIPE    </td><td>Term</td><td>O processo-destino (de um <i>pipe</i>, de uma FIFO ou um de
+                                                                 <i>socket</i>) n&atilde;o est&aacute; conectado</td></tr>
+<tr><td align=center>14</td><td>SIGALRM    </td><td>Term</td><td>Tempo especificado para um alarme expirou</td></tr>
+<tr><td align=center>15</td><td>SIGTERM    </td><td>Term</td><td>Ordena o t&eacute;rmino do processo (este sinal pode ser ignorado)</td></tr>
+<tr><td align=center>16</td><td>SIGSTKFLT  </td><td>Term</td><td>Definido para "<i>stack fault on coprocessor</i>", mas n&atilde;o &eacute;
+                                                                 usado (este tipo de erro n&atilde;o ocorre nos co-processadores x86)</td></tr>
+<tr><td align=center>17</td><td>SIGCHLD    </td><td>Ign </td><td>T&eacute;rmino ou parada de um processo-filho</td></tr>
+<tr><td align=center>18</td><td>SIGCONT    </td><td>Cont</td><td>Permiss&atilde;o para continuar a execu&ccedil;&atilde;o</td></tr>
+<tr><td align=center>19</td><td>SIGSTOP    </td><td>Stop</td><td>O processo deve parar a execu&ccedil;&atilde;o at&eacute; receber uma outra
+                                                                 ordem </td></tr>
+<tr><td align=center>20</td><td>SIGTSTP    </td><td>Stop</td><td>O processo deve parar a execu&ccedil;&atilde;o at&eacute; receber uma outra
+                                                                 ordem (este sinal pode ser ignorado)</td></tr>
+<tr><td align=center>21</td><td>SIGTTIN    </td><td>Stop</td><td>Processo em <i>background</i> tentou ler de um terminal (tty)</td></tr>
+<tr><td align=center>22</td><td>SIGTTOU    </td><td>Stop</td><td>Processo em <i>background</i> tentou escrever em um terminal (tty)</td></tr>
+                                                                 
+<tr><td align=center>23</td><td>SIGURG     </td><td>Ign </td><td>Existem dados urgentes para serem lidos no <i>socket</i></td></tr>
+<tr><td align=center>24</td><td>SIGXCPU    </td><td>Core</td><td>Tempo limite de CPU excedido</td></tr>
+<tr><td align=center>25</td><td>SIGXFSZ    </td><td>Core</td><td>Tamanho limite de um arquivo excedido</td></tr>
+<tr><td align=center>26</td><td>SIGVTALRM  </td><td>Term</td><td>Tempo limite de CPU no modo usu&aacute;rio expirado</td></tr>
+<tr><td align=center>27</td><td>SIGPROF    </td><td>Term</td><td>Tempo limite de CPU no modo kernel e no modo usu&aacute;rio expirado</td></tr>
+<tr><td align=center>28</td><td>SIGWINCH   </td><td>Ign </td><td>Mudan&ccedil;a no tamanho da janela do terminal</td></tr>
+<tr><td align=center>29</td><td>SIGIO      </td><td>Term</td><td>Arquivo dispon&iacute;vel para I/O</td></tr>
+<tr><td align=center>30</td><td>SIGPWR     </td><td>Term</td><td>N&iacute;vel de energia do <i>nobreak</i> est&aacute; baixo</td></tr>
+<tr><td align=center>31</td><td>SIGSYS     </td><td>Core</td><td>Argumento da chamada de sistema inv&aacute;lido</td></tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>apt-get</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="apt-get">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>apt-get</h1>
+
+<blockquote><b><font size="+1"> apt-get [op&ccedil;&otilde;es] </font></b></blockquote>
+<br>
+      
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este utilit&aacute;rio permite a instala&ccedil;&atilde;o, atualiza&ccedil;&atilde;o e remo&ccedil;&atilde;o
+   de pacotes do sistema.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-h, --help</b> : fornece as op&ccedil;&otilde;es do utilit&aacute;rio.
+<li><b>-u, --show-upgraded </b> : mostra a lista de pacotes sendo atualizada.
+<li><b>install pacotes</b> : atualiza os pacotes especificados.
+<li><b>remove pacotes</b> : remove os pacotes especificados.
+<li><b>update</b> : atualiza a lista das vers&otilde;es dos pacotes dispon&iacute;veis.
+<li><b>upgrade</b> : atualiza os pacotes instalados no sistema.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Para atualizar a lista das vers&otilde;es dos pacotes dispon&iacute;veis nos reposit&oacute;rios listados em
+     /etc/apt/sources.list, digite
+    <blockquote class="t1">sudo apt-get update</blockquote>
+<li>Para atualizar os pacotes instalados no sistema, basta digitar
+    <blockquote class="t1">sudo apt-get -u upgrade</blockquote>
+    Naturalmente, &eacute; importante que o comando <i>apt-get</i> seja executado primeiro com a op&ccedil;&atilde;o <i>update</i>.
+    Isto garantir&aacute; que o sistema ser&aacute; atualizado com as vers&otilde;es mais novas dispon&iacute;veis.
+<li>Para atualizar uma distribui&ccedil;&atilde;o inteira sincronizando os pacotes (j&aacute; instalados) para que sejam compat&iacute;veis
+    entre si.
+    <blockquote class="t1">apt-get -u dist-upgrade</blockquote>
+<li>Para instalar o analisador de tr&aacute;fego de redes wireshark, digite
+    <blockquote class="t1">sudo apt-get install wireshark</blockquote>
+    O utilit&aacute;rio ent&atilde;o avalia o que j&aacute; est&aacute; instalado e o que ainda precisa ser instalado. 
+    Abaixo, uma poss&iacute;vel resposta ao comando.
+    <blockquote class="t2">
+    Lendo listas de pacotes... Pronto<br>
+    Construindo árvore de dependências<br>    
+    Lendo informação de estado... Pronto<br>
+    Os seguintes pacotes foram instalados automaticamente e já não são necessários:<br>
+    &nbsp;&nbsp;&nbsp;linux-headers-3.2.0-29 linux-headers-3.2.0-29-generic-pae<br>
+    Use 'apt-get autoremove' para removê-los.<br>
+    Os pacotes extra a seguir serão instalados:<br>
+    &nbsp;&nbsp;&nbsp;libc-ares2 libsmi2ldbl libwireshark-data libwireshark1 libwiretap1 libwsutil1 wireshark-common<br>
+    Pacotes sugeridos:<br>
+    &nbsp;&nbsp;&nbsp;snmp-mibs-downloader wireshark-doc<br>
+    Os NOVOS pacotes a seguir serão instalados:<br>
+    &nbsp;&nbsp;&nbsp;libc-ares2 libsmi2ldbl libwireshark-data libwireshark1 libwiretap1 libwsutil1 wireshark wireshark-common<br>
+    0 pacotes atualizados, 8 pacotes novos instalados, 0 a serem removidos e 0 não atualizados.<br>
+    É preciso baixar 12,8 MB de arquivos.<br>
+    Depois desta operação, 49,0 MB adicionais de espaço em disco serão usados.<br>
+    Você quer continuar [S/n]? 
+    </blockquote>
+    Se o usu&aacute;rio responder "s", a instala&ccedil;&atilde;o ser&aacute; completada.
+<li>Para remover a ferramenta wireshark, digite
+    <blockquote class="t1">sudo apt-get remove wireshark</blockquote>
+    O utilit&aacute;rio verifica os pacotes a serem removidos junto com o wireshark e solicita confirma&ccedil;&atilde;o
+    para o usu&aacute;rio.
+    <blockquote class="t2">
+    sudo apt-get remove wireshark<br>
+    Lendo listas de pacotes... Pronto<br>
+    Construindo árvore de dependências<br>      
+    Lendo informação de estado... Pronto<br>
+    Os seguintes pacotes foram instalados automaticamente e já não são necessários:<br>
+    &nbsp;&nbsp;&nbsp;linux-headers-3.2.0-29 libwsutil1 linux-headers-3.2.0-29-generic-pae libwireshark-data libsmi2ldbl 
+    libc-ares2 libwireshark1<br>
+    &nbsp;&nbsp;&nbsp;libwiretap1 wireshark-common<br>
+    Use 'apt-get autoremove' para removê-los.<br>
+    Os pacotes a seguir serão REMOVIDOS:<br>
+    &nbsp;&nbsp;&nbsp;wireshark<br>
+    0 pacotes atualizados, 0 pacotes novos instalados, 1 a serem removidos e 0 não atualizados.<br>
+    Depois desta operação, 2.189 kB de espaço em disco serão liberados.<br>
+    Você quer continuar [S/n]? 
+    </blockquote>
+    Se o usu&aacute;rio responder "s", a ferramenta wireshark ser&aacute; removida.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="apt.html">APT (<i>Advanced Packaging Tool</i>)</a></b> - sistema para gerenciamento de pacotes no Linux.
+<li><b><a href="aptitude.html">aptitude</a></b> - utilit&aacute;rio para manuseamento de pacotes no Linux.
+<li><b><a href="rpm.html">rpm</a></b> - utilit&aacute;rio para manuseamento de pacotes no Linux.</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

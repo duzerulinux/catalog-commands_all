@@ -1,0 +1,233 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>arquivo</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="arquivo">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+<h1>Arquivo</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>&Eacute; o componente b&aacute;sico de qualquer sistema <i>Unix-like</i>. Nesses sistemas, quase todas as coisas s&atilde;o
+tratadas como arquivos e possuem localiza&ccedil;&atilde;o dentro do sistema de arquivos.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Tipos de arquivos</h2>
+
+<p>No Linux, um arquivo pode ser comum ou especial.
+<ul>
+<li><b>arquivo comum</b> - armazena informa&ccedil;&otilde;es e pode ser de texto, de &aacute;udio, de imagem, bin&aacute;rios, etc.
+<li><b>diret&oacute;rio</b> - cont&eacute;m outros arquivos e/ou outros diret&oacute;rios.
+<li><b>dispositivo</b> - representa um dispositivo f&iacute;sico (hardware) do sistema. Existem dois tipos:
+    <ul>
+    <li><b>de caracteres</b> - as opera&ccedil;&otilde;es de E/S s&atilde;o feitas de forma sequencial.
+    <li><b>de blocos</b> - as opera&ccedil;&otilde;es de E/S s&atilde;o feitas usando blocos de caracteres.
+    </ul>
+<li><b>link simb&oacute;lico</b> - aponta para outro arquivo.
+<li><b>pipe</b> - utilizado para comunica&ccedil;&atilde;o entre processos.
+<li><b>socket</b> - utilizado para comunica&ccedil;&atilde;o entre processos.
+</ul>
+
+<p>No sistema, &eacute; poss&iacute;vel identificar o tipo do arquivo usando o comando <a href="ls.html"><b>ls</b></a> ou o comando
+<a href="file.html"><b>file</b></a>. Por exemplo, se queremos informa&ccedil;&otilde;es sobre o arquivo <i>teste</i>, basta digitar
+<blockquote class="t1">
+ls -l teste
+</blockquote>
+Suponha que a sa&iacute;da do comando &eacute; mostrada abaixo. O campo -rw-rw-r-- indica o tipo e as
+<a href="permissao.html"><b>permiss&otilde;es</b></a> do arquivo, onde o primeiro caractere "-" informa que <i>teste</i> &eacute; 
+um arquivo comum e os outros caracteres informam que o dono do arquivo (<i>aluno</i>) pode ler e escrever no arquivo, o grupo do 
+arquivo (<i>aluno</i>) tamb&eacute;m pode ler e escrever no arquivo, mas os outros usu&aacute;rios s&oacute; podem ler.
+<blockquote class="t2">
+-rw-rw-r-- 1 aluno aluno 7743 Jan 20 16:52 teste
+</blockquote>
+Tamb&eacute;m podemos usar
+<blockquote class="t1">
+file teste
+</blockquote>
+para verificar o tipo do arquivo. A resposta abaixo informa que <i>teste</i> &eacute; um arquivo de texto que usa o conjunto
+de caracteres <i>Unicode</i> (n&uacute;meros &harr; caracteres) com a codifica&ccedil;&atilde;o UTF-8 (n&uacute;meros &harr; 
+bin&aacute;rios).
+<blockquote class="t2">
+teste: UTF-8 Unicode text
+</blockquote>
+
+<p>A tabela abaixo mostra como os tipos de arquivos s&atilde;o referenciados dentro do Linux.</p>
+
+<p>
+<blockquote>
+<table class="t1" align=center rules=all cellpadding=3>
+<tr class="t1"><td align=center><b>Tipo</b></td><td><b>Representa&ccedil;&atilde;o</b></td></tr>
+<tr><td>arquivo comum             </td><td align=center>   -    </td></tr>
+<tr><td>diret&oacute;rio          </td><td align=center>   d    </td></tr>
+<tr><td>dispositivo de caracteres </td><td align=center>   c    </td></tr>
+<tr><td>dispositivo de blocos     </td><td align=center>   b    </td></tr>
+<tr><td>link simb&oacute;lico     </td><td align=center>   l    </td></tr>
+<tr><td>pipe                      </td><td align=center>   p    </td></tr>
+<tr><td>socket                    </td><td align=center>   s    </td></tr>
+</table>
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Opera&ccedil;&otilde;es de E/S</h2>
+
+<p>Existem dois mecanismos b&aacute;sicos para conectar um <a href="processo.html"><b>processo</b></a> a um arquivo:
+<ul>
+<li><b>file descriptor</b> ou <b>fd</b> (descritor de arquivo) - fornece uma interface de baixo n&iacute;vel para as 
+    opera&ccedil;&otilde;es de E/S. &Eacute; representado por um objeto do tipo "int".
+<li><b>Stream</b> (fluxo) - fornece uma interface de alto n&iacute;vel para as opera&ccedil;&otilde;es de E/S. &Eacute; 
+    representado por um objeto do tipo "FILE *".
+</ul>
+
+<p>A interface do <i>fd</i> permite apenas fun&ccedil;&otilde;es simples para transfer&ecirc;ncia de blocos de caracteres.
+O uso de <i>fd</i> &eacute; importante quando h&aacute; a necessidade de opera&ccedil;&otilde;es de E/S  em modos especiais como, 
+por exemplo, <i>polled</i> (comunica&ccedil;&atilde;o s&iacute;ncrona).</p>
+
+<p>A interface do <i>stream</i> permite fun&ccedil;&otilde;es mais complexas com opera&ccedil;&otilde;es de E/S formatadas. 
+O uso de <i>streams</i> &eacute; importante quando se deseja garantir a portabilidade para outros tipos de sistemas (especialmente
+para os sistemas n&atilde;o-GNU).</p>
+
+<p>Na realidade, a interface do <i>stream</i> &eacute; constru&iacute;da a partir dos descritores. Assim, os descritores de arquivo
+s&atilde;o usados para referenciar todo tipo de arquivo aberto no sistema (mesmo que isto seja ignorado pelo usu&aacute;rio). Isto
+ocorre porque apenas o <a href="kernel.html"><b>kernel</b></a> pode executar opera&ccedil;&otilde;es de E/S e ele s&oacute; atende
+pedidos feitos atrav&eacute;s das <a href="chamadas.html"><b>chamadas de sistema</b></a> (interface de baixo n&iacute;vel).</p>
+ 
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descritor de arquivo</h2>
+
+<p>No Linux, o <a href="shell.html"><b>shell</b></a> normalmente opera com tr&ecirc;s descritores de arquivo sempre abertos:
+um arquivo que serve de entrada padr&atilde;o dos dados; um arquivo utilizado como sa&iacute;da padr&atilde;o dos dados; e
+um arquivo onde as mensagens de erros s&atilde;o gravadas. Estes descritores s&atilde;o definidos em /usr/include/unistd.h
+conforme a tabela abaixo.</p>
+
+<blockquote>
+<table class="t1" align=center rules=all cellpadding=5>
+<tr class="t1"><td><b>FD</b></td><td><b>Nome</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td align=center>0</td><td>stdin  (<i>standard input</i>) </td><td>Entrada padr&atilde;o (normalmente, o teclado)</td></tr>
+<tr><td align=center>1</td><td>stdout (<i>standard output</i>)</td><td>Sa&iacute;da padr&atilde;o (normalmente, o terminal)</td></tr>
+<tr><td align=center>2</td><td>stderr (<i>standard error</i>) </td><td>Erro padr&atilde;o (normalmente, o terminal)</td></tr>
+</table>
+</blockquote>
+
+<p>Quando um <a href="processo.html"><b>processo</b></a> &eacute; criado a partir do <i>shell</i>, ele herda c&oacute;pias desses
+descritores. Se <a href="redirecionadores.html"><b>redicionadores de E/S</b></a> s&atilde;o especificados na linha de comandos, 
+o <i>shell</i> altera a defini&ccedil;&atilde;o dos descritores antes de inicializar o processo.</p>
+
+<p>Cada processo possui uma tabela (<i>process descriptor table</i>) com informa&ccedil;&otilde;es necess&aacute;rias a sua 
+execu&ccedil;&atilde;o. Esta tabela aponta para uma outra tabela (<i>file descriptor table</i>) que cont&eacute;m ponteiros para
+todos os arquivos abertos do processo. Esta tabela j&aacute; &eacute; criada com as tr&ecirc;s primeiras c&eacute;lulas apontando para 
+os arquivos padr&atilde;o: <i>stdin</i>, <i>stdout</i> e <i>stderr</i>. Quando algum outro arquivo &eacute; aberto, uma nova
+entrada na tabela &eacute; criada no primeiro slot dispon&iacute;vel.</p>
+
+<p align=center><img src="imagens/fd.gif" width=696 height=490></p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<p>No Linux, o conjunto dos descritores abertos de um processo pode ser visto em /proc/PID/fd/ onde 
+<a href="pid.html"><b>PID</b></a> &eacute; o identificador do processo. Por exemplo, para ver o PID do 
+<a href="shell.html"><b>shell</b></a> sendo usado em um terminal, digite
+<blockquote class="t1">
+ps
+</blockquote>
+Suponha que a resposta &eacute; mostrada abaixo. Portanto, o PID do <i>shell bash</i> &eacute; 4212.
+<blockquote class="t2" cellpadding=5>
+<table class="t2">
+<tr><td>  PID</td><td> TTY   </td><td>   TIME CMD      </td></tr>
+<tr><td> 4212</td><td> pts/0 </td><td>   00:00:00 bash </td></tr>
+<tr><td> 4140</td><td> pts/0 </td><td>   00:00:00 ps   </td></tr>
+</table>
+</blockquote>
+Para ver os arquivos abertos para o <i>bash</i>, basta digitar
+<blockquote class="t1">
+ls -l /proc/4212/fd
+</blockquote>
+A sa&iacute;da abaixo mostra que existem 4 arquivos abertos (0, 1, 2 e 255) para o <i>bash</i>. Note que os arquivos mostrados
+s&atilde;o links para o arquivo /dev/pts/0. Entradas em /dev/pts s&atilde;o na realidade pseudo-terminais: aplica&ccedil;&otilde;es
+usam esses terminais para receber e mostrar dados.
+<blockquote class="t2">
+total 0 <br>
+lrwx------ 1 aluno aluno 64 Jan 20 19:09 0 -> /dev/pts/0 <br>
+lrwx------ 1 aluno aluno 64 Jan 20 19:09 1 -> /dev/pts/0 <br>
+lrwx------ 1 aluno aluno 64 Jan 20 19:09 2 -> /dev/pts/0 <br>
+lrwx------ 1 aluno aluno 64 Jan 20 19:10 255 -> /dev/pts/0
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Limites</h2>
+
+<ul>
+<li>Para saber o n&uacute;mero m&aacute;ximo de fds suportados no sistema, digite
+    <blockquote class="t1">
+    cat /proc/sys/fs/file-max
+    </blockquote>
+    O valor atual usado no Linux &eacute; mostrado abaixo.
+    <blockquote class="t2">
+    797735
+    </blockquote>
+<li>Para verificar o uso atual dos arquivos no sistema, basta digitar
+    <blockquote class="t1">
+    cat /proc/sys/fs/file-nr
+    </blockquote>
+    A resposta abaixo mostra que 7.200 fds j&aacute; foram alocados (inclui fds j&aacute; liberados), zero fds j&aacute;
+    foram liberados e no m&aacute;ximo 797.735 arquivos podem ser abertos no sistema ao mesmo tempo.
+    <blockquote class="t2">
+    7200 0 797735
+    </blockquote>
+<li>Para ver o n&uacute;mero m&aacute;ximo de fds que um processo pode alocar, use o comando
+    <a href="ulimit.html"><b>ulimit</b></a>
+    <blockquote class="t1">
+    ulimit -Sn
+    </blockquote>
+    Abaixo a resposta do <a href="kernel.html"><b>kernel</b></a> 3.18
+    <blockquote class="t2">
+    1024
+    </blockquote>
+<li>Para ver o n&uacute;mero m&aacute;ximo de fds que o administrador do sistema (<a href="root.html"><b>root</b></a>)
+    pode autorizar para os processos
+    <blockquote class="t1">
+    ulimit -Hn
+    </blockquote>
+    A poss&iacute;vel resposta &eacute;
+    <blockquote class="t2">
+    4096
+    </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O comando <a href="fuser.html"><b>fuser</b></a> identifica os processos que est&atilde;o usando um determinado arquivo. 
+<li>O comando <a href="lsof.html"><b>lsof</b></a>   lista os arquivos abertos.
+<li>O comando <a href="stat.html"><b>stat</b></a>   fornece informa&ccedil;&otilde;es sobre arquivos. 
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>grub</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="grub">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>GRUB</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>O <b>GRUB</b> (GRand Unified Boot loader</i>) &eacute; um carregador do <b>Linux</b>. Atualmente, o GRUB2
+   &eacute; o carregador padr&atilde;o de muitas <b><a href="distribuicao.html">distribui&ccedil;&otilde;es Linux</a></b>
+   como, por exemplo, o <b>DuZeru</b>.
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Enquanto o <b>LILO</b> apenas carrega o <b>Linux</b> e outros carregadores de boot, o <b>GRUB</b> pode carregar um
+    grande n&uacute;mero de sistemas operacionais. Outra vantagem do <b>GRUB</b> &eacute; que este possui uma
+    interface interativa.
+<li>O <b>GRUB2</b> &eacute; configurado pelo arquivo <b>/boot/grub/grub.cfg</b>.
+<li>Mudan&ccedil;as na configura&ccedil;&atilde;o do <b>GRUB2</b> s&atilde;o normalmente feitas no arquivo <b>/etc/default/grub</b>
+    e nos scripts localizados em <b>/etc/grub.d</b>. Entretanto, para efetivar as altera&ccedil;&otilde;es feitas &eacute;
+    preciso executar o comando <b>update-grub</b> que gera um novo arquivo de configura&ccedil;&atilde;o <b>grub.cfg</b>.
+<li>Existem duas maneiras de instalar o <b>GRUB2</b>:
+    <ol>
+    <li>Ele pode ser instalado entre o <b><a href="mbr.html">MBR</a></b> (<i>Master Boot Record</i>) e a primeira
+        parti&ccedil;&atilde;o do HD (&eacute; o padr&atilde;o);
+    <li>Ele pode ser instalado no primeiro setor de uma parti&ccedil;&atilde;o.
+    </ol>
+<li>Veja <b><a href="http://www.gnu.org/software/grub/grub-documentation.html">GRUB Documentation</a></b> para mais
+    informa&ccedil;&otilde;es.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="lilo.html">LILO</a></b> - outro carregador de inicializa&ccedil;&atilde;o do <b>Linux</b>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>chmod</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="chmod">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>chmod</h1>
+<blockquote><b><font size="+1">chmod [op&ccedil;&otilde;es] altera&ccedil;&atilde;o arquivo</font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando altera as <b><a href="permissao.html">permiss&otilde;es</a></b> de <a href="arquivo.html"><b>arquivos</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-c</b> : informa quais arquivos estão tendo as permiss&otilde;es alteradas.
+<li><b>-v</b> : informa quais arquivos est&atilde;o sendo processados (n&atilde;o necessariamente alterados).
+<li><b>-R </b> : altera, recursivamente, as permiss&otilde;es de arquivos.
+<li><b>--help</b> : exibe op&ccedil;&otilde;es do comando.
+<li><b>--version</b> : exibe informa&ccedil;&otilde;es sobre o aplicativo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Modo ugoa</h2>
+
+<p>A combina&ccedil;&atilde;o das letras <b>ugoa</b> no comando <i>chmod</i> define quais os usu&aacute;rios est&atilde;o
+tendo as suas permiss&otilde;es de acesso alteradas: 
+<ul>
+<li><b>u</b> = o dono do arquivo (<i>user</i>);
+<li><b>g</b> = os usu&aacute;rios que s&atilde;o membros do mesmo grupo do arquivo (<i>group</i>);
+<li><b>o</b> = os usu&aacute;rios que n&atilde;o membros do grupo do arquivo (<i>others</i>); 
+<li><b>a</b> = todos os usu&aacute;rios do sistema (<i>all</i>). 
+</ul>
+
+<p>Caso n&atilde;o seja especificada a classe dos usu&aacute;rios para os quais se est&aacute; alterando as permiss&otilde;es,
+o sistema usa a op&ccedil;&atilde;o <b>a</b> (todos os usu&aacute;rios).</p>
+
+<p>Deve-se usar, no comando <i>chmod</i>, um operador para especificar o tipo de modifica&ccedil;&atilde;o que se est&aacute; 
+fazendo nas permiss&otilde;es:
+<ul>
+<li>o operador <b>+</b> provoca a adi&ccedil;&atilde;o das permiss&otilde;es informadas &agrave;s permiss&otilde;es j&aacute;
+    existentes;
+<li>o operador <b>-</b> provoca a remo&ccedil;&atilde;o das permiss&otilde;es especificadas; 
+<li>o operador <b>=</b> provoca a redefini&ccedil;&atilde;o das permiss&otilde;es (semelhante a zerar as permiss&otilde;es e
+    defini-las novamente).
+</ul>
+</p>
+
+<p>A combina&ccedil;&atilde;o das letras rwxst no comando <i>chmod</i> especifica as permiss&otilde;es de acesso:</p>
+<ul>
+<li><b>r</b> = leitura.
+<li><b>w</b> = grava&ccedil;&atilde;o.
+<li><b>x</b> = execu&ccedil;&atilde;o (para arquivos) ou autoriza&ccedil;&atilde;o de acesso (para diret&oacute;rios).
+<li><b>u</b> = as permiss&otilde;es do dono do arquivo.
+<li><b>g</b> = as permiss&otilde;es do grupo.
+<li><b>o</b> = as permiss&otilde;es dos outros usu&aacute;rios do sistema.
+<li><b>s</b> = permiss&atilde;o especial de execu&ccedil;&atilde;o de um arquivo ou de acesso a um diret&oacute;rio. 
+   <ul>
+   <li> Caso esta permiss&atilde;o seja dada ao dono do arquivo (diret&oacute;rio), a pessoa 
+        (com autoriza&ccedil;&atilde;o) que executar o arquivo (acessar o diret&oacute;rio),
+        o far&aacute; com as permiss&otilde;es de dono do arquivo (diret&oacute;rio).
+        Este tipo de permiss&atilde;o &eacute; conhecido como SUID (<i>Set User ID</i>).
+        Por exemplo, se o <i>root</i> possui um programa SUID, esse programa 
+        executar&aacute; com privil&eacute;gios de <i>root</i>, mesmo que tenha sido 
+        inicializado por um usu&aacute;rio comum.
+   <li> Caso esta permiss&atilde;o seja dada ao grupo do arquivo (diret&oacute;rio), a pessoa
+        (com autoriza&ccedil;&atilde;o) que executar o arquivo (acessar o diret&oacute;rio),
+        o far&aacute;  com se fosse membro do grupo a qual pertence o arquivo (diret&oacute;rio).
+        Este tipo de permiss&atilde;o &eacute; conhecido como SGID (<i>Set Group ID</i>).
+   </ul>
+</li>
+<li><b>t</b> = permiss&atilde;o especial de execu&ccedil;&atilde;o de um arquivo ou de acesso a um diret&oacute;rio para o resto dos
+    usu&aacute;rios do sistema (n&atilde;o &eacute; o dono e n&atilde;o pertence ao mesmo grupo do arquivo/diret&oacute;rio).
+    Este tipo de permiss&atilde;o &eacute; conhecida como <i>sticky bit</i>.
+    <ul> 
+    <li>Caso esta permiss&atilde;o seja dada a um diret&oacute;rio, o usu&aacute;rio pode criar,alterar e apagar apenas os seus 
+        pr&oacute;prios arquivos que est&atilde;o neste diret&oacute;rio. Por exemplo, o diret&oacute;rio /usr/temp, usado para
+        armazenar arquivos tempor&aacute;rios dos usu&aacute;rios do sistema, possui esta permiss&atilde;o.
+    <li>Caso esta permiss&atilde;o seja dada a um arquivo, o arquivo pode ser compartilhado entre os v&aacute;rios usu&aacute;rios
+        do sistema. Veja /usr/src/linux/Documentation/mandatory.txt para mais detalhes.
+    </ul>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos do modo ugoa</h2>
+
+<ul>
+<li>O comando
+    <blockquote class="t1">chmod ug+rw teste.txt</blockquote>
+    define que o arquivo <i>teste.txt</i> pode ser lido (<b>r</b>) e alterado (<b>w</b>) pelo dono (<b>u</b>) e pelos
+    usu&aacute;rios que s&atilde;o membros do mesmo grupo (<b>g</b>) do arquivo <i>teste.txt</i>.
+<li>Suponha que o arquivo <i>teste</i> tem as seguintes permiss&otilde;es: 
+    <blockquote class="t2">-rw-rw-r--  1 aluno basico 2113 Nov 20 09:41 teste</blockquote>
+    Isto significa que o dono (<i>aluno</i>) e o grupo (<i>basico</i>) possuem permiss&atilde;o para ler e escrever, 
+    enquanto os outros usu&aacute;rios do sistema podem apenas ler o arquivo. Ao digitarmos o comando
+    <blockquote class="t1">chmod g+s teste</blockquote>
+    as permiss&otilde;es do arquivo passam para
+    <blockquote class="t2">-rw-rwSr--  1 aluno basico 2113 Nov 20 09:41 teste</blockquote>
+    A permiss&atilde;o <b>S</b> (letra mai&uacute;scula) indica que o arquivo n&atilde;o &eacute; execut&aacute;vel. Se o arquivo
+    tivesse permiss&atilde;o de execu&ccedil;&atilde;o para o grupo, apareceria <b>s</b> (letra min&uacute;scula) na permiss&atilde;o
+    de execu&ccedil;&atilde;o do grupo.
+<li>Continuando o exemplo acima, ao digitar
+    <blockquote class="t1">chmod g=u teste</blockquote>
+    teremos como resultado
+    <blockquote class="t2">-rw-rw-r--  1 aluno basico 2113 Nov 20 09:41 teste</blockquote>
+    Isto acontece pois foi definido com o comando <i>chmod</i> que as permiss&otilde;es do grupo seriam iguais às
+    permiss&otilde;es do dono do arquivo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos do modo octal</h2>
+
+<p>
+<table class="t1" align="center" cellpadding=3 rules=all>
+<tr class="t1">
+<td valign="top"><b>Valor Octal</b></td>
+<td align="Center" valign="Top"><b>Valor Bin&aacute;rio</b><br> <b>rwx</b></td>
+<td align="Center" valign="Top"><b>Caracteres</b></td>
+<td valign="top"><b>Significado</b></td>
+</tr>
+<tr>
+<td align="Center">0</td>
+<td align="Center">000</td>
+<td align="Center">---</td>
+<td>nenhuma permiss&atilde;o de acesso</td>
+</tr>
+<tr>
+<td align="Center">1</td>
+<td align="Center">001</td>
+<td align="Center">--x</td>
+<td>permiss&atilde;o de execu&ccedil;&atilde;o</td>
+</tr>
+<tr>
+<td align="Center">2</td>
+<td align="Center">010</td>
+<td align="Center">-w-</td>
+<td>permiss&atilde;o de grava&ccedil;&atilde;o</td>
+</tr>
+<tr>
+<td align="Center">3</td>
+<td align="Center">011</td>
+<td align="Center">-wx</td>
+<td>permiss&atilde;o de grava&ccedil;&atilde;o e execu&ccedil;&atilde;o</td>
+</tr>
+<tr>
+<td align="Center">4</td>
+<td align="Center">100</td>
+<td align="Center">r--</td>
+<td>permiss&atilde;o de leitura</td>
+</tr>
+<tr>
+<td align="Center">5</td>
+<td align="Center">101</td>
+<td align="Center">r-x</td>
+<td>permiss&atilde;o de leitura e execu&ccedil;&atilde;o</td>
+</tr>
+<tr>
+<td align="Center">6</td>
+<td align="Center">110</td>
+<td align="Center">rw-</td>
+<td>permiss&atilde;o de leitura e grava&ccedil;&atilde;o</td>
+</tr>
+<tr>
+<td align="Center">7</td>
+<td align="Center">111</td>
+<td align="Center">rwx</td>
+<td>permiss&atilde;o de leitura, grava&ccedil;&atilde;o e execu&ccedil;&atilde;o</td>
+</tr>
+</table>
+</p>
+
+
+<ul>
+<li>Um exemplo do comando <i>chmod</i> usando a tabela acima &eacute;
+    <blockquote class="t1">chmod 764 teste.txt</blockquote>
+    Neste exemplo temos permiss&atilde;o de leitura, grava&ccedil;&atilde;o e execu&ccedil;&atilde;o (7) para
+    o dono do arquivo <i>teste.txt</i>, temos permiss&atilde;o para leitura e grava&ccedil;&atilde;o (6) para
+    os membros do grupo do arquivo e permiss&atilde;o de apenas leitura (4) para os outros usu&aacute;rios do sistema.
+<li>Os n&uacute;meros octais s&atilde;o interpretados da direita para a esquerda, portanto o comando
+    <blockquote class="t1">chmod 64 teste.txt</blockquote>
+    define permiss&atilde;o de leitura (4) para os outros usu&aacute;rios do sistema e permiss&atilde;o de leitura e
+    grava&ccedil;&atilde;o (6) para os usu&aacute;rios do mesmo grupo do arquivo <i>teste.txt</i>.
+
+<li>No comando <i>chmod</i>, as permiss&otilde;es especiais, no modo octal, s&atilde;o definidas antes das permiss&otilde;es
+    do dono, do grupo e do resto dos usu&aacute;rios. Por exemplo,
+    <blockquote class="t1">chmod 4760 teste.txt</blockquote>
+    define que o arquivo <i>teste.txt</i> &eacute; um arquivo SUID (4) com permiss&otilde;es 7, 6 e 0 para o dono, para
+    os membros do grupo e para o resto dos usu&aacute;rios do sistema, respectivamente.
+<table class="t1" align="center" cellpadding=3 rules=all>
+<tr class="t1">
+<td valign="Top"><b>Valor Octal</b></td>
+<td align="Center" valign="Top"><b>Valor Bin&aacute;rio</b><br> <b>ugo</b></td>
+<td valign="Top"><b>Significado</b></td>
+</tr>
+<tr>
+<td align="Center">0</td>
+<td align="Center">000</td>
+<td>nenhuma permiss&atilde;o especial</td>
+</tr>
+<tr>
+<td align="Center">1</td>
+<td align="Center">001</td>
+<td>sticky bit</td>
+</tr>
+<tr>
+<td align="Center">2</td>
+<td align="Center">010</td>
+<td>SGID</td>
+</tr>
+<tr>
+<td align="Center">3</td>
+<td align="Center">011</td>
+<td>SGID e stick bit</td>
+</tr>
+<tr>
+<td align="Center">4</td>
+<td align="Center">100</td>
+<td>SUID</td>
+</tr>
+<tr>
+<td align="Center">5</td>
+<td align="Center">101</td>
+<td>SUID e stick bit</td>
+</tr>
+<tr>
+<td align="Center">6</td>
+<td align="Center">110</td>
+<td>SUID e SGID</td>
+</tr>
+<tr>
+<td align="Center">7</td>
+<td align="Center">111</td>
+<td>SUID, SGID e stick bit</td>
+</tr>
+</table>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Cada arquivo do sistema est&aacute; alocado a um usu&aacute;rio (dono) e a um grupo. Isto significa que
+    um arquivo est&aacute; associado a um <b><a href="uid.html">UID</a></b> e a um <b><a href="gid.html">GID</a></b>. O UID 
+    e o GID s&atilde;o inicialmente herdados do usu&aacute;rio que cria o arquivo. 
+<li>&Eacute; poss&iacute;vel modificar o dono e o grupo de um arquivo com os comandos <a href="chown.html"><b>chown</b></a> e 
+    <a href="chgrp.html"><b>chgrp</b></a>.
+</ul>
+
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

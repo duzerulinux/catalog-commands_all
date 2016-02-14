@@ -1,0 +1,71 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>import</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="import">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>import</h1>
+
+<blockquote><b><font size="+1">import [opções] <arquivo de entrada></font></b></blockquote>
+
+<!-- -------------------------------------------------------------------------------------------- ---->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Produz um arquivo de imagem a partir da janela vis&iacute;vel de um <a href="xwindow.html"><b>servidor X</b></a>.</p>
+
+<!-- -------------------------------------------------------------------------------------------- ---->
+<h2>Algumas opções do comando</h2>
+
+<ul>
+<li><b>compress type</b> :   tipo da compressão do pixel ao produzir uma imagem.
+<li><b>quality value</b> :   n&iacute;vel de compressão JPEG/MIFF/PNG.
+<li><b>resize geometry</b> : redimensiona a imagem.
+<li><b>window id</b> :       seleciona janela com o id ou nome especificado.
+</ul>
+
+<!-- -------------------------------------------------------------------------------------------- ---->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Para selecionar uma janela X ou uma &aacute;rea da tela com o mouse e salvar em formato <i>.eps</i>, digite
+    <blockquote class="t1">import figure.eps</blockquote>
+<li>Para caputurar a tela inteira do servidor X no formato jpeg, sem o mouse e com o nome "tela.jpeg", basta digitar
+    <blockquote class="t1">import -window root tela.jpeg</blockquote>
+</ul>
+
+<!-- -------------------------------------------------------------------------------------------- ---->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O formato padr&atilde;o das imagens &eacute; o MIFF (<i>Magick Image File Format</i>).
+<li>O comando <i>import</i> faz parte das ferramentas do software para tratamento de imagens chamado
+    <a href="http://www.imagemagick.org/index.php" target="_blank"><b>ImageMagick</b></a>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

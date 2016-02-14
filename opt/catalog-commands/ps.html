@@ -1,0 +1,95 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>ps</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="ps">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>ps</h1>
+
+<blockquote><font size="+1"><b>ps [op&ccedil;&otilde;es]</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando exibe informa&ccedil;&otilde;es sobre os <a href="processo.html"><b>processos</b></a> que est&atilde;o executando
+na m&aacute;quina.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-a</b> : mostra os processos de todos os usu&aacute;rios.
+<li><b>-e</b> : mostra as vari&aacute;veis de ambiente no momento da inicializa&ccedil;&atilde;o do processo.
+<li><b>-f</b> : mostra a &aacute;rvore de execu&ccedil;&atilde;o de comandos.
+<li><b>-g grupo</b> : mostra os processos de um determinado nome de grupo.
+<li><b>-x</b> : mostra os processos que n&atilde;o foram iniciados no console.
+<li><b>-u</b> : fornece o nome do usu&aacute;rio e a hora de in&iacute;cio do processo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>O comando
+    <blockquote class="t1">ps</blockquote>
+    exibe os processos sendo executados no terminal. Abaixo um exemplo. 
+    <blockquote class="t2">
+    <table class="t2">
+    <tr><td>PID  </td><td>TTY  </td><td>TIME    </td><td>CMD</td></tr>
+    <tr><td>4030 </td><td>pts/1</td><td>00:00:00</td><td>bash</td></tr>
+    <tr><td>5649 </td><td>pts/1</td><td>00:00:00</td><td>ps</td></tr>
+    </table>
+    </blockquote>
+    Note que o pr&oacute;prio comando <i>ps</i> cria um processo que faz parte do resultado final do comando.
+<li>Para exibir todos os processos do sistema, independente de terminal, basta digitar
+    <blockquote class="t1">ps -aux</blockquote>
+<li>Para ver os processos do grupo <i>adm</i>, digite
+    <blockquote class="t1">ps -g adm</blockquote>
+    Abaixo uma poss&iacute;vel sa&iacute;da para o comando.
+    <blockquote class="t2">
+    <table class="t2">
+    <tr><td>PID </td><td>TTY</td><td>TIME</td><td> CMD</td></tr>
+    <tr><td>979 </td><td>?  </td><td>00:00:00</td><td> kerneloops</td></tr>
+    </table>
+    </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O diret&oacute;rio <b><a href="dir_proc.html">/proc</a></b> possui a lista dos processos que est&atilde;o em
+    execu&ccedil;&atilde;o no sistema.
+<li><b><a href="pid.html">PID</a></b> &eacute; o n&uacute;mero de identifica&ccedil;&atilde;o (ID) de um processo.
+<li><b><a href="ppid.html">PPID</a></b> &eacute; n&uacute;mero de identifica&ccedil;&atilde;o (ID) do processo-pai.
+<li>O comando <b><a href="pstree.html">pstree</a></b> apresenta, em formato de árvore, os processos em execu&ccedil;&atilde;o
+<li>O comando <b><a href="top.html">top</a></b> lista os processos que est&atilde;o utilizando a CPU.</li> 
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>ls</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="ls">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>ls</h1>
+
+<blockquote><font size="+1"><b> ls [op&ccedil;&otilde;es] [diret&oacute;rio]</b></font></blockquote>
+<ul>
+<li>O argumento <i>diret&oacute;rio</i> corresponde ao nome de um diret&oacute;rio que se deseja ver o conte&uacute;do.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando lista o conte&uacute;do de um diret&oacute;rio.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-a</b> : lista todos os arquivos do diret&oacute;rio (inclusive os arquivos ocultos). 
+<li><b>-h</b> : usado junto com a op&ccedil;&atilde;o <b>-l</b>, exibe o tamanho do arquivo em formato mais compreens&iacute;vel
+    para o ser humano.
+<li><b>-i</b> : lista o n&uacute;mero do &iacute;ndice (<a href="inode.html"><b>inode</b></a>) de cada arquivo. Se dois 
+    arquivos em um mesmo sistema de arquivos possuem o mesmo <i>inode</i>, ent&atilde;o ele est&atilde;o vinculados a 
+    um mesmo arquivo f&iacute;sico (liga&ccedil;&atilde;o direta).
+<li><b>-l</b> : lista permiss&otilde;es, n&uacute;mero de entidades (se for diret&oacute;rio, mostra a quantidade de
+    subdiret&oacute;rios existentes dentro dele; se for arquivo, mostra o n&uacute;mero de refer&ecirc;ncias que apontam
+    para o arquivo), dono, grupo, tamanho do arquivo, data e hora da &uacute;ltima atualiza&ccedil;&atilde;o e o nome do 
+    arquivo.
+<li><b>-m</b> : lista arquivos e diret&oacute;rios separados por v&iacute;rgulas.
+<li><b>-o</b> : apresenta listagem longa sem os donos dos arquivos.
+<li><b>-r</b> : lista em ordem reversa.
+<li><b>-t</b> : lista os arquivos por ordem decrescente das datas de atualiza&ccedil;&atilde;o
+<li><b>-F</b> : adiciona um "/" no final dos nomes de diret&oacute;rios, um "*" no final dos nomes de arquivos 
+    execut&aacute;veis, um "@" no final dos nomes de links, etc.
+<li><b>-R</b> : lista diret&oacute;rios e subdiret&oacute;rios recursivamente.
+<li><b>-S</b> : classifica os arquivos por tamanho.
+<li><b>-X</b> : classifica por ordem alfab&eacute;tica considerando primeiro as extens&otilde;es e depois os nomes dos arquivos.
+<li><b>-1</b> : apresenta um arquivo por linha.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Para listar todos os arquivos (inclusive os ocultos) do diret&oacute;rio corrente no formato longo, basta digitar
+    <blockquote class="t1">ls -al</blockquote>
+<li>O comando
+    <blockquote class="t1">ls /home/aluno</blockquote> 
+    lista todos os arquivos do subdiret&oacute;rio <i>aluno</i> que se encontra no diret&oacute;rio /home, 
+    enquanto o comando
+    <blockquote class="t1">ls /etc /usr</blockquote> 
+    lista todos os arquivos e subdiret&oacute;rios dos diret&oacute;rios /etc e /usr.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O Linux mant&eacute;m 3 <i>timestamps</i> para cada arquivo que podem ser vistos com o comando <i>ls</i>.
+<ul>
+<li>O comando <b>ls -l arquivo</b> mostra a data da &uacute;ltima atualiza&ccedil;&atilde;o dos dados (grava&ccedil;&atilde;o)
+     do arquivo.
+<li>O comando <b>ls -lc arquivo</b> mostra a data da &uacute;ltima atualiza&ccedil;&atilde;o do <i>status</i> (permiss&otilde;es, 
+    dono, grupo, etc) do arquivo.
+<li>O comando <b>ls -lu arquivo</b> mostra a data do &uacute;ltimo acesso (leitura) do arquivo.
+</ul>
+<li>Para saber mais sobre as informa&ccedil;&otilde;es sobre estas datas veja as chamadas de sistema
+    <a href="libc/cs_stat.html"><b>stat()/lstat()/fstat</b></a> e a estrutura de dados <a href="libc/ed_stat.html"><b>stat</b></a>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

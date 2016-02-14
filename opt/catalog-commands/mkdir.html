@@ -1,0 +1,77 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>mkdir</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="mkdir">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>mkdir</h1>
+   
+<blockquote><font size="+1"><b>mkdir diret&oacute;rio</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando cria diret&oacute;rios.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-m, --mode</b> : define as <a href="permissao.html"><b>permiss&otilde;es</b></a> do diret&oacute;rio.
+<li><b>-p</b> ou <b>--parents</b> : cria hierarquia de diret&oacute;rios.
+<li><b>--help</b> : lista as op&ccedil;&otilde;es dispon&iacute;veis com o comando. 
+<li><b>--version</b> : exibe informa&ccedil;&atilde;o sobre o comando. 
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Para criar o diret&oacute;rio <i>testes</i> dentro do diret&oacute;rio atual, basta digitar
+    <blockquote class="t1">mkdir testes</blockquote>
+<li>Para criar o diret&oacute;rio <i>testes</i> e dentro deste diret&oacute;rio o subdiret&oacute;rio <i>linux</i>, digite
+    <blockquote class="t1">mkdir -p testes/linux</blockquote>
+<li>Para criar o diret&oacute;rio <i>testes</i> com permiss&otilde;es de leitura e escrita para o <i>grupo</i> e permiss&atilde;o
+    de leitura para <i>outros</i>, deve-se digitar
+    <blockquote class="t1">mkdir unirio2 -m 64</blockquote>
+    Abaixo s&atilde;o mostradas as permiss&otilde;es do arquivo criado.
+    <blockquote class="t2">d---rw-r--  2 aluno aluno 4096 Mar 31 15:14 testes</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Para criar um novo diret&oacute;rio &eacute; preciso ter permiss&atilde;o de grava&ccedil;&atilde;o no diret&oacute;rio pai.
+<li>Por padr&atilde;o, as <a href="permissao.html"><b>permiss&otilde;es</b></a> associadas a um diret&oacute;rio 
+    s&atilde;o 777 (leitura, grava&ccedil;&atilde;o e execu&ccedil;&atilde;o para todos os usu&aacute;rios 
+    do sistema) menos as  permiss&otilde;es definidas no <a href="umask.html"><b>umask</b></a>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

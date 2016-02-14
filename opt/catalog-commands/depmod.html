@@ -1,0 +1,71 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>depmod</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="depmod">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>depmod</h1>
+<blockquote><font size="+1"><b>depmod [op&ccedil;&otilde;es]</b></font><br></blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>O comando verifica as depend&ecirc;ncias dos <a href="modulos.html"><b>m&oacute;dulos</b></a> do 
+<a href="kernel.html"><b>kernel</b></a> e grava o resultado no arquivo <i>/lib/modules/vers&atilde;o do kernel/modules.dep</i>.
+Por exemplo, para a vers&atilde;o 3.18.1-031801-generic do kernel, o arquivo gerado ser&aacute; 
+<i>/lib/modules/3.18.1-031801-generic/modules.dep</i>.
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-a</b> : verifica as depend&ecirc;ncias de todos os m&oacute;dulos do kernel. Esta op&ccedil;&atilde;o
+    &eacute; usada na aus&ecirc;ncia de qualquer outra op&ccedil;&atilde;o. 
+<li><b>-b diret&oacute;rio</b> : define o nome do diret&oacute;rio base para gravar o arquivo de sa&iacute;da.
+<li><b>-h</b> : fornece informa&ccedil;&otilde;es sobre o comando.
+<li><b>-n</b> : direciona o arquivo com as depend&ecirc;ncias para a sa&iacute;da padr&atilde;o.
+<li><b>-v</b> : informa os m&oacute;dulos processados.
+<li><b>-V</b> : informa a vers&atilde;o do utilit&aacute;rio.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><a href="lsmod.html"><b>lsmod</b></a> : exibe informa&ccedil;&otilde;es sobre os m&oacute;dulos que 
+    est&atilde;o instalados no kernel.</li>
+<li><b><a href="modinfo.html">modinfo</a></b> - mostra informa&ccedil;&otilde;es sobre um m&oacute;dulo do kernel.
+<li><a href="modprobe.html"><b>modprobe</b></a> : carrega e remove m&oacute;dulos do kernel.
+<li><a href="insmod.html"><b>insmod</b></a> : insere um m&oacute;dulo no kernel do Linux.
+<li><a href="rmmod.html"><b>rmmod</b></a> : retira um m&oacute;dulo do kernel do Linux.
+<li><a href="uname.html"><b>uname -r</b></a> : verifica a vers&atilde;o do kernel do Linux.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

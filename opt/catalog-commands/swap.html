@@ -1,0 +1,67 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>swap</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="swap">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>swap</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>O <i>swap</i> &eacute; uma &aacute;rea de troca usada para aumentar a quantidade de mem&oacute;ria RAM do sistema.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O tamanho m&aacute;ximo de uma &aacute;rea de <i>swap</i> depende da arquitetura e da vers&atilde;o do <b><a href="kernel.html">kernel</a></b>.
+    <ul>
+    <li>Arquiteturas i386, PPC, m68k e ARM: 2GBytes;
+    <li>Arquitetura mips: 512 MBytes;
+    <li>Arquitetura alpha: 128 GBytes;
+    <li>Arquitetura sparc64: 3 TBytes;
+    <li>kernel com vers&atilde;o superior a 2.3.3: n&atilde;o h&aacute; limite.
+    </ul>
+<li>O Linux permite a defini&ccedil;&atilde;o de at&eacute; 32 &aacute;reas de <i>swap</i>.
+<li>O arquivo <b><a href="dir_proc.html#swaps">/proc/swaps</a></b> possui a configura&ccedil;&atilde;o da &aacute;rea de 
+    <i>swap</i> utilizada pelo sistema.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="free.html">free</a></b> - exibe a quantidade de mem&oacute;ria livre/usada no sistema.
+<li><b><a href="mkswap.html">mkswap</a></b> : formata uma &aacute;rea de <i>swap</i>.
+<li><b><a href="swapoff.html">swapoff</a></b> : desabilita dispositivos de <i>swap</i>.
+<li><b><a href="swapon.html">swapon</a></b> : habilita dispositivos de <i>swap</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

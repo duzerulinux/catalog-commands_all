@@ -1,0 +1,67 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>chfn</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="chfn">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>chfn</h1>
+ 
+<blockquote><b><font size="+1">chfn [op&ccedil;&otilde;es] [usu&aacute;rio]</font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando permite alterar as informa&ccedil;&otilde;es fornecidas pelo aplicativo <b><a href="finger.html">finger</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-f nome</b> : altera o nome do usu&aacute;rio.
+<li><b>-h num</b> : altera o n&uacute;mero do telefone residencial (<i>home</i>).</li>
+<li><b>-r nome</b> : altera o local de trabalho (<i>room</i>).
+<li><b>-w num</b> : altera o n&uacute;mero do telefone do trabalho (<i>work</i>).
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Ao digitar o comando <i>chfn</i>, sem op&ccedil;&otilde;es, o sistema pergunta por modifica&ccedil;&atilde;o em cada
+    um dos campos. Caso n&atilde;o queira alterar um determinado campo, basta digitar Enter.
+<li>Apenas o <a href="root.html"><b>root</b></a> pode alterar informa&ccedil;&otilde;es de outros usu&aacute;rios. Portanto,
+    n&atilde;o &eacute; necess&aacute;rio fornecer o nome do usu&aacute;rio se voc&ecirc; deseja apenas alterar as 
+    informa&ccedil;&otilde;es da sua pr&oacute;pria conta.
+<li>Os dados informados com o comando <i>chfn</i> s&atilde;o armazenados no arquivo <b><a href="dir_etc.html#passwd">/etc/passwd</a></b>
+    na entrada correspondente ao usu&aacute;rio. Para ver as informa&ccedil;&otilde;es existentes, por exemplo, do usu&aacute;rio 
+    <i>aluno</i>, digite
+    <blockquote class="t1">finger aluno</blockquote></li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

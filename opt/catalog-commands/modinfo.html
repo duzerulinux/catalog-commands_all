@@ -1,0 +1,102 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>modinfo</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="modinfo">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>modinfo</h1>
+
+<blockquote><b><font size="+1"> modinfo [op&ccedil;&otilde;es] </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando mostra informa&ccedil;&otilde;es sobre um m&oacute;dulo do kernel.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-F campo</b> ou <b>--field campo</b> : exibe apenas a informa&ccedil;&atilde;o solicitada no campo que 
+    pode ser o autor (<i>author</i>), descri&ccedil;&atilde;o (<i>description</i>), licen&ccedil;a (<i>license</i>), 
+    par&acirc;metros (<i>parm</i></font>), depend&ecirc;ncias (<i>depends</i>), nome alternativo (<i>alias</i>)
+    e nome de arquivo do m&oacute;dulo (<i>filename</i>).
+<li><b>-a</b> : exibe apenas o nome do author do m&oacute;dulo.
+<li><b>-d</b> : exibe apenas as depend&ecirc;ncias do m&oacute;dulo.
+<li><b>-l</b> : exibe apenas a licen&ccedil;a de uso do m&oacute;dulo.
+<li><b>-p</b> : exibe apenas par&acirc;metros do m&oacute;dulo
+<li><b>-n</b> : exibe apenas o nome de arquivo do m&oacute;dulo.
+<li><b>-h</b> ou <b>--help</b> : exibe as op&ccedil;&otilde;es do comando.
+<li><b>-V</b> ou <b>--version</b> : exibe informa&ccedil;&otilde;es sobre o comando.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>O comando
+    <blockquote class="t1">modinfo bnep</blockquote>
+    fornece informa&ccedil;&otilde;es sobre o m&oacute;dulo <b>bnep</b>.
+    <blockquote class="t2">
+    <table class="t2" cellpadding=3>
+    <tr><td>filename:   </td><td>/lib/modules/3.2.0-35-generic-pae/kernel/net/bluetooth/bnep/bnep.ko</td></tr>
+    <tr><td>alias:      </td><td>bt-proto-4</td></tr>
+    <tr><td>license:    </td><td>GPL</td></tr>
+    <tr><td>version:    </td><td>1.3</td></tr>
+    <tr><td>description:</td><td>Bluetooth BNEP ver 1.3</td></tr>
+    <tr><td>author:     </td><td>Marcel Holtmann <marcel@holtmann.org></td></tr>
+    <tr><td>srcversion: </td><td>A5EC31AD4DDDB482F9B8BE2</td></tr>
+    <tr><td>depends:    </td><td>bluetooth</td></tr>
+    <tr><td>intree:     </td><td>Y</td></tr>
+    <tr><td>vermagic:   </td><td>3.2.0-35-generic-pae SMP mod_unload modversions 686</td></tr>
+    <tr><td>parm:       </td><td>compress_src:Compress sources headers (bool)</td></tr>
+    <tr><td>parm:       </td><td>compress_dst:Compress destination headers (bool)</td></tr>
+    </table>
+    </blockquote>
+<li>&Eacute; tamb&eacute;m poss&iacute;vel pedir informa&cedil;&otilde;es apenas sobre o nome
+    de arquivo de um m&oacute;dulo. Por exemplo,
+    <blockquote class="t1">modinfo --field filename bnep</blockquote>
+    ou
+    <blockquote class="t1">modinfo -n bnep</blockquote>
+    exibe apenas o nome de arquivo do m&oacute;dulo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="depmod.html">depmod</a></b> - produz arquivo contendo as depend&ecirc;ncias dos m&oacute;dulos.
+<li><b><a href="insmod.html">insmod</a></b> - carrega m&oacute;dulos do <b>kernel</b> na mem&oacute;ria do sistema.
+<li><b><a href="lsmod.html">lsmod</a></b> - lista os m&oacute;dulos do <b>kernel</b> que est&atilde;o carregados na 
+    mem&oacute;ria.
+<li><b><a href="modprobe.html">modprobe</a></b> - carrega e remove m&oacute;dulos do <b>kernel</b>.
+<li><b><a href="rmmod.html">rmmod</a></b> - descarrega m&oacute;dulos do <b>kernel</b> da mem&oacute;ria do sistema.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

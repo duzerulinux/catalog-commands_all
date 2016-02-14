@@ -1,0 +1,112 @@
+
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>lscpu</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="lscpu">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>lscpu</h1>
+
+<blockquote><b><font size="+1"> lscpu [op&ccedil;&otilde;es] </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando exibe informa&ccedil;&otilde;es sobre a arquitetura da CPU. </p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-p</b> ou <b>--parse</b> : otimiza a sa&iacute;da para facilitar o <i>parsing</i>.
+<li><b>-s</b> ou <b>--sysroot <i>diret&oacute;rio</i></b> : exibe a informa&ccedil;&atilde;o de CPU de outra inst&acirc;ncia, diferente da usada para rodar o comando.
+<li><b>-x</b> ou <b>--parse</b> : usa m&aacute;scara hexadecimal para exibir as CPUs.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2> Exemplos </h2>
+
+<ul>
+<li>Exemplo de sa&iacute;da padr&atilde;o 
+	<blockquote class="t1">lscpu</blockquote>
+    <blockquote class="t2">
+    <table class="t2">
+	<tr><td>Arquitetura:  </td><td> i686 </td></tr>
+    <tr><td>Modo(s) Operacional da CPU:  </td><td> CPU32-bit </td></tr>
+    <tr><td>Byte order:  </td><td> Little Endian </td></tr>
+    <tr><td>CPU(s):  </td><td> 1 </td></tr>
+    <tr><td>Online CPU(s) list:  </td><td> 0 </td></tr>
+	<tr><td>Thread(s) per núcleo:  </td><td> 1 </td></tr>
+	<tr><td>Núcleo(s) por socket:  </td><td> 1 </td></tr>
+	<tr><td>Soquete(s):  </td><td> 1 </td></tr>
+	<tr><td>ID de fornecedor:  </td><td> GenuineIntel </td></tr>
+	<tr><td>Fam&iacute;lia da CPU:  </td><td> 6 </td></tr>
+	<tr><td>Modelo:  </td><td> 58 </td></tr>
+	<tr><td>Step:  </td><td> 9 </td></tr>
+	<tr><td>CPU MHz:  </td><td> 2881.010 </td></tr>
+	<tr><td>BogoMIPS:  </td><td> 5762.02 </td></tr>
+	<tr><td>Online CPU(s) list:  </td><td> 0.30 </td></tr>
+    </table>
+    </blockquote>
+<li>Exemplo de sa&iacute;da usando 
+	<blockquote class="t1">lscpu -x</blockquote>
+    <blockquote class="t2">
+    <table class="t2">
+	<tr><td>Arquitetura:  </td><td> i686 </td></tr>
+    <tr><td>Modo(s) Operacional da CPU:  </td><td> CPU32-bit </td></tr>
+    <tr><td>Byte order:  </td><td> Little Endian </td></tr>
+    <tr><td>CPU(s):  </td><td> 1 </td></tr>
+    <tr><td>Online CPU(s) mask:  </td><td> 0x1 </td></tr>
+	<tr><td>Thread(s) per núcleo:  </td><td> 1 </td></tr>
+	<tr><td>Núcleo(s) por socket:  </td><td> 1 </td></tr>
+	<tr><td>Soquete(s):  </td><td> 1 </td></tr>
+	<tr><td>ID de fornecedor:  </td><td> GenuineIntel </td></tr>
+	<tr><td>Fam&iacute;lia da CPU:  </td><td> 6 </td></tr>
+	<tr><td>Modelo:  </td><td> 58 </td></tr>
+	<tr><td>Step:  </td><td> 9 </td></tr>
+	<tr><td>CPU MHz:  </td><td> 2881.010 </td></tr>
+	<tr><td>BogoMIPS:  </td><td> 5762.02 </td></tr>
+	<tr><td>Online CPU(s) list:  </td><td> 0.30 </td></tr>
+    </table>
+    </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A informa&ccedil;&atilde;o b&aacute;sica exibida sobre a CPU (fam&iacute;lia, modelo etc.) &eacute; sempre baseada na primeira CPU.
+<li>No comando <i>lscpu --sysroot diret&oacute;rio</i> o diret&oacute;rio especificado de ve ser a raiz da inst&acirc;ncia linux a ser
+    examinada.
+<li><i>Parsing</i> tamb&eacute;m &eacute; conhecido como <i>an&aacute;lise sint&aacute;tica</i>, que &eacute; o processo de analisar uma
+    sequ&ecirc;ncia de entrada (lida de um arquivo de computador ou do teclado, por exemplo) para determinar sua estrutura gramatical 
+    segundo uma determinada gram&aacute;tica formal. 
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

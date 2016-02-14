@@ -1,0 +1,147 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>adduser</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="adduser">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>adduser</h1>
+
+<blockquote><b><font size="+1"> adduser [op&ccedil;&otilde;es] usu&aacute;rio </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p> Este comando adiciona um usu&aacute;rio ao sistema.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2> Algumas op&ccedil;&otilde;es do comando </h2>
+
+<ul>
+<li><b>--home DIR</b> : define o diret&oacute;rio <a href="dir_home.html"><b>home</b></a> do usu&aacute;rio.
+<li><b>--uid UID</b> : especifica o <a href="uid.html"><b>UID</b></a> do novo usu&aacute;rio.
+<li><b>--gid GID</b> : especifica o <a href="gid.html"><b>GID</b></a> do grupo prim&aacute;rio (principal) ao qual o usu&aacute;rio pertence.
+<li><b>--shell SHELL</b> : especifica o <a href="shell.html"><b>shell</b></a> padr&atilde;o do usu&aacute;rio.
+<li><b>--ingroup GROUP</b> : define GROUP como o grupo prim&aacute;rio (principal) do novo usu&aacute;rio, onde GROUP é o nome de um grupo
+    que j&aacute; existe.
+<li><b>--system</b> : especifica que o usuário a ser criado é do sistema (o valor do UID ser&aacute;, por padr&atilde;, menor que 1000).
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2> Exemplos </h2>
+
+<ul>
+<li>Para criar o usu&aacute;rio <i>aluno</i>, basta digitar:
+    <blockquote class="t1">adduser aluno</blockquote>
+    O sistema ent&atilde;o executa as seguites tarefas:
+    <ul>
+    <li>aloca um n&uacutemero de <a href="uid.html"><b>UID</b></a> para o novo usu&aacute;rio e cria uma entrada em 
+        <a href="dir_etc.html#passwd"><b>/etc/passwd</b></a>;
+    <li>aloca um n&uacutemero de <a href="gid.html"><b>GID</b></a> para o novo grupo e cria uma entrada em 
+         <a href="dir_etc.html#group"><b>/etc/group</b></a>;
+    <li>cria o diret&oacute;rio <i>aluno</i> em <i>/home</i>;
+    <li> solicita a senha de acesso do novo usu&aacute;rio;
+    <li> solicita dados do novo usu&aacute;rio para incluir na entrada de <a href="dir_etc.html#passwd"><b>/etc/passwd</b></a>.
+    </ul> 
+    O sistema utiliza como padr&atilde;o as configura&ccedil;&otilde;es definidas no arquivo 
+    <a href="dir_etc.html#adduser"><b>/etc/adduser.conf</b></a>. Por exemplo, &eacute; poss&iacute;vel ver:
+    <blockquote class="t2">
+    # FIRST_[GU]ID to LAST_[GU]ID inclusive is the range of UIDs of dynamically<br>
+    # allocated user accounts/groups.<br>
+    FIRST_UID=1000<br>
+    LAST_UID=29999<br>
+    <br>
+    FIRST_GID=1000<br>
+    LAST_GID=29999<br>
+    </blockquote>
+    <p> Isto significa que, quando se usa aloca&ccedil;&atilde;o din&acirc;mica de UID e GID, os valores ficam entre 1000 e 29999 para
+    o usu&aacute;rio normal (n&atilde;o &eacute; usu&aacute;rio especial). Logo, se o usu&aacute;rio <i>aluno</i> &eacute; o primeiro 
+    a ser criado, ele ter&aacute; UID e GID iguais a 1001, pois o valor 1000 j&aacute; foi alocado para o usu&aacute;rio que instalou
+    o sistema.</p>
+    <p>Por padr&atilde;o, os valores menores que 1000 de UID e de GID s&atilde;o reservados para o sistema (usu&aacute;rios
+    especiais). Mas nada impede que o administrador aloque esses valores se eles estiverem dispon&iacute;veis.</p>
+<li>Para definir /home/meudir como o diret&oacute;rio <i>home</i> do usu&aacute;rio <i>aluno</i>:
+    <blockquote class="t1">adduser --home /home/meudir aluno</blockquote>
+<li> O UID do novo usu&aacute;rio&nbsp; corresponde ao menor n&uacute;mero, 
+  maior que 1000, que ainda n&atilde;o est&aacute; alocado. Entretanto, &eacute; poss&iacute;vel
+  definir o UID de um determinado usu&aacute;rio:
+    <blockquote class="t1">adduser --uid 2000 aluno</blockquote>
+  Quando um novo usu&aacute;rio &eacute; criado e o grupo padr&atilde;o do novo usu&aacute;rio n&atilde;o 
+  &eacute; fornecido, o sistema automaticamente cria um novo grupo para este usu&aacute;rio com GID igual 
+  ao n&uacute;mero de UID. Entretanto, o comando acima pode falhar em duas situa&ccedil;&otilde;es:
+  <ol>
+  <li>o valor de UID j&aacute; est&aacute; alocado a outro usu&aacute;rio;
+  <li>o GID com valor igual ao UID j&aacute; est&aacute; alocado a outro grupo.
+  </ol>
+<li>Para definir o GID como 3000, basta digitar:
+    <blockquote class="t1">adduser --uid 2000 --gid 3000 aluno</blockquote>
+    Se o GID j&aacute; estiver alocado a um grupo, o usu&aacute;rio ser&aacute; incluido no grupo definido pelo GID.
+<li>Para adicionar o novo usu&aacute;rio ao grupo UNIRIO que j&aacute; existe:
+    <blockquote class="t1">adduser --uid 2000 --ingroup UNIRIO aluno</blockquote>
+    Se o grupo UNIRIO n&atilde;o existir, o comando falha e o sistema n&atilde;o cria o usu&aacute;rio.
+</ul>
+  
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Arquivos</h2>
+
+<p>O comando <i>adduser</i> cria uma entrada para o usu&aacute;rio no arquivo <a href="dir_etc.html#passwd"><b>/etc/passwd</b></a>. 
+Esta entrada tem o nome, a senha (caso seja usado o sistema <i>shadow</i> para criptografar as senhas, apenas um <b>x</b> ou um 
+<b>*</b> &eacute; exibido neste campo, a senha criptografada &eacute; armazenada no arquivo 
+<a href="dir_etc.html#shadow"><b>/etc/shadow</b></a>), o UID (user identification), GID (group identification), informa&ccedil;&otilde;es
+sobre o usu&aacute;rio (se foram fornecidas), o diret&oacute;rio <a href="dir_home.html"><b>home</b></a> do usu&aacute;rio e o 
+<a href="shell.html"><b>shell</b></a> padr&atilde;o do usu&aacute;rio. Por exemplo, a linha abaixo mostra a entrada criada em 
+/etc/passwd para o usu&aacute;rio <i>aluno</i> que tem UID e GID iguais a 1001 e usa o <i>shell bash</i> como padr&atilde;o.</p>
+
+<blockquote class="t1">aluno:x:1001:1001::/home/aluno:/bin/bash</blockquote>
+
+<p>Caso seja criado um novo grupo durante o processo de cria&ccedil;&atilde;o de uma conta de usu&aacute;rio, o comando <i>adduser</i> 
+cria uma entrada para o grupo no arquivo <a href="dir_etc.html#group"><b>/etc/group</b></a>. Esta entrada tem o nome do grupo, a senha
+(caso seja usado o sistema <i>shadow</i> para criptografar as senhas, apenas um <b>x</b> ou um <b>*</b> &eacute; exibido neste campo, 
+a senha criptografada &eacute; armazenada no arquivo <a href="dir_etc.html#gshadow"><b>/etc/gshadow</b></a>), o GID do grupo e a lista
+dos usu&aacute;rios que s&atilde;o membros do grupo. Por exemplo, a linha abaixo mostra a entrada criada em /etc/group para o grupo 
+<i>aluno</i> que tem GID igual a 1001 e onde o usu&aacute;rio <i>maria</i> tamb&eacute;m &eacute; membro.</p>
+
+<blockquote class="t1">aluno:x:1001:maria</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A configura&ccedil;&atilde;o padr&atilde;o usada pelo comando <i>adduser</i> pode ser encontrada
+    em <a href="dir_etc.html#adduser"><b>/etc/adduser.conf</b></a>.</li>
+<li>O comando <i>adduser</i> normalmente exige o uso do comando <b><a href="sudo.html">sudo</a></b>.
+<li>O comando <a href="useradd.html"><b>useradd</b></a> apenas adiciona um novo usu&aacute;rio ao arquivo 
+    <a href="dir_etc.html#passwd"><b>/etc/passwd</b></a>, n&atilde;o cria um diret&oacute;rio <i>home</i> 
+    para este usu&aacute;rio. Portanto, &eacute; diferente do comando <i>adduser</i>.
+<li>Os comandos <a href="addgroup.html"><b>addgroup</b></a> e <a href="groupadd.html"><b>groupadd</b></a> 
+    criam um novo grupo de usu&aacute;rios no sistema.
+<li>Os comandos <b><a href="deluser.html">deluser</a></b> e <b><a href="userdel.html">userdel</a></b>
+    deletam usu&aacute;rios do sistema.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

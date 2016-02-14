@@ -1,0 +1,80 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>iostat</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="iostat">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>iostat</h1>
+
+<blockquote><b><font size="+1"> iostat [op&ccedil;&otilde;es] </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este aplicativo mostra estat&iacute;sticas de uso do processador e estat&iacute;sticas de E/S
+dos dispositivos e das parti&ccedil;&otilde;es.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-c</b> : mostra informa&ccedil;&otilde;es sobre a utiliza&ccedil;&atilde;o do processador.
+<li><b>-d</b> : mostra estat&iacute;sticas de E/S dos dispositivos e das parti&ccedil;&otilde;es.
+<li><b>-h</b> : usa um formato mais f&aacute;cil de ser entendido pelo usu&aacute;rio.
+<li><b>-k</b> : mostra estat&iacute;sticas em kilobytes por segundo.
+<li><b>-m</b> : mostra estat&iacute;sticas em megabytes por segundo.
+<li><b>-V</b> : informa a vers&atilde;o do aplicativo.
+<li><b>-x</b> : detalha mais as informa&ccedil;&otilde;es fornecidas.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p> O comando
+
+<blockquote class="t1">iostat</blockquote>
+
+apresenta estat&iacute;sticas sobre processadores, dispositivos e parti&ccedil;&otilde;es. Abaixo, um
+exemplo &eacute; fornecido. 
+
+<blockquote class="t2">
+Linux 3.2.0-36-generic-pae (morganna-Satellite-U305) 	20-01-2013 	_i686_	(2 CPU) <br>
+<br>
+<table class="t2" cellpadding=3>
+<tr><td>avg-cpu:</td><td> %user </td><td>%nice </td><td> %system </td><td>%iowait </td><td> %steal</td><td> %idle</td></tr>
+<tr><td>&nbsp;  </td><td> 5,95  </td><td>0,28  </td><td>  1,92   </td><td> 1,99   </td><td> 0,00  </td><td> 89,86</td></tr>
+</table>
+
+<table class="t2" cellpadding=3>
+<tr><td>Device: </td><td>  tps </td><td> kB_read/s </td><td> kB_wrtn/s </td><td> kB_read    kB_wrtn</td></tr>
+<tr><td>sda     </td><td> 8,32 </td><td> 106,25    </td><td> 100,67    </td><td> 619967     587384 </td></tr>
+</table>
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

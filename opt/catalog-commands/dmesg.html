@@ -1,0 +1,79 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>dmesg</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="dmesg">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>dmesg</h1>
+    
+<blockquote><b><font size="+1"> dmesg [op&ccedil;&otilde;es] </font></b></blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando exibe as mensagens do buffer do <a href="kernel.html"><b>kernel</b></a>.
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-n num</b> : mostra apenas mensagens de inicializa&ccedil;&atilde;o do n&iacute;vel <i>num</i>.
+<li><b>-c</b> : apaga as mensagens ap&oacute;s exibi-las (apenas o root pode usar este par&acirc;metro).
+<li><b>-C</b> : apenas apaga as mensagens do buffer.
+<li><b>-k</b> : exibe apenas as mensagens do Kernel.
+<li><b>-s tamanho</b> : define o tamanho do buffer do Kernel. O padr&atilde;o atual &eacute; 16384.
+<li><b>-t</b> : n&atilde;o mostra o hor&aacute;rio das mensagens.
+<li><b>-T</b> : mostra o hor&aacute;rio das mensagens em formato compreens&iacute;vel para os humanos (n&atilde;o usa o
+    formato <i>timestamp</i>).
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>O comando
+    <blockquote class="t1">dmesg -n 1</blockquote>
+    exibe as mensagens de n&iacute;vel 1 (<i>panic messages</i>) ocorridas durante a 
+    inicializa&ccedil;&atilde;o do sistema.
+<li>Para ver apenas as mensagens do Kernel, digite
+    <blockquote class="t1">dmesg -k</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>As mensagens apresentadas pelo comando <i>dmesg</i> s&atilde;o armazenadas em /var/log/dmesg.
+<li>O tempo mostrado com as mensagens pode n&atilde;o ser preciso, pois o tempo dos logs n&atilde;o &eacute;
+    atualizado ap&oacute;s o sistema ser SUSPEND/RESUME.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

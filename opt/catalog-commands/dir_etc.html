@@ -1,0 +1,194 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>diretorio /etc</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="diretorio etc">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>/etc</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este diret&oacute;rio possui os arquivos de configura&ccedil;&atilde;o do sistema.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos de arquivos</h2>
+
+<ul>
+<li><b><a name="adduser">adduser.conf</a></b> - Este arquivo possui a configura&ccedil;&atilde;o padr&atilde;o dos comandos 
+    <b><a href="adduser.html">adduser</a></b> e <b><a href="addgroup.html">addgroup</a></b>.
+<li><b><a name="adjtime">adjtime</a></b> - Este arquivo possui o fator de corre&ccedil;&atilde;o para o RTC (<i>real time clock</i>, ou seja, rel&oacute;gio
+    de tempo real).
+<li><b><a name="atallow">at.allow</a></b> - Este arquivo possui a lista dos usu&aacute;rios que podem usar o comando <b><a href="at.html">at</a></b>.
+    Se este arquivo n&atilde;o existir, todos os usu&aacute;rios t&ecirc;m permiss&atilde;o. Se este arquivo estiver vazio, apenas o root pode executar
+    o comando <b>at</b>.
+<li><b><a name="atdeny">at.deny</a></b> - Este arquivo possui a lista dos usu&aacute;rios que n&atilde;o podem usar o comando <b><a href="at.html">at</a></b>.
+    Se o arquivo <b>/etc/at.allow</b> n&atilde;o existir, &eacute; verificada a exist&ecirc;ncia do arquivo <b>at.deny</b> e todos 
+    os usu&aacute;rios n&atilde;o mencionados no mesmo, recebem permiss&atilde;o para executar o comando <b>at</b>.
+<li><b><a name="bashrc">bash.bashrc</a></b> - Este arquivo possui as fun&ccedil;&otilde;es e os <b><a href="alias.html">aliases</a></b> dispon&iacute;veis a todos
+    os usu&aacute;rios do sistema. As letras <b>RC</b> no nome <b>bashrc</b> significa <i>Run Control File</i> (arquivo de controle de execu&ccedil;&atilde;o).
+<li><b><a name="crontab">crontab</a></b> - Este &eacute; o arquivo <b><a href="crontab.html">crontab</a></b> do sistema, ou seja,
+este &eacute; o arquivo que armazena as tarefas agendadas do sistema.
+<li><b><a name="default">default</a></b> - Este diret&oacute;rio armazena a configura&ccedil;&atilde;o padr&atilde;o de alguns comandos dos sistema.
+<li><b><a name="fstab">fstab</a></b> - Este arquivo mostra os dispositivos de hardware dispon&iacute;veis no sistema (isto n&atilde;o significa que estejam
+    montados) e &eacute; usado pelo <a href="swapon.html"><b>swapon</b></a> e <a href="mount.html"><b>mount</b></a> durante o processo de inicializa&ccedil;&atilde;o
+    do sistema.
+<li><b><a name="group">group</a></b> - Este arquivo possui as defini&ccedil;&otilde;es dos grupos do sistema. Existe uma entrada no arquivo para cada grupo de
+    usu&aacute;rios do sistema com as seguintes informa&ccedil;&otilde;es: nome do grupo, senha do grupo (se houver), n&uacute;mero de 
+    <a href="gid.html"><b>GID</b></a> (group identification) e a lista dos usu&aacute;rio que pertencem a esse grupo. Por exemplo, a linha abaixo mostra a 
+    entrada criada em <b>etc/group</b> para o grupo <b>sys</b> que tem <b>GID</b> igual a 3 e que possui tr&ecirc;s membros: <b>root</b>, <b>bin</b> e 
+    <b>adm</b>.
+    <blockquote class="t2">sys:x:3:root,bin,adm</blockquote> 
+<li><b><a name="gshadow">gshadow</a></b> - Este arquivo possui as senhas criptografadas dos grupos do sistema. Apenas o <b>root</b> (administrador do sistema) 
+    tem permiss&atilde;o para acessar o arquivo <b>/etc/gshadow</b>. O comando <b><a href="grpconv.html">grpconv</a></b> &eacute; usado para criar o arquivo 
+    <b>gshadow</b> a partir do arquivo <b>/etc/group</b>, enquanto o comando <b><a href="grpunconv.html">grpunconv</a></b> executa a
+    opera&ccedil;&atilde;o inversa.
+<li><b><a name="hostconf">host.conf</a></b> - Este arquivo configura a ordem de procura dos nomes das m&aacute;quinas.
+<li><b><a name="hostname">hostname</a></b> - Este arquivo possui o nome da m&aacute;quina.
+<li><b><a name="hosts">hosts</a></b> - Este arquivo possui os endere&ccedil;os e os nomes das m&aacute;quinas da rede.
+<li><b><a name="hostsallow">hosts.allow</a></b> - Este arquivo possui a lista das m&aacute;quinas que possuem autoriza&ccedil;&atilde;o para acessar os servi&ccedil;os
+    de rede colocados dispon&iacute;veis na m&aacute;quina.
+<li><b><a name="hostsdeny">hosts.deny</a></b> - Este arquivo possui a lista das m&aacute;quinas que n&atilde;o podem acessar os servi&ccedil;os de rede colocados
+    dispon&iacute;veis na m&aacute;quina.
+<li><b><a name="init">init</a></b> - Este diret&oacute;rio cont&eacute;m os arquivos de configura&ccedil;&atilde;o inicializados pelo processo 
+    <b><a href="init.html">init</a></b>.
+<li><b><a name="initd">init.d</a></b> - Este diret&oacute;rio cont&eacute;m os scripts usados na inicializa&ccedil;&atilde;o do sistema nos diferentes 
+    n&iacute;veis de execu&ccedil;&atilde;o (<b>runlevels</b>).
+<li><b><a name="issue">issue</a></b> - Este arquivo &eacute; usado como tela de inicializa&ccedil;&atilde;o, no modo texto, dos usu&aacute;rios do sistema.
+    Normalmente, este arquivo mostra o nome e a vers&atilde;o do sistema operacional.
+<li><b><a name="issuenet">issue.net</a></b> - Este arquivo &eacute; usado como tela de inicializa&ccedil;&atilde;o em um login remoto (por exemplo, 
+    <b><a href="telnet.html">telnet</a></b>).
+<li><b><a name="ldsocache">ld.so.cache</a></b> - Este arquivo possui as informa&ccedil;&otilde;es sobre as bibliotecas compartilhadas do sistema. 
+<li><b><a name="ldsoconf">ld.so.conf</a></b> - Este arquivo possui a lista dos diret&oacute;rios onde s&atilde;o armazenadas as bibliotecas compartilhadas.
+<li><b><a name="logindefs">login.defs</a></b> - Este arquivo possui a configura&ccedil;&atilde;o padr&atilde;o utilizada pelo comando 
+    <b><a href="useradd.html">useradd</a></b> na cria&ccedil;&atilde;o de novas contas de usu&aacute;rios.
+<li><b><a name="manpathconfig">manpath.config</a></b> - Este arquivo possui a lista dos diret&oacute;rios onde as p&aacute;ginas do manual on-line
+    (comando <b><a href="man.html">man</a></b>) devem ser procuradas, al&eacute;m de definir a ordem em que a pesquisa por uma p&aacute;gina do manual 
+    &eacute; feita. 
+<li><b><a name="mke2fsconf">mke2fs.conf</a></b> - Este arquivo possui a configura&ccedil;&atilde;o padr&atilde;o usada pelo aplicativo do 
+    <b><a href="mke2fs.html">mke2fs</a></b> para formatar sistemas de arquivos.
+<li><b><a name="modules">modules</a></b> - Este arquivo possui os nomes dos m&oacute;dulos do <b>kernel</b> a serem carregados na
+    inicializa&ccedil;&atilde;o do sistema.
+<li><b><a name="motd">motd</a></b> - O nome deste arquivo &eacute; acr&ocirc;nimo para <b>"Message Of The day"</b>, ou seja, "mensagem do dia". Ele pode ser
+    usado pelo administrador para enviar mensagens aos usu&aacute;rios do sistema. O <b>motd</b> &eacute; um simples arquivo texto cujo conte&uacute;do &eacute;
+    exibido pelo processo <b><a href="login.html">login</a></b> ap&oacute;s um login bem sucedido, antes do <b><a href="shell.html">shell</a></b> ser executado.
+<li><b><a name="mtab">mtab</a></b> - Este arquivo possui a lista dos sistemas de arquivos que est&atilde;o montados no <b>Linux</b>.
+<li><b><a name="mtools">mtools</a></b> - Este &eacute; o arquivo configura&ccedil;&atilde;o do pacote <b>mtools</b>.
+<li><b><a name="passwd">passwd</a></b> - Este arquivo possui a lista de usu&aacute;rios  do sistema. Existe uma entrada no arquivo para cada usu&aacute;rio do
+    sistema com as seguintes informa&ccedil;&otilde;es: nome, senha (caso se use <b>shadow password</b>, as senhas criptografadas s&atilde;o 
+    armazenadas em <b>/etc/shadow</b>), n&uacute;mero de <a href="uid.html"><b>UID</b></a> (user identification), n&uacute;mero de
+    <a href="gid.html"><b>GID</b></a> (group identification), informa&ccedil;&otilde;es sobre o usu&aacute;rio, o diret&oacute;rio <b>home</b> do usu&aacute;rio
+    e o <a href="shell.html"><b>shell</b></a> padr&atilde;o do usu&aacute;rio. Por exemplo, a linha abaixo mostra a entrada criada em <b>/etc/passwd</b> para o
+    usu&aacute;rio <b>aluno</b> que tem UID e GID iguais a 1001.
+    <blockquote class="t2">aluno:x:1001:1001::/home/aluno:/bin/bash</blockquote>
+    As informa&ccedil;&otilde;es sobre o usu&aacute;rio (nome, telefone, local de trabalho, etc) s&atilde;o inclu&iacute;das com os comandos
+    <b><a href="adduser.html">adduser</a></b> e <a href="chfn.html"><b>chfn</b></a> e visualizadas com o comando <a href="finger.html"><b>finger</b></a>.</p>
+<li><b><a name="printcap">printcap</a></b> - Este arquivo possui a configura&ccedil;&atilde;o  das impressoras  do sistema.
+<li><b><a name="profile">profile</a></b> - Este arquivo possui a defini&ccedil;&atilde;o padr&atilde;o do ambiente do sistema, pois abriga as 
+    configura&ccedil;&otilde;es para todos os usu&aacute;rios. Normalmente, a configura&ccedil;&atilde;o de aliases e fun&ccedil;&otilde;es &eacute; 
+    feita no arquivo <b>bash.bashrc</b>
+<li><b><a name="profiled">profile.d</a></b> - Este diret&oacute;rio possui as defini&ccedil;&otilde;es usadas pelos usu&aacute;rios.
+<li><b><a name="protocols">protocols</a></b> -Este arquivo possui a lista dos protocolos Internet DARPA que est&atilde;o dispon&iacute;veis para o 
+    subsistema TCP/IP. 
+<li><b><a name="rcd">rc0.d, rc1.d, rc2.d, rc3.d, rc4.d, rc5.d, rc6.d, rcS.d</a></b> - Estes diret&oacute;rios possuem links para os arquivos usados na
+    inicializa&ccedil;&atilde;o do sistema. Os links dos scripts relacionados ao <b>runlevel X</b> est&atilde;o armazenados no diret&oacute;rio 
+    <b>rcX.d</b>. Os arquivos que come&ccedil;am com a letra <b>S</b> (<i>Start</i>) correspondem a servi&ccedil;os que devem ser inicializados no
+    <b>runlevel</b> correspondente, enquanto os arquivos que come&ccedil;am com <b>K</b> (<i>Kill</i>) indicam os scripts que devem ser executados
+    na finaliza&ccedil;&atilde;o do sistema. O &uacute;ltimo script a ser executado na inicializa&ccedil;&atilde;o &eacute; o <b>/etc/rc.local</b>
+    que apenas retorna o valor zero informando que o sistema foi inicializado com sucesso.
+    Para saber mais sobre os n&iacute;veis de execu&ccedil;&atilde;o do sistema, veja <b><a href="init.html">init</a></b>.
+<li><b><a name="rpc">rpc</a></b> - Este arquivo possui a lista dos n&uacute;meros e respectivos nomes dos servi&ccedil;os RPC (Remote Procedure Calls) 
+    que s&atilde;o usados na implementa&ccedil;&atilde;o de servi&ccedil;os no modelo cliente-servidor.
+<li><b><a name="securetty">securetty</a></b> - Este arquivo possui a lista dos terminais (<b>tty</b>) nos quais o <b><a href="root.html">root</a></b> pode 
+    acessar o sistema. Este arquivo &eacute; usado pelo processo <b><a href="login.html">login</a></b> para verificar se o terminal &eacute; considerado seguro
+    para acesso do <b>root</b>.
+<li><b><a name="services">services</a></b> - Este arquivo possui a lista dos servi&ccedil;os de rede e suas respectivas portas segundo recomenda&ccedil;&otilde;es
+    da IANA (<i>Internet Assigned Numbers Authorith</i>).
+<li><b><a name="shadow">shadow</a></b> - Este arquivo possui as senhas criptografadas dos usu&aacute;rios do sistema.
+<li><b><a name="shells">shells</a></b> - Este arquivo possui a lista dos <a href="shell.html"><b>shells</b></a> que o sistema suporta.
+<li><b><a name="shutdownallow"></a>shutdown.allow</b> - Este arquivo possui a lista de usu&aacute;rios autorizados a reinicializar o sistema com 
+    a combina&ccedil;&atilde;o de teclas <b>CTRL+ALT+DEL</b>.
+<li><b><a name="sudoers">sudoers</a></b> - Este arquivo define a pol&iacute;tica de privil&eacute;gios para os usu&aacute;rios, ou seja,
+    como o comando <b><a href="sudo.html">sudo</a></b> pode ser utilizado. 
+
+    <p>O <b>sudoers</b> permite criar quatro defini&ccedil;&otilde;es: quem pode usar o privil&eacute;gio 
+    definido (<i>user_alias</i>), a quem pode substituir (<i>runas_alias</i>), em quais m&aacute;quinas podem executar 
+    o privil&eacute;gio definido (<i>host_alias</i>) e quais os comandos que podem ser executados (<i>cmnd_alias</i>). 
+    Abaixo s&atilde;o mostrados alguns exemplos.</p>
+
+    <ol>
+    <li>Os usu&aacute;rios <b>maria</b> e <b>pedro</b> possuem os privil&eacute;gios definidos para PROFESSORES.
+    <blockquote>
+        # User alias specification<br>
+        User_Alias PROFESSORES = maria, pedro
+    </blockquote>
+    <li>Quem pode executar como CHEFE pode assumir os privil&eacute;gios dos usu&aacute;rios <b>root</b> e <b>operator</b>.
+    <blockquote>
+        # Runas alias specification<br>
+        Runas_Alias CHEFE = root, operator
+    </blockquote>
+    <li>As m&aacute;quinas de LAB1 est&atilde;o na rede 128.138.243.0 e as m&aacute;quinas de LAB2 est&atilde;o na rede 128.138.53.0.
+    <blockquote>
+        # Host alias specification<br>
+        Host_Alias LAB1 = 128.138.243.0<br>
+        Host_Alias LAB2 = 128.138.53.0
+    </blockquote>
+    <li>Os comandos especificados por FIM s&atilde;o <b><a href="shutdown.html">shutdown</a></b> e <b><a href="reboot.html">reboot</a></b>
+    <blockquote>
+        # Cmnd alias specification<br>
+        Cmnd_Alias FIM = /usr/sbin/shutdown, /usr/bin/reboot
+    </blockquote>
+    </ol>
+
+    <p>Para definir os privil&eacute;gios, usa-se o seguinte formato:
+    <blockquote><b> User Host1 = [(Runas1)] Cmnd1 : Host2 = [(Runas2)] Cmnd2 : ...</b></blockquote>
+    A seguir s&atilde;o mostrados alguns exemplos de como definir privil&eacute;gios usando as defini&ccedil;&otilde;es acima.
+    <ol>
+    <li>O usu&aacute;rio <b>teresa</b> pode executar qualquer comando nas m&aacute;quinas da rede 128.138.243.0.
+    <blockquote>teresa LAB1 = ALL</blockquote>
+    <li>O usu&aacute;rio <b>joao</b> pode executar os comandos <b>shutdown</b> e <b>reboot</b> em qualquer m&aacute;quina.
+    <blockquote>joao ALL = FIM</blockquote>
+    <li>O usu&aacute;rio <b>carlos</b> pode executar nas m&aacute;quinas da rede 128.138.53.0 qualquer comando do diret&oacute;rio 
+    <b>/usr/local/laboratorios/</b> como se fosse o usu&aacute;rio <b>operator</b>.
+    <blockquote>carlos LAB2 = (operator) /usr/local/laboratorios/</blockquote>
+    <li>Os usu&aacute;rios <b>maria</b> e <b>pedro</b> podem executar qualquer comando em qualquer m&aacute;quina sem precisar 
+    fornecer senha.
+    <blockquote>PROFESSORES ALL = NOPASSWD: ALL</blockquote>
+    <li>O Usu&aacute;rio <b>frederico</b> pode executar qualquer comando em qualquer m&aacute;quina como se fosse o usu&aacute;rio <b>operator</b>
+    e sem precisar fornecer senha.
+    <blockquote>frederico ALL = (operator) NOPASSWD: ALL</blockquote>
+    <li>O usu&aacute;rio <b>roberto</b> pode executar qualquer comando como se fosse os usu&aacute;rios <b>root</b> ou <b>operator</b> nas
+    m&aacute;quinas da rede 128.138.243.0 e pode executar os comandos <b>shutdown</b> e <b>reboot</b> nas m&aacute;quinas da rede 128.138.53.0.
+    <blockquote>roberto LAB1 = (CHEFE) ALL : LAB2 = FIM</blockquote>
+    </ol>
+
+<li><b><a name="terminfo">terminfo</a></b> - Este diret&oacute;rio possui as descri&ccedil;&otilde;es dos terminais suportados pelo sistema.
+<li><b><a name="x11">X11</a></b> - Este diret&oacute;rio possui os arquivos de configura&ccedil;&atilde;o do sistema <b><a href="xwindow.html">X</a></b>.
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

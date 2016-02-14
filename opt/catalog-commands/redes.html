@@ -1,0 +1,185 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+
+<head>
+<title>Comandos de Rede</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="Comandos de redes">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>Comandos de Rede</h1>
+      
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Nessa p&aacutegina ser&aacute mostrado os principais comando de configura&ccedil;&atilde;o de rede do Linux.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>ifconfig</h2>
+
+<ul>
+<li>O <i>ifconfig</i> mostra os detalhes da(s) interface(s) de rede definida(s) no sistema.
+     <ul>
+	<li><b>-a</b>: mostra todas as interfaces.
+	<li><b>[nome da interface]</b>: mostra os detalhes da interface especificada.
+    </ul>
+
+<br><li>As partes importantes contidas nas informa&ccedil;&otilde;es de cada interface de rede s&atildeo:
+    <ul>
+	<li>Link encap: o tipo de hardware f&iacutesico compat&iacutevel com esta interface.
+	<li>HWaddr: Endere&ccedilo MAC da placa de rede. O endere&ccedilo MAC &e um identificador exclusivo atribu%iacutedo pelo fabricante. O identificador MAC 		n&atilde;o 	pode ser alterado.
+	<li>Mask: a m&aacutescara de rede.
+	<li>inet addr: o endere&ccedilo IP anexado &agrave interface.
+    </ul>
+
+<br><li>Tamb&eacutem &eacute poss&iacutevel usar o <i>ifconfig</i> para administrar essas interfaces. Alguns dos comandos para administrar as interfaces podem ser vistos a seguir:
+    <ul>
+	<li><b>up/down</b> &ndash; ativa ou desativa uma interface espec&iacutefica.
+	<blockquote>ifconfig eth0 down</blockquote>
+	<li><b>add</b> &ndash; define um endere&ccedilo IP espec&iacutefico para a interface.
+	<blockquote>ifconfig eth0 add  192.168.1.101</blockquote>
+	<li><b>netmask</b> &ndash; define a m&aacutescara de rede da interface.
+	<blockquote>ifconfig eth0 netmask  255.255.255.0</blockquote>
+    </ul>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>netstat</h2>
+
+<ul>
+<li>O comando <i>netstat</i> fornece  as informa&ccedil;&otildees completas sobre o desempenho (estat&iacutesticas) da(s) interface(s) de rede.
+   <ul>
+	<li><b>-i</b>: Mostra estat&iacutesticas das interfaces presentes.
+	<p>Saida:</p>
+	<blockquote><pre>
+	Kernel  Interface table
+	Iface   MTU Met   RX-OK RX-ERR RX-DRP RX-OVR  TX-OK TX-ERR TX-DRP TX-OVR Flg
+	eth0   1500  0      844   0      0      0       551   0      0      0   BMRU
+	lo    65536  0      365   0      0      0       365   0      0      0    LRU
+	</pre></blockquote>
+	<li><b>-i -e</b>: Mesma sa&iacute do comando <i>ifconfig</i>.
+	<li><b>-s</b>: Mostra um resumo estat&iacutestico de cada protocolo em vez de apresentar os detalhes de cada conex&atildeo.
+	<li><b>-s -u/-t</b>:  Mostra as estat&iacutesticas relacionadas ao protocolo UDP/TCP.
+	<p>Saida:</p>
+	<blockquote><pre>
+	Udp:
+    	296 packets received
+   	88 packets to unknown port received.
+   	0 packet receive errors
+   	395 packets sent
+	</pre></blockquote>
+	<li><b>-r</b>: Exibi a tabela de roteamento.
+	<p>Saida:</p>
+	<blockquote><pre>
+	Kernel  IP routing table
+	Destination    Gateway       Genmask          Flags  MSS Window  irtt Iface
+	default        10.0.2.2      0.0.0.0          UG       0 0          0 eth0
+	10.0.2.0       *             255.255.255.0    U        0 0          0 eth0
+	link-local     *             255.255.0.0      U        0 0          0 eth0
+	</pre>
+   </ul>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>ping</h2>
+
+<ul>
+<li>&Eacute utilizado para testar uma conex&atildeo, sendo que este utilit&aacuterio de diagn&oacutestico utiliza-se das mensagens Echo Request e
+    Echo Reply do protocolo ICMP para determinar se uma m&aacutequina est&aacute ligada e funcional. Ele opera enviando um
+    ICMP (Control Message Protocol), se o software de IP da m&aacutequina destino recbe-o ele emite uma resposta de echo imediatamente.
+    <blockquote>ping [op&ccedil;&otildees] google.com [IP ou hostname]</blockquote>
+    <p>Saida</p>
+    <blockquote><pre>
+    PING google.com (216.58.222.14) 56(84) bytes of data.
+    64 bytes from gru06s25-in-f14.1e100.net (216.58.222.14): icmp_seq=1 ttl=55 time=202ms
+    64 bytes from gru06s25-in-f14.1e100.net (216.58.222.14): icmp_seq=2 ttl=55 time=62.7ms
+    64 bytes from from gru06s25-in-f14.1e100.net (216.58.222.14): icmp_seq=3 ttl=55 time=203ms
+    64 bytes from from gru06s25-in-f14.1e100.net (216.58.222.14): icmp_seq=4 ttl=55 time=72.8ms
+    64 bytes from from gru06s25-in-f14.1e100.net (216.58.222.14): icmp_seq=5 ttl=55 time=127ms
+    ------google.com ping statistics ------
+    5 packets transmitted, 5 received, 0% packets loss, time 4005ms
+    rtt min/avg/max/mxdev = 62.767/133.799/203.342/60.547 ms
+    </pre></blockquote>
+
+<br><li>Algumas op&ccedil;&otildees de comando para o ping s&atildeo:
+   <ul>
+	<li><b>-c [x] </b>: Faz o ping enviar x pacotes.
+	<li><b>-i [n]</b>: Aguarda n segundos para enviar o pr&otildeximo pacote
+	<li><b>-R</b>: Registra a rota seguida pelos pacotes at&eatilde chegar ao seu destino
+	<li><b>-t [ttl]</b>: Fixa o ttl (time to live), que indica o maior n&uacutemero de saltos que um pacote pode dar antes de ser descartado.
+   </ul>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>traceroute</h2>
+
+<ul>
+<li>Mostra o caminho percorrido por um pacote para chegar ao seu destino. Cada linha que aparece &eacute chamada de pulo.<br>
+Este comando mostra na tela o caminho percorrido entre os Gateways da rede e o tempo gasto de retransmiss&atildeo.
+<blockquote>traceroute [op&ccedil;&otildees] google.com [IP ou hostname]</blockquote>
+<p>Saida:</p>
+<blockquote><pre>
+traceroute to google.com (173.194.119.35), 30hops max, 60 byte packets
+1   10.0.2.2(10.0.2.2) 0.116 ms 0.113 ms 0.069 ms
+2   * * *
+3   * * *
+4   * * *
+5   * * *
+6   * * *
+7   * * *
+8   * * *
+9   * * *
+10  * * *
+11  * * *
+12  * * *
+13  * * *
+14  * * *
+15  * * *
+16  * * *
+17  * * *
+18  * * *
+19  * * *
+20  * * *
+21  * * *
+22  * * *
+23  * * *
+24  * * *
+25  * * *
+26  * * *
+27  * * *
+28  * * *
+29  * * *
+30  * * *
+</pre></blockqoute>
+
+<br><li>Algumas op&ccedil;&otildees de comando para o ping s&atildeo:
+   <ul>
+	<li><b>-m [x]</b>: Realiza x pulos.
+	<li><b>-n</b>: Mostra os endere&ccedilos numericamente ao inv&eacutes de usar resolu&ccedil;&atildeo DNS.
+	<li><b>-w [num]</b>: Configura o tempo m&aacuteximo que aguardar&aacute por uma resposta.
+   </ul>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>nice</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="nice">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>nice</h1>
+   
+<blockquote><font size="+1"><b>nice [op&ccedil;&otilde;es] [comando]</b></font></blockquote>
+<ul>
+<li>O argumento <i>comando</i> &eacute; o comando a ser executado.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando define a prioridade de execu&ccedil;&atilde;o de um <b><a href="processo.html">processo</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-n valor</b> ou <b>-valor</b> : adiciona o valor especificado &agrave; prioridade padr&atilde;o (valor 10)
+    de execu&ccedil;&atilde;o no sistema.
+<li><b>--help</b> : lista as op&ccedil;&otilde;es dispon&iacute;veis com o comando.
+<li><b>--version</b> : exibe informa&ccedil;&atilde;o sobre o comando. 
+
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Como a prioridade padr&atilde;o de execu&ccedil;&atilde;o do comando <b>nice</b> &eacute; 10, o comando
+   <blockquote class="t1">nice -5 find / -name gcc</blockquote>
+   usa prioridade 5 para a execu&ccedil;&atilde;o.
+<li>O comando
+   <blockquote class="t1">sudo nice --5 find / -name gcc</blockquote>
+   define prioridade -5 para a execu&ccedil;&atilde;o. Somente o administrador do sistema (<b>root</b>) pode
+   definir prioridades negativas, por isso &eacute; preciso usar o comando <b><a href="sudo.html">sudo</a></b>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A prioridade de execu&ccedil;&atilde;o de um processo pode variar de <b>-20</b> (maior prioridade) a <b>19</b> 
+    (menor prioridade). Por padr&atilde;o, a prioridade dos processos &eacute; zero.
+<li>Quando o valor de ajuste da prioridade n&atilde;o &eacute; definido junto com o comando <b>nice</b>, 
+    o sistema assume o valor de ajuste igual a 10.
+<li>Se nenhum argumento &eacute; fornecido com o comando <b>nice</b>, o sistema exibe a prioridade padr&atilde;o
+    atualmente em uso (valor zero).
+<li>Existem dois limites de prioridade:
+    <ul>
+    <li><b>hard</b> - s&atilde;o definidos pelo administrador (<b><a href="root.html">root</a></b>) e implementados pelo 
+        <b><a href="kernel.html">kernel</a></b>. O usu&aacute;rio comum n&atilde;o pode ultrapassar os limites definidos.
+    <li><b>soft</b> - estes limites s&atilde;o interpretados como os valores padr&otilde;es. O usu&aacute;rio comum pode
+        definir valores acima ou abaixo dos limites especificados.
+    </ul>
+<li>&Eacute; poss&iacute;vel definir o valor <b>nice</b> para um usu&aacute;rio ou um grupo no arquivo 
+    <b>/etc/security/limits.conf</b>. Por exemplo, para definir o valor <b>nice</b> dos processos executados pelo 
+    usu&aacute;rio <b>aluno</b> como 1 e n&atilde;o permitir que este valor seja alterado, basta criar a linha abaixo
+    no arquivo.
+    <blockquote class="t2">aluno hard priority 1</blockquote>
+    Para definir para todos os usu&aacute;rios como padr&atilde;o a prioridade 4, digite
+    <blockquote class="t2">* soft priority 4</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="pid.html">PID</a></b> - n&uacute;mero de identifica&ccedil;&atilde;o (<b>ID</b>) de um processo.
+<li><b><a href="processo.html">processo</a></b> - programa em execu&ccedil;&atilde;o. </li>
+<li><b><a href="renice.html">renice</a></b> - altera a prioridade de um processo que est&aacute; executando.
+<li><b><a href="top.html">top</a></b> - utilit&aacute;rio que lista, em tempo real, os processos que est&atilde;o usando
+    a cpu e informa a prioridade execu&ccedil;&atilde;o de cada um.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

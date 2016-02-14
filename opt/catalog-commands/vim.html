@@ -1,0 +1,153 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>vim</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="vim">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>vim</h1>
+ 
+<blockquote><font size="+1"><b>vim [op&ccedil;&otilde;es] [arquivo]</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este utilit&aacute;rio &eacute; um editor de textos e &eacute; uma vers&atilde;o melhorada do antigo <i>vi</i> 
+(<i>Vi IMproved</i>).</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-b</b> : permite editar arquivo bin&aacute;rio.
+<li><b>-h</b> : exibe op&ccedil;&otilde;es do aplicativo.
+<li><b>+n</b> : inicializa o cursor na <b>n</b>-&eacute;sima linha.
+<li><b>-r</b> : recupera a &uacute;ltima vers&atilde;o do arquivo (o arquivo estava sendo editado quando o <b>vim</b> foi encerrado 
+               de forma n&atilde;o normal, por exemplo, devido a falta de energia el&eacute;trica).
+<li><b>-R</b> : abre arquivo apenas para leitura.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O <i>vim</i> (<i>VI Improvement</i>) &eacute; uma melhoria do antigo editor de texto <i>vi</i>. 
+    Este por sua vez &eacute; uma melhoria do editor de texto orientado a linha chamado <i>ed</i>. 
+<li>O <i>vim</i> possui tr&ecirc;s formas de trabalho: modo de linha, modo de edi&ccedil;&atilde;o e 
+    modo de comandos. A mudan&ccedil;a de um modo para outro modo &eacute; feita atrav&eacute;s do uso
+    da tecla Esc.
+<li>Ap&oacute;s o arquivo ser aberto pelo <i>vim</i>, o modo de comandos &eacute; ativado.
+    No <i>modo de comandos</i>, as teclas digitadas pelo usu&aacute;rio s&atilde;o interpretadas pelo 
+    <i>vim</i> como a&ccedil;&otilde;es a serem executadas dentro do arquivo aberto. No <i>modo de 
+    edi&ccedil;&atilde;o</i>, as teclas digitadas pelo usu&aacute;rio  s&atilde;o ecoadas na tela. 
+    Para entrar neste modo, pode-se digitar, por exemplo, "a" (adicionar), "i" (incluir),etc.
+    No <i>modo de linha</i>, o usu&aacute;rio define a&ccedil;&otilde;es a serem executadas
+    no arquivo como um todo (por exemplo, salvar, substituir caracteres, sair do aplicativo, etc). 
+    Para entrar neste modo, deve-se digitar ":".
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Modo de comandos</h2>
+
+<ul>
+<li><b>0</b> : mover o cursor para o in&iacute;cio da linha em que o cursor est&aacute; posicionado.
+<li><b>a</b> : inserir texto ap&oacute;s a posi&ccedil;&atilde;o atual do cursor.
+<li><b>A</b> : inserir texto no final da linha atual.
+<li><b>dd</b> : deletar linha atual.
+<li><b>[n]+dd</b> : deletar <i>n</i> linhas a partir da linha atual.
+<li><b>G</b> : ir para o fim do arquivo.
+<li><b>[n]+G</b> : ir para a <i>n</i>-&eacute;sima linha do arquivo.
+<li><b>h</b> : voltar um caractere.
+<li><b>H</b> : ir para a primeira linha exibida na tela atual.
+<li><b>i</b> : inserir texto a partir da posi&ccedil;&atilde;o atual do cursor.
+<li><b>I</b> : inserir texto no in&iacute;cio da linha atual.
+<li><b>j</b> : descer uma linha.
+<li><b>J</b> : juntar a linha atual com a linha seguinte.
+<li><b>[n]+J</b> : juntar <i>n</i> linhas consecutivas a partir da linha atual.
+<li><b>k</b> : subir uma linha.
+<li><b>l</b> : avan&ccedil;ar um caractere.
+<li><b>L</b> : ir para a &uacute;ltima linha exibida na tela atual.
+<li><b>n</b> : procurar, a partir da posi&ccedil;&atilde;o atual do cursor, a pr&oacute;xima ocorr&ecirc;ncia do texto definido no 
+    &uacute;ltimo comando <b>/</b>.
+<li><b>N</b> : procurar, a partir da posi&ccedil;&atilde;o atual do cursor e indo em dire&ccedil;&atilde;o ao in&iacute;cio do arquivo,
+    a pr&oacute;xima ocorr&ecirc;ncia do texto definido no &uacute;ltimo comando <b>/</b>.                      
+<li><b>o</b> : inserir uma linha em branco ap&oacute;s a linha atual.
+<li><b>O</b> : inserir uma linha em branco acima da linha atual.
+<li><b>p</b> : inserir linhas copiadas ap&oacute;s a linha atual.
+<li><b>P</b> : inserir linhas copiadas antes da linha atual.
+<li><b>r</b> : substituir o caractere atual.
+<li><b>R</b> : substituir um conjunto de caracteres.
+<li><b>s</b> : deletar o caractere atual e inserir texto.
+<li><b>S</b> : apagar linha e inserir novo texto na linha.
+<li><b>u</b> : desfazer a &uacute;ltima altera&ccedil;&atilde;o feita no texto e ainda n&atilde;o desfeita.
+<li><b>U</b> : desfazer a &uacute;ltima altera&ccedil;&atilde;o feita no texto.
+<li><b>x</b> : apagar caractere onde o cursor est&aacute; posicionado.
+<li><b>$</b> : mover o cursor para o fim da linha em que o cursor est&aacute; posicionado.
+<li><b>[n]+y</b> : copiar <i>n</i> linhas a partir da linha atual.
+<li><b>yy</b> : copiar a linha atual.
+<li><b>[n]+Y</b> : copiar <i>n</i> linhas a partir da linha atual.
+<li><b>YY</b> : copiar a linha atual.
+<li><b>CTRL+B</b> : voltar uma p&aacute;gina.
+<li><b>CTRL+F</b> : avan&ccedil;ar uma p&aacute;gina.
+<li><b>F1</b> : exibir tela de ajuda.
+<li><b>[n]+ENTER</b> : ir para <i>n</i> linhas abaixo da linha atual.
+<li><b>[n]+.</b> : repetir o &uacute;ltimo comando que alterou o texto <i>n</i> vezes a partir da posi&ccedil;&atilde;o atual do cursor.
+<li><b>[n]+~+ENTER</b> : inverter a caixa (<i>case</i>) dos <i>n</i> caracteres seguintes ao cursor.
+<li><b>/texto</b> : procurar pela primeira ocorr&ecirc;ncia do texto especificado a partir da posi&ccedil;&atilde;o atual do cursor.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Modo de linha</h2>
+
+<ul>
+<li><b>:r arquivo</b> : incluir arquivo a partir da linha atual do cursor.
+<li><b>:q+ENTER</b> : sair da tela de ajuda.
+<li><b>:q!</b> : sair do <i>vim</i> sem salvar as altera&ccedil;&otilde;es.
+<li><b>:w arquivo</b> : salvar arquivo com o nome especificado.
+<li><b>:wq</b> : sair do <i>vim</i> salvando as altera&ccedil;&otilde;es.
+<li><b>:X</b> : criptografa o arquivo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Para visualizar um arquivo bin&aacute;rio no modo hexadecimal, abra o arquivo com <i>vim</i> e digite
+    <blockquote class="t1">:%!xxd</blockquote>
+    Para retornar ao formato bin&aacute;rio, digite
+    <blockquote class="t1">:%!xxd -r</blockquote>
+</ul>
+    <table cellpadding=5>
+    <tr>
+    <td><img src="imagens/vim1.jpg" width=500 height=281><br><p align=center>Arquivo bin&aacute;rio</p></td>
+    <td><img src="imagens/vim2.jpg" width=500 height=281><br><p align=center>Arquivo no modo hexadecimal</p></td>
+    </tr>
+    </table>
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

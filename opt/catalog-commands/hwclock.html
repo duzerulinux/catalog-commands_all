@@ -1,0 +1,84 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>hwclock</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="hwclock">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<!-- Barra do governo -->
+<div id="barra-brasil">
+    <a href="http://brasil.gov.br" style="background:#7F7F7F; height: 20px; padding:4px 0 4px 10px; display: block; font-family:sans,sans-serif; text-decoration:none; color:white; ">Portal do Governo Brasileiro</a>
+</div>
+<script src="http://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
+<!---------------------->
+
+<h1>hwclock</h1>
+  
+<blockquote><b><font size="+1">hwclock [op&ccedil;&otilde;es] </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Existem dois rel&oacute;gios no sistema Linux que fornecem:
+<ol>
+<li><b>Hora da m&aacute;quina</b> (<i>Hardware Clock</i>) - &eacute; independente de qualquer programa 
+    de controle executando na CPU e funciona mesmo com a m&aacute;quina desligada.
+<li><b>Hora do sistema</b> (<i>System Time</i>) - corresponde ao rel&oacute;gio dentro do kernel do Linux e representa a     
+    quantidade de segundos desde meia-noite de primeiro de janeiro de 1970 (<a href="tempo_unix.html"><b>tempo do Unix</b></a>). 
+    Ele funciona apenas quando o Linux est&aacute; sendo executado na m&aacute;quina e
+    &eacute; o tempo que realmente importa.
+    Quando a m&aacute;quina &eacute; inicializada, o Linux copia a hora da m&aacute;quina para o tempo do sistema e n&atilde;o
+    mais volta a acessar o tempo da m&aacute;quina.
+</ol>
+O comando <b>hwclock</b> permite exibir e/ou modificar a hora desses rel&oacute;gios.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-r</b> : exibe a data e a hora do rel&oacute;gio da m&aacute;quina.</li> 
+<li><b>-w</b> : copia a hora do sistema para o rel&oacute;gio da m&aacute;quina.</li>
+<li><b>-s</b> : copia a hora da m&aacute;quina para a hora do sistema.</li>
+<li><b>--set --date=novadata</b> : modifica a data e a hora do rel&oacute;gio da m&aacute;quina.</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>O comando
+    <blockquote class="t1">sudo hwclock -r</blockquote>
+    mostra a data e a hora do rel&oacute;gio da m&aacute;quina no formato abaixo
+    <blockquote>Ter 25 Dez 2012 22:28:20 BRST  -0.492407 segundos</blockquote>
+<li>O comando</p>
+    <blockquote class="t1">sudo hwclock --set --date="9/22/12 18:55:10"</blockquote>
+    define a nova data como 22 de setembro de 2012 e a nova hora como 18:55:10.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+<td align=left><font size=2 color="#00008B"><a href="../index.html">&nbsp;&nbsp;Home&nbsp;&nbsp;</a></font></td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

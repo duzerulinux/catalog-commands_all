@@ -1,0 +1,73 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>mke2fs</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="mke2fs">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>mke2fs</h1>
+   
+<blockquote><font size="+1"><b>mke2fs [op&ccedil;&otilde;es] dispositivo</b></font></blockquote>
+<ul>
+<li>O argumento <i>dispositivo</i> &eacute; o arquivo especial correspondente ao dispositivo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando cria um sistema de arquivos ext2/ext3/ext4.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>S&atilde;o algumas das op&ccedil;&otilde;es deste comando</h2>
+
+<ul>
+<li><b>-b num</b> : especifica num bytes por bloco.
+<li><b>-c</b> : verifica o dispositivo antes de format&aacute;-lo.
+<li><b>-m num</b> : reserva num% de espa&ccedil;o no disco para o administrador.
+<li><b>-t tipo</b> : especifica o tipo de sistemas de arquivos como, por exemplo, <b>ext2</b>, <b>ext3</b>
+    e <b>ext4</b>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>O comando
+
+<blockquote class="t1">mke2fs -t ext4 /dev/hda1</blockquote>
+
+formata o dispositivo <b>/dev/hda1</b> para suportar um sistema de arquivos do tipo <b>ext4</b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O arquivo de configura&ccedil;&atilde;o do <b>mke2fs</b> &eacute; o 
+    <b><a href="dir_etc.html#mke2fsconf">/etc/mke2fs.conf</a></b>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

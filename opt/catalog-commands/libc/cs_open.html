@@ -1,0 +1,228 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>open()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="open()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>open( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta <a href="../chamadas.html"><b>chamada de sistema</b></a> abre e, possivelmente, cria um
+<a href="../arquivo.html"><b>arquivo</b></a>.</p>
+   
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include&lt;sys/types.h&gt;<br>
+#include&lt;sys/stat.h&gt;<br>
+#include&lt;fcntl.h&gt;<br>
+int open(const char *pathname, int flags);<br>
+int open(const char *pathname, int flags, mode_t mode);
+</blockquote>
+
+<ul>
+<li>O argumento <i>pathname</i> &eacute; uma string com o nome do arquivo a ser aberto.
+<li>O argumento <i>flags</i> define como o arquivo deve ser aberto e deve incluir um dos seguintes modos de acesso:
+    <ul>
+    <li><b>O_RDONLY</b> - arquivo aberto apenas para leitura.
+    <li><b>O_WRONLY</b> - arquivo aberto apenas para escrita.
+    <li><b>O_RDWR</b> - arquivo aberto para leitura e escrita.
+    </ul>
+    Em adi&ccedil;&atilde;o, podem ser definidos um ou mais flags como, por exemplo, os mostrados na tabela abaixo.</p>
+    <table class="t2" rules=all cellpadding=10 cellspacing=10 align=center width=650>
+    <tr class="t1"><td><b>Flag</b></td><td><b>Significado</b></td></tr>
+    <td>O_APPEND              </td><td>Antes de cada <i>write</i>, o ponteiro do arquivo &eacute; posicionado no final do arquivo</td></tr>
+    <td>O_ASYNC               </td><td>Gera um sinal quando uma opera&ccedil;&atilde;o de E/S se torna poss&iacute;vel</td></tr>
+    <td>O_CREAT               </td><td>Se o arquivo n&atilde;o existe, ele ser&aacute; criado</td></tr>
+    <td>O_DIRECTORY           </td><td>Se o arquivo n&atilde;o for um diret&oacute;rio, a chamada falha</td></tr>
+    <td>O_NONBLOCK ou O_NDELAY</td><td>O arquivo &eacute; aberto em um modo que n&atilde;o &eacute; de bloco</td></tr>
+    <td>O_TRUNC               </td><td>Se o arquivo j&aacute; existe, ele ser&aacute; truncado</td></tr>
+    </table><br>
+    Alguns dos flags mostrados acima podem ser modificados usando a chamada de sistema <b><a href="cs_fcntl.html">fcntl( )</a></b>.</p>
+<li>O argumento <i>mode</i> &eacute; o conjunto de bits com o tipo e <a href="../permissao.html"><b>permiss&otilde;es</b></a>
+    de acesso do arquivo. Este argumento deve ser fornecido quando O_CREAT &eacute; especificado nos <i>flags</i>. Se O_CREAT n&atilde;o
+    &eacute; especificado, o <i>mode</i> &eacute; ignorado. Os bits de permiss&atilde;o correspondem aos bits definidos em <i>mode</i>
+    AND os bits invertidos da configura&ccedil;&atilde;o <a href="../umask.html"><b>umask</b></a>. 
+    <blockquote class="t2">
+    mode & ~umask
+    </blockquote>
+    Os nomes simb&oacute;licos usados para definir as permiss&otilde;es s&atilde;o mostrados na tabela abaixo.</p>
+    <table class="t2" rules=all cellpadding=10 cellspacing=10 align=center width=650>
+    <tr class="t1"><td><b>Permiss&atilde;o</b></td><td><b>Valor</b></td><td><b>Significado</b></td></tr>
+    <tr><td>S_IRWXU</td><td>00700</td><td>Permiss&atilde;o de leitura, grava&ccedil;&atilde;o e execu&ccedil;&atilde;o para o dono</td></tr>
+    <tr><td>S_IRUSR</td><td>00400</td><td>Permiss&atilde;o de leitura para o dono</td></tr>
+    <tr><td>S_IWUSR</td><td>00200</td><td>Permiss&atilde;o de grava&ccedil;&atilde;o para o dono</td></tr>
+    <tr><td>S_IXUSR</td><td>00100</td><td>Permiss&atilde;o de execu&ccedil;&atilde;o para o dono</td></tr>
+    <tr><td>S_IRWXG</td><td>00070</td><td>Permiss&atilde;o de leitura, grava&ccedil;&atilde;o e execu&ccedil;&atilde;o para o grupo</td></tr>
+    <tr><td>S_IRGRP</td><td>00040</td><td>Permiss&atilde;o de leitura para o grupo</td></tr>
+    <tr><td>S_IWGRP</td><td>00020</td><td>Permiss&atilde;o de grava&ccedil;&atilde;o para o grupo</td></tr>
+    <tr><td>S_IXGRP</td><td>00010</td><td>Permiss&atilde;o de execu&ccedil;&atilde;o para o grupo</td></tr>
+    <tr><td>S_IRWXO</td><td>00007</td><td>Permiss&atilde;o de leitura, grava&ccedil;&atilde;o e execu&ccedil;&atilde;o para os outros
+                                          usu&aacute;rios</td></tr>
+    <tr><td>S_IROTH</td><td>00004</td><td>Permiss&atilde;o de leitura para os outros usu&aacute;rios</td></tr>
+    <tr><td>S_IWOTH</td><td>00002</td><td>Permiss&atilde;o de grava&ccedil;&atilde;o para os outros usu&aacute;rios</td></tr>
+    <tr><td>S_IXOTH</td><td>00001</td><td>Permiss&atilde;o de execu&ccedil;&atilde;o para os outros usu&aacute;rios</td></tr>
+    </table>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Se a chamada <i>open( )</i> &eacute; executada com sucesso, o valor zero &eacute; retornado. Caso a chamada n&atilde;o
+seja bem sucedida, o valor -1 &eacute; retornado e o c&oacute;digo do erro &eacute; colocado na vari&aacute;vel externa 
+<b><a href="vr_errno.html">errno</a></b>. A tabela abaixo mostra os erros que podem ocorrer com esta chamada.</p>
+
+<p>
+<blockquote>
+<table class="t2" rules=all cellpadding=10 cellspacing=10 align=center width=650>
+<tr class="t1"><td><b>Erro</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td>EACCES      </td><td>Acesso ao arquivo n&atilde;o &eacute; permitido</td></tr>
+<tr><td>EDQUOT      </td><td>Quota de disco do usu&aacute;rio excedida</td></tr>
+<tr><td>EEXIST      </td><td>Novo caminho j&aacute; existe</td></tr>
+<tr><td>EFAULT      </td><td>Nome do arquivo aponta para uma &aacute;rea de endere&ccedil;o n&atilde;o acess&iacute;vel</td></tr>
+<tr><td>EFBIG       </td><td>Overflow</td></tr>
+<tr><td>EINTR       </td><td>Bloqueado</td></tr>
+<tr><td>EINVAL      </td><td>Valor n&atilde;o v&aacute;lido</td></tr>
+<tr><td>EISDIR      </td><td>&Eacute; um diret&oacute;rio</td></tr>
+<tr><td>ELOOP       </td><td>Muitos links simb&oacute;licos encontrados na defini&ccedil;&atilde;o do nome do arquivo</td></tr>
+<tr><td>EMFILE      </td><td>Processo j&aacute; possui o n&uacute;mero m&aacute;ximo de arquivos abertos</td></tr>
+<tr><td>ENAMETOOLONG</td><td>Nome do arquivo longo demais</td></tr>
+<tr><td>ENODEV      </td><td>Device especial</td></tr>
+<tr><td>ENOENT      </td><td>O nome do arquivo especificado n&atilde;o existe</td></tr>
+<tr><td>ENOMEM      </td><td>Mem&oacute;ria insuficiente</td></tr>
+<tr><td>ENOSPC      </td><td>N&atilde;o existe entrada no diret&oacute;rio</td></tr>
+<tr><td>ENOTDIR     </td><td>Um componente do nome do arquivo n&atilde;o &eacute; um diret&oacute;rio</td></tr>
+<tr><td>ENXIO       </td><td>Sem permis&atilde;o de leitura</td></tr>
+<tr><td>EOVERFLOW   </td><td>Overflow</td></tr>
+<tr><td>EPERM       </td><td>Sem permiss&atilde;o</td></tr>
+<tr><td>EROFS       </td><td>Permiss&atilde;o de escrita foi solicitada para um arquivo que s&oacute; permite leitura</td></tr>
+<tr><td>ETXTBSY     </td><td>Arquivo sendo atualmente executado</td></tr>
+<tr><td>EWOULDBLOCK </td><td>Arquivo n&atilde;o liberado</td></tr>
+</table>
+</blockquote>
+<p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<blockquote class="t2">
+1. #include&lt;unistd.h&gt; <br>
+2. #include&lt;fcntl.h&gt;  <br>
+3. #include&lt;stdio.h&gt;  <br>
+4. #include&lt;stdlib.h&gt; <br>
+5. #include&lt;string.h&gt; <br>
+6. #include&lt;errno.h&gt;  <br>
+7. int main() <br>
+8. &nbsp;&nbsp;&nbsp; { <br>
+9. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int  fd, n; <br>
+10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char linha[100]; <br>
+11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char nome[]  = "/etc/passwd"; <br>
+12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fd = open(nome, O_RDONLY); <br>
+13.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (fd == -1) <br>
+14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Open: %s\n", strerror(errno)); <br>
+16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(1); <br>
+17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+18.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while (n = read(fd, linha, strlen(linha))) <br>
+19.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("%s", linha); <br>
+20.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; close(fd); <br>
+21.&nbsp;&nbsp;&nbsp; }
+</blockquote>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/open.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 6 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da 
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>unistd.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das <a href="../chamadas.html"><b>chamadas de sistema</b></a>. 
+    <li><b>fcntl.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o de op&ccedil;&otilde;es de controle dos arquivos. Por exemplo
+        <ul>
+        <li>O_RDONLY - abrir apenas para leitura;
+        <li>O_WRONLY - abrir apenas para escrita;
+        <li>O_APPEND - adicionar registros no final do arquivo;
+        <li>O_CREAT - criar arquivo se ele ainda n&atilde;o existir;
+        <li>O_TRUNC - zerar arquivo se ele j&aacute; existir.
+        </ul>
+        O cabe&ccedil;alho <i>fcntl.h</i> inclui automaticamente o cabe&ccedil;alho <i>sys/stat.h</i> que possui defini&ccedil;&otilde;es
+        das <a href="../permissao.html"><b>permiss&otilde;es</b></a> de arquivo como, por exemplo
+        <ul>
+        <li>S_IRWXU - leitura, escrita e execu&ccedil;&atilde;o para o dono do arquivo;
+        </ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror( )</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro.
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+    </ul>
+<li><b>Linha 7 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da
+    linha 9 a linha 20.
+<li><b>Linhas de 9 a 11 :</b> defini&ccedil;&otilde;es de vari&aacute;veis.
+<li><b>Linhas de 12 a 17:</b> abre arquivo <i>/etc/passwd</i> para leitura.
+<li><b>Linhas de 18 e 19:</b> ler arquivo e exibe na sa&iacute;da padr&atilde;o.
+<li><b>Linhas de 20:</b> fecha arquivo.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar
+<blockquote class="t1">
+gcc -o open open.c 
+</blockquote>
+Para executar
+<blockquote class="t1">
+./open
+</blockquote>
+Ser&aacute; ent&atilde;o exibido o conte&uacute;do do arquivo <i>/etc/passwd</i>.
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Deve-se especificar o argumento <i>mode</i> na chamada <i>open( )</i> quando o flag <i>O_CREAT</i> &eacute; definido.
+<li>Note que o terceiro argumento da chamada <i>open( )</i> &eacute;  do tipo <i>mode_t</i>. Veja
+    a estrutura de dados <a href="ed_stat.html"><b>stat</b></a> para mais detalhes.
+<li>Se a chamada <i>open( )</i> &eacute; bem sucedida, o valor retornado corresponde ao menor valor de descritor de arquivo
+    dispon&iacute;vel.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

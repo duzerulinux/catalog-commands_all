@@ -1,0 +1,75 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>tr</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="tr">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>tr</h1>
+   
+<blockquote><font size="+1"><b>tr [op&ccedil;&otilde;es] expr1 [expr2]</b></font></blockquote>
+<ul>
+<li>O argumento <i>expr1</i> corresponde ao conjunto de caracteres que ser&atilde;o alterados/deletados pelo comando <i>tr</i>.
+<li>O argumento <i>expr2</i> corresponde ao conjunto de caracteres que substituir&atilde;o os caracteres definidos em <i>expr1</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este utilit&aacute;rio deleta ou substitui caracteres.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-d</b> : remove qualquer caractere informado em <i>expr1</i>.
+<li><b>--help</b> : exibe as op&ccedil;&otilde;es do utilit&aacute;rio.
+<li><b>--version</b> : mostra informa&ccedil;&otilde;es sobre o utilit&aacute;rio.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>O comando
+    <blockquote class="t1">tr ajx MNP</blockquote>
+    altera os caracteres <i>a</i>, <i>j</i> e <i>x</i> para <i>M</i>, <i>N</i> e <i>P</i>, respectivamente. 
+    Na realidade, o comando acima abre um modo de edi&ccedil;&atilde;o onde o usu&aacute;rio pode digitar 
+    textos. O texto digitado pelo usu&aacute;rio &eacute; ent&atilde;o alterado pelo comando <i>tr</i>.
+    Para sair do modo de edi&ccedil;&atilde;o, use <i>CTRL+C</i>.</p>
+<li>Para definir um conjunto de caracteres com o comando <i>tr</i>, use o h&iacute;fen. Por exemplo,
+    <blockquote class="t1">tr a-z A-Z < teste</blockquote>
+    exibe, na sa&iacute;da padr&atilde;o, o arquivo <i>teste</i> substituindo as letras min&uacute;sculas
+    pelas letras mai&uacute;sculas (para mais detalhes sobre o s&iacute;mbolo <b>&lt;</b>, veja 
+    <b><a href="redirecionadores.html">redirecionadores de E/S</a></b>).
+<li>Tamb&eacute;m &eacute; poss&iacute;vel eliminar caracteres com o comando <i>tr</i>. Por exemplo,
+    <blockquote class="t1">tr -d a-cz < teste</blockquote>
+    elimina os caracteres <i>a</i>, <i>b</i>, <i>c</i> e <i>z</i> ao exibir o conte&uacute;do do arquivo <i>teste</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

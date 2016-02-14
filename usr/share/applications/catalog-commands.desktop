@@ -1,0 +1,22 @@
+[Desktop Entry]
+Name=Catalog Commands
+Name[ca]=catàleg de funcions
+Name[en_AU]=Command Catalog
+Name[en_GB]=Command Catalog
+Name[pt]=Catalogo de comandos
+Name[pt_BR]=Catalogo de comandos
+Name[pt_PT]=Catalogo do comandos
+Comment=A Catalog with A to Z commands being based all distros
+Comment[en_AU]=Add or remove applications from the menu
+Comment[en_GB]=Add or remove applications from the menu
+Comment[pt]=Catalogo com comandos de A a Z tendo base todas as distros
+Comment[pt_BR]=Catalogo com comandos de A a Z tendo base todas as distros
+Comment[pt_PT]=Catalogo com comandos de A a Z tendo base todas as distros
+Exec=firefox file:///opt/catalog-commands/index.html
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=GNOME;Settings;DesktopSettings;Utility;
+Keywords=Configuration;Menu;User;
+Icon=catalog-commands
+X-Ubuntu-Gettext-Domain=catalog-commands

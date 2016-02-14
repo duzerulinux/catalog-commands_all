@@ -1,0 +1,173 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>acct()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="acct()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>acct( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta <a href="../chamadas.html"><b>chamada de sistema</b></a> habilita/desabilita a monitora&ccedil;&atilde;o
+(contagem) de <a href="../processo.html"><b>processos</b></a>.</p>
+  
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<p>
+<blockquote class="t2">
+#include&lt;unistd.h&gt;<br>
+int acct(const char *filename);
+</blockquote>
+</p>
+
+<ul>
+<li>O par&acirc;metro <i>filename</i> &eacute; uma string com o nome do arquivo a ser usado para armazenar registros
+    sobre os processos monitorados.
+<li>Se <i>filename</i> &eacute; NULL, o monitoramento dos processos &eacute; desabilitado.
+<li>Quando o par&acirc;metro <i>filename</i> define um nome de arquivo que j&aacute; existe, a contabiliza&ccedil;&atilde;o
+    dos processos &eacute; habilitada e registros para os processos que terminam s&atilde;o adicionados a este arquivo.
+<li>Quando o par&acirc;metro <i>filename</i> define um nome de arquivo que n&atilde;o existe, a chamada <i>acct( )</i> falha.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Se a chamada <i>acct( )</i> &eacute; executada com sucesso, o valor zero &eacute; retornado. Caso a chamada n&atilde;o
+seja bem sucedida, o valor -1 &eacute; retornado e o c&oacute;digo do erro &eacute; colocado na vari&aacute;vel externa 
+<b><a href="vr_errno.html">errno</a></b>. A tabela abaixo mostra os erros que podem ocorrer com esta chamada.</p>
+
+<p>
+<blockquote>
+<table class="t2" rules=all cellpadding=10 cellspacing=10 align=center width=650>
+<tr class="t1"><td><b>Erro</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td>EACCES      </td><td>Acesso ao arquivo n&atilde;o &eacute; permitido</td></tr>
+<tr><td>EFAULT      </td><td>Nome do arquivo aponta para uma &aacute;rea de endere&ccedil;o n&atilde;o acess&iacute;vel</td></tr>
+<tr><td>EIO         </td><td>Erro de I/O</td></tr>
+<tr><td>EISDIR      </td><td>Nome do arquivo &eacute; de um diret&oacute;rio</td></tr>
+<tr><td>ELOOP       </td><td>Muitos links simb&oacute;licos encontrados na defini&ccedil;&atilde;o do nome do arquivo</td></tr>
+<tr><td>ENAMETOOLONG</td><td>Nome do arquivo longo demais</td></tr>
+<tr><td>ENFILE      </td><td>Limite m&aacute;ximo de n&uacute;mero de arquivos abertos j&aacute; foi alcan&ccedil;ado</td></tr>
+<tr><td>ENOENT      </td><td>O nome do arquivo especificado n&atilde;o existe</td></tr>
+<tr><td>ENOMEM      </td><td>Mem&oacute;ria insuficiente</td></tr>
+<tr><td>ENOSYS      </td><td>Monitoramento n&atilde;o foi implementado no kernel</td></tr>
+<tr><td>ENOTDIR     </td><td>Um componente do nome do arquivo n&atilde;o &eacute; um diret&oacute;rio</td></tr>
+<tr><td>EPERM       </td><td>O processo n&atilde;o tem permiss&atilde;o para habilitar o monitoramento</td></tr>
+<tr><td>EROFS       </td><td>Permiss&atilde;o de escrita foi solicitada para um arquivo que s&oacute; permite leitura</td></tr>
+<tr><td>EUSERS      </td><td>Excesso de usu&aacute;rios n&atilde;o permite alocar estruturas de arquivos ou mem&oacute;ria</td></tr>
+</table>
+</blockquote>
+<p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include&lt;unistd.h&gt;  <br>
+2. #include&lt;stdio.h&gt;   <br>
+3. #include&lt;errno.h&gt;   <br>
+4. #include&lt;string.h&gt;  <br>
+5. int main (int argc, char* argv[]) <br>
+6. &nbsp; &nbsp; &nbsp;{ <br>
+7. &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;   if (acct(argv[1]) == 0) <br>
+8. &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;     { <br>
+9. &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;       if (argv[1] == NULL) <br>
+10.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+   printf("Monitoramento desabilitado\n");<br>
+11.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;       else<br>
+12.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+   printf("Monitoramento habilitado\n"); <br>
+13.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;     } <br>
+14.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;   else <br>
+15.&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; printf("Erro %d - %s\n", errno, strerror(errno));<br>
+16.&nbsp; &nbsp; &nbsp;}
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/acct.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 4 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>unistd.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das <a href="../chamadas.html"><b>chamadas de sistema</b></a>. 
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror( )</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro.
+    </ul>
+<li><b>Linha 5 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 7 a linha 15.
+<li><b>Linha 7 :</b> executa a chamada <i>acct( )</i> usando o nome do arquivo passado para gravar os registros sobre os processos.
+<li><b>Linhas de 9 a 12 :</b> se a execu&ccedil;&atilde;o da chamada <i>acct( )</i> foi um sucesso, verifica se o monitoramento dos 
+    processos foi habilitado ou desabilitado.
+<li><b>Linha 15 :</b> informa o erro ocorrido na execu&ccedil;&atilde;o da chamada <i>acct( )</i>. 
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+<blockquote class="t1">
+gcc -o acct acct.c
+</blockquote>
+Vamos usar o arquivo <i>teste</i> para gravar os registros de monitoramento dos processos. Como o arquivo precisa existir,
+o comando <a href="../touch.html"><b>touch</b></a> pode ser usado para criar um arquivo vazio.
+<blockquote class="t1">
+touch teste
+</blockquote>
+Para inicializar o monitoramento, basta digitar
+<blockquote class="t1">
+sudo ./acct teste
+</blockquote>
+Note que &eacute; preciso usar <a href="../sudo.html"><b>sudo</b></a> para executar o processo, pois o monitoramento requer 
+permiss&otilde;es de administrador. Para parar o monitoramento, digite
+<blockquote class="t1">
+sudo ./acct
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Veja a estrutura <a href="ed_acct.html"><b>acct</b></a> para um exemplo de leitura dos registros de monitoramento gravado.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

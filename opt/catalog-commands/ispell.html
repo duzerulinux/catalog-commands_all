@@ -1,0 +1,84 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>ispell</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="ispell">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>ispell</h1>
+
+<blockquote><font size="+1"><b>ispell [op&ccedil;&otilde;es] arquivo...</b></font></blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+<p>Este comando faz a verifica&ccedil;&atilde;o ortogr&aacute;fica de um texto.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-t</b> : o arquivo de entrada est&aacute; no formato TEX ou LATEX.
+<li><b>-H</b> : o arquivo de entrada est&aacute; no formato SGML/HTML.
+<li><b>-o</b> : o arquivo de entrada deve ser tratado como um arquivo texto comum.
+<li><b>-b</b> : cria um arquivo de backup com extens&atilde;o <i>.bak</i>.
+<li><b>-x</b> : deleta o arquivo de backup ap&oacute;s a verifica&ccedil;&atilde;o ortogr&aacute;fica.
+<li><b>-d</b> : especifica um outro arquivo para ser usado como dicion&aacute;rio pela ferramenta.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Por padr&atilde;o, o dicion&aacute;rio utilizado pelo aplicativo <i>ispell</i> 
+    &eacute; o ingl&ecirc;s. Mas o Linux fornece dicion&aacute;rios para corre&ccedil;&atilde;o 
+    ortogr&aacute;fica de v&aacute;rios idiomas. Para ver qual o dicion&aacute;rio padr&atilde;o 
+    utilizado pelo aplicativo <i>ispell</i>, basta digitar
+    <blockquote class="t1">printenv DICTIONARY<br></blockquote>
+    Se a <b><a href="variaveis_ambiente.html">vari&aacute;vel de ambiente</a></b> DICTIONARY n&atilde;o
+    apresentar nenhum valor, ent&atilde;o o ingl&ecirc;s &eacute; o padr&atilde;o.
+<li>O nome do dicion&aacute;rio de portugu&ecirc;s brasileiro para o <i>ispell</i> &eacute; 
+    <i>ibrazilian</i>. &Eacute; poss&iacute;vel baix&aacute;-lo a partir da <i>Central de Programas do
+    DuZeru</i>. Por exemplo, para usar este dicion&aacute;rio para corrigir o arquivo <i>teste.tex</i>, digite
+    <blockquote class="t1">ispell -d brazilian -t teste.tex</blockquote>
+    Outra forma &eacute; alterar a vari&aacute;vel de ambiente DICTIONARY
+    <blockquote class="t1">export DICTIONARY=brazilian</blockquote>
+    e, em seguida, usar o <i>ispell</i>
+    <blockquote class="t1">ispell -t teste.tex</blockquote>
+    Note que a altera&ccedil;&atilde;o feita acima na vari&aacute;vel DICTIONARY
+    s&oacute; &eacute; v&aacute;lida enquanto o usu&aacute;rio estiver logado na mesma sess&atilde;o. 
+    Para alterar em car&aacute;ter permanente o idioma padr&atilde;o do sistema, deve-se incluir o comando 
+    no arquivo <i>.bashrc</i> que fica no diret&oacute;rio <b><a href="dir_home.html">home</a></b> 
+    do usu&aacute;rio.
+<li>Os arquivos de dicion&aacute;rios dispon&iacute;veis no sistema e utilizados 
+    pelo <i>ispell</i> s&atilde;o armazenados em <i>/usr/lib/ispell/</i>. Por exemplo,
+    o dicion&aacute;rio padr&atilde;o corresponde ao arquivo <i>default.hash</i> e o
+    dicion&aacute;rio brasileiro corresponde ao arquivo <i>brazilian.hash</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

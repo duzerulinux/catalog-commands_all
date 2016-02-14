@@ -1,0 +1,222 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>at</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="at">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>at</h1>
+
+<blockquote><b><font size="+1">at [op&ccedil;&otilde;es]</font></b></blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando agenda uma tarefa para que seja executada em determinado momento.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-c tarefa</b> : o conte&uacute;do da tarefa agendada &eacute; enviado para a sa&iacute;da padr&atilde;o, onde <b>tarefa</b> corresponde a um
+    n&uacute;mero de identifica&ccedil;&atilde;o gerado pelo sistema.</li>
+<li><b>-d</b> : deleta tarefa agendada. &Eacute; um <b><a href="alias.html">alias</a></b> para o comando <b><a href="atrm.html">atrm</a></b>.</li> 
+<li><b>-f arquivo</b> : a tarefa a ser executa est&aacute; no arquivo especificado.</li>
+<li><b>-l</b> : lista as tarefas agendadas. &Eacute; um <b><a href="alias.html">alias</a></b> para o comando <b><a href="atq.html">atq</a></b>.</li>
+<li><b>-m</b> : envia um e-mail para o usu&aacute;rio quando a tarefa for conclu&iacute;da.</li>
+<li><b>-M</b> : nunca envia e-mail para o usu&aacute;rio.</li>
+<li><b>-q fila</b> : armazena a tarefa em uma determinada fila. Quando o nome da fila n&atilde;o &eacute; fornecido, o sistema coloca a tarefa 
+    agendada pelo comando <b>at</b> na fila "a". As filas podem ser de "a" a "z" e de "A" a "Z". O nome da fila influencia na prioridade de
+    execu&ccedil;&atilde;o (a fila "a" tem prioridade sobre a fila "b" e fila com letra min&uacute;scula tem prioridade sobre fila com letra mai&uacute;scula).
+<li><b>-t time</b> : o hor&aacute;rio de execu&ccedil;&atilde;o da tarefa est&aacute; no formato <i>timestamp</i>, ou seja, [[CC]YY]MMDDhhmm[.ss],
+onde
+  <ul>
+  <li><b>CC</b> : os dois primeiros d&iacute;gitos do ano (opcional);</li>
+  <li><b>YY</b> : os dois &uacute;ltimos d&iacute;gitos do ano (s&oacute; s&atilde;o obrigat&oacute;rios se os dois 
+                  primeiros d&iacute;gitos do ano forem fornecidos);</li>
+  <li><b>MM</b> : os dois d&iacute;gitos correspondentes ao m&eacute;s;</li>
+  <li><b>DD</b> : os dois d&iacute;gitos correspondentes ao dia;</li>
+  <li><b>hh</b> : os dois d&iacute;gitos correspondentes à hora;</li>
+  <li><b>mm</b> : os dois d&iacute;gitos correspondentes aos minutos;</li>
+  <li><b>.ss</b> : os dois d&iacute;gitos correspondentes aos segundos (opcional).</li>
+  </ul>
+</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato do hor&aacute;rio</h2>
+
+<p>S&atilde;o aceitas horas no formato HHMM ou no formato HH:MM. Outras 
+op&ccedil;&otilde;es v&aacute;lidas para horas s&atilde;o <b>midnight</b> 
+(meia-noite), <b>noon</b> (meio-dia), <b>teatime</b> (hora do ch&aacute;, ou seja 
+16:00) e <b>now</b> (agora).</p>
+
+<p>Junto com a hora pode-se tamb&eacute;m especificar o dia da tarefa no formato 
+MMDDAA, MM/DD/AA ou MM.DD.AA.  Al&eacute;m disso, &eacute; poss&iacute;vel 
+tamb&eacute;m definir datas como <b>today</b> (hoje) e <b>tomorrow</b> 
+(amanh&atilde;).</p>
+
+<p>Outra forma de definir o hor&aacute;rio de execu&ccedil;&atilde;o de uma tarefa
+&eacute; especificar uma hora mais um contador de tempo. Por exemplo, 
+<b>8:00 + 3 days</b> marca a tarefa para ser executada daqui a 3 dias &agrave;s
+8:00 horas da manh&atilde;. Pode-se usar como contador de tempo os termos
+<b>minutes</b> (minutos), <b>hours</b> (horas), <b>days</b> (dias) e 
+<b>weeks</b> (semanas).</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>Considere o arquivo "<b>teste</b>" com o seguinte conte&uacute;do:</p>
+
+<blockquote class="t2">
+ls > arq1_teste <br>
+ps -aux > arq2_teste
+</blockquote>
+
+<p>Para agendar a execu&ccedil;&atilde;o do arquivo "<b>teste</b>" &agrave;s 17:22 do mesmo dia, basta digitar</p>
+
+<blockquote class="t1">
+at -f teste 17:22
+</blockquote>
+
+<p>Abaixo &eacute; apresentada a resposta do sistema: a tarefa recebeu o n&uacute;mero de identifica&ccedil;&atilde;o 11 
+e ser&aacute; executada usando o <b><a href="shell.html">shell</a> sh</b> &agrave;s 17:22 do dia 7 de novembro de 2012.</p>
+
+<blockquote class="t2">
+warning: commands will be executed using /bin/sh <br>
+job 11 at Wed Nov  7 17:22:00 2012
+</blockquote>
+
+<p>O agendamento fica armazenado no diret&oacute;rio <b>/var/spool/cron/atjobs/</b> para ser executado pelo daemon <b>atd</b>.
+Portanto, para ver as tarefas agendadas, entre com</p>
+
+<blockquote class="t1">
+sudo ls -al /var/spool/cron/atjobs/
+</blockquote>
+
+<p>&Eacute; poss&iacute;vel ver abaixo uma poss&iacute;vel sa&iacute;da para o comando. Neste caso, podemos deduzir que a tarefa foi 
+agendada &agrave;s 17:20 do dia 7 de novembro pelo usu&aacute;rio <b>aluno</b>. O n&uacute;mero que identifica a tarefa
+foi gerado pelo daemon <b>atd</b>.</p>
+
+<blockquote class="t2">
+-rwx------ 1 aluno    daemon 3791 Nov  7 17:20 a0000b0157e96a<br>
+</blockquote>
+
+<p>Para ver se houve algum erro de execu&ccedil;&atilde;o, basta verificar o arquivo <b>/var/log/auth.log</b>.
+No caso em tela, a execu&ccedil;&atilde;o foi normal e o log s&oacute; mostra o in&iacute;cio e o fim 
+do servi&ccedil;o.</p>
+
+<blockquote class="t2">
+Nov  7 17:22:00 aluno atd[2670]: pam_unix(atd:session): session opened for user aluno by (uid=1)<br>
+Nov  7 17:22:00 aluno atd[2670]: pam_unix(atd:session): session closed for user aluno<br>
+</blockquote>
+
+<p>&Eacute importante observar que o primeiro comando do arquivo "<b>teste</b>" corresponde a listagem dos arquivos do diret&oacute;rio
+onde o usu&aacute;rio <b>aluno</b> estava quando agendou a tarefa. Enquanto o segundo comando do arquivo "<b>teste</b>" independe
+de qualquer localiza&ccedil;&atilde;o de onde partiu o agendamento.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios sobre as op&ccedil;&otilde;es do comando</h2>
+
+<p>No lugar de criar um arquivo com os comandos a serem executados, &eacute; poss&iacute;vel fornecer 
+os comandos usando o prompt do sistema. Para isto, basta entrar com o comando <b>at</b> e o hor&aacute;rio
+da execu&ccedil;&atilde;o das tarefas. Abaixo alguns exemplos.
+
+<ul>
+<li><b>at 20:00 tomorrow</b> : amanh&atilde; &agrave;s 20 horas.</li>
+<li><b>at teatime tomorrow</b> : amanh&atilde; &agrave;s 16 horas.</li>
+<li><b>at teatime +2 days</b> : depois de amanh&atilde; &agrave;s 16 horas.</li>
+<li><b>at -t 201212312355.45</b> : &agrave;s 23:55:45 do dia 31 de dezembro de 2012 (<i>timestamp</i>).</li>
+</ul>
+
+<p>Neste caso, &eacute; aberto um editor de linhas. Pode-se ent&atilde;o digitar um comando por linha e dar ENTER 
+ap&oacute;s cada comando ou pode-se digitar v&aacute;rios comandos por linha, separando-os por ponto-e-v&iacute;rgula.
+Para encerrar o editor, deve-se digitar <b>CTRL+D</b>.</p>
+
+<p>Para ver as tarefas agendadas, digite</p>
+
+<blockquote class="t1">at -l</blockquote>
+
+<p>O comando acima informa o n&uacute;mero da tarefa agendada, a data e a hora da execu&ccedil;&atilde;o, o nome da fila de execu&ccedil;&atilde;o 
+(o padr&atilde;o &eacute; a fila "a") e o nome do usu&aacute;rio. Considerando que as tarefas acima foram agendadas no dia
+7 de novembro, podemos ter a seguite sa&iacute;da:</p>
+
+<blockquote class="t2">
+<table cellpadding=3>
+<tr><td>14</td><td>Fri</td><td>Nov</td><td>9 </td><td>16:00:00 2012 a aluno</td></tr>
+<tr><td>13</td><td>Thu</td><td>Nov</td><td>8 </td><td>16:00:00 2012 a aluno</td></tr>
+<tr><td>12</td><td>Thu</td><td>Nov</td><td>8 </td><td>20:00:00 2012 a aluno</td></tr>
+<tr><td>15</td><td>Mon</td><td>Dec</td><td>31</td><td>23:55:45 2012 a aluno</td></tr>
+</table>
+</blockquote>
+
+<p>Para ver o conte&uacute;do da tarefa 12, basta digitar</p>
+
+<blockquote class="t1">at -c 12</blockquote>
+
+Note que o sistema apresenta um arquivo onde as vari&aacute;veis de ambiente s&atilde;o definidas antes da execu&ccedil;&atilde;o dos comandos.
+Portanto, o sistema primeiro recupera o ambiente onde o comando <b>at</b> foi digitado. 
+
+<p>Para remover a tarefa 12 do sistema &eacute; s&oacute; entrar com o comando</p>
+
+<blockquote class="t1">at -d 12</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+
+<li>O <b>daemon</b> respons&aacute;vel pela execu&ccedil;&atilde;o das tarefas
+agendadas pelo comando <b>at</b> &eacute; o <b>atd</b>.</li>
+
+<li>As tarefas agendadas ficam armazenadas em <b>/var/spool/cron/atjobs</b>.</li>
+
+<li>Informa&ccedil;&otilde;es sobre a execu&ccedil;&atilde;o podem ser encontradas em <b>/var/log/auth.log</b>.
+
+<li>A tarefa agendada com o comando <b>at</b> &eacute; executada apenas uma vez.
+Para agendar tarefas que devem ser executadas periodicamente, use o comando
+<b><a href="crontab.html">crontab</a></b>.</li>
+
+<li>O usu&aacute;rio com permiss&atilde;o de <b><a href="root.html">root</a></b> pode usar o comando <b>at</b> sem 
+restri&ccedil;&otilde;es. Para os outros usu&aacute;rios, a permiss&atilde;o para usar este comando &eacute; 
+determinada pelos arquivos <b><a href="dir_etc.html#atallow">/etc/at.allow</a></b>
+e <b><a href="dir_etc.html#atdeny">/etc/at.deny</a></b>.</li>
+
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="atq.html">atq</a></b> : lista as tarefas agendadas com o comando <b>at</b>.</li> 
+<li><b><a href="atrm.html">atrm</a></b> : remove tarefas agendadas com o comando <b>at</b>.</li> 
+<li><b><a href="crontab.html">crontab</a></b> : agenda tarefas para serem executadas periodicamente.</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

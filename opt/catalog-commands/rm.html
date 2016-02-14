@@ -1,0 +1,81 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>rm</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="rm">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>rm</h1>
+
+<blockquote><b><font size="+1">rm [op&ccedil;&otilde;es] arquivo/diret&oacute;rio</font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando remove <a href="arquivo.html"><b>arquivos</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-f</b> : apaga sem pedir confirma&ccedil;&atilde;o.</li>
+<li><b>-i</b> : apaga ap&oacute;s pedir confirma&ccedil;&atilde;o.</li>
+<li><b>-r</b> : apaga arquivos e subdiret&oacute;rios.</li> 
+<li><b>-v</b> : lista arquivos deletados.</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Para apagar o arquivo <i>teste.txt</i>, basta digitar
+    <blockquote class="t1">rm teste.txt</blockquote>
+<li>Para apagar o diret&oacute;rio <i>teste</i> e todo o seu conte&uacute;do, digite
+    <blockquote class="t1">rm -fr teste</blockquote>
+<li>Pode-se usar os caracteres ?, * e [ ] como <a href="curingas.html"><b>curingas</b></a>. 
+    O primeiro substitui apenas um &uacute;nico caractere, o segundo substitui um n&uacute;mero qualquer de caracteres, 
+    enquanto o terceiro substitui um &uacute;nico caractere dentro de um certo limite de valor. Por exemplo, suponha que
+    o diret&oacute;rio atual tenha os seguintes arquivos: <i>teste1.txt</i>, <i>teste2.txt</i>, <i>teste3.txt</i> e 
+    <i>teste10.txt</i>. O comando
+    <blockquote class="t1">rm teste*.txt ou rm teste*</blockquote>
+    apaga os quatro arquivos, enquanto o comando
+    <blockquote class="t1">rm teste?.txt</blockquote>
+    apaga apenas os arquivos <i>teste1.txt</i>, <i>teste2.txt</i> e <i>teste3.txt</i>. Para apagar apenas os dois 
+    primeiros arquivos, basta digitar
+    <blockquote class="t1">rm teste[1-2].txt</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>&Eacute; preciso ter <b><a href="permissao.html">permiss&atilde;o</a></b> de grava&ccedil;&atilde;o para remover um arquivo.
+<li>O comando <b><a href="rmdir.html">rmdir</a></b> remove diret&oacute;rios vazios.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>chamadas de sistema</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="chamadas de sistema">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>chamadas de sistema</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>As chamadas de sistemas s&atilde;o fun&ccedil;&otilde;es (interfaces) usadas pelos aplicativos para solicitar a 
+execu&ccedil;&atilde;o de algum servi&ccedil;o ao <a href="kernel.html"><b>kernel</b></a> do sistema operacional.
+Por isso, as chamadas de sistemas s&atilde;o instru&ccedil;&otilde;es com maior privil&eacute;gio quando comparadas
+&agrave;s outras instru&ccedil;&otilde;es.</p>
+
+<p>Com as chamadas de sistemas &eacute; poss&iacute;vel, por exemplo, definir acesso a recursos de baixo n&iacute;vel como
+aloca&ccedil;&atilde;o de mem&oacute;ria, perif&eacute;ricos e arquivos. Al&eacute;m disso, s&atilde;o as chamadas de sistemas
+que permitem a cria&ccedil;&atilde;o e a finaliza&ccedil;&atilde;o de processos.</p>
+
+<p>Quando a execu&ccedil;&atilde;o de uma chamada de sistema &eacute; solicitada, o sistema operacional salva todo o contexto
+do processo (para continuar mais tarde de onde parou), verifica as permiss&otilde;es envolvidas no pedido e autoriza (se for o caso)
+o processador a executar o servi&ccedil;o solicitado.</p>
+
+<p>Quando o processador termina a execu&ccedil;&atilde;o da chamada de sistema, o sistema operacional retorna o controle para o 
+processo, colocando-o novamente na fila de processos prontos para a execu&ccedil;&atilde;o.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Biblioteca C</h2>
+
+<p>No Linux, kernel 3.18, existem quase 400 chamadas de sistemas disponibilizadas na 
+<a href="biblioteca_c.html"><b>biblioteca C</b></a> (a biblioteca faz a interface entre o aplicativo e o kernel).</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Programa&ccedil;&atilde;o</h2>
+
+<p>O programador normalmente n&atilde;o utiliza as chamadas de sistema no seu c&oacute;digo. Ele utiliza uma fun&ccedil;&atilde;o de
+biblioteca que &eacute; transformada em uma ou mais chamadas de sistema quando o c&oacute;digo execut&aacute;vel &eacute; gerado
+e h&aacute; necessidade de pedir um servi&ccedil;o ao kernel.
+Por exemplo, a fun&ccedil;&atilde;o <a href="libc/fc_printf.html"><b>printf( )</b></a> da Linguagem C &eacute; mapeada na chamada 
+<a href="libc/cs_write.html"><b>write( )</b></a> para escrever em um arquivo. J&aacute; a fun&ccedil;&atilde;o matem&aacute;tica
+<i>sqrt( )</i> n&atilde;o precisa de privil&eacute;gios especiais para ser executada e n&atilde;o h&aacute; necessidade de pedir 
+ajuda ao kernel.</p>
+
+<p>O programador pode usar as chamadas de sistema no seu c&oacute;digo se, por exemplo, est&aacute; usando a Linguagem C. Com isto, 
+ele ganha rapidez na compila&ccedil;&atilde;o do programa (n&atilde;o precisa fazer a convers&atilde;o), mas diminui a portabilidade 
+do c&oacute;digo (o formato das chamadas pode variar com as arquiteturas).</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Lista</h2>
+
+<p>As chamadas de sistema do <a href="linux.html"><b>Linux</b></a>  podem ser encontradas no arquivo /usr/include/unistd.h ou 
+podem ser obtidas com o comando "man syscalls" (esta p&aacute;gina do <a href="man.html"><b>manual on-line</b></a> discute as
+chamadas de sistemas do Linux). Abaixo a lista do kernel 3.18.</p>
+
+<table class="t2" align="center" cellpadding=3 rules=all width=600>
+<tr class="t1">
+<td align="left"><b>Chamada de Sistema</b></td><td align="left"><b>Descri&ccedil;&atilde;o</b></td>
+</tr>
+<tr><td>_llseek             </td><td></td></tr>
+<tr><td>_newselect          </td><td></td></tr>
+<tr><td>_sysctl             </td><td></td></tr>
+<tr><td>accept              </td><td></td></tr>
+<tr><td>accept4             </td><td></td></tr>
+<tr><td><a href="libc/cs_access.html"><b>access( )</b></a></td><td>Verifica as permiss&otilde;es de um processo em rela&ccedil;&atilde;o
+     a um arquivo</td></tr>
+<tr><td><a href="libc/cs_acct.html"><b>acct( )</b></a>    </td><td>Habilita/desabilita a monitora&ccedil;&atilde;o de processos</td></tr>
+<tr><td>add_key             </td><td></td></tr>
+<tr><td><a href="libc/cs_adjtimex.html"><b>adjtimex( )</b></a></td><td>L&ecirc;/ajusta o rel&oacute;gio do kernel</td></tr>
+<tr><td><a href="libc/cs_alarm.html"><b>alarm( )</b></a></td><td>Especifica um alarme de rel&oacute;gio para o envio de um sinal</td></tr>
+<tr><td>bind                </td><td></td></tr>
+<tr><td><a href="libc/cs_brk.html"><b>brk( ) <br> sbrk( )</b></a></td><td valign=center>Alteram o tamanho do segmento de dados</td></tr>
+<tr><td>cacheflush          </td><td>                                      </td></tr>
+<tr><td><a href="libc/cs_capget.html"><b>capget<br>capset</b></a></td><td valign=center>Manipulam as capacidades dos processos</td></tr>
+<tr><td><a href="libc/cs_chdir.html"><b>chdir( )</b></a></td><td>Altera o diretório de trabalho do processo</td></tr>
+<tr><td><a href="libc/cs_chmod.html"><b>chmod( )</b></a></td><td>Altera as permiss&otilde;es do arquivo</td></tr>
+<tr><td>chown               </td><td>                                      </td></tr>
+<tr><td>chown32             </td><td>                                      </td></tr>
+<tr><td>chroot              </td><td>                                      </td></tr>
+<tr><td>clock_adjtime       </td><td>                                      </td></tr>
+<tr><td>clock_getres        </td><td>                                      </td></tr>
+<tr><td>clock_gettime       </td><td>                                      </td></tr>
+<tr><td>clock_nanosleep     </td><td>                                      </td></tr>
+<tr><td>clock_settime       </td><td>                                      </td></tr>
+<tr><td>clone               </td><td>                                      </td></tr>
+<tr><td><a href="libc/cs_close.html"><b>close( )</b></a></td><td>Fecha um descritor de arquivo</td></tr>
+<tr><td>connect             </td><td>                                      </td></tr>
+<tr><td>creat               </td><td>                                      </td></tr>
+<tr><td>delete_module       </td><td>                                      </td></tr>
+<tr><td>dup                 </td><td>                                      </td></tr>
+<tr><td>dup2                </td><td>                                      </td></tr>
+<tr><td>dup3                </td><td>                                      </td></tr>
+<tr><td>epoll_create        </td><td>                                      </td></tr>
+<tr><td>epoll_create1       </td><td>                                      </td></tr>
+<tr><td>epoll_ctl           </td><td>                                      </td></tr>
+<tr><td>epoll_pwait         </td><td>                                      </td></tr>
+<tr><td>epoll_wait          </td><td>                                      </td></tr>
+<tr><td>eventfd             </td><td>                                      </td></tr>
+<tr><td>eventfd2            </td><td>                                      </td></tr>
+<tr><td><a href="libc/cs_execve.html"><b>execve( )</b></a></td><td>Executa um programa</td></tr>
+<tr><td><a href="libc/cs_exit.html"><b>_exit( )</b></a></td><td>Termina o processo</td></tr>
+<tr><td>exit_group          </td><td>                                      </td></tr>
+<tr><td>faccessat           </td><td>                                      </td></tr>
+<tr><td>fadvise64           </td><td>                                      </td></tr>
+<tr><td>fadvise64_64        </td><td>                                      </td></tr>
+<tr><td>fallocate           </td><td>                                      </td></tr>
+<tr><td>fanotify_init       </td><td>                                      </td></tr>
+<tr><td>fanotify_mark       </td><td>                                      </td></tr>
+<tr><td>fchdir              </td><td>                                      </td></tr>
+<tr><td>fchmod              </td><td>                                      </td></tr>
+<tr><td>fchmodat            </td><td>                                      </td></tr>
+<tr><td>fchown              </td><td>                                      </td></tr>
+<tr><td>fchown32            </td><td>                                      </td></tr>
+<tr><td>fchownat            </td><td>                                      </td></tr>
+<tr><td><a href="libc/cs_fcntl.html"><b>fcntl( )</b></a></td><td>Realiza opera&ccedil;&otilde;es de controle em um descritor de arquivo</td></tr>
+<tr><td>fcntl64             </td><td>                                      </td></tr>
+<tr><td>fdatasync           </td><td>                                      </td></tr>
+<tr><td>fgetxattr           </td><td>                                      </td></tr>
+<tr><td>finit_module        </td><td>                                      </td></tr>
+<tr><td>flistxattr          </td><td>                                      </td></tr>
+<tr><td>flock               </td><td>                                      </td></tr>
+<tr><td><a href="libc/cs_fork.html"><b>fork( )</b></a></td><td>Cria um processo-filho  </td></tr>
+<tr><td>fremovexattr        </td><td>                                      </td></tr>
+<tr><td>fsetxattr           </td><td>                                      </td></tr>
+<tr><td>fstat64             </td><td>                                      </td></tr>
+<tr><td>fstatat64           </td><td>                                      </td></tr>
+<tr><td>fstatfs             </td><td>                                      </td></tr>
+<tr><td>fstatfs64           </td><td>                                      </td></tr>
+<tr><td>fsync               </td><td>                                      </td></tr>
+<tr><td>ftruncate           </td><td>                                      </td></tr>
+<tr><td>ftruncate64         </td><td>                                      </td></tr>
+<tr><td>futex               </td><td>                                      </td></tr>
+<tr><td>futimesat           </td><td>                                      </td></tr>
+<tr><td>get_mempolicy       </td><td>                                      </td></tr>
+<tr><td>get_robust_list     </td><td>                                      </td></tr>
+<tr><td>get_thread_area     </td><td>                                      </td></tr>
+<tr><td>getcpu              </td><td>                                      </td></tr>
+<tr><td>getcwd              </td><td>                                      </td></tr>
+<tr><td>getdents            </td><td>                                      </td></tr>
+<tr><td>getdents64          </td><td>                                      </td></tr>
+<tr><td>getegid             </td><td>                                      </td></tr>
+<tr><td>getegid32           </td><td>                                      </td></tr>
+<tr><td>geteuid             </td><td>                                      </td></tr>
+<tr><td>geteuid32           </td><td>                                      </td></tr>
+<tr><td>getgid              </td><td>                                      </td></tr>
+<tr><td>getgid32            </td><td>                                      </td></tr>
+<tr><td>getgroups           </td><td>                                      </td></tr>
+<tr><td>getgroups32         </td><td>                                      </td></tr>
+<tr><td>getitimer           </td><td>                                      </td></tr>
+<tr><td>getpeername         </td><td>                                      </td></tr>
+<tr><td>getpagesize         </td><td>                                      </td></tr>
+<tr><td>getpgid             </td><td>                                      </td></tr>
+<tr><td>getpgrp             </td><td>                                      </td></tr>
+<tr><td><a href="libc/cs_getpid.html"><b>getpid( )</b></a></td><td>Fornece o n&uacute;mero de identifica&ccedil;&atilde;o do processo (PID)</td></tr>
+<tr><td><a href="libc/cs_getppid.html"><b>getppid( )</b></a></td><td>Fornece o n&uacute;mero de identifica&ccedil;&atilde;o do processo-pai (PPID)</td></tr>
+<tr><td>getpriority         </td><td>                                      </td></tr>
+<tr><td>getresgid           </td><td>                                      </td></tr>
+<tr><td>getresgid32         </td><td>                                      </td></tr>
+<tr><td>getresuid           </td><td>                                      </td></tr>
+<tr><td>getresuid32         </td><td>                                      </td></tr>
+<tr><td>getrlimit           </td><td>                                      </td></tr>
+<tr><td>getrusage           </td><td>                                      </td></tr>
+<tr><td>getsid              </td><td>                                      </td></tr>
+<tr><td>getsockname         </td><td>                                      </td></tr>
+<tr><td>getsockopt          </td><td>                                      </td></tr>
+<tr><td>gettid              </td><td>                                      </td></tr>
+<tr><td>gettimeofday        </td><td>                                      </td></tr>
+<tr><td>getuid              </td><td>                                      </td></tr>
+<tr><td>getuid32            </td><td>                                      </td></tr>
+<tr><td>getxattr            </td><td>                                      </td></tr>
+<tr><td>init_module         </td><td>                                      </td></tr>
+<tr><td>inotify_add_watch   </td><td>                                      </td></tr>
+<tr><td>inotify_init        </td><td>                                      </td></tr>
+<tr><td>inotify_init1       </td><td>                                      </td></tr>
+<tr><td>inotify_rm_watch    </td><td>                                      </td></tr>
+<tr><td>io_cancel           </td><td>                                      </td></tr>
+<tr><td>io_destroy          </td><td>                                      </td></tr>
+<tr><td>io_getevents        </td><td>                                      </td></tr>
+<tr><td>io_setup            </td><td>                                      </td></tr>
+<tr><td>io_submit           </td><td>                                      </td></tr>
+<tr><td>ioctl               </td><td>                                      </td></tr>
+<tr><td>ioperm              </td><td>                                      </td></tr>
+<tr><td>iopl                </td><td>                                      </td></tr>
+<tr><td>ioprio_get          </td><td>                                      </td></tr>
+<tr><td>ioprio_set          </td><td>                                      </td></tr>
+<tr><td>ipc                 </td><td>                                      </td></tr>
+<tr><td>kcmp                </td><td>                                      </td></tr>
+<tr><td>kern_features       </td><td>                                      </td></tr>
+<tr><td>kexec_load          </td><td>                                      </td></tr>
+<tr><td>keyctl              </td><td>                                      </td></tr>
+<tr><td>kill                </td><td>                                      </td></tr>
+<tr><td>lchown              </td><td>                                      </td></tr>
+<tr><td>lchown32            </td><td>                                      </td></tr>
+<tr><td>lgetxattr           </td><td>                                      </td></tr>
+<tr><td><a href="libc/cs_link.html"><b>link( )</b></a></td><td>Cria um novo nome para um arquivo que j&aacute; existe</td></tr>
+<tr><td>linkat              </td><td>                                      </td></tr>
+<tr><td>listen              </td><td>                                      </td></tr>
+<tr><td>listxattr           </td><td>                                      </td></tr>
+<tr><td>llistxattr          </td><td>                                      </td></tr>
+<tr><td>lookup_dcookie      </td><td>                                      </td></tr>
+<tr><td>lremovexattr        </td><td>                                      </td></tr>
+<tr><td>lseek               </td><td>                                      </td></tr>
+<tr><td>lsetxattr           </td><td>                                      </td></tr>
+<tr><td>lstat64             </td><td>                                      </td></tr>
+<tr><td>madvise             </td><td>                                      </td></tr>
+<tr><td>madvise1            </td><td>                                      </td></tr>
+<tr><td>mbind               </td><td>                                      </td></tr>
+<tr><td>migrate_pages       </td><td>                                      </td></tr>
+<tr><td>mincore             </td><td>                                      </td></tr>
+<tr><td><a href="libc/cs_mkdir.html"><b>mkdir( )</b></a></td><td>Cria um diret&oacute;rio</td></tr>
+<tr><td>mkdirat             </td><td>                                      </td></tr>
+<tr><td>mknod               </td><td>                                      </td></tr>
+<tr><td>mknodat             </td><td>                                      </td></tr>
+<tr><td>mlock               </td><td>                                      </td></tr>
+<tr><td>mlockall            </td><td>                                      </td></tr>
+<tr><td>mmap                </td><td>                                      </td></tr>
+<tr><td>mmap2               </td><td>                                      </td></tr>
+<tr><td>modify_ldt          </td><td>                                      </td></tr>
+<tr><td>mount               </td><td>                                      </td></tr>
+<tr><td>move_pages          </td><td>                                      </td></tr>
+<tr><td>mprotect            </td><td>                                      </td></tr>
+<tr><td>mq_getsetattr       </td><td>                                      </td></tr>
+<tr><td>mq_notify           </td><td>                                      </td></tr>
+<tr><td>mq_open             </td><td>                                      </td></tr>
+<tr><td>mq_timedreceive     </td><td>                                      </td></tr>
+<tr><td>mq_timedsend        </td><td>                                      </td></tr>
+<tr><td>mq_unlink           </td><td>                                      </td></tr>
+<tr><td>mremap              </td><td>                                      </td></tr>
+<tr><td>msgctl              </td><td>                                      </td></tr>
+<tr><td>msgget              </td><td>                                      </td></tr>
+<tr><td>msgrcv              </td><td>                                      </td></tr>
+<tr><td>msgsnd              </td><td>                                      </td></tr>
+<tr><td>msync               </td><td>                                      </td></tr>
+<tr><td>munlock             </td><td>                                      </td></tr>
+<tr><td>munlockall          </td><td>                                      </td></tr>
+<tr><td>munmap              </td><td>                                      </td></tr>
+<tr><td>name_to_handle_at   </td><td>                                      </td></tr>
+<tr><td>nanosleep           </td><td>                                      </td></tr>
+<tr><td>nice                </td><td>                                      </td></tr>
+<tr><td>oldfstat            </td><td>                                      </td></tr>
+<tr><td>oldlstat            </td><td>                                      </td></tr>
+<tr><td>oldolduname         </td><td>                                      </td></tr>
+<tr><td>oldstat             </td><td>                                      </td></tr>
+<tr><td>olduname            </td><td>                                      </td></tr>
+<tr><td><a href="libc/cs_open.html"><b>open( )</b></a></td><td>Abre (cria) um descritor de arquivo</td></tr>
+<tr><td>open_by_handle_at   </td><td>                                      </td></tr>
+<tr><td>openat              </td><td>                                      </td></tr>
+<tr><td><a href="libc/cs_pause.html"><b>pause( )</b></a></td><td>Aguarda a chegada de um sinal</td></tr>
+<tr><td>pciconfig_iobase    </td><td>                                      </td></tr>
+<tr><td>pciconfig_read      </td><td>                                      </td></tr>
+<tr><td>pciconfig_write     </td><td>                                      </td></tr>
+<tr><td>perf_event_open     </td><td>                                      </td></tr>
+<tr><td>personality         </td><td>                                      </td></tr>
+<tr><td>perfctr             </td><td>                                      </td></tr>
+<tr><td>perfmonctl          </td><td>                                      </td></tr>
+<tr><td>pipe                </td><td>                                      </td></tr>
+<tr><td>pipe2               </td><td>                                      </td></tr>
+<tr><td>pivot_root          </td><td>                                      </td></tr>
+<tr><td>poll                </td><td>                                      </td></tr>
+<tr><td>ppc_rtas            </td><td>                                      </td></tr> 
+<tr><td>ppoll               </td><td>                                      </td></tr>
+<tr><td>prctl               </td><td>                                      </td></tr>
+<tr><td>pread64             </td><td>                                      </td></tr>
+<tr><td>preadv              </td><td>                                      </td></tr>
+<tr><td>prlimit             </td><td>                                      </td></tr>
+<tr><td>process_vm_readv    </td><td>                                      </td></tr>
+<tr><td>process_vm_writev   </td><td>                                      </td></tr>
+<tr><td>pselect6            </td><td>                                      </td></tr>
+<tr><td>ptrace              </td><td>                                      </td></tr>
+<tr><td>pwrite64            </td><td>                                      </td></tr>
+<tr><td>pwritev             </td><td>                                      </td></tr>
+<tr><td>quotactl            </td><td>                                      </td></tr>
+<tr><td><a href="libc/cs_read.html"><b>read( )</b></a></td><td>Ler um descritor de arquivo</td></tr>
+<tr><td>readahead           </td><td>                                      </td></tr>
+<tr><td>readdir             </td><td>                                      </td></tr>
+<tr><td>readlink            </td><td>                                      </td></tr>
+<tr><td>readlinkat          </td><td>                                      </td></tr>
+<tr><td>readv               </td><td>                                      </td></tr>
+<tr><td>reboot              </td><td>                                      </td></tr>
+<tr><td>recv                </td><td>                                      </td></tr>
+<tr><td>recvfrom            </td><td>                                      </td></tr>
+<tr><td>recvmsg             </td><td>                                      </td></tr>
+<tr><td>recvmmsg            </td><td>                                      </td></tr>
+<tr><td>remap_file_pages    </td><td>                                      </td></tr>
+<tr><td>removexattr         </td><td>                                      </td></tr>
+<tr><td>rename              </td><td>                                      </td></tr>
+<tr><td>renameat            </td><td>                                      </td></tr>
+<tr><td>request_key         </td><td>                                      </td></tr>
+<tr><td>restart_syscall     </td><td>                                      </td></tr>
+<tr><td><a href="libc/cs_rmdir.html"><b>rmdir( )</b></a></td><td>Apaga um diret&oacute;rio vazio</td></tr>
+<tr><td>rt_sigaction        </td><td>                                      </td></tr>
+<tr><td>rt_sigpending       </td><td>                                      </td></tr>
+<tr><td>rt_sigprocmask      </td><td>                                      </td></tr>
+<tr><td>rt_sigqueueinfo     </td><td>                                      </td></tr>
+<tr><td>rt_sigreturn        </td><td>                                      </td></tr>
+<tr><td>rt_sigsuspend       </td><td>                                      </td></tr>
+<tr><td>rt_sigtimedwait     </td><td>                                      </td></tr>
+<tr><td>rt_tgsigqueueinfo   </td><td>                                      </td></tr>
+<tr><td>s390_runtime_instr  </td><td>                                      </td></tr>
+<tr><td>sched_get_priority_max</td><td>                                    </td></tr>
+<tr><td>sched_get_priority_min</td><td>                                    </td></tr>
+<tr><td>sched_getaffinity   </td><td>                                      </td></tr>
+<tr><td>sched_getparam      </td><td>                                      </td></tr>
+<tr><td>sched_getscheduler  </td><td>                                      </td></tr>
+<tr><td>sched_rr_get_interval</td><td>                                     </td></tr>
+<tr><td>sched_setaffinity   </td><td>                                      </td></tr>
+<tr><td>sched_setparam      </td><td>                                      </td></tr>
+<tr><td>sched_setscheduler  </td><td>                                      </td></tr>
+<tr><td>sched_yield         </td><td>                                      </td></tr>
+<tr><td>select              </td><td>                                      </td></tr>
+<tr><td>semctl              </td><td>                                      </td></tr>
+<tr><td>semget              </td><td>                                      </td></tr>
+<tr><td>semop               </td><td>                                      </td></tr>
+<tr><td>semtimedop          </td><td>                                      </td></tr>
+<tr><td>send                </td><td>                                      </td></tr>
+<tr><td>sendfile            </td><td>                                      </td></tr>
+<tr><td>sendfile64          </td><td>                                      </td></tr>
+<tr><td>sendmmsg            </td><td>                                      </td></tr>
+<tr><td>sendmsg             </td><td>                                      </td></tr>
+<tr><td>sendto              </td><td>                                      </td></tr>
+<tr><td>set_mempolicy       </td><td>                                      </td></tr>
+<tr><td>set_robust_list     </td><td>                                      </td></tr>
+<tr><td>set_thread_area     </td><td>                                      </td></tr>
+<tr><td>set_tid_address     </td><td>                                      </td></tr>
+<tr><td>setdomainname       </td><td>                                      </td></tr>
+<tr><td>setfsgid            </td><td>                                      </td></tr>
+<tr><td>setfsgid32          </td><td>                                      </td></tr>
+<tr><td>setfsuid            </td><td>                                      </td></tr>
+<tr><td>setfsuid32          </td><td>                                      </td></tr>
+<tr><td>setgid              </td><td>                                      </td></tr>
+<tr><td>setgid32            </td><td>                                      </td></tr>
+<tr><td>setgroups           </td><td>                                      </td></tr>
+<tr><td>setgroups32         </td><td>                                      </td></tr>
+<tr><td>sethostname         </td><td>                                      </td></tr>
+<tr><td><a href="libc/cs_setitimer.html"><b>setitimer( )</td><td>Altera o valor de um temporizador de intervalo</td></tr>
+<tr><td>setns               </td><td>                                      </td></tr>
+<tr><td>setpgid             </td><td>                                      </td></tr>
+<tr><td>setpriority         </td><td>                                      </td></tr>
+<tr><td>setregid            </td><td>                                      </td></tr>
+<tr><td>setregid32          </td><td>                                      </td></tr>
+<tr><td>setresgid           </td><td>                                      </td></tr>
+<tr><td>setresgid32         </td><td>                                      </td></tr>
+<tr><td>setresuid           </td><td>                                      </td></tr>
+<tr><td>setresuid32         </td><td>                                      </td></tr>
+<tr><td>setreuid            </td><td>                                      </td></tr>
+<tr><td>setreuid32          </td><td>                                      </td></tr>
+<tr><td>setrlimit           </td><td>                                      </td></tr>
+<tr><td>setsid              </td><td>                                      </td></tr>
+<tr><td>setsockopt          </td><td>                                      </td></tr>
+<tr><td>settimeofday        </td><td>                                      </td></tr>
+<tr><td>setuid              </td><td>                                      </td></tr>
+<tr><td>setuid32            </td><td>                                      </td></tr>
+<tr><td>setxattr            </td><td>                                      </td></tr>
+<tr><td>sgetmask            </td><td>                                      </td></tr>
+<tr><td>shmat               </td><td>                                      </td></tr>
+<tr><td>shmctl              </td><td>                                      </td></tr>
+<tr><td>shmdt               </td><td>                                      </td></tr>
+<tr><td>shmget              </td><td>                                      </td></tr>
+<tr><td>shutdown            </td><td>                                      </td></tr>
+<tr><td>sigaction           </td><td>                                      </td></tr>
+<tr><td>sigaltstack         </td><td>                                      </td></tr>
+<tr><td><a href="libc/cs_signal.html"><b>signal( )</b></a></td><td>Define um conjunto de a&ccedil;&otilde;es para um determinado sinal recebido</td></tr>
+<tr><td>signalfd            </td><td>                                      </td></tr>
+<tr><td>signalfd4           </td><td>                                      </td></tr>
+<tr><td>sigpending          </td><td>                                      </td></tr>
+<tr><td>sigprocmask         </td><td>                                      </td></tr>
+<tr><td>sigreturn           </td><td>                                      </td></tr>
+<tr><td>sigsuspend          </td><td>                                      </td></tr>
+<tr><td>socket              </td><td>                                      </td></tr>
+<tr><td>socketcall          </td><td>                                      </td></tr>
+<tr><td>socketpair          </td><td>                                      </td></tr>
+<tr><td>splice              </td><td>                                      </td></tr>
+<tr><td>spu_create          </td><td>                                      </td></tr>
+<tr><td>spu_run             </td><td>                                      </td></tr>
+<tr><td>ssetmask            </td><td>                                      </td></tr>
+<tr><td><a href="libc/cs_stat.html"><b>stat( ) <br> lstat( ) <br> fstat( )</b></a></td><td valign=center>Fornecem informações sobre um arquivo</td></tr>
+<tr><td>stat64              </td><td>                                      </td></tr>
+<tr><td>statfs              </td><td>                                      </td></tr>
+<tr><td>statfs64            </td><td>                                      </td></tr>
+<tr><td>stime               </td><td>                                      </td></tr>
+<tr><td>subpage_prot        </td><td>                                      </td></tr>
+<tr><td>swapoff             </td><td>                                      </td></tr>
+<tr><td>swapon              </td><td>                                      </td></tr>
+<tr><td>symlink             </td><td>                                      </td></tr>
+<tr><td>symlinkat           </td><td>                                      </td></tr>
+<tr><td>sync                </td><td>                                      </td></tr>
+<tr><td>sync_file_range     </td><td>                                      </td></tr>
+<tr><td>sync_file_range2    </td><td>                                      </td></tr>
+<tr><td>syncfs              </td><td>                                      </td></tr>
+<tr><td>sysfs               </td><td>                                      </td></tr>
+<tr><td>sysinfo             </td><td>                                      </td></tr>
+<tr><td>syslog              </td><td>                                      </td></tr>
+<tr><td>tee                 </td><td>                                      </td></tr>
+<tr><td>tgkill              </td><td>                                      </td></tr>
+<tr><td><a href="libc/cs_time.html"><b>time( )</b></a></td><td>Fornece a quantidade de segundos desde &agrave;s zero horas de 01/01/1970</td></tr>
+<tr><td>timer_create        </td><td>                                      </td></tr>
+<tr><td>timer_delete        </td><td>                                      </td></tr>
+<tr><td>timer_getoverrun    </td><td>                                      </td></tr>
+<tr><td>timer_gettime       </td><td>                                      </td></tr>
+<tr><td>timer_settime       </td><td>                                      </td></tr>
+<tr><td>timerfd_create      </td><td>                                      </td></tr>
+<tr><td>timerfd_gettime     </td><td>                                      </td></tr>
+<tr><td>timerfd_settime     </td><td>                                      </td></tr>
+<tr><td>times               </td><td>                                      </td></tr>
+<tr><td>tkill               </td><td>                                      </td></tr>
+<tr><td>truncate            </td><td>                                      </td></tr>
+<tr><td>truncate64          </td><td>                                      </td></tr>
+<tr><td>ugetrlimit          </td><td>                                      </td></tr>
+<tr><td>umask               </td><td>                                      </td></tr>
+<tr><td>umount              </td><td>                                      </td></tr>
+<tr><td>umount2             </td><td>                                      </td></tr>
+<tr><td>uname               </td><td>                                      </td></tr>
+<tr><td><a href="libc/cs_unlink.html"><b>unlink( )</b></a></td><td>Apaga um nome de arquivo</td></tr>
+<tr><td>unlinkat            </td><td>                                      </td></tr>
+<tr><td>unshare             </td><td>                                      </td></tr>
+<tr><td>uselib              </td><td>                                      </td></tr>
+<tr><td>ustat               </td><td>                                      </td></tr>
+<tr><td>utime               </td><td>                                      </td></tr>
+<tr><td>utimensat           </td><td>                                      </td></tr>
+<tr><td>utimes              </td><td>                                      </td></tr>
+<tr><td>utrap_install       </td><td>                                      </td></tr>
+<tr><td>vfork               </td><td>                                      </td></tr>
+<tr><td>vhangup             </td><td>                                      </td></tr>
+<tr><td>vm86old             </td><td>                                      </td></tr>
+<tr><td>vm86                </td><td>                                      </td></tr>
+<tr><td>vmsplice            </td><td>                                      </td></tr>
+<tr><td><a href="libc/cs_wait.html"><b>wait( ) <br> waitpid( ) <br> waitid( )</b></a> </td><td valign=center>Esperam pela mudança de estado de um processo-filho</td></tr>
+<tr><td><a href="libc/cs_write.html"><b>write( )</b></a> </td><td>Escreve em um descritor de arquivo</td></tr>
+<tr><td>writev              </td><td>                                      </td></tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

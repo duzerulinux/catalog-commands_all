@@ -1,0 +1,80 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>newgrp</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="newgrp">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+
+<h1>newgrp</h1>
+   
+<blockquote><font size="+1"><b> newgrp [grupo]</b></font><br></blockquote>
+<ul>
+<li>O argumento <i>grupo</i> corresponde ao <i>nome</i> do grupo desejado (n&atilde;o pode ser o 
+    <b><a href="gid.html">GID</a></b> do grupo).
+</ul>
+     
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando muda, temporariamente, o grupo do usu&aacute;rio.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>Suponha que o grupo principal de um usu&aacute;rio &eacute; <b>linux</b> e que ele digita o seguinte
+   comando:
+   <blockquote class="t1">newgrp teste</blockquote>
+   Isto significa que o usu&aacute;rio passa a usar o grupo <b>teste</b> na sess&atilde;o e que, 
+   se ele criar um novo arquivo, este pertencer&aacute; ao grupo <b>teste</b>. 
+   Entretanto, se o usu&aacute;rio abrir outro terminal, o grupo do usu&aacute;rio ser&aacute; o grupo
+   <b>linux</b>, pois a altera&ccedil;&atilde;o para  o grupo <b>teste</b> &eacute; tempor&aacute;ria 
+   e s&oacute; vale para a sess&atilde;o em curso.
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Para retornar ao grupo anterior, basta digitar <b>exit</b>.
+<li>Se nenhum nome de grupo &eacute; fornecido com o comando, assume-se que o novo grupo corresponde ao 
+    grupo padr&atilde;o do usu&aacute;rio (para saber qual &eacute; o grupo padr&atilde;o de um usu&aacute;rio 
+    veja o arquivo <b><a href="dir_etc.html#passwd">/etc/passwd</a></b>).
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="groupadd.html">groupadd</a></b> - cria um novo grupo de usu&aacute;rios.
+<li><b><a href="groupdel.html">groupdel</a></b> - deleta um grupo de usu&aacute;rios.
+<li><b><a href="groupmod.html">groupmod</a></b> - modifica um grupo de usu&aacute;rios.
+<li><b><a href="groups.html">groups</a></b>     - lista os grupos aos quais um usu&aacute;rio pertence.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>redirecionadores</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="redicionadores">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>redirecionadores de E/S</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Os redirecionadores de E/S definem qual &eacute; a entrada/sa&iacute;da de um comando. A tabela abaixo mostra alguns
+exemplos de operadores de E/S.</p>
+
+<p>
+<table class="t1" align="center" rules=all cellpadding=5 width=650>
+    <tr class="t1"><td><b>Operador</b>              </td><td><b>Significado</b>                               </td></tr>
+    <tr><td align="center">&gt; <b>ou</b> 1&gt;     </td><td>redireciona para sa&iacute;da                    </td></tr>
+    <tr><td align="center">&gt;&gt;                 </td><td>redireciona para fim de arquivo                  </td></tr>
+    <tr><td align="center">&lt;                     </td><td>redireciona para a entrada                       </td></tr>
+    <tr><td align="center">&lt;&lt;                 </td><td>redireciona para a entrada e mant&eacute;m a entrada aberta at&eacute;
+                                                             que seja digitado algum caractere de EOF (fim de arquivo) como, por 
+                                                             exemplo, CTRL+D                                  </td></tr>
+    <tr><td align="center">&gt;&amp; <b>ou</b> 2&gt;</td><td>redireciona a sa&iacute;da de erros              </td></tr>
+    <tr><td align="center">|                        </td><td>redireciona a sa&iacute;da de um comando para a entrada de um outro
+                                                             comando                                          </td></tr>
+    <tr><td align="center">tee                      </td><td>redireciona o resultado para a sa&iacute;da padr&atilde;o e para
+                                                             um arquivo, deve ser usado em conjunto com o "|" </td></tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+
+<li>O comando <a href="cat.html"><b>cat</b></a> abaixo copia o conte&uacute;do dos arquivos <i>teste1.txt</i> e <i>teste2.txt</i>
+    para o arquivo <i>teste</i>. Caso o arquivo <i>teste</i> n&atilde;o exista, o arquivo &eacute; criado. Caso o arquivo
+    <i>teste</i> exista, ele &eacute; sobreposto.
+    <blockquote class="t1">cat teste1.txt teste2.txt &gt; teste</blockquote></li>
+<li>O comando <i>cat</i> abaixo adiciona o conte&uacute;do do arquivo <i>teste3.txt</i> no final do arquivo <i>teste</i>. Caso o
+    arquivo <i>teste</i> n&atilde;o exista, ele &eacute; criado.
+    <blockquote class="t1">cat teste3.txt &gt;&gt; teste</blockquote></li>
+<li>O comando <i>cat</i> abaixo recebe como entrada o arquivo <i>teste.txt</i> e, portanto, mostra na tela o conte&uacute;do deste
+    arquivo.
+    <blockquote class="t1">cat &lt; teste.txt</blockquote>
+<li>Suponha que o diret&oacute;rio <i>xxxxx</i> n&atilde;o existe. Portanto, o comando
+    <blockquote class="t1">ls xxxxxx</blockquote>
+    apresenta uma mensagem de erro. Para direcionar a sa&iacute;da de erro deste comando para o arquivo <i>resultado</i>, basta
+    digitar
+    <blockquote class="t1">ls xxxxxx &gt;&amp; resultado</blockquote>
+    ou
+    <blockquote class="t1">ls xxxxxx 2&gt; resultado</blockquote>
+<li>Abaixo temos tr&ecirc;s comandos aninhados: primeiro, o comando <i>cat</i> exibe o conte&uacute;do do arquivo <i>teste.txt</i>;
+    segundo, o resultado do comando <i>cat</i> &eacute; usado como entrada do comando <a href="wc.html"><b>wc</b></a> que conta o
+    n&uacute;mero de linhas do arquivo; e terceiro, o n&uacute;mero de linhas do arquivo <i>teste.txt</i> &eacute; gravado no arquivo
+    <i>resultado.txt</i>.
+    <blockquote class="t1"> cat teste.txt | wc -l &gt; resultado.txt</blockquote></li>
+<li>Podemos tamb&eacute;m usar o comando <b><a href="tee.html">tee</a></b> junto com o caractere <b>|</b> para que o resultado de um
+    comando seja redirecionado para a sa&iacute;da padr&atilde;o e para um arquivo. Por exemplo, suponha que queremos que o arquivo
+    <i>teste.txt</i> seja copiado para o arquivo <i>teste2.txt</i> e que seja tamb&eacute;m exibido na tela. Ent&atilde;o, basta
+    digitarmos
+    <blockquote class="t1">cat teste.txt | tee teste2.txt</blockquote></li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

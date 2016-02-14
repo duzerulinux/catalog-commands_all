@@ -1,0 +1,93 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>stty</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="stty">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>stty</h1>
+
+<blockquote><font size="+1"><b>stty [op&ccedil;&otilde;es]</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando modifica e/ou mostra as configura&ccedil;&otilde;es de linhas de terminal.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-a</b> : exibe todas as configura&ccedil;&otilde;es atuais do terminal.
+<li><b>-g</b> : exibe todas as configura&ccedil;&otilde;es atuais do terminal em um formato que pode ser usado como
+    argumento para outro comando <i>stty</i> para restaurar as configura&ccedil;&otilde;es atuais.
+<li><b>--help</b> : informa as op&ccedil;&otilde;es do aplicativo.
+<li><b>--version</b> : exibe informa&ccedil;&otilde;es sobre o aplicativo.
+<li><b>sane</b> : restaura a configura&ccedil;&atilde;o padr&atilde;o no terminal.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>O comando
+    <blockquote class="t1">stty</blockquote>
+   exibe informa&ccedil;&otilde;es sobre a comunica&ccedil;&atilde;o do terminal. Um exemplo &eacute; mostrado abaixo.
+
+    <blockquote class="t2">
+    speed 38400 baud; line = 0;<br>
+    eol = M-^?; eol2 = M-^?; swtch = M-^?;<br>
+    ixany iutf8
+    </blockquote>
+
+<li>Para ver todas as configura&ccedil;&otilde;es atuais do terminal, digite
+    <blockquote class="t1">stty -a</blockquote>
+    Abaixo uma poss&iacute;vel sa&iacute;da &eacute; mostrada. Note, por exemplo, que o terminal tem atualmente 48 linha com 170 colunas cada
+    (o usu&aacute;rio pode modificar o tamanho da tela).
+
+    <blockquote class="t2">
+    speed 38400 baud; rows 48; columns 170; line = 0;<br>
+    intr = ^C; quit = ^\; erase = ^?; kill = ^U; eof = ^D; eol = M-^?; eol2 = M-^?; swtch = M-^?; start = ^Q; stop = ^S;
+    susp = ^Z; rprnt = ^R; werase = ^W; lnext = ^V; <br>
+    flush = ^O; min = 1; time = 0;<br>
+    -parenb -parodd cs8 hupcl -cstopb cread -clocal -crtscts<br>
+    -ignbrk brkint -ignpar -parmrk -inpck -istrip -inlcr -igncr icrnl ixon -ixoff -iuclc ixany imaxbel iutf8<br>
+    opost -olcuc -ocrnl onlcr -onocr -onlret -ofill -ofdel nl0 cr0 tab0 bs0 vt0 ff0<br>
+    isig icanon iexten echo echoe echok -echonl -noflsh -xcase -tostop -echoprt echoctl echoke
+    </blockquote>
+
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="setterm.html">setterm</a></b> - configura os atributos do terminal no modo texto.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

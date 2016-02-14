@@ -1,0 +1,107 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>biosdecode</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="biosdecode">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>biosdecode</h1>
+
+<blockquote><b><font size="+1"> biosdecode [op&ccedil;&otilde;es] </font></b></blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando decodifica informa&ccedil;&otilde;es do BIOS (<i>Basic Input/Output System</i>).
+Na realidade, o <i>biosdecode</i> apenas mostra as estruturas usadas pelo BIOS.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-h</b> ou <b>--help</b> : exibe as op&ccedil;&otilde;es do comando.
+<li><b>-V</b> ou <b>--version </b> : mostra informa&ccedil;&otilde;es sobre o comando.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+<p>O comando
+
+<blockquote class="t1">sudo biosdecode</blockquote>
+
+pode ter, por exemplo, como sa&iacute;da:
+
+<blockquote class="t2">
+# biosdecode 2.11<br>
+ACPI 2.0 present.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OEM Identifier: TOSQCI<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RSD Table 32-bit Address: 0x7F6D56A7<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XSD Table 64-bit Address: 0x000000007F6D56F7<br>
+SMBIOS 2.4 present.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Structure Table Length: 1044 bytes<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Structure Table Address: 0x000DF010<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number Of Structures: 30<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maximum Structure Size: 135 bytes<br>
+BIOS32 Service Directory present.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Revision: 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Calling Interface Address: 0x000FDA80<br>
+PNP BIOS 1.0 present.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Event Notification: Not Supported<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Real Mode 16-bit Code Address: E7D2:87F1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Real Mode 16-bit Data Address: 0040:0000<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;16-bit Protected Mode Code Address: 0x000FBE5C<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;16-bit Protected Mode Data Address: 0x00000400<br>
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li><b>BIOS</b> &eacute; um programa gravado na mem&oacute;ria ROM (<i>read only memory</i>) que tem duas 
+    fun&ccedil;&otilde;es b&aacute;sicas: dar suporte para o acesso inicial ao hardware e carregar o sistema
+    operacional.
+<li>Outros programas armazenados na mem&oacute;ria ROM:
+    <ul>
+    <li> SETUP (configurar) - permite alterar a configura&ccedil;&atilde;o do BIOS;
+    <li> POST (<i>Power On Self Test</i>) - verifica se hardware est&aacute; operacional.
+    </ul>
+<li><b>CMOS</b> (<i>complementary metal-oxide-semiconductor</i>) &eacute; uma mem&oacute;ria tempor&aacute;ria que armazena
+    as configura&ccedil;&otilde;es do computador feitas pelo BIOS. Para que estas informa&ccedil;&otilde;es sejam 
+    preservadas, mesmo quando o computador &eacute; desligado, o CMOS &eacute; alimentado por uma bateria de l&iacute;tio.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="dmidecode.html">dmidecode</a></font></b> - decodifica tabelas DMI (<i>Destktop Management Information</i>).
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

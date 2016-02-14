@@ -1,0 +1,105 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>ac</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="ac">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>ac</h1>
+
+<blockquote><b><font size="+1"> ac [op&ccedil;&otilde;es] usu&aacute;rios </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p> Este comando imprime estat&iacute;sticas sobre o tempo de conex&atilde;o dos usu&aacute;rios no sistema.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-d</b> ou <b>--daily-totals</b> : imprime o tempo de conex&atilde;o de cada dia.
+<li><b>-y</b> ou <b>--print-year</b> : imprime o total de conex&atilde;o por ano.
+<li><b>-p</b> ou <b>--individual-totals</b> : imprime o tempo total de conex&atilde;o para cada usu&aacute;rio.
+<li><b>-f</b> ou <b>--file <i>arquivo</i></b> : l&ecirc; as informa&ccedil;&otilde;es de login de <i>arquivo</i> ao inv&eacute;s
+    de <i>wtmp</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2> Exemplos </h2>
+
+<ul>
+<li>Para imprimir o tempo de conex&atilde;o di&aacute;rio, digite
+    <blockquote class="t1">ac -d</blockquote>
+    Uma poss&iacute;vel sa&iacute;da &eacute; mostrada abaixo. 
+    <blockquote class="t2">
+    <table class="t2">
+    <tr><td>Jul  3  </td><td>total </td><td> 1.17 </td></tr>
+    <tr><td>Jul  4  </td><td>total </td><td> 2.10 </td></tr>
+    <tr><td>Jul  5  </td><td>total </td><td> 8.23 </td></tr>
+    <tr><td>Jul  6  </td><td>total </td><td> 2.10 </td></tr>
+    <tr><td>Jul  7  </td><td>total </td><td> 0.30 </td></tr>
+    </table>
+    </blockquote>
+<li>Para imprimir o tempo de conex&atilde;o de todos os usu&aacute;rios, basta digitar
+    <blockquote class="t1">ac -p</blockquote>
+    A sa&iacute;da poder&aacute; ser como mostrada abaixo.
+    <blockquote class="t2">
+    <table class="t2">
+    <tr><td>bob   </td><td> 8.06 </td></tr>
+    <tr><td>joao  </td><td> 0.60 </td></tr>
+    <tr><td>pedro </td><td> 7.37 </td></tr>
+    <tr><td>root  </td><td> 0.12 </td></tr>
+    <tr><td>total </td><td> 16.15</td></tr>
+    </table>
+    </blockquote>
+<li>Para imprimir somente o tempo de conex&atilde;o de <i>joao</i> e <i>ana</i>, digite</p>
+    <blockquote class="t1">ac -p joao ana</blockquote>
+    Nesse caso a sa&iacute;da ser&aacute;
+    <blockquote class="t2">
+    <table class="t2">
+    <tr><td>ana  </td><td> 8.06 </td></tr>
+    <tr><td>joao </td><td> 0.60 </td></tr>
+    <tr><td>total</td><td> 9.66 </td></tr>
+    </table>
+    </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O comando <i>ac</i> n&atilde;o cria o arquivo <i>/var/log/wtmp</i>. Se ele n&atilde;o existe, nenhum controle &eacute; feito. 
+    Para come&ccedil;ar esse controle, &eacute; necess&aacute;ria sua cria&ccedil;&atilde;o com tamanho zero.
+<li>O arquivo <i>/var/log/wtmp</i> pode ficar muito grande de maneira muito r&aacute;pida. &Eacute; aconselh&aacute;vel sua
+    edi&ccedil;&atilde;o para diminui-lo.
+<li>Para usar <i>ac</i>, &eacute; preciso instalar o pacote <i>acct</i> no Linux.
+    <blockquote class="t1">sudo apt-get install acct</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>alarm()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="alarm()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>alarm( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta <a href="../chamadas.html"><b>chamada de sistema</b></a> especifica um alarme de rel&oacute;gio para o envio de um 
+<a href="../sinal.html"><b>sinal</b></a>.
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+   
+<p>
+<blockquote class="t2">
+#include&lt;unistd.h&gt;<br>
+unsigned int alarm(unsigned int seconds);
+</blockquote>
+</p>
+
+<ul>
+<li>O par&acirc;metro <i>seconds</i> corresponde &agrave; quantidade de segundos para o envio do alarme.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include&lt;stdio.h&gt;  <br>
+2. #include&lt;time.h&gt;   <br>
+3. #include&lt;signal.h&gt; <br>
+4. void mensagem(int signum) <br>
+5. { <br>
+6. &nbsp; &nbsp; &nbsp; time_t tp; <br>
+7. &nbsp; &nbsp; &nbsp; time(&tp); <br>
+8. &nbsp; &nbsp; &nbsp; printf("%s", ctime(&tp)); <br>
+9. } <br>
+10.void main( ) <br>
+11.{ <br>
+12.&nbsp; &nbsp; &nbsp; signal(SIGALRM, mensagem); <br>
+13.&nbsp; &nbsp; &nbsp; printf("*** inicio do programa\n"); <br>
+14.&nbsp; &nbsp; &nbsp; while (1) <br>
+15.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { <br>
+16.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alarm(5); <br>
+17.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; pause( ); <br>
+18.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } <br>
+19.}
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/alarm.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 3 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>time.h</b> - cabe&ccedil;alho com as fun&ccedil;&otilde;es para manipular datas e horas.
+    <li><b>signal.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o dos <a href="../sinal.html"><b>sinais</b></a>.
+    </ul>
+<li><b>Linhas de 4 a 9 :</b> a fun&ccedil;&atilde;o <i>mensagem( )</i> &eacute; chamada quando um sinal SIGALRM &eacute; capturado
+    pelo processo. Esta fun&ccedil;&atilde;o apenas imprime o dia e a hora local obtidos com a chamada de sistema
+    <a href="cs_time.html"><b>time( )</b></a> e formatada com a fun&ccedil;&atilde;o <a href="fc_ctime.html"><b>ctime( )</b></a>.
+<li><b>Linha 10 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 12 a linha 18.
+<li><b>Linha 12 :</b> usa a chamada <a href="cs_signal.html"><b>signal( )</b></a> para definir que a fun&ccedil;&atilde;o 
+    <i>mensagem( )</i> deve ser executada quando o sinal SIGALRM &eacute; capturado pelo processo.
+<li><b>Linhas de 14 a 18 :</b> define um loop infinito.
+<li><b>Linha 16 :</b> usa a chamada <i>alarm( )</i> para definir que um sinal SIGALRM deve ser entregue ao processo em 5 segundos.
+<li><b>Linha 17 :</b> usa a chamada <a href="cs_pause.html"><b>pause( )</b></a> para suspender o processo at&eacute; o recebimento
+    de um sinal (neste exemplo, a espera &eacute; pelo sinal SIGALRM).
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+<blockquote class="t1">
+gcc -o alarm alarm.c
+</blockquote>
+Para executar o programa, basta digitar
+<blockquote class="t1">
+./alarm
+</blockquote>
+Abaixo &eacute; mostrada uma poss&iacute;vel sa&iacute;da. As teclas CTRL+C s&atilde;o usadas para cancelar o programa.
+<blockquote class="t2">
+*** inicio do programa   <br>
+Thu Mar 26 14:45:21 2015 <br>
+Thu Mar 26 14:45:26 2015 <br>
+Thu Mar 26 14:45:31 2015 <br>
+Thu Mar 26 14:45:36 2015 <br>
+^C
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A chamada <i>alarm( )</i> configura o envio de um sinal SIGALRM para o processo ap&oacute;s a quantidade de segundos especificada.
+<li>Se o argumento <i>seconds</i> &eacute; igual a zero, nenhum novo alarme &eacute; agendado e os alarmes agendados anteriormente
+    s&atilde;o cancelados.
+<li>A chamada <i>alarm( )</i> retorna o n&uacute;mero de segundos restantes at&eacute; que outro alarme agendado previamente seja
+    convenientemente enviado, ou zero se n&atilde;o h&aacute; alarme pendente.
+<li>Apenas um alarme &eacute; permitido por processo.
+<li>As chamadas <i>alarm( )</i> e <a href="cs_setitimer.html"><b>setitimer( )</b></a> compartilham o mesmo temporizador. Isto significa
+    que uma chamada feita por um deles ir&aacute; interferir no uso do outro.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

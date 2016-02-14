@@ -1,0 +1,121 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>fuser</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="fuser">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>fuser</h1>
+
+<blockquote><font size="+1"><b>fuser [options] nome</b></font><b>...</b><br></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando identifica os processos que est&atilde;o usando um determinado <a href="arquivo.html"><b>arquivo</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-i</b> : pede confirma&ccedil;&atilde;o antes de matar um processo (usado junto com a op&ccedil;&atilde;o <i>-k</i>).
+<li><b>-k</b> : mata os processos que est&atilde;o acessando o arquivo/diret&oacute;rio especificado.
+<li><b>-l</b> : lista os nomes de sinais que podem ser enviados para os processos.
+<li><b>-u</b> : identifica o usu&aacute;rio de cada processo.
+<li><b>-v</b> : informa para cada processo listado, o usu&aacute;rio que est&aacute; acessando, o <b><a href="pid.html">PID</a></b>
+                do processo acessando, como o processo acessa o arquivo/diret&oacute;rio e o comando usado para acessar.
+<li><b>-V</b> : mostra a vers&atilde;o do aplicativo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios sobre o comando</h2>
+
+<p>Um processo pode ter os seguintes tipos de acesso a um arquivo/diret&oacute;rio:
+<ul>
+<li><b>c</b> - diret&oacute;rio atual (a partir do qual o processo foi inicializado);
+<li><b>e</b> - arquivo sendo executado pelo processo;
+<li><b>f</b> - arquivo aberto.
+<li><b>F</b> - arquivo aberto para escrita.
+<li><b>r</b> - diret&oacute;rio raiz do sistema.
+<li><b>m</b> - arquivo mmap (mapeamento de mem&oacute;ria) ou biblioteca compartilhada.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Por exemplo, para exibir os processos (com a identifica&ccedil;&atilde;o dos respectivos 
+    usu&aacute;rios) que est&atilde;o usando o <b><a href="shell.html">shell</a></b> <i>bash</i>, 
+    o editor de texto <b><a href="vim.html">vim</a></b> e o diret&oacute;rio <i>/home/aluno1</i>, 
+    digite
+    <blockquote class="t1">fuser -u /bin/bash /usr/bin/vim /home/aluno1</blockquote>
+    Uma poss&iacute;vel sa&iacute;da para este comando &eacute;:
+    <blockquote class="t2">
+    /bin/bash: 1113e(root) 1125e(aluno1)  1154e(aluno2)<br>
+    /usr/bin/vim: 1350e(aluno1)<br>
+    /home/aluno1: 1125c(aluno1) 1350c(aluno1) <br>
+    </blockquote>
+    onde temos tr&ecirc;s processos usando o arquivo <i>/bin/bash</i> (1113, 1125 e 1154), 
+    apenas um processo usando o arquivo <i>/bin/vim</i> (1350) e dois processos usando o 
+    diret&oacute;rio <i>/home/aluno1</i> (1125 e 1350). Ao lado do n&uacute;mero de um processo 
+    (PID) temos uma letra que representa o tipo de acesso e temos a identifica&ccedil;&atilde;o do 
+    usu&aacute;rio a quem pertence o processo. Note que, no exemplo acima, o processo 1350 aparece 
+    nas duas &uacute;ltimas linhas exibidas pelo comando <i>fuser</i>. Isto significa que o aplicativo 
+    <i>vim</i> foi chamado a partir do diret&oacute;rio <i>/home/aluno1</i>.
+<li>Para se obter mais informa&ccedil;&otilde;es sobre os processos pode-se usar a op&ccedil;&atilde;o <i>-v</i>.
+    <blockquote class="t1">fuser -v /bin/bash /home/aluno</blockquote>
+    Uma poss&iacute;vel sa&iacute;da para este comando &eacute; mostrada abaixo.
+    <blockquote class="t2">
+    <table class="t2">
+    <tr><td>            </td><td>USU&Aacute;RIO </td><td>PID </td><td>ACESSO</td><td>COMANDO</td></tr>
+    <tr><td>/bin/bash:  </td><td>aluno          </td><td>2196</td><td>...e. </td><td>bash</td></tr>
+    <tr><td>/home/aluno:</td><td>aluno          </td><td>1405</td><td>..c.. </td><td>gnome-session</td></tr>
+    <tr><td>            </td><td>aluno          </td><td>1460</td><td>..c.. </td><td>gnome-settings-</td></tr>
+    <tr><td>            </td><td>aluno          </td><td>1630</td><td>..c.. </td><td>compiz</td></tr>
+    </table>
+    </blockquote>
+<li>Para ver os sinais que podem ser enviados para os processos, basta digitar
+    <blockquote class="t1">fuser -l</blockquote>
+    Abaixo a lista de sinais fornecida pelo <b><a href="kernel.html">kernel</a></b> 3.2.0-35-generic-pae (distribui&ccedil;&atilde;o Ubuntu).
+    <blockquote class="t2">
+    HUP INT QUIT ILL TRAP ABRT IOT BUS FPE KILL USR1 SEGV USR2 PIPE ALRM TERM<br>
+    STKFLT CHLD CONT STOP TSTP TTIN TTOU URG XCPU XFSZ VTALRM PROF WINCH IO PWR SYS<br>
+    UNUSED
+    </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A lista completa dos processos em execu&ccedil;&atilde;o no sistema pode ser vista no diret&oacute;rio 
+    <b><a href="dir_proc.html">/proc</a></b> ou com o comando <b><a href="ps.html">ps -aux</a></b>.
+<li>Para ver a lista os arquivos abertos por algum processo, use o comando <b><a href="lsof.html">lsof</a></b>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

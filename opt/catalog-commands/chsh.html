@@ -1,0 +1,78 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>chsh</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="chsh">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>chsh</h1>
+  
+<blockquote><b><font size="+1">chsh [-s shell] </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando altera o <b><a href="shell.html">shell</a></b> padr&atilde;o usado pelo usu&aacute;rio.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>--help</b> : exibe op&ccedil;&otilde;es do comando.
+<li><b>-s shell</b> : especifica o nome do novo <i>shell</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>Por exemplo,</p>
+
+<blockquote class="t1">chsh -s /bin/ash</blockquote>
+
+<p>faz com que o <i>shell ash</i> do diret&oacute;rio <b><a href="dir_bin.html">/bin</a></b> passe a ser o 
+<i>shell</i> padr&atilde;o do usu&aacute;rio que digitou o comando.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A informa&ccedil;&atilde;o sobre qual <i>shell</i> &eacute; usado por cada usu&aacute;rio &eacute; armazenada no
+    arquivo <b><a href="dir_etc.html#passwd">/etc/passwd</a></b>. A linha abaixo mostra um exemplo de uma linha do 
+    /etc/passwd que associa o usu&aacute;rio <i>aluno</i> ao <i>shell bash</i>.
+    <blockquote class="t2">aluno:x:1001:1001::/home/aluno:/bin/bash</blockquote>
+    Portanto, se o comando <i>chsh</i> &eacute; executado com sucesso,o arquivo /etc/passwd &eacute; alterado pelo sistema. 
+    Apenas o <b><a href="root.html">root</a></b> pode editar o arquivo /etc/passwd e modific&aacute;-lo diretamente (sem usar
+    o comando <i>chsh</i>).
+<li>Para verificar quais os <i>shells</i> que est&atilde;o dispon&iacute;veis no sistema, digite
+    <blockquote class="t1">more /etc/shells</blockquote>
+    O comando acima, na realidade, apenas lista o conte&uacute;do do arquivo <b><a href="dir_etc.html#shells">/etc/shells</a></b>.
+<li>Caso um <i>shell</i> n&atilde;o seja informado na linha de comando, o sistema solicitar&aacute; ao usu&aacute;rio a senha e 
+    depois o nome do novo <i>shell</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

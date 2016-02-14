@@ -1,0 +1,98 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>fsck</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="fsck">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>fsck</h1>
+
+<blockquote><font size="+1"><b>fsck [op&ccedil;&otilde;es] [sistema]</b></font><br></blockquote>
+<ul>
+<li>O argumento <i>sistema</i> pode ser o nome do dispositivo ou o ponto de montagem para o sistema de arquivos.
+<li>Se mais de um sistema de arquivo for fornecido, o <i>fsck</i> tentar&aacute; verific&aacute;-los em paralelo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando &eacute; usado para verificar e, opcionalmente, reparar um ou mais sistemas de arquivos.
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-a</b> : repara automaticamente o sistema de arquivos com defeito.</li>
+<li><b>-A</b> : analisa o arquivo <b><a href="dir_etc.html#fstab">/etc/fstab</a></b> e tenta verificar todos 
+    os arquivos listados de uma vez.</li> 
+<li><b>-N</b> : n&atilde;o executa, apenas mostra o que seria feito.</li>
+<li><b>-r</b> : pergunta se o sistema de arquivos deve ser reparado quando detecta alguma falha.</li>
+<li><b>-V</b> : produz uma sa&iacute;da detalhada.</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>O comando
+
+<blockquote class="t1">fsck -N</blockquote>
+
+informa o que o sistema faria se o aplicativo <b>fsck</b> fosse executado.
+Abaixo &eacute; mostrada a resposta do comando onde o HD possui uma &uacute;nica parti&ccedil;&atilde;o do 
+tipo <b>ext4</b> e, por isso, seria chamado o verificador de arquivos <b>/sbin/fsck.ext4</b>.
+
+<blockquote class="t2">
+fsck de util-linux 2.20.1 <br>
+[/sbin/fsck.ext4 (1) -- /] fsck.ext4 /dev/sda1 <br>
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Se nenhum sistema de arquivo &eacute; especificado na linha de comando, o <b>fsck</b> ir&aacute; verificar
+    os sistemas de arquivos listados no <b><a href="dir_etc.html#fstab">/etc/fstab</a></b>.
+<li>O c&oacute;digo de erro retornado &eacute; a soma das seguintes condi&ccedil;&otilde;es:
+    <ul>
+    <li><b>0</b> - nenhum erro.</li>
+    <li><b>1</b> - erros corrigidos.</li>
+    <li><b>2</b> - o sistema deve ser reiniciado.</li>
+    <li><b>4</b> - erros n&atilde;o corrigidos.</li>
+    <li><b>8</b> - erro operacional.</li>
+    <li><b>16</b> - erro de uso ou de sintaxe.</li>
+    <li><b>32</b> - cancelado pelo usu&aacute;rio.</li>
+    <li><b>128</b> - erro de biblioteca compartilhada.</li>
+    </ul>
+<li>Na realidade, o <b>fsck</b> &eacute; simplesmente um intermedi&aacute;rio para os v&aacute;rios verificadores 
+    de sistemas de arquivos dispon&iacute;veis no Linux (por exemplo, <b>fsck.ext4</b> para sistemas de arquivo do 
+    tipo <b>ext4</b>). O execut&aacute;vel espec&iacute;fico &eacute; procurado em <b>/sbin</b>, <b>/sbin/fs.d</b>, 
+    <b>/sbin/fs</b>, <b>/etc/fs</b>, <b>/etc</b> e, finalmente, nos diret&oacute;rios listados na 
+    <b><a href="variaveis.html">vari&aacute;vel de ambiente</a></b> <b>PATH</b>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

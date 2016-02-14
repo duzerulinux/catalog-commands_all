@@ -1,0 +1,78 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>lesskey</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="lesskey">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>lesskey</h1>
+
+<blockquote><font size="+1"><b>lesskey [-o arq_sa&iacute;da] [arq_entrada]</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+<p>Este aplicativo permite personalizar as teclas usadas pelo paginador <b><a href="less.html">less</a></b>.
+S&atilde;o par&acirc;metros do comando:
+<ul>
+<li><b>arq_entrada</b> &eacute; um arquivo texto com a descri&ccedil;&atilde;o das teclas;
+<li><b>arq_sa&iacute;da</b> &eacute; o nome do arquivo bin&aacute;rio gerado pelo <i>lesskey</i> e que ser&aacute;
+    utilizado pelo comando <i>less</i>. Se o arquivo de sa&iacute;da j&aacute; existir, ele ser&aacute; apagado e 
+    criado novamente.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Podemos, por exemplo, criar um arquivo chamado <i>teste</i> que possui o seguinte conte&uacute;do
+    <blockquote class="t2">
+    ^a forw-screen<br> 
+    ^g back-screen<br>
+    j quit<br>
+    </blockquote>
+    O arquivo acima define a tecla <b>CTRL+a</b> para avan&ccedil;ar uma p&aacute;gina, a tecla <b>CTRL+g</b> 
+    para voltar uma p&aacute;gina e a tecla <b>j</b> para encerrar o aplicativo. &Eacute; importante observar 
+    que as teclas padr&atilde;o do aplicativo <i>less</i> que n&atilde;o s&atilde;o modificadas pelo comando 
+    <b>lesskey</b> podem ainda ser usadas dentro do paginador.
+    As teclas definidas acima no arquivo <i>teste</i> s&oacute; poder&atilde;o ser utilizadas no <i>less</i> 
+    ap&oacute;s a execu&ccedil;&atilde;o do comando
+    <blockquote class="t1">lesskey teste</blockquote>
+    Este comando cria o arquivo <i>.less</i> no diret&oacute;rio <b><a href="dir_home.html">home</a></b> do 
+    usu&aacute;rio. Portanto, basta deletar este arquivo para desabilitar as novas teclas.
+<li>Por padr&atilde;o, as novas defini&ccedil;&otilde;es para o <i>less</i> ficam no arquivo <i>.less</i>.
+    Mas &eacute; poss&iacute;vel usar um arquivo com outro nome. Para criar o arquivo <i>aluno</i> a partir do 
+    arquivo <i>teste</i>, basta digitar
+    <blockquote class="t1">lesskey -o aluno teste</blockquote>
+    Em seguida, &eacute; preciso definir a <b><a href="variaveis.html">vari&aacute;vel de ambiente</a></b> 
+    LESSKEY. 
+    <blockquote class="t1">export LESSKEY=~/aluno</blockquote>
+    Neste exemplo, assume-se que o arquivo foi criado no diret&oacute;rio raiz do usu&aacute;rio.</p>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

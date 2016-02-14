@@ -1,0 +1,115 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>mkswap</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="mkswap">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>mkswap</h1>
+   
+<blockquote><b><font size="+1">mkswap [op&ccedil;&otilde;es] dispositivo [bloco]</font></b></blockquote>
+<ul>
+<li>O argumento <i>dispositivo</i> pode ser uma parti&ccedil;&atilde;o de disco (ex: /dev/sdb7) ou um arquivo.
+<li>O argumento <i>bloco</i> &eacute; a quantidade de blocos de 1024 bytes usada pelo sistema de arquivos.
+    Se este par&acirc;metro n&atilde;o for fornecido, o <i>mswap</i> usar&aacute; toda a parti&ccedil;&atilde;o 
+    ou todo o arquivo. Este par&acirc;metro &eacute; considerado sup&eacute;rfluo e &eacute; mantido apenas
+    por quest&atilde;o de compatibilidade com os sistemas mais antigos (portanto, &eacute; aconselh&aacute;vel
+    n&atilde;o us&aacute;-lo).
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando configura uma &aacute;rea de troca (<i>swap</i>) do Linux.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-c</b> : verifica a exist&ecirc;ncia de blocos ruins antes de criar o sistema de arquivos.
+<li><b>-h</b> ou <b>--help</b> : lista as op&ccedil;&otilde;es dispon&iacute;veis com o comando.
+<li><b>-U UUID</b> ou <b>--uuid UUID</b> : especifica o <b><a href="uuid.html">UUID</a></b> a ser usado.
+<li><b>--version</b> : exibe informa&ccedil;&atilde;o sobre o comando. 
+</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Antes de criar uma &aacute;rea de <i>swap</i>, &eacute; preciso verificar o tamanho de p&aacute;gina
+    usada no sistema. Podemos obter esta inform&ccedil;&atilde;o no arquivo 
+    <b><a href="dir_proc.html#cpuinfo">/proc/cpuinfo</a></b>. O comando <i>swap</i> n&atilde;o aceita
+    criar uma &aacute;rea menor que 10 p&aacute;ginas, mas n&atilde;o existe limite m&aacute;ximo de tamanho.
+<li>Para obter informa&ccedil;&otilde;es sobre a &aacute;rea de <i>swap</i> utilizada no seu sistema,
+    basta ver o conte&uacute;do do arquivo <b><a href="dir_proc.html#swaps">/proc/swaps</a></b>.
+    Abaixo &eacute; mostrado um poss&iacute;vel exemplo. 
+    <blockquote class="t2">
+    <table class="t2" cellpadding=3>
+    <tr><td>Filename </td><td>Type     </td><td>Size    </td><td>Used</td><td>Priority</td></tr>
+    <tr><td>/dev/sda5</td><td>partition</td><td>2085884	</td><td>0   </td><td>-1      </td></tr>
+    </table>
+    </blockquote>
+    Note que, neste caso, a &aacute;rea de <i>swap</i> &eacute; a parti&ccedil;&atilde;o de disco /dev/sda5
+    com tamanho de 2GBytes (s&atilde;o 2085884 blocos de 1024 bytes).
+<li>Pode-se tamb&eacute;m obter informa&ccedil;&otilde;es sobre a &aacute;rea de <i>swap</i> com o comando
+    <b><a href="fdisk.html">fdisk</a></b>, basta digitar
+    <blockquote class="t1">sudo fdisk -l</blockquote>
+    Uma poss&iacute;vel resposta &eacute; mostrada abaixo.
+    <blockquote class="t2">
+    Disco /dev/sda: 200.0 GB, 200049647616 bytes<br>
+    255 heads, 63 sectors/track, 24321 cylinders, total de 390721968 setores <br>
+    Unidades = setores de 1 * 512 = 512 bytes <br>
+    Sector size (logical/physical): 512 bytes / 512 bytes <br>
+    I/O size (minimum/optimal): 512 bytes / 512 bytes <br>
+    Identificador do disco: 0x00013dad <br>
+    <br>
+    <table class="t2" cellpadding=3>
+    <tr><td>Dispositivo</td><td>Boot</td><td>Início   </td><td>Fim      </td><td>Blocos   </td><td>Id</td><td>Sistema</td></tr>
+    <tr><td>/dev/sda1  </td><td>*   </td><td>    2048 </td><td>386547711</td><td>193272832</td><td>83</td><td>Linux</td></tr>
+    <tr><td>/dev/sda2  </td><td>    </td><td>386549758</td><td>390721535</td><td>2085889  </td><td>5 </td><td>Estendida</td></tr>
+    <tr><td>/dev/sda5  </td><td>    </td><td>386549760</td><td>390721535</td><td>2085888  </td><td>82</td><td>Linux swap / Solaris</td></tr>
+    </table>
+    </blockquote>
+
+<li>Ap&oacute;s criar a &aacute;rea de <i>swap</i>, &eacute; preciso usar o comando <b><a href="swapon.html">swapon</a></b>
+    para inicializ&aacute;-la.
+<li>Para configurar um arquivo de <i>swap</i> (ao inv&eacute;s de uma parti&ccedil;&atilde;o) devemos executar a seguinte    
+    sequ&ecirc;ncia de comandos:
+    <blockquote class="t1">
+    dd if=/dev/zero of=swapfile bs=1024 count=65536<br>
+    mkswap swapfile 65536<br>
+    sync<br>
+    swapon swapfile<br>
+    </blockquote>
+    O comando <b><a href="dd.html">dd</a></b> cria o arquivo de <i>swap</i>. O comando <i>mkswap</i> configura o arquivo 
+    para <i>swap</i>. O comando <b><a href="sync.html">sync</a></b> atualiza o arquivo criado. O comando 
+    <b><a href="swapon.html">swapon</a></b> habilita o arquivo criado para ser &aacute;rea de <i>swap</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

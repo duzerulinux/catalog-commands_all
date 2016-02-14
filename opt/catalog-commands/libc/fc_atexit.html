@@ -1,0 +1,135 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>atexit()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="atexit()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>atexit( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta fun&ccedil;&atilde;o chama outra fun&ccedil;&atilde;o quando o processo termina normalmente.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<p>
+<blockquote class="t2">
+#include&lt;stdlib.h&gt;<br>
+int atexit(void (*function)(void));
+</blockquote>
+<ul>
+<li>O argumento <i>function</i> corresponde &agrave; fun&ccedil;&atilde;o a ser chamada quando o processo termina normalmente.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>A fun&ccedil;&atilde;o retorna zero em caso de sucesso e um valor n&atilde;o zero em caso de erro.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include&lt;stdio.h&gt; <br>
+2. #include&lt;stdlib.h&gt; <br>
+3. void teste_atexit() <br>
+4. &nbsp;&nbsp;&nbsp;{ <br>
+5. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Programa terminou sem erros\n"); <br>
+6. &nbsp;&nbsp;&nbsp;} <br>
+7. int main () <br>
+8. &nbsp;&nbsp;&nbsp;{ <br>
+9. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; atexit(teste_atexit); <br>
+10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Inicio do programa\n"); <br>
+11.&nbsp;&nbsp;&nbsp;}
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/atexit.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 2 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>stdlib.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da fun&ccedil;&atilde;o <i>atexit( )</i>.
+    </ul>
+<li><b>Linhas de 3 a 6 :</b> fun&ccedil;&atilde;o chamada por <i>atexit( )</i>.
+<li><b>Linha 7 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 9 a linha 10.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+   <blockquote class="t1">
+   gcc -o atexit atexit.c
+   </blockquote>
+Para executar, basta digitar
+   <blockquote class="t1">
+   ./atexit
+   </blockquote>
+A sa&iacute;da gerada pelo programa &eacute; mostrada abaixo.
+  <blockquote class="t2">
+  Inicio do programa <br>
+  Programa terminou sem erros
+  </blockquote>
+</p>
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>N&atilde;o h&aacute; necessidade da exist&ecirc;ncia de uma fun&ccedil;&atilde;o <a href="fc_exit.html"><b>exit( )</b></a>
+    no programa para que a fun&ccedil;&atilde;o definida em <i>atexit( )</i> seja chamada. Basta que o t&eacute;rmino da 
+    execu&ccedil;&atilde;o seja normal.
+<li>Quando um erro ocorre durante a execu&ccedil;&atilde;o, o sistema coloca o c&oacute;digo do erro na vari&aacute;vel externa
+    <a href="vr_errno.html"><b>errno</b></a>.
+<li>N&atilde;o &eacute; poss&iacute;vel passar argumentos para a fun&ccedil;&atilde;o chamada com <i>atexit()</i>.
+<li>Se v&aacute;rias fun&ccedil;&otilde;es s&atilde;o registradas com <i>atexit( )</i>, elas s&atilde;o chamadas na ordem inversa
+    em que foram registradas.
+<li>A fun&ccedil;&atilde;o <i>atexit( )</i> faz parte da <a href="../biblioteca_c.html"><b>biblioteca pad&atilde;o C</b></a>.
+    Por isso, &eacute; prefer&iacute;vel o uso dessa fun&ccedil;&atilde;o ao uso da fun&ccedil;&atilde;o
+    <a href="fc_on_exit.html"><b>on_exit()</b></a>.
+</ul>
+
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

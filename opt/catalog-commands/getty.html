@@ -1,0 +1,81 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>getty</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="getty">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>getty</h1>
+   
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>O <i>getty</i> &eacute;  o  segundo  dos  tr&ecirc;s  programas (<b><a href="init.html">init</a></b>, <i>getty</i> e 
+<b><a href="login.html">login</a></b>) usados pelo sistema para permitir o acesso dos usu&aacute;rios. Ele &eacute; iniciado
+pelo processo <i>init</i> para:
+<ol>
+<li>Abrir as linhas <a href="tty.html"><b>tty</b></a> e configurar o seu modo de funcionamento.
+<li>Imprimir a identifica&ccedil;&atilde;o de acesso ao sistema e receber o nome do usu&aacute;rio.
+<li>Iniciar o processo <i>login</i> para o usu&aacute;rio.
+</ol>
+
+<p>Na realidade, o <i>getty</i> &eacute; um programa que gerencia um terminal. Seu objetivo &eacute; proteger o
+sistema de acesso n&atilde;o autorizado. Os terminais gerenciados pelos processos <i>getty</i> s&atilde;o implementados
+como <b><a href="consoles.html">consoles virtuais</a></b>. Por padr&atilde;o, o DuZeru inicializa seis 
+consoles virtuais com o processo <i>getty</i> que podem ser acessadas usando as teclas de <i>Ctrl+Alt+F1</i> a 
+<i>Ctrl+Alt+F6</i>, enquanto as teclas <i>CTRL+ALT+F7</i> est&atilde;o associadas &agrave; interface gr&aacute;fica.</p>
+
+<p>Pode-se usar o comando <b><a href="ps.html">ps -au</a></b> para ver os processos iniciados pelo aplicativo <i>getty</i>.
+
+<blockquote class="t2">
+<table class="t2" cellpadding=3>
+<tr><td>USER</td><td>PID</td><td> %CPU</td><td>%MEM</td><td>VSZ  </td><td>RSS</td><td>TTY </td><td>STAT</td><td>START</td><td>TIME</td><td>COMMAND</td></tr>
+<tr><td>root</td><td>867</td><td> 0.0 </td><td>0.0 </td><td>4632 </td><td>824</td><td>tty4</td><td>Ss+</td><td>14:52</td><td>0:00</td><td>/sbin/getty -8 38400 tty4</td></tr>
+<tr><td>root</td><td>874</td><td> 0.0 </td><td>0.0 </td><td>4632 </td><td>824</td><td>tty5</td><td>Ss+</td><td>14:52</td><td>0:00</td><td>/sbin/getty -8 38400 tty5</td></tr>
+<tr><td>root</td><td>881</td><td> 0.0 </td><td>0.0 </td><td>4632 </td><td>820</td><td>tty2</td><td>Ss+</td><td>14:52</td><td>0:00</td><td>/sbin/getty -8 38400 tty2</td></tr>
+<tr><td>root</td><td>882</td><td> 0.0 </td><td>0.0 </td><td>4632 </td><td>820</td><td>tty3</td><td>Ss+</td><td>14:52</td><td>0:00</td><td>/sbin/getty -8 38400 tty3</td></tr>
+<tr><td>root</td><td>886</td><td> 0.0 </td><td>0.0 </td><td>4632 </td><td>820</td><td>tty6</td><td>Ss+</td><td>14:52</td><td>0:00</td><td>/sbin/getty -8 38400 tty6</td></tr>
+<tr><td>root</td><td>1132</td><td>5.1 </td><td>1.1 </td><td>51884</td><td>22648</td><td>tty7</td><td>Ss+</td><td>14:52</td><td>9:19</td><td>/usr/bin/X :0</td></tr>
+<tr><td>root</td><td>1145</td><td>0.0</td><td>0.0</td><td>4632</td><td>828</td><td>tty1</td><td>Ss+</td><td>14:52</td><td>0:00</td><td>/sbin/getty -8 38400 tty1</td></tr>
+</table>
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O nome <i>getty</i> significa "get teletype".
+<li>O arquivo <b><a href="dir_etc.html#issue">/etc/issue</a></b> &eacute; usado pelo <i>getty</i> para fornecer   
+    informa&ccedil;&otilde;es no login local, enquanto o arquivo <b><a href="dir_etc.html#issuenet">/etc/issue.net</a></b>
+    fornece informa&ccedil;&otilde;es no login remoto.
+<li>O DuZeru tamb&eacute;m disponibiliza o programa "agetty" (<i>alternative getty</i>) para inicializar os terminais virtuais. 
+    Esta vers&atilde;o do <i>getty</i> tem a vantagem de n&atilde;o usar arquivos de configura&ccedil;&atilde;o, pois os 
+    par&acirc;metros s&atilde;o fornecidos na linha de comando.
+ </ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

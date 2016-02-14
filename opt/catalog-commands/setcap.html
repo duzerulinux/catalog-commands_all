@@ -1,0 +1,101 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>setcap</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="setcap">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>setcap</h1>
+
+<blockquote><b><font size="+1">  setcap [op&ccedil;&otilde;es] arquivo</font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando permite alterar/incluir/deletar capacidades de <a href="arquivo.html"><b>arquivos</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-&nbsp;</b>  : as capacidades s&atilde;o lidas da entrada padr&atilde;o.
+<li><b>-q</b> : n&atilde;o mostra mensagens do comando.
+<li><b>-r</b> : remove capacidades.
+<li><b>-h</b> : exibe as op&ccedil;&otilde;es do comando.
+<li><b>-v</b> : permite fornecer mais de um arquivo na linha de comandos.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Operadores e Flags</h2>
+
+<p>A tabela abaixo mostra as opera&ccedil;&otilde;es permitidas com o comand <i>setcap</i>.</p>
+
+<table class="t2" rules=all align=center cellpadding=5>
+<tr class="t1"><td><b>Operador</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td align=center>  =     </td><td>Define capacidades     </td></tr>
+<tr><td align=center>  +     </td><td>Inclui capacidades     </td></tr>
+<tr><td align=center>  -     </td><td>Deleta capacidades     </td></tr>
+</table>
+
+<p>Pode definir capacidades de tr&ecirc;s tipos como mostradas na tabela abaixo.</p>
+
+<table class="t2" rules=all align=center cellpadding=5>
+<tr class="t1"><td><b>Flag</b></td><td><b>Descri&ccedil;&atilde;o</b>                    </td></tr>
+<tr><td align=center>  e      </td><td>Capacidades efetivas                              </td></tr>
+<tr><td align=center>  i      </td><td>Capacidades herd&aacute;veis (<i>inheritable</i>) </td></tr>
+<tr><td align=center>  p      </td><td>Capacidades permitidas                            </td></tr>
+</table>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Para permitir que o comando <i>ping</i> possa abrir soquetes de rede e transmitir/receber pacotes de dados, digite
+    <blockquote class="t1">sudo setcap cap_net_raw+p /bin/ping</blockquote>
+    &Eacute; poss&iacute;vel incluir capacidades para mais de um arquivo usando o mesmo comando.
+    <blockquote class="t1">sudo setcap cap_net_raw+p /bin/ping cap_net_raw+p /usr/bin/crontab</blockquote>
+<li>O comando abaixo adiciona as capacidades <i>cap_dac_override</i> e <i>cap_sys_tty_config</i> para as capacidades efetivas
+    e para as capacidades permitidas.
+    <blockquote class="t1">sudo setcap cap_dac_override,cap_sys_tty_config+ep /bin/ping</blockquote>
+<li>Para adicionar todas as capacidades poss&iacute;veis para as capacidades efetivas e para as capacidades permitidas, use o comando abaixo.
+    <blockquote class="t1">sudo setcap all+ep /bin/ping</blockquote>
+<li>Para remover as capacidades do comando <i>ping</i>, basta digitar
+    <blockquote class="t1">sudo setcap -r /bin/ping</blockquote>
+    &Eacute; poss&iacute;vel remover as capacidades de mais de um arquivo usando o mesmo comando.
+    <blockquote class="t1">sudo setcap -r /bin/ping -r /usr/bin/crontab</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O comando <a a href="getcap.html"><b>getcap</b></a> informa quais as capacidades dos arquivos.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

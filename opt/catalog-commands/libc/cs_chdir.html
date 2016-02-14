@@ -1,0 +1,171 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>chdir()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="chdir()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>chdir( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta <a href="../chamadas.html"><b>chamada de sistema</b></a> altera o diret&oacute;rio de trabalho do 
+<a href="../processo.html"><b>processo</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<p>
+<blockquote class="t2">
+#include&lt;unistd.h&gt;<br>
+int chdir(const char *path);
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Se a chamada &eacute; executada com sucesso, o valor zero &eacute; retornado. Caso a chamada n&atilde;o
+seja bem sucedida, o valor -1 &eacute; retornado e o c&oacute;digo do erro &eacute; colocado na vari&aacute;vel externa 
+<b><a href="vr_errno.html">errno</a></b>. A tabela abaixo mostra alguns erros que podem ocorrer com esta chamada.</p>
+
+<blockquote>
+<table class="t2" rules=all cellpadding=10 cellspacing=10 align=center width=650>
+<tr class="t1"><td><b>Erro</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td>EACCES       </td><td>Permiss&atilde;o de acesso negada</td></tr>
+<tr><td>EBADF        </td><td>Descritor de arquivo n&atilde;o v&aacute;lido</td></tr>
+<tr><td>EFAULT       </td><td>Problema com o endere&ccedil;o de mem&oacute;ria</td></tr>
+<tr><td>EIO          </td><td>Erro de I/O</td></tr>
+<tr><td>ELOOP        </td><td>Muitos links simb&oacute;licos no caminho do arquivo</td></tr>
+<tr><td>ENAMETOOLONG </td><td>Caminho longo demais</td></tr>
+<tr><td>ENOENT       </td><td>Arquivo n&atilde;o existe</td></tr>
+<tr><td>ENOMEM       </td><td>Mem&oacute;ria dispon&iacute;vel insuficiente</td></tr>
+<tr><td>ENOTDIR      </td><td>Um componente no caminho do arquivo n&atilde;o &eacute; diret&oacute;rio</td></tr>
+</table>
+</blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include&lt;unistd.h&gt;<br>
+2. #include&lt;stdio.h&gt;<br>
+3. #include&lt;stdlib.h&gt;<br>
+4. #include&lt;string.h&gt;<br>
+5. #include&lt;errno.h&gt;<br>
+6. int main()<br>
+7. {<br>
+8. &nbsp;&nbsp;&nbsp; if (chdir("/boot") == -1)<br>
+9. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro chdir(/etc) %d: %s\n", errno, strerror(errno));<br>
+11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 1;<br>
+12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+13.&nbsp;&nbsp;&nbsp; system("pwd");<br>
+14.&nbsp;&nbsp;&nbsp; if (chdir("grub") == -1)<br>
+15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro chdir(grub) %d: %s\n", errno, strerror(errno));<br>
+17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 1;<br>
+18.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+19.&nbsp;&nbsp;&nbsp; system("pwd");<br>
+20.&nbsp;&nbsp;&nbsp; if (chdir(getenv("HOME")) == -1)<br>
+21.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br>
+22.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro chdir(HOME) %d: %s\n", errno, strerror(errno));<br>
+23.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 1;<br>
+24.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+25.&nbsp;&nbsp;&nbsp; system("pwd");<br>
+26.}
+</blockquote>
+</p>
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/chdir.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 5 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>unistd.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das <a href="../chamadas.html"><b>chamadas de sistema</b></a>.
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>stdlib.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es 
+        <a href="fc_system.html"><b>system( )</b></a> e <a href="fc_getenv.html"><b>getenv( )</b></a>.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror( )</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro.
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+   </ul>
+<li><b>Linha 6 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 8 a linha 25.
+<li><b>Linhas de 8 a 12 :</b> altera o diret&oacute;rio de trabalho do processo para <a href="../dir_boot.html"><b>/boot</b></a>. 
+    Neste caso, &eacute; fornecido um caminho absoluto (n&atilde;o depende do diret&oacute;rio atual de trabalho).
+<li><b>Linha 6 :</b> exibe o diret&oacute;rio de trabalho do processo.
+<li><b>Linhas de 14 a 18 :</b> altera o diret&oacute;rio de trabalho do processo para o diret&oacute;rio <i>grub</i> que est&aacute; 
+    dentro do diret&oacute;rio atual de trabalho. Neste caso, &eacute; fornecido um caminho relativo.
+<li><b>Linha 19 :</b> exibe o diret&oacute;rio de trabalho do processo.
+<li><b>Linhas de 20 a 25 :</b> altera o diret&oacute;rio de trabalho do processo para o diret&oacute;rio 
+    <a href="../dir_home.html"><b>home</b></a> do usu&aacute;rio. Neste caso, &eacute; fornecido um caminho absoluto.
+<li><b>Linha 25 :</b> exibe o diret&oacute;rio de trabalho do processo.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+    <blockquote class="t1">
+    gcc -o chdir chdir.c
+    </blockquote>
+E para executar, basta dgitar
+    <blockquote class="t1">
+    ./chdir 
+    </blockquote>
+A resposta do programa &eacute; mostrada abaixo para o usu&aacute;rio aluno.
+    <blockquote class="t2">
+    /boot<br>
+    /boot/grub<br>
+    /home/aluno
+    </blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O diret&oacute;rio atual de trabalho &eacute; usado como ponto de partida para interpretar caminhos relativos.
+<li>Um processo-filho, criado via <a href="cs_fork.html"><b>fork( )</b></a>, herda o diret&oacute;rio atual de trabalho do processo-pai.
+<li>A chamada <a href="cs_execve.html"><b>execve( )</b></a> n&atilde;o altera o diret&oacute;rio de trabalho do processo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

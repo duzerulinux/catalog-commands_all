@@ -1,0 +1,90 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>addgroup</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="addgroup">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+
+
+<h1>addgroup</h1>
+
+<blockquote><b><font size="+1"> addgroup [options] grupo </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p> Este comando adiciona um grupo ao sistema. O grupo &eacute; criado sem usu&aacute;rios.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>--gid ID</b> : especifica o <a href="gid.html"><b>GID</b></a> do grupo sendo criado.
+<li><b>--system</b> : especifica que o grupo a ser criado &eacute do sistema (o valor do GID ser&aacute;, 
+    por padr&atilde;o, menor que 1000).
+<li><b>--version</b> : mostra informa&ccedil;&atilde;o de vers&atilde;o e copyright.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2> Exemplos </h2>
+
+<ul>
+<li>Para criar o grupo <i>alunos</i>, basta digitar:
+       <blockquote class="t1">addgroup alunos</blockquote>
+    O sistema ent&atilde;o aloca um n&uacutemero de <a href="gid.html"><b>GID</b></a> para o novo grupo e cria
+    uma entrada em <a href="dir_etc.html#group"><b>/etc/group</b></a>. Quando se usa aloca&ccedil;&atilde;o din&acirc;mica
+    de GID, os valores ficam entre 1000 e 29999 para o grupo normal (n&atilde;o &eacute; grupo especial). Logo, se o grupo 
+    <i>alunos</i> &eacute; o primeiro a ser criado, ele ter&aacute; GID igual a 1001, pois o valor 1000 j&aacute; foi alocado
+    para o grupo do usu&aacute;rio que instalou o sistema. Por padr&atilde;o, os valores menores que 1000
+    de GID s&atilde;o reservados para o sistema (grupos especiais). Mas nada impede que o administrador aloque esses 
+    valores se eles estiverem dispon&iacute;veis.
+<li>Para criar o grupo alunos com GID 2000, basta digitar:
+    <blockquote class="t1">sudo addgroup --gid 2000 alunos</blockquote>
+<li>Para incluir o usu&aacute;rio <i>aluno</i> no grupo <i>teste</i>, onde tanto o usu&aacute;rio quanto o aluno j&aacute; 
+    existem, digite
+    <blockquote class="t1">sudo addgroup aluno teste</blockquote>
+
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A configura&ccedil;&atilde;o padr&atilde;o usada pelo comando <i>addgroup</i> pode ser encontrada
+  em <a href="dir_etc.html#adduser"><b>/etc/adduser.conf</b></a>.
+<li>O comando <i>addgroup</i> normalmente exige o uso do comando <b><a href="sudo.html">sudo</a></b>.
+<li>&Eacute; poss&iacute;vel usar o comando <a href="adduser.html"><b>adduser</b></a> com a op&ccedil;&atilde;o  <i>--group</i>
+    para criar um grupo.
+<li>O comando <a href="groupadd.html"><b>groupadd</b></a> cria um novo grupo de usu&aacute;rios no sistema de forma 
+    id&ecirc;ntica ao comando <i>addgroup</i>.
+<li>Os comandos <b><a href="delgroup.html">delgroup</a></b> e <b><a href="groupdel.html">groupdel</a></b>
+    deletam grupos do sistema.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>sprintf()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="sprintf()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>sprintf( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta fun&ccedil;&atilde;o formata uma string.
+   
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include&lt;stdio.h&gt;<br>
+int sprintf(char *str, const char *format, ...);
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Em caso de sucesso, a fun&ccedil;&atilde;o retorna o n&uacute;mero de caracteres da string formatada. Em caso de erro, 
+um valor negativo &eacute; retornado.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include&lt;stdio.h&gt;<br>
+2. #include&lt;stdlib.h&gt;<br>
+3. #include&lt;string.h&gt;<br>
+4. #include&lt;errno.h&gt;<br>
+5. int main()<br>
+6. {<br>
+7. &nbsp;&nbsp;&nbsp; int ret;<br>
+8. &nbsp;&nbsp;&nbsp; char dir[15] = "/etc/passwd";<br>
+9. &nbsp;&nbsp;&nbsp; char comando[100];<br>
+10.&nbsp;&nbsp;&nbsp; ret = sprintf(comando, "ls -l %s", dir);<br>
+11.&nbsp;&nbsp;&nbsp; printf("ret = %d\n", ret);<br>
+12.&nbsp;&nbsp;&nbsp; ret = system(comando);<br>
+13.&nbsp;&nbsp;&nbsp; if (ret == -1)<br>
+14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro system() %d: %s\n", errno, strerror(errno));<br>
+15.&nbsp;&nbsp;&nbsp; else<br>
+16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Exemplo executado com sucesso\n");<br>
+17.}
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/sprintf.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 4 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>stdlib.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da fun&ccedil;&atilde;o <a href="fc_system.html"><b>system( )</b></a>.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror( )</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro.
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+   </ul>
+<li><b>Linha 5 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 7 a linha 16.
+<li><b>Linhas de 7 a 9:</b> define as vari&aacute;veis usadas no programa.
+<li><b>Linha 10 :</b> formata a string <i>comando</i>.
+<li><b>Linha 11 :</b> exibe o valor de retorno da fun&ccedil;&atilde;o <i>sprintf( )</i>.
+<li><b>Linhas de 12 a 16 :</b> usa <a href="fc_system.html"><b>system( )</b></a> para executar o comando formatado com a 
+       fun&ccedil;&atilde;o <i>sprintf( )</i>.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+    <blockquote class="t1">
+    gcc -o sprintf sprintf.c 
+    </blockquote>
+Para executar, entre com
+    <blockquote class="t1">
+    ./sprintf
+    </blockquote>
+Abaixo &eacute; apresentada a resposta obtida com o programa. Note que o comando "ls -l /etc/passwd" tem 17 caracteres.
+    <blockquote class="t2">
+    ret = 17 <br>
+    -rw-r--r-- 1 root root 1925 Mar 14 18:00 /etc/passwd<br>
+    Exemplo executado com sucesso
+    </blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<p>
+<ul>
+<li>A fun&ccedil;&atilde;o <i>sprintf( )</i> formata uma cadeia de caracteres interpretando as diretivas '%'. S&atilde;o exemplos
+    de diretivas que podem ser usadas na fun&ccedil;&atilde;o <i>sprintf( )</i>:<br><br>
+    <table class="t1" rules=all align="center" cellpadding=10 cellspacing=10 width=650>
+    <tr class="t1"><td><b>Formato</b></td><td><b>Significado</b></td></tr>
+    <tr><td align="center">%a</td><td>hexadecimal ponto flutuante, letra min&uacute;scula</td></tr> 
+    <tr><td align="center">%A</td><td>hexadecimal ponto flutuante, letra mai&uacute;scula</td></tr> 
+    <tr><td align="center">%c</td><td>caractere (tipo <i>char</i>)</td></tr> 
+    <tr><td align="center">%d</td><td>valor inteiro (tipo <i>int</i>)</td></tr>
+    <tr><td align="center">%e</td><td>nota&ccedil;&atilde;o cient&iacute;fica, letra min&uacute;scula</td></tr>
+    <tr><td align="center">%E</td><td>nota&ccedil;&atilde;o cient&iacute;fica, letra mai&uacute;scula</td></tr>
+    <tr><td align="center">%f</td><td>valor com ponto flutuante (tipo <i>float</i>), letra min&uacute;scula</td></tr> 
+    <tr><td align="center">%F</td><td>valor com ponto flutuante (tipo <i>float</i>), letra mai&uacute;scula</td></tr> 
+    <tr><td align="center">%g</td><td>usa a menor representa&ccedil;&atilde;o (%e ou %f)</td></tr> 
+    <tr><td align="center">%G</td><td>usa a menor representa&ccedil;&atilde;o (%E ou %F)</td></tr> 
+    <tr><td align="center">%i</td><td>valor inteiro (tipo <i>int</i>)</td></tr>
+    <tr><td align="center">%ld</td><td>valor inteiro longo (tipo <i>long int</i>)</td></tr>
+    <tr><td align="center">%lu</td><td>valor decimal longo (tipo <i>unsigned long int</i>)</td></tr>
+    <tr><td align="center">%o</td><td>valor octal (tipo <i>unsigned int</i>)</td></tr> 
+    <tr><td align="center">%s</td><td>string (tipo <i>*char</i>)</td></tr> 
+    <tr><td align="center">%u</td><td>valor decimal sem sinal (tipo <i>unsigned int</i>)</td></tr> 
+    <tr><td align="center">%x</td><td>valor hexadecimal (tipo <i>unsigned int</i>)</td></tr> 
+    </table>
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

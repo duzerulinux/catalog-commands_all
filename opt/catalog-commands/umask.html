@@ -1,0 +1,98 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>umask</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="umask">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>umask</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Quando o usu&aacute;rio cria um arquivo (diret&oacute;rio), o sistema associa ao
+objeto criado um conjunto de <b><a href="permissao.html">permiss&otilde;es de acesso</a></b>.
+Estas permiss&otilde;es indicam quem pode ler, alterar e/ou executar (acessar) o arquivo 
+(diret&oacute;rio).</p>
+
+<p>Por padr&atilde;o, 
+
+<ul>
+<li>as permiss&otilde;es iniciais de um arquivo s&atilde;o 0666 (leitura e grava&ccedil;&atilde;o para todo e 
+    qualquer usu&aacute;rio do sistema);
+<li>as permiss&otilde;es iniciais de um diret&oacute;rio s&atilde;o 0777 (leitura, grava&ccedil;&atilde;o e acesso
+    para todo e qualquer usu&aacute;rio do sistema).
+</ul>
+
+<p>Quando um usu&aacute;rio cria um arquivo (ou diret&oacute;rio), o sistema associa a este arquivo (diret&oacute;rio) o 
+resultado da opera&ccedil;&atilde;o
+    <blockquote class="t2">"permiss&atilde;o padr&atilde;o" <i>AND</i> !umask</blockquote>
+onde <i>umask</i> tem as permiss&otilde;es n&atilde;o liberadas para os usu&aacute;rios.</p>
+
+<p>Por exemplo, considerando a permiss&atilde;o padr&atilde;o 6 (bin&aacute;rio 110) para o dono de um arquivo e o valor 3 (bin&aacute;rio 011)
+na posi&ccedil;&atilde;o correspondente do <i>umask</i>, temos
+    <blockquote class="t2">110 AND !011 = 110 AND 100 = 100</blockquote>
+Isto significa que o dono s&oacute; tem permiss&atilde;o para leitura quando cria um arquivo.</p> 
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Para verificar a configura&ccedil;&atilde;o atual de umask, basta digitar na linha de comando
+    <blockquote class="t1">umask</blockquote>
+    Abaixo &eacute; mostrada a defini&ccedil;&atilde;o padr&atilde;o do Linux.
+    <blockquote class="t2">0002</blockquote>
+<li>Suponha que o usu&aacute;rio <i>aluno</i> tenha umask igual a 0002. Quando este usu&aacute;rio cria
+    o arquivo <i>teste</i>, as permiss&otilde;es do arquivo ent&atilde;o corresponde ao valor 0664.
+    <blockquote class="t2">
+    -rw-rw-r--   1 aluno aluno  0 May 28 17:20 teste
+    </blockquote>
+<li>Para alterar o valor de umask, basta incluir o novo valor ap&oacute;s o comando umask. 
+    Por exemplo, o comando
+    <blockquote class="t1">umask 0036</blockquote>
+    define que, por padr&atilde;o, novos arquivos ter&atilde;o permiss&atilde;o 0640, enquanto novos 
+    diret&oacute;rios ter&atilde;o permiss&atilde;o 0741. Abaixo, um arquivo e um diret&oacute;rio criados 
+    com estas permiss&otilde;es.
+    <blockquote class="t2">
+    <table cellpadding=2>
+    <tr><td>-rw-r----- 1 </td><td>aluno aluno</td><td align="right"> 1024</td><td> Fev 12 20:45 arq_teste</td></tr>
+    <tr><td>drwxr----x 2 </td><td>aluno aluno</td><td align="right"> 4096</td><td> Fev 12 20:47 dir_teste</td></tr>
+    </table>
+    </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="chmod.html">chmod</a></b> - altera as permiss&otilde;es de acesso de arquivos/diret&oacute;rios.
+<li><b><a href="permissao.html">permiss&atilde;o de acesso</a></b> - autoriza&ccedil;&atilde;o para ler/gravar/executar
+    um arquivo/diret&oacute;rio do sistema.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

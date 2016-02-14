@@ -1,0 +1,77 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>killall</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="killall">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>killall</h1>
+
+<blockquote><font size="+1"><b>killall [op&ccedil;&otilde;es] [nome]</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando envia um determinado <b><a href="sinal.html">sinal</a></b> a um conjunto de <b><a href="processo.html">processos</a></b> 
+que usam o mesmo nome.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-e nome</b> : procura pelo nome que seja igual (exato) ao especificado. Se o nome tiver mais de 15 caracteres, apenas os primeiros
+    15 caracteres s&atilde;o comparados.
+<li><b>-i</b> : pede confirma&ccedil;&atilde;o antes de matar o processo.
+<li><b>-l</b> : lista os sinais que podem ser enviados a um processo junto com o comando <i>killall</i>.
+<li><b>-s sinal</b> ou <b>-sinal</b> : define outro sinal a ser enviado aos processos ao inv&eacute;s do sinal TERM.
+<li><b>-u usu&aacute;rio</b> : mata apenas os processos de determinado usu&aacute;rio.
+<li><b>-v</b> : informa se o sinal foi enviado com sucesso.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>O comando
+<blockquote class="t1">killall -9 firefox</blockquote>
+mata todos os processos relacionados ao firefox. O uso do <a href="sinal.html"><b>sinal</b></a> 9 (SIGKILL) informa
+que o comando n&atilde;o pode ser ignorado pelo aplicativo. 
+<li>Para remover apenas o processo <i>firefox</i>, digite
+<blockquote class="t1">killall -e firefox</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O comando <b><a href="kill.html">kill</a></b> envia um determinado sinal a um processo em execu&ccedil;&atilde;o.
+<li>O comando <b><a href="ps.html">ps</a></b> exibe informa&ccedil;&otilde;es sobre os processos em execu&ccedil;&atilde;o.
+<li>O comando <b><a href="top.html">top</a></b> lista os processos que est&atilde;o utilizando a CPU.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

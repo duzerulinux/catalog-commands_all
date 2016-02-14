@@ -1,0 +1,130 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>perror()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="perror()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>perror( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Fun&ccedil;&atilde;o que fornece a mensagem do &uacute;ltimo erro encontrado durante a execu&ccedil;&atilde;o de uma 
+<a href="../chamadas.html"><b>chamada de sistema</b></a> ou de uma fun&ccedil;&atilde;o da 
+<a href="../biblioteca_c.html"><b>biblioteca</b></a>.</p>
+   
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include &lt;stdio.h&gt;<br>
+void perror(const char *s);
+</blockquote>
+<ul>
+<li>O argumento <b>*s</b> &eacute; um ponteiro para a string fornecida na chamada da fun&ccedil;&atilde;o. 
+    Se *s n&atilde;o &eacute; NULL e n&atilde;o &eacute; igual a '\0' (<i>null byte</i>), a mensagem &eacute; 
+    apresentada ap&oacute;s a string fornecida e de dois pontos (":"). Se nenhuma string &eacute; fornecida,
+    apenas a mensagem de erro &eacute; apresentada.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Quando um erro ocorre durante a execu&ccedil;&atilde;o, o sistema coloca o c&oacute;digo do erro na vari&aacute;vel externa
+<a href="vr_errno.html"><b>errno</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include&lt;stdio.h&gt; <br>
+2. int main() <br>
+3. &nbsp;&nbsp;&nbsp;{ <br>
+4. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FILE *arq; <br>
+5. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arq = fopen("arquivo_inexistente.txt", "r"); <br>
+6. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (arq == NULL ) <br>
+7. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <br>
+8. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;perror("Erro "); <br>
+9. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return(1); <br>
+10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fclose(arq); <br>
+12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return(0);   <br>
+13.&nbsp;&nbsp;&nbsp;}
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/perror.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas 1 :</b> &eacute; feita a inclus&atilde;o do arquivo <i>header</i> da 
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    </ul>
+<li><b>Linha 2 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o
+    da linha 4 a linha 12.
+<li><b>Linha 5 a linha 10 :</b> abre arquivo para leitura.
+<li><b>Linha 11 :</b> fecha arquivo.
+<li><b>Linha 12 :</b> termina programa e retorna zero. 
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+<blockquote class="t1">
+gcc -o perror perror.c
+</blockquote>
+Para executar,
+<blockquote class="t1">
+./perror 
+</blockquote>
+Abaixo, a sa&iacute;da do programa.
+<blockquote class="t2">
+Erro : No such file or directory
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Pode-se tamb&eacute;m usar a fun&ccedil;&atilde;o <a href="fc_strerror.html"><b>strerror( )</b></a> para ver a 
+    mensagem de erro correspondente ao valor armazenado em <i>errno</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>diretorio /proc</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="diretorio proc">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+
+<h1>/proc</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<ul>
+<li>Este diret&oacute;rio n&atilde;o &eacute; um sistema real de arquivos. Na realidade, este diret&oacute;rio &eacute; uma 
+    interface para as estruturas de dados do <a href="kernel.html"><b>kernel</b></a> que oferece informa&ccedil;&otilde;es
+    sobre os processos que est&atilde;o sendo executados.
+<li>&Eacute; importante observar que o <b>root</b> (administrador de sistema) n&atilde;o trabalha diretamente com o diret&oacute;rio
+    <b>/proc</b>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos de arquivos</h2>
+
+<ul>
+<li><b><a name="asound">asound</a></b> - Este diret&oacute;rio possui informa&ccedil;&otilde;es sobre a placa de som da m&aacute;quina.
+<li><b><a name="bus">bus</a></b> - Este diret&oacute;rio possui informa&ccedil;&otilde;es sobre dispositivos como PCI e USB.</p>
+<li><b><a name="cmdline">cmdline</a></b> - Este arquivo possui informa&ccedil;&otilde;es sobre o <b><a href="kernel.html">kernel</a></b> como,
+    por exemplo, o local de armazenamento dos arquivos e as op&ccedil;&otilde;es usadas na inicializa&ccedil;&atilde;o.</p>
+<li><b><a name="cpuinfo">cpuinfo</a></b> - Este arquivo possui as informa&ccedil;&otilde;es sobre o processador do sistema tais como modelo, 
+    capacidade, velocidade, fabricante, tamanho da cache, etc.
+<li><b><a name="devices">devices</a></b> - Este arquivo possui a lista dos dispositivos E/S ativos no sistema.
+<li><b><a name="dma">dma</a></b> - Este arquivo exibe informa&ccedil;&otilde;es sobre o DMA (<i>Direct Memory Access</i>).
+    A tecnologia DMA permite que alguns dispositivos de hardware acessem a mem&oacute;ria independentemente da CPU.
+<li><b><a name="driver">driver</a></b> - Este diret&oacute;rio possui informa&ccedil;&otilde;es sobre os drivers.
+<li><b><a name="filesystems">filesystems</a></b> - Este arquivo possui a lista dos <b><a href="sistemas_de_arquivos.html">sistemas de arquivos</a></b> 
+que a vers&atilde;o instalada do <b>Linux</b> suporta.
+<li><b><a name="fs">fs</a></b> - Este diret&oacute;rio possui informa&ccedil;&otilde;es sobre os sistemas de arquivos.
+<li><b><a name="interrupts">interrupts</a></b> - Este arquivo possui a lista das interrup&ccedil;&otilde;es (IRQs) processadas desde a 
+    inicializa&ccedil;&atilde;o do sistema.
+<li><b><a name="iomem">iomem</a></b> - Este arquivo exibe os endere&ccedil;os de mem&oacute;ria para os dispositivos de E/S.
+<li><b><a name="ioports">ioports</a></b> - Este arquivo exibe as portas dos dispositivos de E/S.
+<li><b><a name="irq">irq</a></b> - Este diret&oacute;rio possui informa&ccedil;&otilde;es sobre as IRQs (<i>Interrupt Request</i>).
+<li><b><a name="kcore">kcore</a></b> - Este arquivo &eacute; um mapeamento da mem&oacute;ria RAM. Normalmente, o tamanho deste arquivo
+    representa o tamanho total da mem&oacute;ria f&iacute;sica. Entretanto, na arquitetuta de 64 bits, o tamanho do <b>kcore</b> representa
+    a quantidade m&aacute;xima de mem&oacute;ria que a m&aacute;quina pode suportar.
+<li><b><a name="meminfo">meminfo</a></b> - Este arquivo apresenta informa&ccedil;&otilde;es sobre a mem&oacute;ria do sistema.
+<li><b><a name="modules">modules</a></b> - Este arquivo possui a lista dos <b><a href="modulos.html">m&oacute;dulos</a></b>
+    do <a href="kernel.html"><b>kernel</b></a> que est&atilde;o carregados na mem&oacute;ria.
+<li><b><a name="mounts">mounts</a></b> - Este arquivo possui a lista dos sistemas de arquivos montados (veja o comando <b><a href="mount.html">mount</a></b>).
+    Ele normalmente possui mais informa&ccedil;&otilde;es do que o arquivo <b><a href="dir_etc.html#mtab">/etc/mtab</a></b> como, por exemplo, as 
+    op&ccedil;&otilde;es de montagem usadas. Embora estas informa&ccedil;&otilde;es n&atilde;o estejam necessariamente atualizadas.
+<li><b><a name="net">net</a></b> - Este diret&oacute;rio possui informa&ccedil;&otilde;es sobre as conex&otilde;es.
+<li><b><a name="partitions">partitions</a></b> - Este arquivo exibe informa&ccedil;&otilde;es sobre as parti&ccedil;&otilde;es do sistema.
+<li><b><a name="scsi">scsi</a></b> - O arquivo <b>scsi</b> deste diret&oacute;rio possui a listagem dos equipamentos <b>scsi</b> atualmente 
+    em uso no sistema.
+<li><b><a name="swaps">swaps</a></b> - Este arquivo possui informa&ccedil;&otilde;es sobre a &aacute;rea de <b><a href="swap.html">swap</a></b> usada pelo sistema.
+<li><b><a name="sys">sys</a></b> - Este diret&oacute;rio possui informa&ccedil;&otilde;es sobre os par&acirc;metros usados pelo sistema.
+<li><b><a name="tty">tty</a></b> -Este diret&oacute;rio possui informa&ccedil;&otilde;es sobre dispositivos seriais.</p>
+<li><b><a name="uptime">uptime</a></b> - Este arquivo mostra, em segundos, o tempo que a m&aacute;quina est&aacute; ligada e o tempo de ociosidade 
+    do processador (ou processadores). Por exemplo, o conte&uacute;do
+    <blockquote class="t2">4792.58 8654.37</blockquote>
+    indica que o computador está funcionando há mais de 1 hora e que as CPUs (são duas neste exemplo) ficaram ociosas na maior parte do tempo.
+<li><b><a name="version">version</a></b> - Este arquivo possui a vers&atilde;o, a data e a hora da compila&ccedil;&atilde;o do 
+    <a href="kernel.html"><b>kernel</b></a>.
+<li><b><a name="vmstat">vmstat</a></b> - Este arquivo possui informa&ccedil;&otilde;es estat&iacute;sticas sobre a mem&oacute;ria virtual usada pelo 
+    <a href="kernel.html"><b>kernel</b></a>. Por exemplo:
+    <ul>
+    <li>N&uacute;mero de p&aacute;ginas livres na mem&oacute;ria.
+        <blockquote class="t2">pgfree 6648052</blockquote>
+    <li>N&uacute;mero de p&aacute;ginas alocadas para a tabela de p&aacute;ginas.
+        <blockquote class="t2">nr_page_table_pages 1664</blockquote>
+    <li>N&uacute;mero de p&aacute;ginas que foram levadas para a mem&oacute;ria cache (<i>pageins</i>) e n&uacute;mero de p&aacute;ginas que foram 
+        retiradas da mem&oacute;ria cache (<i>pageouts</i>) desde a inicializa&ccedil;&atilde;o da m&aacute;quina.
+        <blockquote class="t2">
+        pgpgin 455241<br>
+        pgpgout 279000
+        </blockquote>
+    <li>N&uacute;mero de p&aacute;ginas que foram levadas da &aacute;rea de <b>swap</b> do HD para a mem&oacute;ria real (<i>swap in</i>) e n&uacute;mero
+        de p&aacute;ginas que foram retiradas da mem&oacute;ria real para &aacute;rea de <b>swap</b> do HD (<i>swap out</i>) desde a inicializa&ccedil;&atilde;o
+        da m&aacute;quina.
+        <blockquote class="t2">
+        pswpin 0<br>
+        pswpout 0
+        </blockquote>
+    </ul>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Processos</h2>
+
+<p>&Eacute; poss&iacute;vel descobrir mais sobre os processos que est&atilde;o executando no sistema analisando o <b>/proc</b>.
+Por exemplo, suponha que voc&ecirc; est&aacute; interessado no processo com <b><a href="pid.html">PID</a></b> <b>3966</b>. Para 
+descobrir informa&ccedil;&otilde;es sobre esse processo, basta analisar os arquivos do diret&oacute;rio <b>/proc/3966</b>.
+
+<ul>
+<li><b>/proc/3966/cmdline</b> - este arquivo informa a linha de comando que inicializou o processo.
+<li><b>/proc/3966/cwd</b> - &eacute; um link simb&oacute;lico para o diret&oacute;rio onde o comando que iniciou o processo foi digitado.
+<li><b>/proc/3966/environ</b> - este arquivo tem as defini&ccedil;&otilde;es das <a href="variaveis.html"><b>vari&aacute;veis de ambiente</b></a> 
+    usadas na execu&ccedil;&atilde;o do processo.
+<li><b>/proc/3966/statm</b> - este arquivo possui informa&ccedil;&otilde;es sobre o uso de memória pelo processo.
+<li><b>/proc/3966/status</b> - este arquivo fornece informa&ccedil;&otilde;es como nome do processo, <b><a href="pid.html">PID</a></b>, 
+    ID do processo-pai (PPID), estado do processo (<i>Sleep</i> ou <i>Running</i>), <b><a href="uid.html">UID</a></b> e <b><a href="gid.html">GID</a></b>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Para obter mais informa&ccedil;&otilde;es sobre os arquivos do diret&oacute;rio <b>/proc</b>, use o comando "<b>man proc</b>".
+</ul>      
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

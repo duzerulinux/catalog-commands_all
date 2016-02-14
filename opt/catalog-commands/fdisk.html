@@ -1,0 +1,104 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>fdisk</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="fdisk">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>fdisk</h1>
+
+<blockquote><font size="+1"><b>fdisk [op&ccedil;&otilde;es]</b></font><br></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando manipula a tabela de parti&ccedil;&atilde;o do disco.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-b tamanho</b> : especifica o tamanho do setor. S&atilde;o valores v&aacute;lidos: 512, 1024, 2048 or 4096.
+    Usado apenas nas vers&otilde;es antigas do <b><a href="kernel.html">kernel</a></b>.
+<li><b>-C tamanho</b> : especifica o n&uacute;mero de cilindros do disco.
+<li><b>-h</b> : exibe informa&ccedil;&otilde;es sobre o <b>fdisk</b>.
+<li><b>-l</b> : lista as parti&ccedil;&otilde;es existentes no disco atual (caso o usu&aacute;rio n&atilde;o especifique o disco).
+<li><b>-s parti&ccedil;&atilde;o</b> : lista o tamanho da parti&ccedil;&atilde;o em blocos.
+<li><b>-v</b> : exibe vers&atilde;o do aplicativo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>O comando
+
+<blockquote class="t1">sudo fdisk -l</blockquote>
+
+informa sobre as parti&ccedil;&otilde;es existentes no disco.</p>
+
+<p>
+<blockquote class="t2">
+Disco /dev/sda: 200.0 GB, 200049647616 bytes<br>
+255 heads, 63 sectors/track, 24321 cylinders, total de 390721968 setores<br>
+Unidades = setores de 1 * 512 = 512 bytes<br>
+Sector size (logical/physical): 512 bytes / 512 bytes<br>
+I/O size (minimum/optimal): 512 bytes / 512 bytes<br>
+Identificador do disco: 0x00013dad<br>
+<br>
+<table class="t2" cellpadding=3>
+<tr><td>Dispositivo</td><td>Boot</td><td>Início   </td><td>Fim      </td><td>Blocos   </td><td>Id</td><td width=300>Sistema</td></tr>
+<tr><td>/dev/sda1  </td><td align=center> *  </td><td>     2048</td><td>386547711</td><td>193272832</td><td>83</td><td>Linux</td></tr>
+<tr><td>/dev/sda2  </td><td>    </td><td>386549758</td><td>390721535</td><td>2085889  </td><td>5 </td><td>Estendida</td></tr>
+<tr><td>/dev/sda5  </td><td>    </td><td>386549760</td><td>390721535</td><td>2085888  </td><td>82</td><td>Linux swap / Solaris</td></tr>
+</table>
+</blockquote>
+</p>
+
+<p>Inicialmente, &eacute; preciso entender que a configura&ccedil;&atilde;o usada pelo sistema pode ser diferente da
+   situa&ccedil;&atilde;o real do HD. Da sa&iacute;da acima, podemos tirar as seguintes conclus&otilde;es sobre como
+   o sistema ver o HD:
+<ul>
+<li>O disco tem 200 GBytes divididos em 390.721.968 setores, onde cada setor tem 512 Bytes .
+<li>Uma trilha tem 63 setores, portanto existem 390.721.968 / 63 = 6.201.936 trilhas.
+<li>Existem 255 cabe&ccedil;otes (<i>heads</i>), logo o disco possui 255 superf&iacute;cies e um cilindro possui 255 trilhas. 
+    Isto significa que em uma leitura/grava&ccedil;&atilde;o s&atilde;o lidos 255 setores de uma vez, cada um em uma 
+    superf&iacute;cie diferente mas com um mesmo n&uacute;mero de trilha.
+</ul>
+Sobre a situa&ccedil;&atilde;o real do HD, podemos deduzir:
+<ul>
+<li>Normalmente, um HD de computador pessoal possui apenas um prato com dupla superf&iacute;cie. Para ler os dados, 
+    existem dois cabe&ccedil;otes (<i>heads</i>): um cabe&ccedil;ote para cada superf&iacute;cie.
+<li>Neste exemplo, quando um cabe&ccedil;ote &eacute; posicionado, ele l&ecirc;/grava 255 setores de uma vez.
+</ul>
+
+<p>Outra observa&ccedil;&atilde;o que pode ser feita sobre a sa&iacute;da do comando mostrada acima &eacute; que
+a primeira parti&ccedil;&atilde;o do HD come&ccedil;a no bloco 2.048 (2.048 X 512 Bytes = 1.048.576 Bytes). Isto significa 
+que o primeiro MegaBytes do HD n&atilde;o &eacute; usado pelos sistemas de arquivos. Ele foi reservado para a 
+instala&ccedil;&atilde;o do <b><a href="mbr.html">MBR</a></b> e do <b><a href="grub.html">GRUB2</a></b>.
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

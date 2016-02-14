@@ -1,0 +1,142 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>getppid()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="getppid()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>getppid( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta <a href="../chamadas.html"><b>chamada de sistema</b></a> fornece o n&uacute;mero de identifica&ccedil;&atilde;o
+do <a href="../processo.html"><b>processo</b></a>-pai (<a href="../ppid.html"><b>PPID</b></a>).</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+   
+<blockquote class="t2">
+#include&lt;unistd.h&gt;<br>
+pid_t getppid(void);
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Esta fun&ccedil;&atilde;o sempre tem sucesso.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>
+<blockquote class="t2">
+1. #include&lt;unistd.h&gt; <br>
+2. #include&lt;stdio.h&gt;  <br>
+3. #include&lt;string.h&gt; <br>
+4. #include&lt;errno.h&gt;  <br>
+5. int main() <br>
+6. &nbsp;&nbsp;&nbsp; { <br>
+7. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pid_t processo, processo_pai; <br>
+8. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; processo     = getpid(); <br>
+9. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; processo_pai = getppid(); <br>
+10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (processo == -1) <br>
+11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro getpid() %d: %s\n", errno, strerror(errno)); <br>
+12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else <br>
+13.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Processo ID  = %ld\n", (long)processo); <br>
+15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Processo-pai = %ld\n", (long)processo_pai); <br>
+16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+17.&nbsp;&nbsp;&nbsp; }
+</blockquote>
+</p>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/getppid.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 4 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>unistd.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das <a href="../chamadas.html"><b>chamadas de sistema</b></a>. 
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror( )</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro.
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+    </ul>
+<li><b>Linha 5 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 7 a linha 16.
+<li><b>Linha 7 :</b> define vari&aacute;veis.
+<li><b>Linha 8 :</b> executa a chamada <i>getpid( )</i>.
+<li><b>Linha 9 :</b> executa a chamada <i>getppid( )</i>.
+<li><b>Linhas 10 e 11 :</b> informa o erro ocorrido na execu&ccedil;&atilde;o da chamada <i>getpid( )</i>.
+<li><b>Linhas 14 e 15 :</b> exibe o n&uacute;mero do processo e do processo-pai.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+<blockquote class="t1">
+ gcc -o getppid getppid.c
+</blockquote>
+Para executar, basta digitar
+<blockquote class="t1">
+./getppid 
+</blockquote>
+Abaixo, um exemplo de sa&iacute;da.
+<blockquote class="t2">
+Processo ID  = 2682 <br>
+Processo-pai = 2502
+</blockquote>
+Neste caso, o processo-pai &eacute; o <a href="../shell.html"><b>shell</b></a> bash como mostra o comando 
+<a href="../ps.html"><b>ps</b></a>.
+<blockquote class="t2">
+<table class="t2">
+<tr><td>PID </td><td>TTY  </td><td>TIME    </td><td>CMD </td></tr>
+<tr><td>2502</td><td>pts/1</td><td>00:00:00</td><td>bash</td></tr>
+<tr><td>2683</td><td>pts/1</td><td>00:00:00</td><td>ps  </td></tr>
+</table>
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A chamada retorna o PID no formato especificado pelo tipo <i>pid_t</i> que corresponde ao tipo int (inteiro).
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

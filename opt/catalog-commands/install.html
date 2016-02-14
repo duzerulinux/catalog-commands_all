@@ -1,0 +1,81 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>install</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="install">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>install</h1>
+
+<blockquote><b><font size="+1"> install [op&ccedil;&otilde;es] arquivo(s)</font></b></blockquote>
+<br>
+
+<!-- -------------------------------------------------------------------------------------------- ---->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando copia <a href="arquivo.html"><b>arquivos</b></a> alterando <a href="permissao.html"><b>permiss&otilde;es</b></a>, dono
+e grupo dos arquivos. Ele combina os comandos <a href="cp.html"><b>cp</b></a> com <a href="chown.html"><b>chown</b></a> e
+<a href="chmod.html"><b>chmod</b></a>.</p>
+
+<!-- -------------------------------------------------------------------------------------------- ---->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-b</b> : cria um backup do arquivo destino que j&aacute; existe, antes de sobrescrev&ecirc;-lo.
+<li><b>--help</b> : mostra as op&ccedil;&otilde;es do comando.
+<li><b>-v</b> ou <b>--verbose</b> : informa o que est&aacute; sendo feito.
+<li><b>--version</b> : informa a vers&atilde;o do aplicativo.
+</ul>
+
+<!-- -------------------------------------------------------------------------------------------- ---->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Para o usu&aacute;rio <i>aluno</i> copiar o arquivo <i>/etc/passwd</i> para o arquivo <i>teste</i>, basta digitar
+    <blockquote class="t1">install /etc/passwd teste</blockquote>
+    Abaixo s&atilde;o mostrados os atributos dos dois arquivos. Note que o arquivo <i>teste</i> tem permiss&atilde;o para
+    execu&ccedil;&atilde;o.
+    <blockquote class="t2">
+    <table class="t2">
+    <tr><td>-rw-r--r-- </td><td>1 </td><td>root  </td><td>root  </td><td>1925 </td><td>Mar 14 18:00 </td><td>/etc/passwd</td></tr>
+    <tr><td>-rwxr-xr-x </td><td>1 </td><td>aluno </td><td>aluno </td><td>1925 </td><td>Mai 16 16:34 </td><td>teste      </td></tr>
+    </table>
+    </blockquote>
+<li>Para copiar o arquivo <i>/etc/passwd</i> dentro do diret&oacute;rio <i>teste</i> (j&aacute; existente), digite
+    <blockquote class="t1">install /etc/passwd teste</blockquote>
+    Neste caso, o arquivo <i>passwd</i> &eacute; criado dentro do diret&oacute;rio <i>teste</i>.
+    <blockquote class="t2">
+    <table class="t2">
+    <tr><td>-rwxr-xr-x </td><td>1 </td><td>aluno </td><td>aluno </td><td>1925 </td><td>Mai 16 16:34 </td><td>passwd      </td></tr>
+    </table>
+    </blockquote>
+<li>Para copiar o arquivo <i>teste</i> para o arquivo <i>teste2</i> e manter um backup deste arquivo (o arquivo <i>teste2</i> j&aacute;
+    existe), basta digitar
+    <blockquote class="t1">install -b teste teste2</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

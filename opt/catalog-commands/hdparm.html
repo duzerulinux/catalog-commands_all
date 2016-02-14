@@ -1,0 +1,96 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>hdparm</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="hdparm">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>hdparm</h1>
+
+<blockquote><b><font size="+1"> hdparm [op&ccedil;&otilde;es] dispositivo</font></b></blockquote>
+<ul>
+<li>O argumento <i>dispositivo</i> &eacute; o disco do qual se deseja obter informa&ccedil;&otilde;es.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este utilit&aacute;rio exibe/altera os par&acirc;metros de discos SATA/IDE do sistema.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-h</b> : informa as op&ccedil;&otilde;es do aplicativo.
+<li><b>-i</b> : exibe identifica&ccedil;&atilde;o do dispositivo.
+<li><b>-I</b> : exibe informa&ccedil;&otilde;es detalhadas do dispositivo.
+<li><b>-V</b> : informa vers&atilde;o do aplicativo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>O comando
+
+<blockquote class="t1">sudo hdparm -i /dev/sda</blockquote>
+
+exibe informa&ccedil;&otilde;es que identifica o disco. Abaixo, &eacute; apresentada uma poss&iacute;vel
+sa&iacute;da.
+
+<blockquote class="t2">
+/dev/sda:<br>
+<br>
+&nbsp;&nbsp;&nbsp;Model=TOSHIBA MK2035GSS, FwRev=DK020M, SerialNo=97SHFJNZS<br>
+&nbsp;&nbsp;&nbsp;Config={ Fixed }<br>
+&nbsp;&nbsp;&nbsp;RawCHS=16383/16/63, TrkSize=0, SectSize=0, ECCbytes=0<br>
+&nbsp;&nbsp;&nbsp;BuffType=unknown, BuffSize=unknown, MaxMultSect=16, MultSect=16<br>
+&nbsp;&nbsp;&nbsp;CurCHS=16383/16/63, CurSects=16514064, LBA=yes, LBAsects=390721968<br>
+&nbsp;&nbsp;&nbsp;IORDY=on/off, tPIO={min:120,w/IORDY:120}, tDMA={min:120,rec:120}<br>
+&nbsp;&nbsp;&nbsp;PIO modes:  pio0 pio1 pio2 pio3 pio4<br>
+&nbsp;&nbsp;&nbsp;DMA modes:  sdma0 sdma1 sdma2 mdma0 mdma1 mdma2<br>
+&nbsp;&nbsp;&nbsp;UDMA modes: udma0 udma1 udma2 udma3 udma4 *udma5<br>
+&nbsp;&nbsp;&nbsp;AdvancedPM=yes: unknown setting WriteCache=enabled<br>
+&nbsp;&nbsp;&nbsp;Drive conforms to: Unspecified:  ATA/ATAPI-3,4,5,6,7<br>
+<br>
+ * signifies the current active mode
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><a href="df.html"><b>df</b></a> - exibe informa&ccedil;&otilde;es sobre os espa&ccedil;os livre e utilizado das  
+    parti&ccedil;&otilde;es.
+<li><a href="du.html"><b>du</b></a> - exibe informa&ccedil;&otilde;es sobre o espa&ccedil;o usado pelos diret&oacute;rios
+    e arquivos.
+<li><b><a href="fdisk.html">fdisk</a></b> - aplicativo utilizado para particionar discos.</li>
+<li><b><a href="smartctl.html">smartctl</a></b> - exibe relat&oacute;rio detalhado sobre os discos IDE/SCSI existentes
+    no sistema.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>tex</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="tex">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>tex</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>O <i>TeX</i> &eacute; um sistema de tipografia bastante utilizado no meio acad&ecirc;mico por ser capaz de produzir f&oacute;rmulas e
+s&iacute;mbolos matem&aacute;ticos de uma forma elegante. A gera&ccedil;&atilde;o de documentos com <i>TeX</i> pode ser dividida em
+quatro etapas:
+
+<ol>
+<li>O uso de um editor de texto qualquer para digitar o documento com extens&atilde;o <i>.tex</i>. O arquivo criado possui macros que 
+    definem como o texto dever&aacute; ser formatado.
+<li>Gera&ccedil;&atilde;o do arquivo com extens&atilde;o <i>.dvi</i> com o comando <b><a href="latex.html">latex</a></b>.
+<li>Convers&atilde;o do arquivo <i>.dvi</i> em um arquivo <i>.ps</i> (PostScript) com o comando <b><a href="dvips.html">dvips</a></b>.
+<li>Visualiza&ccedil;&atilde;o do arquivo com extens&atilde;o <i>.ps</i> com o comando <a href="gv.html"><b>gv</b></a>.
+</ol>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>Abaixo &eacute; mostrado um pequeno exemplo de um arquivo com macros <b>tex</b>. Digite este arquivo 
+e salve-o com o nome de <b>teste.tex</b>. </p>
+                    
+<blockquote class="t2">
+\documentclass[12pt]{article}<br>
+\usepackage[brazil]{babel}<br>
+\usepackage[utf8]{inputenc}<br>
+\begin{document}<br>
+\section{Introdu&ccedil;&atilde;o}<br>
+\label{sec:introducao}<br>
+Ol&aacute;, {\em Mundo}.<br>
+\end{document}<br>
+</blockquote>
+
+<ul>
+<li>A primeira linha do arquivo define o tipo de documento a ser formatado: &eacute; um artigo e a letra padr&atilde;o do texto 
+    &eacute; de tamanho 12. 
+<li>As duas linhas seguintes incluem os pacotes necess&aacute;rios para reconhecer acentua&ccedil;&atilde;o no texto (o padr&atilde;o &eacute; 
+    o ingl&ecirc;s e, portanto, sem acento) e definir a codifica&ccedil;&atilde;o UTF-8 (padr&atilde;o DuZeru). 
+<li>A quarta linha informa o in&iacute;cio do documento. 
+<li>A quinta linha indica o in&iacute;cio de uma se&ccedil;&atilde;o do artigo com o t&iacute;tulo "Introdu&ccedil;&atilde;o"
+    (a numera&ccedil;&atilde;o das se&ccedil;&otilde;es &eacute; feita pelo utilit&aacute;rio).
+<li>A sexta linha define um label para a se&ccedil;&atilde;o. Isto permite que a se&ccedil;&atilde;o seja referenciada em qualquer parte 
+    do texto. No caso de altera&ccedil;&atilde;o na numera&ccedil;&atilde;o dessa se&ccedil;&atilde;o, o aplicativo automaticamente 
+    renumerar&aacute; todas as cita&ccedil;&otilde;es.
+<li>A s&eacute;tima linha mostra a frase "Ol&aacute;, {\em Mundo}", onde a tag <i>\em</i> indica que a palavra "Mundo" aparecer&aacute; em it&aacute;lico.
+</ul>
+<p>Com o arquivo pronto, o pr&oacute;ximo passo &eacute; gerar o arquivo <i>teste.dvi</i> com o comando
+   <blockquote class="t1">latex teste.tex</blockquote>
+<p>Para converter o arquivo <i>dvi</i> para o formato <i>postscript</i> digite
+   <blockquote class="t1">dvips -o teste.ps teste</blockquote>
+<p>Para visualizar o texto, basta digitar
+   <blockquote class="t1">gv teste.ps</blockquote></p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>N&atilde;o &eacute; obrigat&oacute;rio o uso da extens&atilde;o <i>.tex</i> nos arquivos com macros <i>tex</i>.
+<li>Para instalar o <i>tex</i>, basta digitar
+    <blockquote class="t1">sudo apt-get install texlive-latex-base</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="dvips.html">dvips</a></b> - converte arquivo <i>.dvi</i> em <i>.ps</i> (PostScript).
+<li><b><a href="gv.html">gv</a></b> - aplicativo para visualiza&ccedil;&atilde;o de arquivos com extens&atilde;o <i>ps</i> e <i>pdf</i>.
+<li><b><a href="latex.html">latex</a></b> - gera arquivo <i>.dvi</i> a partir da defini&ccedil;&atilde;o de macros <i>TEX</i>.
+<li><b><a href="ps2pdf.html">ps2pdf</a></b> - converte arquivo no formato <i>ps</i> para o formato <i>pdf</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

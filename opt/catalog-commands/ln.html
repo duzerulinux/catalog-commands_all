@@ -1,0 +1,119 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>ln</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="ln">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>ln</h1>
+       
+<blockquote><font size="+1"><b>ln [op&ccedil;&otilde;es] origem destino</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando cria liga&ccedil;&otilde;es (<i>links</i>) entre <a href="arquivo.html"><b>arquivos</b></a>. H&aacute; dois conceitos de
+   <i>liga&ccedil;&atilde;o</i> em sistemas Unix:
+<ul>
+<li><b>Liga&ccedil;&atilde;o direta</b> - define mais um nome para um arquivo (um arquivo pode ter diversos nomes). 
+    O arquivo ser&aacute; removido&nbsp; do disco quando o &uacute;ltimo nome for removido. N&atilde;o h&aacute; 
+    algo como um nome original, todos os nomes tem o mesmo <i>status</i>.
+<li><b>Liga&ccedil;&atilde;o simb&oacute;lica</b> ou <b>dymlink</b> -  define um caminho para um arquivo.
+    Liga&ccedil;&otilde;es simb&oacute;licas podem apontar para arquivos em diferentes sistemas de arquivo e 
+    n&atilde;o necessitam apontar para arquivos que realmente existem.
+</ul>
+
+<p>Em uma <i>liga&ccedil;&atilde;o direta</i> os arquivos possuem o mesmo <b><a href="inode.html">inode</a></b>. 
+   Enquanto que em uma <i>liga&ccedil;&atilde;o simb&oacute;lica</i> os arquivos apontam para a mesma &aacute;rea 
+   de dados, mas possuem diferentes <i>inodes</i>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-d</b> : cria uma liga&ccedil;&atilde;o direta (<i>hard link</i>), &eacute; o padr&atilde;o.
+<li><b>-L</b> ou <b>--logical</b> : cria uma liga&ccedil;&atilde;o para um link simb&oacute;lico.
+<li><b>-s</b> : cria uma liga&ccedil;&atilde;o simb&oacute;lica (<i>soft link</i>).
+<li><b>-v</b> : mostra o nome de cada arquivo antes de criar o link.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>O comando abaixo cria, no diret&oacute;rio <i>teste</i>, liga&ccedil;&atilde;o direta para os arquivos do
+    diret&oacute;rio atual cujos nomes come&ccedil;am por <i>aula</i>. Isto significa que cada arquivo ter&aacute;
+    dois nomes: um fica no diret&oacute;rio atual e o outro no diret&oacute;rio <i>teste</i>. As altera&ccedil;&otilde;es
+    feitas usando um dos nomes ser&atilde;o vistas quando se acessar o arquivo usando o outro nome. Se um dos nomes for 
+    apagado, o arquivo continuar&aacute; existindo com o outro nome.
+    <blockquote class="t1">ln aula* teste/.</blockquote>
+    Quando dois nomes representam o mesmo arquivo, eles possuem o mesmo <a href="inode.html"><b>inode</b></a>. Para ver
+    os inodes dos arquivos de um diret&oacute;rio, basta digitar
+    <blockquote class="t1">ls -i</blockquote>
+<li>Para criar, no diret&oacute;rio atual, um <i>link</i> simb&oacute;lico chamado <i>teste</i> para o 
+    arquivo <b><a href="dir_etc.html#passwd">/etc/passwd</a></b>, basta digitar
+    <blockquote class="t1">ln -s /etc/passwd teste</blockquote>
+    &Eacute; poss&iacute;vel ent&atilde;o usar o comando <b><a href="ls.html">ls -l</a></b> para ver as 
+    caracter&iacute;sticas do arquivo criado. 
+    <blockquote class="t2">lrwxrwxrwx 1 aluno aluno 11 Dez 31 16:17 teste -> /etc/passwd</blockquote>
+    Note que temos duas indica&ccedil;&otilde;es de que se trata de um <i>link</i> simb&oacute;lico:
+    o primeiro caractere das permiss&otilde;es &eacute; "l" e o arquivo <i>teste</i> aponta
+    para o arquivo /etc/passwd.
+<li>Para criar <i>links</i> simb&oacute;licos no diret&oacute;rio atual para todos os arquivos do diret&oacute;rio
+   <i>testes</i> que come&ccedil;am por <i>scrip</i>, basta digitar
+   <blockquote class="t1">ln -sv testes/script* .</blockquote>
+   Note que, no comando acima, a op&ccedil;&atilde;o "-v" lista os <i>links</i> sendo criados e que o ponto ('.') 
+   representa o diret&oacute;rio atual.
+<li>Para criar um <i>link</i> simb&oacute;lico para o diret&oacute;rio <b><a href="dir_etc.html">/etc</a></b> com o
+    nome <i>teste</i>, digite
+    <blockquote class="t1">ln -s /etc teste</blockquote>
+    Portanto, qualquer opera&ccedil;&atilde;o feita no diret&oacute;rio <i>teste</i> ser&aacute; feita na realidade
+    no diret&oacute;rio /etc e pode precisar de permiss&atilde;o de administrador.
+<li>&Eacute; poss&iacute;vel criar uma liga&ccedil;&atilde;o para um link simb&oacute;lico. Por exemplo,
+    <blockquote class="t1">ln -s teste link1</blockquote>
+    cria o link simb&oacute;lico <i>link1</i> para o arquivo <i>teste</i>. O comando
+    <blockquote class="t1">ln -sL link1 link2</blockquote>
+    cria o link simb&oacute;lico <i>link2</i> para o arquivo <i>link1</i>. Portanto, <i>link2</i> aponta para o arquivo
+    apontado por <i>link1</i>.
+    <blockquote class="t2">
+    <table class="t2" cellpadding=3>
+    <tr><td>lrwxrwxrwx </td><td>1 </td><td>aluno</td><td>aluno</td><td>5    </td><td>Mai 6 16:23</td><td> link1 -> teste</td></tr>
+    <tr><td>lrwxrwxrwx </td><td>1 </td><td>aluno</td><td>aluno</td><td>5    </td><td>Mai 6 16:23</td><td> link2 -> link1</td></tr>
+    <tr><td>-rw-rw-r-- </td><td>1 </td><td>aluno</td><td>aluno</td><td>7743 </td><td>Mai 6 16:23</td><td> teste</td></tr>
+    </table>
+    </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>N&atilde;o &eacute; poss&iacute;vel criar v&iacute;nculos diretos para diret&oacute;rios e nem para sistemas de arquivos.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

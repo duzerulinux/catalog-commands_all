@@ -1,0 +1,87 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>stat</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="stat">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>stat</h1>
+
+<blockquote><b><font size="+1"> stat [options] arquivo </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando mostra informa&ccedil;&otilde;es sobre um <a href="arquivo.html"><b>arquivo</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>--help</b> : mostra informa&ccedil;&otilde;es sobre o aplicativo.
+<li><b>--version</b> : mostra a vers&atilde;o instalada do aplicativo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2> Exemplos </h2>
+
+<ul>
+<li>Para obter informa&ccedil;&otilde;es sobre o arquivo <i>teste</i>, basta digitar:
+    <blockquote class="t1">stat teste</blockquote>
+    Abaixo uma poss&iacute;vel sa&iacute;da.
+    <blockquote class="t2">
+    Arquivo: “teste” <br>
+    Tamanho: 236  &nbsp;&nbsp;&nbsp; Blocos: 8  &nbsp;&nbsp;&nbsp;  Bloco IO: 4096 &nbsp;&nbsp;&nbsp; arquivo comum <br>
+    Dispositivo: 805h/2053d &nbsp;&nbsp;&nbsp; Inode: 1317635 &nbsp;&nbsp;&nbsp; Links: 1 <br>
+    Acesso: (0660/-rw-rw----) &nbsp;&nbsp;&nbsp; Uid: ( 1000/aluno) &nbsp;&nbsp;&nbsp; Gid: ( 1000/aluno) <br>
+    Acessar: 2015-01-19 11:09:59.595576165 -0200 <br>
+    Modificar: 2015-01-19 11:07:31.503576462 -0200 <br>
+    Alterar: 2015-01-19 11:07:31.551576462 -0200
+    </blockquote>
+<li>Abaixo &eacute; apresentado o resultado do comando para o sistema de arquivos que fica na parti&ccedil;&atilde;o /dev/sda1.
+    <blockquote class="t2">
+    Arquivo: “/dev/sda1” <br>
+    Tamanho: 0         	Blocos: 0 &nbsp;&nbsp;&nbsp; Bloco IO: 4096 &nbsp;&nbsp;&nbsp; arquivo especial de bloco <br>
+    Dispositivo: 5h/5d	Inode: 9009 &nbsp;&nbsp;&nbsp; Links: 1 &nbsp;&nbsp;&nbsp; Tipo de dispositivo: 8,1 <br>
+    Acesso: (0660/brw-rw----) &nbsp;&nbsp;&nbsp; Uid: (    0/    root) &nbsp;&nbsp;&nbsp;  Gid: (    6/    disk) <br>
+    Acessar: 2015-01-19 17:00:00.239287971 -0200 <br>
+    Modificar: 2015-01-19 17:00:00.239287971 -0200 <br>
+    Alterar: 2015-01-19 17:00:00.239287971 -0200
+    </blockquote>
+
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Para saber mais sobre as informa&ccedil;&otilde;es fornecidas pelo comando <i>stat</i>, veja as chamadas de sistema
+    <a href="libc/cs_stat.html"><b>stat( )/lstat( )/fstat</b></a> e a estrutura de dados <a href="libc/ed_stat.html"><b>stat</b></a>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

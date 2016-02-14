@@ -1,0 +1,82 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>alias</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="alias">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>alias</h1>
+
+<blockquote><b><font size="+1">alias [nome alternativo='comandos']</font></b></blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Comando interno do <a href="shell.html"><b>shell</b></a> que permite definir apelidos (do inglês alias) para comandos.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>Por exemplo, o comando
+
+<blockquote class="t1">alias teste='ls -al'</blockquote>
+
+define que, toda vez que o usu&aacute;rio digitar "teste", o sistema processar&aacute;
+o comando "ls -al".</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>&Eacute; importante observar que a defini&ccedil;&atilde;o feita com o comando <i>alias</i> n&atilde;o &eacute; permanente,
+ou seja, da próxima vez que o sistema for acessado, ela não existirá mais. Para criar uma defini&ccedil;&atilde;o permanente, 
+o comando <i>alias</i> deve ser inclu&iacute;do em um dos arquivos carregados pelo <a href="shell.html"><b>shell</b></a> 
+durante o processo de inicializa&ccedil;&atilde;o.<br>
+
+<p>Por exemplo, o <i>shell bash</i> ler dois arquivos com as defini&ccedil;&otilde;es: <i>.bashrc</i> e 
+<a href="dir_etc.html#bashrc"><b>/etc/bashrc</b></a>. O primeiro arquivo possui
+as defini&ccedil;&otilde;es feitas pelo pr&oacute;prio usu&aacute;rio, enquanto
+o segundo arquivo possui as defini&ccedil;&otilde;es do sistema e que podem ser
+usadas por todos os usu&aacute;rios.</p>
+
+<p>Para usar uma defini&ccedil;&atilde;o imediatamente ap&oacute;s a sua inclus&atilde;o em <i>.bashrc</i>, sem a necessidade
+de sair do sistema e entrar novamente, basta digitar
+<blockquote class="t1">source .bashrc</blockquote></li>
+
+<li>Para obter mais informa&ccedil;&otilde;es sobre <i>alias</i>, digite
+    <blockquote class="t1">help alias</blockquote></li>
+
+<li>O comando <i>alias</i> sem par&acirc;metros exibe a lista das defini&ccedil;&otilde;es que est&atilde;o 
+    dispon&iacute;veis ao usu&aacute;rio.</li>
+
+<li>Use o comando <b><a href="unalias.html">unalias</a></b> para remover uma defini&ccedil;&atilde;o feita pelo comando
+    <i>alias</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

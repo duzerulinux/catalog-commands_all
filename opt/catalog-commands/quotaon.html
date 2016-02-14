@@ -1,0 +1,82 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>quotaon</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="quotaon">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>quotaon</h1>
+
+<blockquote><b><font size="+1">quotaon [op&ccedil;&otilde;es] [sistema de arquivos]</font></b></blockquote>
+<ul>
+<li>O argumento <i>sistema de arquivos</i> &eacute; o nome do sistema de arquivos cujo 
+    <b><a href="cotas.html">sistema de cotas</a></b> deve ser habilitado.
+</ul>
+  
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando habilita o sistema de cotas de um sistema de arquivos.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-a</b> : habilita as cotas de todos os sistemas de arquivos definidos no <b><a href="dir_etc.html#fstab">/etc/fstab</a></b>.
+<li><b>-u</b> : habilita as cotas de usu&aacute;rios. &Eacute; o padr&atilde;o.
+<li><b>-g</b> : habilita as cotas dos grupos.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>Por exemplo, o comando
+
+<blockquote class="t1">quotaon /dev/hda2</blockquote>
+
+habilita o sistema de cotas do /dev/hda2 conforme definido em /etc/fstab.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>&Eacute; preciso usar o comando <b><a href="sudo.html">sudo</a></b> para obter informa&ccedil;&otilde;es sobre
+    o sistema de cotas de outros usu&aacute;rios.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="cotas.html">cotas de disco</a></b> - define a quantidade de espa&ccedil;o em disco que cada usu&aacute;rio/grupo
+    pode usar.
+<li><b><a href="quota.html">quota</a></b> - fornece informa&ccedil;&otilde;es sobre o sistema de cotas do disco.</li>
+<li><b><a href="quotaoff.html">quotaoff</a></b> - desabilita o sistema de cotas de um sistema de arquivos.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

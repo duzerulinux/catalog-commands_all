@@ -1,0 +1,77 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>lsof</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="lsof">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>lsof</h1>
+
+<blockquote><b><font size="+1"> lsof [op&ccedil;&otilde;es] </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este aplicativo lista os <a href="arquivo.html"><b>arquivos</b></a> abertos (em uso). O termo <i>lsof</i> significa 
+<i>list open files</i>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>--help</b> : mostra as op&ccedil;&otilde;es do aplicativo.
+<li><b>-i [i]</b> : mostra os processos associados ao endere&ccedil;os <i>i</i>.
+<li><b>-s</b> : mostra o tamanho do arquivo.
+<li><b>-p processo</b> : mostra os arquivos abertos do processo informado.
+<li><b>-u usu&aacute;rio</b> : mostra apenas informa&ccedil;&otilde;es de um determinado usu&aacute;rio.
+<li><b>-U</b> : seleciona os sockets Unix.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Para ver apenas os processos do usu&aacute;rio <i>aluno</i>, digite
+    <blockquote class="t1">lsof -u aluno</blockquote>
+<li>Para ver os arquivos abertos pelo processo <b><a href="init.html">init</a></b>, basta digitar
+    <blockquote class="t1">sudo lsof -p 1</blockquote>
+<li>Para listar os processos relacionados com a porta 80, entre com 
+    <blockquote class="t1">lsof -i :80</blockquote>
+<li>Para listar os processos com socket UNIX, digite
+    <blockquote class="t1">lsof -i -U</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O comando <b><a href="fuser.html">fuser</a></b> identifica os processos que est&atilde;o usando um determinado arquivo.
+<li>O comando <a href="stat.html"><b>stat</b></a> fornece informa&ccedil;&otilde;es sobre arquivos. 
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

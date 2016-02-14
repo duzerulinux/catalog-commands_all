@@ -1,0 +1,90 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>display</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="display">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>DISPLAY</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>No sistema <b><a href="xwindow.html">X</a></b>, &eacute; poss&iacute;vel definir onde uma aplica&ccedil;&atilde;o 
+gr&aacute;fica deve aparecer (em que m&aacute;quina). Para isto basta alterar o conte&uacute;do da 
+<b><a href="variaveis.html">vari&aacute;vel de ambiente</a></b> <i>DISPLAY</i>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Verificar o valor da vari&aacute;vel DISPLAY</h2>
+
+<p>Um <i>display</i> no X consiste, basicamente, de um teclado, um mouse e uma tela
+de v&iacute;deo. O <i>display</i> padr&atilde;o de uma m&aacute;quina corresponde a</p>
+
+<blockquote class="t2">m&aacute;quina.dom&iacute;nio:0.0</blockquote> 
+
+<p>ou simplesmente a
+<blockquote class="t2">:0.0</blockquote>
+onde <i>m&aacute;quina</i> &eacute; o nome do computador onde o servidor X
+est&aacute; sendo executado e <i>dom&iacute;nio</i> &eacute; o local da rede onde
+fica o computador. A sequ&ecirc;ncia num&eacute;rica indica o n&uacute;mero do
+<i>display</i> (&eacute; usualmente zero, mas pode variar j&aacute; que &eacute; 
+poss&iacute;vel existir m&uacute;ltiplos <i>displays</i> conectados em um computador)
+e o n&uacute;mero da tela de v&iacute;deo (um <i>display</i> pode possuir 
+m&uacute;ltiplas telas).</p>
+
+<p>Para ver qual o <i>display</i> que voc&ecirc; est&aacute; usando no momento, 
+digite</p>
+
+<blockquote class="t1">echo $DISPLAY</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Alterar o valor da vari&aacute;vel DISPLAY</h2>
+
+<p>Ao alterar o valor da vari&aacute;vel <i>DISPLAY</i>, estaremos portanto alterando o local onde o <i>display</i> de 
+uma m&aacute;quina ser&aacute; mostrado. Suponha que voc&ecirc; est&aacute; usando a m&aacute;quina <i>ipanema</i> do
+dom&iacute;nio <i>praias</i>, mas est&aacute; conectado remotamente a m&aacute;quina <i>copacabana</i>. Para executar, 
+por exemplo, o aplicativo <b><a href="gv.html">gv</a></b> em <i>copacabana</i> mas ver o <i>display</i> em <i>ipanema</i>,
+basta digitar</p>
+
+<blockquote class="t1">export DISPLAY="ipanema.praias:0.0"</blockquote>
+
+<p>e depois entrar com o comando</p> 
+
+<blockquote class="t1">gv</blockquote>
+
+<p>&Eacute; tamb&eacute;m poss&iacute;vel substituir os dois comandos acima
+pelo comando abaixo.</p>
+
+<blockquote class="t1">gv -display ipanema.praias:0.0</blockquote>
+
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<p>O programa <b><a href="xhost.html">xhost</a></b> pode ser usado para definir
+quais m&aacute;quinas podem ter acesso ao servidor X.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

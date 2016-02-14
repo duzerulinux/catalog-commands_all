@@ -1,0 +1,301 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>stat(), lstat(), fstat()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="stat(), lstat(), fstat()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>stat( ), lstat( ), fstat( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Estas <a href="../chamadas.html"><b>chamadas de sistema</b></a> fornecem informa&ccedil;&otilde;es sobre um 
+<a href="../arquivo.html"><b>arquivo</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include &lt;sys/types.h&gt; <br>
+#include &lt;sys/stat.h&gt; <br>
+#include &lt;unistd.h&gt; <br>
+int stat(const char *path, struct stat *buf); <br>
+int lstat(const char *path, struct stat *buf); <br>
+int fstat(int fd, struct stat *buf);
+</blockquote>
+<ul>
+<li>As informa&ccedil;&otilde;es do arquivo apontado pelo argumento <i>path</i> ou pelo descritor <i>fd</i>
+s&atilde;o colocadas na &aacute;rea de mem&oacute;ria apontada por <i>*buf</i>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Se as chamadas s&atilde;o executadas com sucesso, o valor zero &eacute; retornado. Caso a chamada n&atilde;o
+seja bem sucedida, o valor -1 &eacute; retornado e o c&oacute;digo do erro &eacute; colocado na vari&aacute;vel externa 
+<b><a href="vr_errno.html">errno</a></b>. A tabela abaixo mostra os erros que podem ocorrer com esta chamada.</p>
+
+<p>
+<blockquote>
+<table class="t2" rules=all cellpadding=10 cellspacing=10 align=center width=650>
+<tr class="t1"><td><b>Erro</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td>EACCES      </td><td>Acesso ao arquivo n&atilde;o &eacute; permitido</td></tr>
+<tr><td>EBADF       </td><td>Valor de fd n&atilde;o &eacute; v&aacute;lido</td></tr>
+<tr><td>EFAULT      </td><td>Nome do arquivo aponta para uma &aacute;rea de endere&ccedil;o n&atilde;o acess&iacute;vel</td></tr>
+<tr><td>ELOOP       </td><td>Muitos links simb&oacute;licos encontrados na defini&ccedil;&atilde;o do nome do arquivo</td></tr>
+<tr><td>ENAMETOOLONG</td><td>Nome do arquivo longo demais</td></tr>
+<tr><td>ENOENT      </td><td>O nome do arquivo especificado n&atilde;o existe</td></tr>
+<tr><td>ENOMEM      </td><td>Mem&oacute;ria insuficiente</td></tr>
+<tr><td>ENOTDIR     </td><td>Um componente do nome do arquivo n&atilde;o &eacute; um diret&oacute;rio</td></tr>
+<tr><td>EOVERFLOW   </td><td>Overflow</td></tr>
+</table>
+</blockquote>
+<p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>O programa <a href="exemplos/lstat.c" target="_blank"><b>lstat.c</b></a> verifica as caracter&iacute;sticas de um arquivo
+cujo nome &eacute; fornecido pelo usu&aacute;rio. Note que o exemplo usa a chamada <i>lstat()</i>, mas isto pode ser facilmente
+adaptado para usar <i>stat()</i> ou <i>fstat()</i>.
+</p>
+
+<blockquote class="t2">
+1. #include&lt;sys/types.h&gt;  <br>
+2. #include&lt;sys/stat.h&gt;   <br>
+3. #include&lt;unistd.h&gt;     <br>
+4. #include&lt;stdio.h&gt;      <br>
+5. #include&lt;stdlib.h&gt;     <br>
+6. #include&lt;string.h&gt;     <br>
+7. #include&lt;errno.h&gt;      <br>
+8. #include&lt;time.h&gt;       <br>
+9. void permissoes(struct stat info) <br>
+10.&nbsp;&nbsp;&nbsp; { <br>
+11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Mode         : %u\n", (int)info.st_mode); <br>
+12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Permissoes   : "); <br>
+13.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (S_ISREG(info.st_mode)) <br>
+14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("-"); <br>
+15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else <br>
+16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (S_ISLNK(info.st_mode)) <br>
+17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("l"); <br>
+18.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else <br>
+19.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (S_ISDIR(info.st_mode)) <br>
+20.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("d"); <br>
+21.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else <br>
+22.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (S_ISCHR(info.st_mode)) <br>
+23.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("c"); <br>
+24.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  else <br>
+25.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (S_ISBLK(info.st_mode)) <br>
+26.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   &nbsp;&nbsp;&nbsp; printf("b"); <br>
+27.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else <br>
+28.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+   if (S_ISFIFO(info.st_mode)) <br>
+29.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp; printf("f"); <br>
+30.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else <br>
+31.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp; if (S_ISSOCK(info.st_mode)) <br>
+32.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("s"); <br>
+33.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp; else <br>
+34.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  printf("?"); <br>
+35.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf((info.st_mode & S_IRUSR) ? "r" : "-"); <br>
+36.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf((info.st_mode & S_IWUSR) ? "w" : "-"); <br>
+37.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf((info.st_mode & S_IXUSR) ? "x" : "-"); <br>
+38.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf((info.st_mode & S_IRGRP) ? "r" : "-"); <br>
+39.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf((info.st_mode & S_IWGRP) ? "w" : "-"); <br>
+40.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf((info.st_mode & S_IXGRP) ? "x" : "-"); <br>
+41.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf((info.st_mode & S_IROTH) ? "r" : "-"); <br>
+42.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf((info.st_mode & S_IWOTH) ? "w" : "-"); <br>
+43.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf((info.st_mode & S_IXOTH) ? "x" : "-"); <br>
+44.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("\n"); <br>
+45.&nbsp;&nbsp;&nbsp; } <br>
+46.int main(int argc, char * const argv[]) <br>
+47.&nbsp;&nbsp;&nbsp; { <br>
+48.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; struct stat info; <br>
+49.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (argc != 2) <br>
+50.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     { <br>
+51.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Forneca o nome do arquivO\n"); <br>
+52.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(1); <br>
+53.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+54.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   if (lstat(argv[1], &info) < 0) <br>
+55.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     { <br>
+56.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Erro stat %d: %s\n", errno, strerror(errno)); <br>
+57.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(2); <br>
+58.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+59.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Device       : %u \n",      (int)info.st_dev); <br>
+60.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Major number : %u\n",       major(info.st_dev)); <br>
+61.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Minor number : %u\n",       minor(info.st_dev)); <br>
+62.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Inode        : %u\n",       (int)info.st_ino); <br>
+63.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; permissoes(info); <br>
+64.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Links        : %u\n",       (int)info.st_nlink); <br>
+65.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("UID          : %u\n",       (int)info.st_uid); <br>
+66.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("GID          : %u\n",       (int)info.st_gid); <br>
+67.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Tipo         : %u\n",       (int)info.st_rdev); <br>
+68.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Tamanho      : %u bytes\n", (int)info.st_size); <br>
+69.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Bloco E/S    : %u bytes\n", (int)info.st_blksize); <br>
+70.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Qtde Blocos  : %u\n",       (int)info.st_blocks); <br>
+71.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Ultimo acesso: %s",         ctime(&info.st_atime)); <br>
+72.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Ultima modif.: %s",         ctime(&info.st_mtime)); <br>
+73.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Ultimo status: %s",         ctime(&info.st_ctime)); <br>
+74.&nbsp;&nbsp;&nbsp; }
+</blockquote>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/lstat.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 8 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>sys/types.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o de 
+        <a href="../biblioteca_c.html#tipos_dados"><b>tipos de dados</b></a> como <i>time_t</i>.
+    <li><b>sys/stat.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o de <a href="../permissao.html"><b>permiss&otilde;es</b></a>
+        e da estrutura <a href="ed_stat.html"><b>stat</b></a>. 
+    <li><b>unistd.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das <a href="../chamadas.html"><b>chamadas de sistema</b></a>. 
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>stdlib.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o de alguns tipos de vari&aacute;veis e com v&aacute;rias
+        fun&ccedil;&otilde;es de uso geral como, por exemplo, <a href="fc_exit.html"><b>exit()</b></a>.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror()</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro.
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+    <li><b>time.h</b> - cabe&ccedil;alho com as fun&ccedil;&otilde;es para manipular datas e horas.
+    </ul>
+<li><b>Linhas de 9 a 45 :</b> fun&ccedil;&atilde;o <i>permissoes( )</i> que verifica as 
+    <a href="../permissao.html"><b>permiss&otilde;es</b></a> do arquivo.
+<li><b>Linha 46 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da 
+    linha 48 a linha 73.
+<li><b>Linhas de 49 a 53 :</b> verifica se o usu&aacute;rio forneceu o nome do arquivo.
+<li><b>Linhas de 54 a 58:</b> usa a chamada <i>lstat( )</i> para verificar as informa&ccedil;&otilde;es do arquivo.
+<li><b>Linhas de 59 a 73:</b> exibe as informa&ccedil;&otilde;es do arquivo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar, digite
+<blockquote class="t1">
+gcc -o lstat lstat.c
+</blockquote>
+Vamos primeiro verificar as caracter&iacute;sticas do arquivo <i>teste</i> com o comando
+<blockquote class="t1">
+ls -li teste 
+</blockquote>
+A resposta mostrada &eacute;
+<blockquote class="t2">
+1317635 -rw-rw---- 1 aluno aluno 235 Jan  3 16:57 teste
+</blockquote>
+Vamos agora usar <i>lstat</i> para verificar o arquivo <i>teste</i>.
+<blockquote class="t1">
+./lstat teste 
+</blockquote>
+Abaixo a sa&iacute;da mostrada pelo programa <i>lstat</i>.
+<blockquote class="t2">
+<table cellpadding=3 class="t2">
+<tr><td>Device       </td><td>:</td><td colspan=5> 2053                                          </td></tr>
+<tr><td>Major number </td><td>:</td><td colspan=5> 8                                             </td></tr>
+<tr><td>Minor number </td><td>:</td><td colspan=5> 5                                             </td></tr>
+<tr><td>Inode        </td><td>:</td><td colspan=5> 1317635                                       </td></tr>
+<tr><td>Mode         </td><td>:</td><td colspan=5> 33200                                         </td></tr>
+<tr><td>Permissoes   </td><td>:</td><td colspan=5> -rw-rw----                                    </td></tr>
+<tr><td>Links        </td><td>:</td><td colspan=5> 1                                             </td></tr>
+<tr><td>UID          </td><td>:</td><td colspan=5> 1000                                          </td></tr>
+<tr><td>GID          </td><td>:</td><td colspan=5> 1000                                          </td></tr>
+<tr><td>Tipo         </td><td>:</td><td colspan=5> 0                                             </td></tr>
+<tr><td>Tamanho      </td><td>:</td><td colspan=5> 235 bytes                                     </td></tr>
+<tr><td>Bloco E/S    </td><td>:</td><td colspan=5> 4096 bytes                                    </td></tr>
+<tr><td>Qtde Blocos  </td><td>:</td><td colspan=5> 8                                             </td></tr>
+<tr><td>Ultimo acesso</td><td>:</td><td> Fri</td><td>Jan</td><td>16</td><td>10:56:02</td><td>2015</td></tr>
+<tr><td>Ultima modif.</td><td>:</td><td> Sat</td><td>Jan</td><td>3 </td><td>16:57:35</td><td>2015</td></tr>
+<tr><td>Ultimo status</td><td>:</td><td> Sat</td><td>Jan</td><td>17</td><td>20:11:25</td><td>2015</td></tr>
+</table>
+</blockquote>
+
+<ul>
+<li>O n&uacute;mero do <i>device</i> &eacute; 2053. Para entender o que este n&uacute;mero significa &eacute; preciso convert&ecirc;-lo
+    para bin&aacute;rio. Neste caso, temos 2 bytes: 00001000 00000101. O primeiro byte corresponde a 8 em decimal e representa o 
+    <i>major device number</i>. O segundo corresponde a 5 em decimal e representa o <i>minor device number</i>.
+    Tradicionalmente, o n&uacute;mero maior identifica o <i>driver</i> associado com o device (o n&uacute;mero 8 &eacute; disco SCSI) e
+    n&uacute;mero menor identifica o <i>device</i> propriamente dito. Portanto, este arquivo se localiza na parti&ccedil;&atilde;o
+    /dev/sda1 de um disco SCSI (neste caso, o primeiro disco). Para saber mais sobre a parti&ccedil;&atilde;o use o comando 
+    <a href="../df.html"><b>df</b></a>.
+<li>As fun&ccedil;&otilde;es <a href="fc_major.html"><b>major()/minor()</b></a> confirmam a informa&ccedil;&atilde;o discutida acima:
+    <i>major device number</i> &eacute; 8 e <i>minor device number</i> &eacute; 5.  
+<li>O n&uacute;mero de <a href="../inode.html"><b>inode</b></a> do arquivo &eacute; 1317635.
+<li>O n&uacute;mero 33200 corresponde ao tipo e às permiss&otilde;es do arquivo. Para verificar o que este valor significa, &eacute;
+    necess&aacute;rio convert&ecirc;-lo em bin&aacute;rio: 7 bits indicam o tipo (arquivo regular, diret&oacute;rio, caractere, bloco, fifo,
+    link e socket); 3 bits (ler, escrever e executar) indicam as permiss&otilde;es do dono do arquivo; 3 bits (ler, escrever e executar)
+    indicam as permiss&otilde;es do grupo do arquivo; e 3 bits (ler, escrever e executar) indicam as permiss&otilde;es dos outros 
+    (n&atilde;o &eacute; o dono e nem pertence ao grupo do arquivo). Quando o bit &eacute; zero, o arquivo n&atilde;o tem a
+    caracter&iacute;stica. Quando o bit &eacute; 1, o arquivo tem a caracter&iacute;stica. A imagem abaixo mostra o valor usado
+    no exemplo em bin&aacute;rio.
+    <p align=center><img src="../imagens/mode_t.gif" width=450 height=192></p>
+    Note que o programa tamb&eacute;m fornece a interpreta&ccedil;&atilde;o do campo em seguida ao valor em decimal.
+<li>Existe apenas 1 link direto para este arquivo. Portanto, se <i>teste</i> for deletado, o arquivo ser&aacute; deletado (veja
+    o comando <a href="../ln.html"><b>ln</b></a> para mais detalhes).
+<li>O <a href="../uid.html"><b>UID</b></a> e o <a href="../gid.html"><b>GID</b></a> s&atilde;o iguais a 1000. Neste caso, o dono e o 
+    grupo s&atilde;o iguais a <i>aluno</i> (a numera&ccedil;&atilde;o dos usu&aacute;rios e dos grupos s&atilde;o independentes; o fato
+    de terem o mesmo n&uacute;mero neste exemplo apenas implica que, provavelmente, o usu&aacute;rio <i>aluno</i> e o grupo <i>aluno</i>
+    foram criados ao mesmo tempo com o comando <a href="../adduser.html"><b>adduser</b></a>).
+<li>O tipo (<i>st_rdev</i>) &eacute; sempre zero, a menos que o arquivo seja de caractere ou de bloco.
+<li>O arquivo tem 235 bytes.
+<li>O tamanho ideal dos blocos nas opera&ccedil;&otilde;es de E/S &eacute; 4096 bytes.
+<li>O n&uacute;mero de blocos de 512 bytes alocados para o arquivo &eacute 8. Note que 8 X 512 bytes = 4096 bytes. Portanto, foi alocado
+    o tamanho ideal do bloco para opera&ccedil;&otilde;es de E/S, embora o arquivo tenha apenas 235 bytes.
+<li>O arquivo foi acessado (lido) pela &uacute;ltima vez &agrave;s 10:56:02 de 16/01/15.
+<li>O arquivo foi modificado (gravado) pela &uacute;ltima vez &agrave;s 16:57:35 de 03/01/15.
+<li>O arquivo teve alguma caracter&iacute;stica alterada pela &uacute;ltima vez &agrave;s 20:11:25 de 17/01/15. Neste exemplo, foram
+    retiradas as permiss&otilde;es de acesso dos "outros".
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>As informa&ccedil;&otilde;es obtidas com as chamadas de sistema <i>stat()</i>, <i>lstat()</i> e <i>fstat()</i> s&atilde;o 
+    colocadas em uma estrutura do tipo <a href="ed_stat.html"><b>stat</b></a>.
+<li>Quando o arquivo usado como argumento na chamada &eacute; um link simb&oacute;lico:
+    <ul>
+    <li>as chamadas <i>stat()</i> e <i>fstat()</i> mostram as informa&ccedil;&otilde;es sobre o arquivo apontado pelo link;
+    <li>a chamada <i>lstat()</i> mostra as informa&ccedil;&otilde;es sobre o link.
+    </ul>
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,88 @@
+<html>
+<head>
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>vigr</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="vigr">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>vigr</h1>
+
+<blockquote><b><font size="+1"> vigr [op&ccedil&otilde;es] </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este aplicativo edita o arquivo <b><a href="dir_etc.html#group">/etc/group</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-h, --help</b> : exibe as op&ccedil&otilde;es do aplicativo.
+<li><b>-s, --shadow</b> : edita o arquivo <b><a href="dir_etc.html#gshadow">/etc/gshadow</a></b>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Para editar o arquivo /etc/group, basta digitar
+    <blockquote class="t1">sudo vigr</blockquote>
+<li>Para editar o arquivo /etc/gshadow com o aplicativo <i>vigr</i>, digite
+    <blockquote class="t1">sudo vigr -s</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O editor padr&atilde;o de <i>vigr</i> &eacute; o <a href="vim.html"><b>vim</b></a>.
+    Para alterar o editor padr&atilde;o deve-se alterar (ou definir, caso n&atilde;o exista)  
+    a <b><a href="variaveis_ambiente.html">vari&aacute;vel de ambiente</a></b> EDITOR. Por exemplo, 
+    o comando
+    <blockquote class="t1">export EDITOR=pico</blockquote>
+    configura o <i>pico</i> como editor padr&atilde;o do <i>vigr</i>.               
+<li>&Eacute; importante notar que o comando <i>vigr</i> apenas edita o arquivo 
+    <b><a href="dir_etc.html#group">/etc/group</a></b> e permite que o <b><a href="root.html">root</a></b>
+    altere o seu conte&uacute;do. Nenhuma verifica&ccedil;&atilde;o de consist&ecirc;ncia &eacute; 
+    feita pelo aplicativo. Portanto, &eacute; da responsabilidade do root garantir 
+    que a altera&ccedil;&atilde;o feita corresponde a realidade.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="vim.html">vim</a></b> - editor de textos.
+<li><b><a href="vipw.html">vipw</a></b> - edita o arquivo /etc/passwd.
+<li><b><a href="visudo.html">visudo</a></b> - edita o arquivo /etc/sudoers.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

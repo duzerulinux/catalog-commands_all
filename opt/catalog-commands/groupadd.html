@@ -1,0 +1,77 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>groupadd</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="groupadd">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>groupadd</h1>
+   
+<blockquote><font size="+1"><b>groupadd [op&ccedil;&otilde;es] grupo</b></font><br></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando cria um novo grupo de usu&aacute;rios.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-g gid</b> : fornece a identifica&ccedil;&atilde;o num&eacute;rica do grupo (<a href="gid.html"><b>GID</b></a>) 
+    sendo criado. O valor padr&atilde;o &eacute; o menor valor, maior que 999, que ainda n&atilde;o est&aacute; 
+    alocado a outro grupo. Valores entre 0 e 999 s&atilde;o tipicamente reservados para as contas do sistema.
+<li><b>-f</b> : for&ccedil;a a cria&ccedil;&atilde;o do grupo. Caso o GID especificado j&aacute; exista, o sistema
+    escolhe outro valor (usado em conjunto com a op&ccedil;&atilde;o -g).
+<li><b>-r</b> : cria uma conta do sistema. Por padr&atilde;o, o valor escolhido &eacute; o menor valor dispon&iacute;vel 
+    entre 0 e 999, a menos que a op&ccedil;&atilde;o -g seja usada.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>O comando
+
+<blockquote class="t1">groupadd -r teste<br></blockquote>
+
+cria um grupo do sistema chamado <i>teste</i>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A configura&ccedil;&atilde;o padr&atilde;o usada pelo comando <i>groupadd</i> pode ser encontrada
+    em <a href="dir_etc.html#logindefs"><b>/etc/login.defs</b></a>.
+<li>A lista dos grupos existentes no sistema &eacute; armazenada em <b><a href="dir_etc.html#group">/etc/group</a></b>.
+<li>O comando <i>useradd</i> nomalmente exige o uso do comando <b><a href="sudo.html">sudo</a></b>.
+<li>O comando <b><a href="addgroup.html">addgroup</a></b> tamb&eacute;m cria grupo de usu&aacute;rios.
+<li>Os comandos <a href="delgroup.html"><b>delgroup</b></a> e <a href="groupdel.html"><b>groupdel</b></a> deletam grupos
+    de usu&aacute;rios.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

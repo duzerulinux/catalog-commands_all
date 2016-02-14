@@ -1,0 +1,2 @@
+?package(catalog-commands):needs="X11" section="Applications/System/Administration"\
+  title="catalog-commands" command="firefox file:///opt/catalog-commands/index.html"

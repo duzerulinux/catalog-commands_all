@@ -1,0 +1,98 @@
+
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>lsscsi</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="lsscsi">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>lsscsi</h1>
+
+<blockquote><b><font size="+1"> lsscsi [op&ccedil;&otilde;es] </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p> Este comando lista os dispositivos scsi/sata como HDs. </p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-l</b> ou <b>--long</b> : exibe informa&ccedil;&atilde;o adicional para cada dispositivo SCSI.
+<li><b>-L</b> ou <b>--list</b> : exibe informa&ccedil;&atilde;o adicional nos pares <i><nome do atributo>=<valor></i>.
+<li><b>-p</b> ou <b>--protection</b> : exibe informa&ccedil;&atilde;o adicional sobre a integridade dos dados.
+<li><b>-v</b> ou <b>--verbose</b> : exibe o nome dos diret&oacute;rios de onde as informa&ccedil;&otilde;es foram retiradas.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2> Exemplos </h2>
+
+<ul>
+<li>Exemplo de saída padr&atilde;o 
+	<blockquote class="t1">lsscsi</blockquote>
+    <blockquote class="t2">
+    <table class="t2">
+	<tr><td>[1:0:0:0]  </td><td> cd/dvd </td><td> VBOX </td><td> CD-ROM </td><td> 1.0 </td><td> /dev/sr0 </td></tr>
+    <tr><td>[2:0:0:0]  </td><td> disk </td><td> ATA </td><td> VBOX HARDDISK </td><td> 1.0 </td><td> /dev/sda </td></tr>
+    </table>
+    </blockquote>
+<li>Exemplo de saída usando 
+	<blockquote class="t1">lsscsi -c</blockquote>
+    <blockquote class="t2">
+    <table class="t2">
+	<tr><td>Attached devices:</td></tr>
+	<tr><td>Host: scsi1  </td><td> Channel: 00 </td><td> Target: 00 </td><td> lun: 00 </td></tr>
+	<tr><td>Vendor: VBOX  </td><td> Model: CD-ROM </td><td> REV: 1.0 </td></tr>
+	<tr><td>Type: CD-ROM  </td><td> &nbsp; </td><td> ANSI SCSI revision: 50 </td></tr>
+	<tr><td>Host: scsi2  </td><td> Channel: 00 </td><td> Target: 00 </td><td> lun: 00 </td></tr>
+	<tr><td>Vendor: ATA  </td><td> Model: VBOX HARDDISK </td><td> REV: 1.0 </td></tr>
+	<tr><td>Type: Direct-Access  </td><td> &nbsp; </td><td> ANSI SCSI revision: 50 </td></tr>
+    </table>
+    </blockquote>
+<li>Exemplo de saída usando 
+	<blockquote class="t1">lsscsi -l</blockquote>
+    <blockquote class="t2">
+    <table class="t2">
+	<tr><td>[1:0:0:0]  </td><td> cd/dvd </td><td> VBOX </td><td> CD-ROM </td><td> 1.0 </td><td> /dev/sr0 </td></tr>
+	<tr><td> state=running </td><td> queue_depth=1 </td><td> scsi_level=6 </td><td> type=5 </td><td> device_blocked=0 </td><td> timeout=30 </td></tr>
+	<tr><td>[2:0:0:0]  </td><td> disk </td><td> ATA </td><td> VBOX HARDDISK </td><td> 1.0 </td><td> /dev/sda </td></tr>
+	<tr><td> state=running </td><td> queue_depth=31 </td><td> scsi_level=6 </td><td> type=5 </td><td> device_blocked=0 </td><td> timeout=30 </td></tr>
+	</table>
+    </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Para usar <i>lsscsi</i>, &eacute; preciso instalá-lo, através do comando
+    <blockquote class="t1">sudo apt-get install lsscsi</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

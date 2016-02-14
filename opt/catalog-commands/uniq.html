@@ -1,0 +1,110 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>uniq</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="uniq">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>unique</h1>
+   
+<blockquote><font size="+1"><b>unique [op&ccedil;&otilde;es] [arquivo]</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando verifica/remove as linhas duplicadas de um arquivo ordenado.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-c</b> : exibe o n&uacute;mero de ocorr&ecirc;ncias de cada linha do arquivo.</li>
+<li><b>-d</b> : exibe apenas as linhas com mais de uma ocorr&ecirc;ncia onde cada linha &eacute; mostrada apenas uma vez.</li>
+<li><b>-D</b> : exibe todas as linhas com mais de uma ocorr&ecirc;ncia. Se uma determinada linha possui duas ocorr&ecirc;ncias, ela &eacute; exibida duas vezes.</li>
+<li><b>-i</b> : ignora a diferen&ccedil;a entre letras mai&uacute;sculas e letras min&uacute;sculas.</li>
+<li><b>-u</b> : exibe apenas as linhas que possuem uma &uacute;nica ocorr&ecirc;ncia.</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<p>Suponha que o arquivo <i>teste</i> possui o seguinte conte&uacute;do:
+
+<blockquote class="t2">
+aaaa<br>
+aaaa<br>
+AAAA<br>
+bbb<br>
+bbbbb<br>
+cccc<br>
+CCCC
+</blockquote>
+</p>
+
+<ul>
+<li>Para ver apenas linhas n&atilde;o repetidas do arquivo, digite
+    <blockquote class="t1">uniq teste</blockquote>
+    O resultado ser&aacute;
+    <blockquote class="t2">
+    aaaa<br>
+    AAAA<br>
+    bbb<br>
+    bbbbb<br>
+    cccc<br>
+    CCCC
+    </blockquote>
+<li>Para exibir as linhas repetidas e o n&uacute;mero de ocorr&ecirc;ncias, basta digitar
+    <blockquote class="t1">uniq -cd teste</blockquote>
+    A sa&iacute;da ser&aacute;:
+    <blockquote class="t2">2 aaaa</blockquote>
+<li>Para n&atilde;o diferenciar letras mai&uacute;sculas e min&uacute;sculas, digite
+    <blockquote class="t1">uniq -cdi teste</blockquote>
+    e a seguinte sa&iacute;da &eacute; apresentada:
+    <blockquote class="t2">
+    3 aaaa<br>
+    2 cccc
+    </blockquote>
+<li>Para ver as linhas do arquivo <i>teste</i> que possuem uma &uacute;nica ocorr&ecirc;ncia e sem
+    considerar a diferen&ccedil;a entre letras min&uacute;sculas e letras mai&uacute;sculas, digite</p>
+    <blockquote class="t1">uniq -ui teste</blockquote>
+    O sistema apresentar&aacute; a seguinte resposta:
+    <blockquote class="t2">
+    bbb<br>
+    bbbbb
+    </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Caso o nome de um arquivo n&atilde;o seja definido junto com o comando <i>uniq</i>, o sistema usar&aacute; a 
+    entrada padr&atilde;o para receber os dados.</p>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

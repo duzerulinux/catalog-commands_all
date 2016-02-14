@@ -1,0 +1,216 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>mkdir()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="mkdir()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+
+<h1>mkdir( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta <a href="../chamadas.html"><b>chamada de sistema</b></a> cria um diret&oacute;rio.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include&lt;unistd.h&gt;<br>
+#include&lt;sys/stat.h&gt;<br>
+int chdir(const char *pathname, mode_t mode);
+</blockquote>
+
+<ul>
+<li>O argumento <i>pathname</i> &eacute; uma string com o nome do diret&oacute;rio a ser criado.
+<li>O argumento <i>mode</i> corresponde ao conjunto de permiss&otilde;es de acesso do novo diret&oacute;rio.
+    <ul>
+    <li>Quando o diret&oacute;rio &eacute; criado, os bits de <a href="../permissao.html"><b>permiss&atilde;o</b></a> correspondem 
+        aos bits definidos em <i>mode</i> &amp; aos bits invertidos da configura&ccedil;&atilde;o <a href="../umask.html"><b>umask</b></a>, 
+        onde &amp; &eacute; o operador l&oacute;gico <i>AND</i>.
+    <li>Os nomes simb&oacute;licos (do arquivo <i>/usr/include/sys/stat.h</i>), usados para definir as permiss&otilde;es, s&atilde;o
+        mostrados na tabela abaixo.</p>
+        <table class="t2" rules=all cellpadding=10 cellspacing=10 align=center width=650>
+        <tr class="t1">
+        <td><b>Permiss&atilde;o</b></td><td><b>Significado</b></td></tr>
+        <tr><td>S_IRUSR</td><td>Permiss&atilde;o de leitura para o dono</td></tr>
+        <tr><td>S_IWUSR</td><td>Permiss&atilde;o de grava&ccedil;&atilde;o para o dono</td></tr>
+        <tr><td>S_IXUSR</td><td>Permiss&atilde;o de execu&ccedil;&atilde;o para o dono</td></tr>
+        <tr><td>S_IRGRP</td><td>Permiss&atilde;o de leitura para o grupo</td></tr>
+        <tr><td>S_IWGRP</td><td>Permiss&atilde;o de grava&ccedil;&atilde;o para o grupo</td></tr>
+        <tr><td>S_IXGRP</td><td>Permiss&atilde;o de execu&ccedil;&atilde;o para o grupo</td></tr>
+        <tr><td>S_IROTH</td><td>Permiss&atilde;o de leitura para os outros usu&aacute;rios</td></tr>
+        <tr><td>S_IWOTH</td><td>Permiss&atilde;o de grava&ccedil;&atilde;o para os outros usu&aacute;rios</td></tr>
+        <tr><td>S_IXOTH</td><td>Permiss&atilde;o de execu&ccedil;&atilde;o para os outros usu&aacute;rios</td></tr>
+        </table><br>
+        Portanto, para obter permiss&atilde;o de leitura, grava&ccedil;&atilde;o e execu&ccedil;&atilde;o para o dono do
+        arquivo, deve-se definir
+       <blockquote>S_IRUSR | S_IWUSR | S_IXUSR</blockquote>
+       onde <b>|</b> corresponde ao operador l&oacute;gico <i>OR</i>.
+    <li>&Eacute; tamb&eacute;m poss&iacute;vel usar a nota&ccedil;&atilde;o octal para definir as permiss&otilde;es dos arquivos. 
+        Sabemos que cada arquivo/diret&oacute;rio no Linux possui tr&ecirc;s n&iacute;veis de permiss&atilde;o (dono do arquivo, 
+        usu&aacute;rios do mesmo grupo do arquivo e outros usu&aacute;rios) e que cada n&iacute;vel possui 3 tipos de permiss&atilde;o
+       (leitura, grava&ccedil;&atilde;o e execu&ccedil;&atilde;o).<br><br>
+       <table class="t2" rules=all cellpadding=10 cellspacing=10 align=center width=650>
+       <tr class="t1"><td valign="Top"><b>Valor Octal</b></td>
+                      <td align="Center" valign="Top"><b>Valor Bin&aacute;rio</b><br> <b>rwx</b></td>
+                      <td valign="Top"><b>Significado</b></td>
+       </tr>
+       <tr><td align="Center">0</td><td align="Center">000</td><td>Nenhuma permiss&atilde;o de acesso</td></tr>
+       <tr><td align="Center">1</td><td align="Center">001</td><td>Permiss&atilde;o de execu&ccedil;&atilde;o (x)</td></tr>
+       <tr><td align="Center">2</td><td align="Center">010</td><td>Permiss&atilde;o de grava&ccedil;&atilde;o (w)</td></tr>
+       <tr><td align="Center">3</td><td align="Center">011</td><td>Permiss&atilde;o de grava&ccedil;&atilde;o e 
+           execu&ccedil;&atilde;o(wx)</td></tr>
+       <tr><td align="Center">4</td><td align="Center">100</td><td>Permiss&atilde;o de leitura (r)</td></tr>
+       <tr><td align="Center">5</td><td align="Center">101</td><td>Permiss&atilde;o de leitura e execu&ccedil;&atilde;o (rx)</td></tr>
+       <tr><td align="Center">6</td><td align="Center">110</td><td>Permiss&atilde;o de leitura e grava&ccedil;&atilde;o (rw)</td></tr>
+       <tr><td align="Center">7</td><td align="Center">111</td><td>Permiss&atilde;o de leitura, grava&ccedil;&atilde;o e 
+           execu&ccedil;&atilde;o (rwx)</td></tr>
+       </table><br>
+    <li>O exemplo abaixo cria um diret&oacute;rio com permiss&atilde;o de leitura, grava&ccedil;&atilde;o e execu&ccedil;&atilde;o
+        para o dono, isto &eacute;, estamos definindo uma permiss&atilde;o igual a 700. Suponha que umask = 002. Ent&atilde;o, temos
+        <blockquote>0700 &amp; ~0002 = 0700 &amp; 0775 = 0700</blockquote>
+        Portanto, apenas o dono tem autoriza&ccedil;&atilde;o para ler, gravar e executar o arquivo. Note que a permiss&atilde;o foi
+        definida com 4 d&iacute;gitos pois um zero foi adicionado no in&iacute;cio do n&uacute;mero. O primeiro d&iacute;gito &eacute;
+        usado na defini&ccedil;&atilde;o de permiss&atilde;o especial de acesso (SUID, SGID e stick bit). A falta deste zero antes das
+        permiss&otilde;es pode provocar erros na defini&ccedil;&atilde;o do conjunto de permiss&otilde;es do diret&oacute;rio.
+    </ul>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Se a chamada <i>mkdir( )</i> &eacute; executada com sucesso, o valor zero &eacute; retornado. Caso a chamada n&atilde;o
+seja bem sucedida, o valor -1 &eacute; retornado e o c&oacute;digo do erro &eacute; colocado na vari&aacute;vel externa 
+<b><a href="vr_errno.html">errno</a></b>. A tabela abaixo mostra os erros que podem ocorrer com esta chamada.</p>
+
+<p>
+<blockquote>
+<table class="t2" rules=all cellpadding=10 cellspacing=10 align=center width=650>
+<tr class="t1"><td><b>Erro</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td>EACCES      </td><td>Acesso ao arquivo n&atilde;o &eacute; permitido</td></tr>
+<tr><td>EDQUOT      </td><td>Quota de disco do usu&aacute;rio excedida</td></tr>
+<tr><td>EEXIST      </td><td>Novo caminho j&aacute; existe</td></tr>
+<tr><td>EFAULT      </td><td>Nome do arquivo aponta para uma &aacute;rea de endere&ccedil;o n&atilde;o acess&iacute;vel</td></tr>
+<tr><td>ELOOP       </td><td>Muitos links simb&oacute;licos encontrados na defini&ccedil;&atilde;o do nome do arquivo</td></tr>
+<tr><td>EMLINK      </td><td>N&uacute;mero de links para arquivo excedido</td></tr>
+<tr><td>ENAMETOOLONG</td><td>Nome do arquivo longo demais</td></tr>
+<tr><td>ENOENT      </td><td>O nome do arquivo especificado n&atilde;o existe</td></tr>
+<tr><td>ENOMEM      </td><td>Mem&oacute;ria insuficiente</td></tr>
+<tr><td>ENOSPC      </td><td>N&atilde;o existe entrada no diret&oacute;rio</td></tr>
+<tr><td>ENOTDIR     </td><td>Um componente do nome do arquivo n&atilde;o &eacute; um diret&oacute;rio</td></tr>
+<tr><td>EPERM       </td><td>Sem permiss&atilde;o</td></tr>
+<tr><td>EROFS       </td><td>Permiss&atilde;o de escrita foi solicitada para um arquivo que s&oacute; permite leitura</td></tr>
+</table>
+</blockquote>
+<p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<blockquote class="t2">
+1. #include&lt;sys/stat.h&gt; <br>
+2. #include&lt;stdio.h&gt;    <br>
+3. #include&lt;string.h&gt;   <br>
+4. #include&lt;errno.h&gt;    <br>
+5. int main() <br>
+6. &nbsp;&nbsp;&nbsp; { <br>
+7. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (mkdir("./testes", S_IRUSR | S_IWUSR | S_IXUSR) != 0) <br>
+8. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("mkdir: %s\n", strerror(errno)); <br>
+9. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; system("ls -l"); <br>
+10.&nbsp;&nbsp;&nbsp; }
+</blockquote>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/mkdir.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 4 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da 
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>sys/stat.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o dos nomes simb&oacute;licos para as permiss&otilde;es dos
+        arquivos. Por exemplo:
+        <ul>
+        <li>S_IRUSR - permiss&atilde;o de leitura para o dono do arquivo;
+        <li>S_IWUSR - permiss&atilde;o de escrita para o dono do arquivo;
+        <li>S_IXUSR - permiss&atilde;o de execu&ccedil;&atilde;o para o dono do arquivo;
+        </ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror( )</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro.
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+    </ul>
+<li><b>Linha 5 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da
+    linha 7 a linha 9.
+<li><b>Linha 7 :</b> esta linha executa duas a&ccedil;&otilde;es. Primeiro, usa a chamada de sistema <i>mkdir( )</i> para criar o
+    diret&oacute;rio <i>testes</i> dentro do diret&oacute;rio corrente com permiss&atilde;o de leitura, grava&ccedil;&atilde;o e
+    execu&ccedil;&atilde;o apenas para o dono do arquivo. Segundo, verifica se a execu&ccedil;&atilde;o da chamada <i>mkdir( )</i>
+    foi bem sucedida. Em caso negativo, a linha 8 &eacute; executada.
+<li><b>Linha 8 :</b> exibe o erro ocorrido durante a execu&ccedil;&atilde;o da chamada <i>mkdir( )</i>.
+<li><b>Linha 9 :</b> usa a fun&ccedil;&atilde;o <a href="fc_system.html"><b>system( )</b></a> para exibir as permiss&otilde;es de
+    acesso do diret&oacute;rio <i>testes</i>.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar
+   <blockquote class="t1">gcc -o mkdir mkdir.c</blockquote>
+Para executar
+<blockquote class="t1">./mkdir</blockquote>
+</p>
+
+<p>Abaixo &eacute; apresentada uma poss&iacute;vel sa&iacute;da para o programa discutido acima.
+<blockquote class="t2">
+<table class="t2">
+<tr><td>drwx------</td><td>2 aluno aluno</td><td>4096 Oct 4 21:27</td><td>testes</td></tr>
+</table>
+</blockquote>
+</p>
+
+<p>Note que a linha da sa&iacute;da possui <a href="../permissao.html"><b>permiss&atilde;o</b></a> de leitura, 
+escrita e execu&ccedil;&atilde;o apenas para o dono do arquivo.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A vantagem em usar os nomes simb&oacute;licos das permiss&otilde;es ao inv&eacute;s da nota&ccedil;&atilde;o octal est&aacute;
+    relacionada a portabilidade do programa.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

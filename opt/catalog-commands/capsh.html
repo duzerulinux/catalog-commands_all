@@ -1,0 +1,99 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>capsh</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="capsh">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>capsh</h1>
+
+<blockquote><b><font size="+1"> capsh [op&ccedil;&otilde;es] </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p> Este comando permite alterar/verificar as <a href="capacidades.html"><b>capacidades</b></a> de um 
+<a href="processo.html"><b>processo</b></a>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>--decode=xxx</b> : converte uma string hexadecimal em uma lista de capacidades.
+<li><b>--drop=xxx</b> : remove capacidades do <i>bset</i>.
+<li><b>--gid=n</b> : altera <a href="gid.html"><b>GID</b></a> para <i>n</i>.
+<li><b>--help</b> : mostra as op&ccedil;&otilde;es do comando.
+<li><b>--inh=xxx</b> : define XXX como capacidades no conjunto de capacidades heredit&aacute;rias.
+<li><b>--print</b> : exibe informa&ccedil;&otilde;es sobre as capacidades do processo.
+<li><b>--uid=n</b> : altera <a href="uid.html"><b>UID</b></a> para <i>n</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2> Exemplos </h2>
+
+<ul>
+<li>Para ver informa&ccedil;&otilde;es das capacidades do <a href="shell.html"><b>shell</b></a>, digite na linha de comandos
+    <blockquote class="t1">capsh --print</blockquote>
+    Abaixo &eacute; mostrada uma poss&iacute;vel resposta. Note que atualmente o processo n&atilde;o tem capacidades habilitadas.
+    <blockquote class="t2">
+    Current: = <br>
+    Bounding set = cap_chown,cap_dac_override,cap_dac_read_search,cap_fowner,cap_fsetid,cap_kill,cap_setgid,<br>
+    cap_setuid,cap_setpcap,cap_linux_immutable,cap_net_bind_service,cap_net_broadcast,cap_net_admin,cap_net_raw,<br>
+    cap_ipc_lock,cap_ipc_owner,cap_sys_module,cap_sys_rawio,cap_sys_chroot,cap_sys_ptrace,cap_sys_pacct,<br>
+    cap_sys_admin,cap_sys_boot,cap_sys_nice,cap_sys_resource,cap_sys_time,cap_sys_tty_config,cap_mknod,cap_lease,<br>
+    cap_audit_write,cap_audit_control,cap_setfcap,cap_mac_override,cap_mac_admin,cap_syslog,cap_wake_alarm,<br>
+    cap_block_suspend,37<br>
+    Securebits: 00/0x0/1'b0<br>
+    &nbsp;&nbsp;&nbsp; secure-noroot: no (unlocked)<br>
+    &nbsp;&nbsp;&nbsp; secure-no-suid-fixup: no (unlocked)<br>
+    &nbsp;&nbsp;&nbsp; secure-keep-caps: no (unlocked)<br>
+    uid=1000(aluno)<br>
+    gid=1000(aluno)<br>
+    groups=4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),108(lpadmin),124(sambashare),1000(aluno)
+    </blockquote>
+<li>Para apenas ver as 37 capacidades mantidas atualmente no Linux, digite
+    <blockquote class="t1">capsh --decode=0000001fffffffff</blockquote>
+    A resposta do sistema &eacute; mostrada abaixo.
+    <blockquote class="t2">
+    0x0000001fffffffff=cap_chown,cap_dac_override,cap_dac_read_search,cap_fowner,cap_fsetid,cap_kill,cap_setgid,<br>
+    cap_setuid,cap_setpcap,cap_linux_immutable,cap_net_bind_service,cap_net_broadcast,cap_net_admin,cap_net_raw,<br>
+    cap_ipc_lock,cap_ipc_owner,cap_sys_module,cap_sys_rawio,cap_sys_chroot,cap_sys_ptrace,cap_sys_pacct,<br>
+    cap_sys_admin,cap_sys_boot,cap_sys_nice,cap_sys_resource,cap_sys_time,cap_sys_tty_config,cap_mknod,cap_lease,<br>
+    cap_audit_write,cap_audit_control,cap_setfcap,cap_mac_override,cap_mac_admin,cap_syslog,cap_wake_alarm,<br>
+    cap_block_suspend
+    </blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>&Eacute; preciso instalar a biblioteca <i>libcap</i> para usar o comando <i>capsh</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

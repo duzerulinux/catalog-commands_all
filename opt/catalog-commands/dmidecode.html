@@ -1,0 +1,188 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>dmidecode</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="dmidecode">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>dmidecode</h1>
+
+<blockquote><b><font size="+1"> dmidecode [op&ccedil;&otilde;es] </font></b></blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando decodifica tabelas DMI (<i>Destktop Management Information</i>).</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-t tipo</b> : mostra informa&ccedil;&otilde;es apenas do tipo especificado como, por exemplo, <i>bios</i>,
+    <i>processor</i>, <i>memory</i>, <i>cache</i>, etc. Veja tabelas abaixo.
+<li><b>-h</b> ou <b>--help</b> : exibe as op&ccedil;&otilde;es do comando.
+<li><b>-V</b> ou <b>--version </b> : mostra informa&ccedil;&otilde;es sobre o comando.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Tipos DMI</h2>
+
+<p>Existem duas formas de especificar o tipo para o comando <b>dmidecode</b>.</p>
+<ol>
+<li>Fornecendo a numera&ccedil;&atilde;o dos tipos desejados.<br><br>
+
+<table class="t1" cellpadding=2 border=2>
+<tr><td><b>Tipo</b></td><td><b>Informa&ccedil;&atilde;o</b></td></tr>
+<tr><td>0 </td><td> BIOS</td></tr>
+<tr><td>1 </td><td> System</td></tr>
+<tr><td>2 </td><td> Base Board</td></tr>
+<tr><td>3 </td><td> Chassis</td></tr>
+<tr><td>4 </td><td> Processor</td></tr>
+<tr><td>5 </td><td> Memory Controller</td></tr>
+<tr><td>6 </td><td> Memory Module</td></tr>
+<tr><td>7 </td><td> Cache</td></tr>
+<tr><td>8 </td><td> Port Connector</td></tr>
+<tr><td>9 </td><td> System Slots</td></tr>
+<tr><td>10</td><td> On Board Devices</td></tr>
+<tr><td>11</td><td> OEM Strings</td></tr>
+<tr><td>12</td><td> System Configuration Options</td></tr>
+<tr><td>13</td><td> BIOS Language</td></tr>
+<tr><td>14</td><td> Group Associations</td></tr>
+<tr><td>15</td><td> System Event Log</td></tr>
+<tr><td>16</td><td> Physical Memory Array</td></tr>
+<tr><td>17</td><td> Memory Device</td></tr>
+<tr><td>18</td><td> 32-bit Memory Error</td></tr>
+<tr><td>19</td><td> Memory Array Mapped Address</td></tr>
+<tr><td>20</td><td> Memory Device Mapped Address</td></tr>
+<tr><td>21</td><td> Built-in Pointing Device</td></tr>
+<tr><td>22</td><td> Portable Battery</td></tr>
+<tr><td>23</td><td> System Reset</td></tr>
+<tr><td>24</td><td> Hardware Security</td></tr>
+<tr><td>25</td><td> System Power Controls</td></tr>
+<tr><td>26</td><td> Voltage Probe</td></tr>
+<tr><td>27</td><td> Cooling Device</td></tr>
+<tr><td>28</td><td> Temperature Probe</td></tr>
+<tr><td>29</td><td> Electrical Current Probe</td></tr>
+<tr><td>30</td><td> Out-of-band Remote Access</td></tr>
+<tr><td>31</td><td> Boot Integrity Services</td></tr>
+<tr><td>32</td><td> System Boot</td></tr>
+<tr><td>33</td><td> 64-bit Memory Error</td></tr>
+<tr><td>34</td><td> Management Device</td></tr>
+<tr><td>35</td><td> Management Device Component</td></tr>
+<tr><td>36</td><td> Management Device Threshold Data</td></tr>
+<tr><td>37</td><td> Memory Channel</td></tr>
+<tr><td>38</td><td> IPMI Device</td></tr>
+<tr><td>39</td><td> Power Supply</td></tr>
+<tr><td>40</td><td> Additional Information</td></tr>
+<tr><td>41</td><td> Onboard Device</td></tr>
+</table>
+<br>
+
+<li>Fornecendo palavras-chaves. Abaixo alguns exemplos.<br><br>
+
+<table class="t1" cellpadding=2 border=2>
+<tr><td><b>Palavra-chave</b></td><td><b>Tipos</b></td></tr>
+<tr><td>   bios         </td><td>       0, 13</td></tr>
+<tr><td>   system       </td><td>       1, 12, 15, 23, 32</td></tr>
+<tr><td>   baseboard    </td><td>       2, 10, 41</td></tr>
+<tr><td>   chassis      </td><td>       3</td></tr>
+<tr><td>   processor    </td><td>       4</td></tr>
+<tr><td>   memory       </td><td>       5, 6, 16, 17</td></tr>
+<tr><td>   cache        </td><td>       7</td></tr>
+<tr><td>   connector    </td><td>       8</td></tr>
+<tr><td>   slot         </td><td>       9</td></tr>
+</table>
+<br>
+
+</ol>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Para ver as informa&ccedil;&otilde;es sobre a vers&atilde;o do programa usado pelo BIOS, basta digitar
+    <blockquote class="t1">sudo dmidecode -t 1</blockquote>
+    Abaixo uma poss&iacute;vel sa&iacute;da.
+
+<blockquote class="t2">
+# dmidecode 2.11<br>
+SMBIOS 2.4 present.<br>
+<br>
+Handle 0x0000, DMI type 0, 24 bytes<br>
+BIOS Information<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vendor: TOSHIBA<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Version: V2.50<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Release Date: 08/30/2007<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Address: 0xE7860<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runtime Size: 100256 bytes<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ROM Size: 1024 kB<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Characteristics:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ISA is supported<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PCI is supported<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PC Card (PCMCIA) is supported<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PNP is supported<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BIOS is upgradeable<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BIOS shadowing is allowed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ESCD support is available<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Boot from CD is supported<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ACPI is supported<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;USB legacy is supported<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BIOS boot specification is
+   supported<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Targeted content distribution
+   is supported
+</blockquote>
+
+<li>Para ver as informa&ccedil;&otilde;es sobre o BIOS e o sistema, digite
+    <blockquote class="t1">sudo dmidecode -t 0,1</blockquote>
+
+<li>Para ver as informa&ccedil;&otilde;es das tabelas DMI sobre a mem&oacute;ria, pode-se usar
+    <blockquote class="t1">sudo dmidecode -t memory</blockquote>
+    Neste caso, ser&atilde;o lidas as tabelas dos tipos 5, 6, 16 e 17.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O comando <b>dmidecode</b> sem par&acirc;metros apresenta as informa&ccedil;&otilde;es de todas as tabelas DMI.
+<li>Algumas pessoas preferem usar o termo "tabelas SMBIOS" (<i>System Management BIOS</i>) ao inv&eacute;s de 
+    tabelas DMI.
+</ul>
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="biosdecode.html">biosdecode</a></b> - decodifica informa&ccedil;&otilde;es do BIOS 
+    (<i>Basic Input/Output System</i>).
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

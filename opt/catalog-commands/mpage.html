@@ -1,0 +1,75 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>mpage</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="mpage">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>mpage</h1>
+   
+<blockquote><font size="+1"><b>mpage [op&ccedil;&otilde;es] arquivo</b></font><br> </blockquote>
+<ul>
+<li>O argumento <i>arquivo</i> &eacute; o nome do arquivo a ser formatado para impress&atilde;o.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este aplicativo permite imprimir v&aacute;rias p&aacute;ginas em uma &uacute;nica folha de papel.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-1</b> : imprime uma p&aacute;gina por papel.</li>
+<li><b>-2</b> : imprime duas p&aacute;ginas por papel.</li>
+<li><b>-4</b> : imprime quatro p&aacute;ginas por papel.</li>
+<li><b>-8</b> : imprime oito p&aacute;ginas por papel.</li>
+<li><b>-b</b> : define o tipo do papel (A4, legal, letter, etc).</li>
+<li><b>-c</b> : junta v&aacute;rios arquivos em uma &uacute;nica impress&atilde;o.</li>
+<li><b>-H</b> : cria cabe&ccedil;alho para cada p&aacute;gina.</li>
+<li><b>-l</b> : usa formato <b>landscape</b> (o padr&atilde;o &eacute; <b>portrait</b>).</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>Para criar o arquivo <b>teste.ps</b> com quatro p&aacute;ginas por folha e formato A4 a partir do arquivo
+   <b>teste.txt</b>, basta digitar</p> 
+
+<blockquote class="t1">mpage -4 -b a4 teste.txt > teste.ps</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Este comando ler um arquivo <b>ASCII</b> ou <b>PostScript</b> e cria um arquivo <b>PostScript</b> para 
+    impress&atilde;o.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

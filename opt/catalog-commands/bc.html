@@ -1,0 +1,119 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>bc</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="bc">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>bc</h1>
+
+<blockquote><b><font size="+1"> bc [op&ccedil;&otilde;es] [express&atilde;o / arquivo] </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>&Eacute; uma linguagem de programa&ccedil;&atilde;o para opera&ccedil;&otilde;es aritm&eacute;ticas. O termo <i>bc</i>
+significa <i>basic calculator</i>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2> Algumas op&ccedil;&otilde;es do comando </h2>
+
+<ul>
+<li><b>-h</b> ou <b>--help</b> : exibe as op&ccedil;&otilde;es da linguagem.
+<li><b>-i</b> : usa modo interativo.
+<li><b>-l</b> ou <b>--mathlib</b> : usa a biblioteca padr&atilde;o de fun&ccedil;&otilde;es matem&aacute;ticas como, por exemplo,
+    as mostradas abaixo.
+    <ul>
+    <li><b>s (x)</b> : o seno de <i>x</i>, onde <i>x</i> &eacute; em radianos.
+    <li><b>c (x)</b> : o cosseno de <i>x</i>, onde <i>x</i> &eacute; em radianos.
+    <li><b>a (x)</b> : o arcotangente de <i>x</i>, a resposta &eacute; dada em radianos.
+    <li><b>l (x)</b> : o logaritmo natural de <i>x</i>.
+    <li><b>e (x)</b> : a fun&ccedil;&atilde;o exponencial de <i>e</i> elevado a <i>x</i>.
+    <li><b>j (n, x)</b> : a fun&ccedil;&atilde;o de Bessel da ordem de <i>n</i> de <i>x</i>.
+    <li><b>sqrt (x)</b> : a raiz quadrada de <i>x</i>.
+    </ul>
+<li><b>-v</b> ou <b>--version</b> : exibe a vers&atilde;o atual da linguagem.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2> Exemplos </h2>
+
+<ul>
+<li>Para calcular a divis&atilde;o de 5 por 3 com 2 casas decimais, digite
+    <blockquote class="t1">bc <<< "scale=2;5/3"</blockquote>
+<li>Outra forma de calcular a divis&atilde;o de 5 por 3 com 2 casas decimais &eacute;
+    <blockquote class="t1">echo "scale=2; 5/3" | bc</blockquote>
+<li>Para calcular a pot&ecirc;ncia de 6 elevado a 3, basta digitar
+    <blockquote class="t1">bc <<< 6^3</blockquote>
+<li>Para calcular a raiz quadrada de 4, digite
+    <blockquote class="t1">bc -l <<< 'sqrt(4)'</blockquote>
+<li>Para imprimir o n&uacute;mero <i>pi</i> com dez casas decimais, entre com
+    <blockquote class="t1">echo pi=$(echo "scale=10; 4*a(1)" | bc -l)</blockquote>
+<li>Para coverter o n&uacute;mero hexadecimal 2D para decimal, digite
+    <blockquote class="t1">bc <<< "ibase=16;obase=A;2D"</blockquote>
+<li>Para coverter o n&uacute;mero decimal 45 em hexadecimal, digite
+    <blockquote class="t1">bc <<< "ibase=A;obase=16;45"</blockquote>
+<li>Para coverter o n&uacute;mero decimal 45 em octal, digite
+    <blockquote class="t1">bc <<< "ibase=A;obase=8;45"</blockquote>
+<li>Para coverter o n&uacute;mero decimal 45 em bin&aacute;rio, digite
+    <blockquote class="t1">bc <<< "ibase=A;obase=2;45"</blockquote>
+<li>Para verificar se o n&uacute;mero 131 &eacute; par ou &iacute;mpar, basta digitar
+    <blockquote class="t1">echo 'if ((131%2) == 0) {print "numero par\n"} else {print "numero impar\n"}' | bc</blockquote>
+<li>Para entrar no modo interativo, digite
+    <blockquote class="t1">bc -i</blockquote>
+    Em seguida, forneça as opera&ccedil;&otilde;es a serem feitas e tecle Enter a cada intera&ccedil;&atilde;o. Abaixo, s&atilde;o
+    feitas quatro intera&ccedil;&otilde;es: 1) soma de 3 e 2; 2) divis&atilde;o de 8 por 7; 3) define 2 casas decimais para as 
+    pr&oacute;ximas opera&ccedil;&otilde;es; 4) pede novamente a divis&atilde;o de 8 por 7.
+    <blockquote class="t2">
+    3+2 <br>
+    5 <br>
+    8/7 <br>
+    1 <br>
+    scale=2 <br>
+    8/7 <br>
+    1.14
+    </blockquote>
+    Para sair do modo interativo basta digitar <i>quit</i>.
+</ul>
+  
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A linguagem <i>bc</i> &eacute; muito rica pois permite, por exemplo, o uso de 
+   <ul>
+   <li>comandos de decis&atilde;o (if, else);
+   <li>la&ccedil;os (for, while);
+   <li>expres&otilde;es aritm&eacute;ticas (+, -, *, /, %, ++, --, =, +=, -=, &gt;, &gt;=, &lt;, &lt;=, !=, etc);
+   <li>vari&aacute;veis, constantes e vetores .
+   </ul>
+   Para obter mais informa&ccedil;&otilde;es, consulte o <a href="man.html"><b>manual on-line</b></a> (digite "man bc").
+<li>N&atilde;o existem no <i>bc</i> : tratamento de erros e manipula&ccedil;&atilde;o de arquivos. 
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

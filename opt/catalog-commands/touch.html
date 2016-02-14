@@ -1,0 +1,75 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>touch</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="touch">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>touch</h1>
+   
+<blockquote><font size="+1"><b> touch [op&ccedil;&otilde;es] arquivo</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este utilit&aacute;rio permite alterar a data e a hora do &uacute;ltimo acesso e/ou data de modifica&ccedil;&atilde;o de um arquivo.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-a</b> : altera apenas a data do &uacute;timo acesso.
+<li><b>-c, --no-create</b> : n&atilde;o cria qualquer arquivo.
+<li><b>-m</b> : altera apenas a data de modifica&ccedil;&atilde;o do arquivo.
+<li><b>-t [[CC]YY]MMDDhhmm[.ss]</b> : define o tempo a ser usado pelo utilit&aacute;rio ao inv&eacute;s do tempo atual.
+<li><b>--help</b> : exibe as op&ccedil;&otilde;es do utilit&aacute;rio.
+<li><b>--version</b> : mostra informa&ccedil;&otilde;es sobre o arquivo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Se o arquivo <i>teste</i> n&atilde;o existe, o comando
+    <blockquote class="t1">touch teste</blockquote>
+    cria um arquivo vazio.
+<li>Para alterar as datas de modifica&ccedil;&atilde;o e de acesso do arquivo <i>teste</i> para 12:31 do dia 01/05 do ano corrente, digite
+   <blockquote class="t1">touch -t 05011231 teste</blockquote>
+<li>Para atualizar as datas de todos os arquivos do diret&oacute;rio corrente, digite
+    <blockquote class="t1">touch *</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Se as op&ccedil;&otilde;es n&atilde;o especificarem qual data deve ser alterada, o utilit&aacute;rio altera as duas datas do arquivo:
+    acesso e modifica&ccedil;&atilde;o.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

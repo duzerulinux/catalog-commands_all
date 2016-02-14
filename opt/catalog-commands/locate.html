@@ -1,0 +1,95 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>locate</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="locate">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>locate</h1>
+       
+<blockquote><font size="+1"><b>locate express&atilde;o</b></font></blockquote>
+<ul>
+<li>O argumento <i>express&atilde;o</i> &eacute; o padr&atilde;o a ser procurado.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando utiliza um banco de dados de nomes de arquivos para pesquisar um determinado nome. 
+Esta base de dados &eacute;  criada/atualizada pelo administrador do sistema atrav&eacute;s do comando 
+<b><a href="updatedb.html">updatedb</a></b> e &eacute; armazenada em <b>/var/lib/mlocate/mlocate.db</b>.
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-b, --basename</b> : define uma parte do nome do arquivo a ser procurado.
+<li><b>-d, --database DBPATH</b> : define a base de dados a ser usada ao inv&eacute;s da base de dados padr&atilde;o.
+<li><b>-h, --help</b> : exibe as op&ccedil;&otilde;es do utilit&aacute;rio.
+<li><b>-V, --version</b> : mostra informa&ccedil;&otilde;es sobre o utilit&aacute;rio.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<ul>
+<li>O comando
+   <blockquote class="t1">locate *syslog</blockquote>
+   apresenta a seguinte sa&iacute;da no <b>duzeru 2.1</b>
+   <blockquote class="t2"> 
+   /etc/default/rsyslog<br>
+   /etc/init.d/rsyslog<br>
+   /etc/logcheck/ignore.d.server/rsyslog<br>
+   /etc/logrotate.d/rsyslog<br>
+   /usr/lib/rsyslog<br>
+   /usr/share/rsyslog<br>
+   /usr/share/doc/rsyslog<br>
+   /usr/share/lintian/overrides/rsyslog<br>
+   /var/log/syslog<br>
+   /var/log/installer/syslog
+   </blockquote>
+<li>Os comandos
+   <blockquote class="t1">locate \syslog</blockquote>
+e
+   <blockquote class="t1">locate *syslog*</blockquote>
+   procuram pelos arquivos cujos nomes possuem a string <b>syslog</b>. Neste caso, considera-se como parte do nome de 
+   arquivo todos os diret&oacute;rios hierarquicamente superior ao arquivo.
+<li>Para pesquisar a string <b>syslog</b> apenas nos nomes de arquivos (n&atilde;o considera os nomes de diret&oacute;rios),
+    digite
+   <blockquote class="t1">locate -b syslog</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="find.html">find</a></b> - pesquisa arquivos em uma hierarquia de diret&oacute;rios.
+<li><b><a href="whereis.html">whereis</a></b> - lista a localiza&ccedil;&atilde;o de programas bin&aacute;rios, fontes e documenta&ccedil;&atilde;o.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

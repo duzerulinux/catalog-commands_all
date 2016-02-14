@@ -1,0 +1,92 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>wc</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="wc">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>wc</h1>
+   
+<blockquote><font size="+1"><b>wc [op&ccedil;&otilde;es] [arquivo]</b></font></blockquote>
+<ul>
+<li>O argumento <i>arquivo</i> &eacute; o nome do arquivo a ser usado como entrada pelo utilit&aacute;rio.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este utilit&aacute;rio conta linhas, palavras e caracteres de arquivos.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-c</b> : conta bytes.
+<li><b>-l</b> : conta linhas.
+<li><b>-L</b> : mostra o comprimento da linha mais longa.
+<li><b>-m</b> : conta caracteres.
+<li><b>-w</b> : conta palavras.
+<li><b>--help</b> : exibe as op&ccedil;&otilde;es do utilit&aacute;rio.
+<li><b>--version</b> : mostra informa&ccedil;&otilde;es sobre o utilit&aacute;rio.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>Suponha o arquivo <i>teste</i> com o conte&uacute;do abaixo.
+<blockquote class="t2">
+linha 1 <br>
+<br>
+linh&aacute; 2<br>
+<br>
+o fim
+</blockquote>
+O comando 
+<blockquote class="t1">wc teste</blockquote>
+fornece a seguinte resposta
+<blockquote class="t2">
+ 5  6 25 teste
+</blockquote>
+O arquivo <i>teste</i> tem 5 linhas, 6 palavras (2 por linha n&atilde;o vazia) e 25 bytes (quantidade de bytes por linha: 8, 1, 9, 1 e 6).
+Note que &eacute; contado o byte/caractere de fim de linha ('\0') e que o caractere "&aacute;" da terceira linha &eacute; representado
+por dois bytes. Isto pode ser verificado com o comando
+<blockquote class="t1">wc -m teste</blockquote>
+que mostra que o arquivo tem apenas 24 caracteres.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Caso nenhuma op&ccedil;&atilde;o seja fornecida, o comando informa o n&uacute;mero de linhas, de palavras e de bytes do arquivo
+    especificado.
+<li>Caso o nome do arquivo n&atilde;o seja fornecido, o utilit&aacute;rio permite que o usu&aacute;rio digite as linhas na entrada
+    padr&atilde;o (as linhas s&atilde;o separadas pela tecla ENTER e o final do arquivo &eacute; caracterizado pelas teclas CTRL+D)
+    e, em seguida, faz a contagem.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

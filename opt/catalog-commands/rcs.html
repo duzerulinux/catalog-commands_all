@@ -1,0 +1,155 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>rcs</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="rcs">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>RCS</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p><b>RCS</b> significa <i>Revision Control System</i> e &eacute; um sistema para controlar acesso a arquivos compartilhados
+por v&aacute;rios usu&aacute;rios.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Uma forma de organizar os arquivos gerenciados pelo <i>RCS</i> &eacute; criar um subdiret&oacute;rio 
+    com o nome <i>RCS</i>. Assim, o <i>RCS</i> passar&aacute; a usar este subdiret&oacute;rio
+    como padr&atilde;o para armazenamento e recupera&ccedil;&atilde;o de arquivos <i>RCS</i>. Por exemplo, para
+    controlar os arquivos do diret&oacute;rio <i>teste</i> com o <i>RCS</i>, execute os seguintes passos:
+    <blockquote class="t1">cd teste</blockquote>
+    <blockquote class="t1">mkdir RCS</blockquote>
+
+<li>Para que um programa passe a ser gerenciado pelo <i>RCS</i>, &eacute; preciso que ele seja primeiro verificado. 
+    Para isto basta digitar
+    <blockquote class="t1">ci programa</blockquote>
+    onde <b>ci</b> significa <i>ckeck in RCS revisions</i>. Em resposta ao comando acima, o <i>RCS</i> solicita a
+    descri&ccedil;&atilde;o do programa especificado. Para encerrar a descri&ccedil;&atilde;o, basta utilizar um ponto
+    em uma linha isolada ou utilizar <b>Ctrl+D</b>. O <i>RCS</i> ent&atilde;o apaga o arquivo original e cria um novo 
+    arquivo com mesmo nome e extens&atilde;o "<b>,v</b>". Este arquivo &eacute; somente para leitura e &eacute; maior 
+    que o arquivo original porque o sistema <i>RCS</i> acrescenta algumas informa&ccedil;&otilde;es adicionais a esse 
+    arquivo tais como vers&atilde;o, descri&ccedil;&atilde;o recentemente digitada, hist&oacute;rico de 
+    altera&ccedil;&atilde;o, etc. 
+
+<li>Para que uma c&oacute;pia do arquivo (apenas para leitura) seja deixado pelo <i>RCS</i> no diret&oacute;rio, basta
+    usar a op&ccedil;&atilde;o <b>-u</b>, ou seja,
+    <blockquote class="t1">ci -u programa<br></blockquote>
+
+<li>&Eacute; tamb&eacute;m poss&iacute;vel definir o n&uacute;mero da vers&atilde;o que o <i>RCS</i> armazenar&aacute; 
+    o arquivo. Por exemplo,
+    <blockquote class="t1">ci -r2.0 programa</blockquote>
+    define que o n&uacute;mero da nova vers&atilde;o &eacute; 2.0. O <i>RCS</i> n&atilde;o aceita um n&uacute;mero de 
+    vers&atilde;o menor que o n&uacute;mero da &uacute;ltima vers&atilde;o gravada.
+
+<li>Para obter uma c&oacute;pia de trabalho de um arquivo gerenciado pelo <i>RCS</i>, 
+    deve-se digitar
+    <blockquote class="t1">co programa</blockquote>
+    onde <b>co</b> significa <i>ckeck out RCS revisions</i>. Entretanto, esta c&oacute;pia &eacute; apenas para leitura.
+
+<li>Para obter uma c&oacute;pia do arquivo para altera&ccedil;&atilde;o e bloqueiar o acesso a esse arquivo por parte 
+    dos outros usu&aacute;rios, basta digitar
+    <blockquote class="t1">co -l programa</blockquote>
+
+<li>Pode-se tamb&eacute;m recuperar uma determinada vers&atilde;o do programa gravado pelo <i>RCS</i>. Por exemplo,
+    <blockquote class="t1">co -r2.0 programa</blockquote>
+    recupera a vers&atilde;o 2.0 do programa especificado.
+
+<li>Para desbloquear um arquivo sem fazer nenhuma altera&ccedil;&atilde;o, deve-se digitar
+    <blockquote class="t1">rcs -u arquivo</blockquote>
+
+<li>Para verificar quais as altera&ccedil;&otilde;es existentes entre a &uacute;ltima vers&atilde;o gravada do programa
+    pelo <i>RCS</i> e a vers&atilde;o atual no seu diret&oacute;rio, digite<br>
+    <blockquote class="t1">rcsdiff programa</blockquote>
+    Por exemplo, a seguinte sa&iacute;da</p>
+
+<blockquote class="t2">
+11d10<br>
+&lt; ******<br>
+15a15,16<br>
+&gt; #include "def2.h"<br>
+&gt; #include "def3.h"<br>
+</blockquote>
+
+informa que a linha 11 do arquivo original foi removida e que duas novas linhas, 
+15 e 16, foram incluidas no arquivo. &Eacute; tamb&eacute;m poss&iacute;vel 
+verificar as diferen&ccedil;as existentes entre duas vers&otilde;es de um arquivo 
+<i>RCS</i>. Por exemplo,
+<blockquote class="t1">rcsdiff -r2.0 -r1.0 teste.c</blockquote>
+lista as diferen&ccedil;as existentes entre a vers&atilde;o 2.0 e a vers&atilde;o
+1.0 do arquivo <i>teste.c</i> gerenciado pelo <i>RCS</i>.
+
+<li>Para obter o hist&oacute;rico das altera&ccedil;&otilde;es de um arquivo <i>RCS</i>, basta digitar
+    <blockquote class="t1">rlog programa</blockquote>
+
+<li>Para apagar todos os arquivos <i>RCS</i>, em um diret&oacute;rio, que n&atilde;o est&atilde;o bloqueados para
+    altera&ccedil;&atilde;o (apenas leitura), pode-se usar o seguinte comando:
+    <blockquote class="t1">rcsclean</blockquote>
+
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Palavras-chave do RCS</h2>
+
+<p>&Eacute; poss&iacute;vel documentar o c&oacute;digo-fonte usando as 
+informa&ccedil;&otilde;es armazenadas pelo <i>RCS</i>. S&atilde;o exemplos de 
+palavras-chave conhecidas pelo <i>RCS</i>:</p>
+
+<ul>
+<li><b>$Author$</b> : identifica&ccedil;&atilde;o do usu&aacute;rio da &uacute;ltima revis&atilde;o.</li>
+<li><b>$Date$</b> : data e hora da &uacute;ltima revis&atilde;o.</li>
+<li><b>$Id$</b> : nome do arquivo, vers&atilde;o, data e hora da atualiza&ccedil;&atilde;o, autor e estado do programa no gerenciamento do  
+    <i>RCS</i>.</li>
+<li><b>$Log$</b> : mensagem de log gerada durante a verifica&ccedil;&atilde;o.</li>
+<li><b>$Revision$</b> : n&uacute;mero da vers&atilde;o do arquivo.</li>
+<li><b>$Source$</b> : caminho completo do arquivo <i>RCS</i>.</li>
+</ul>
+
+<p>Quando alguma destas palavras &eacute; usada no c&oacute;digo-fonte, o <i>RCS</i> a 
+substitui automaticamente durante a verifica&ccedil;&atilde;o do arquivo (comando <b>ci</b>). 
+
+<p>Para verificar quais palavras-chave s&atilde;o usadas em um arquivo, antes de coloc&aacute;-lo sob o controle do
+   <i>RCS</i>, basta digitar</p>
+
+<blockquote class="t1">ident arquivo</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+
+<li>O <i>RCS</i> gerencia os programas apenas localmente, ou seja, dentro de um determinado diret&oacute;rio. O 
+    <a href="http://www.linux.org/threads/linux-and-cvs.4168/"><b>CVS</b></a> (<i>Concurrent Versions System</i>)
+    &eacute; uma ferramenta constru&iacute;da sobre a estrutura do <i>RCS</i> e que opera sobre uma rede.
+
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

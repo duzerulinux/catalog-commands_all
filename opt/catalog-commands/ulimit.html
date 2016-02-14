@@ -1,0 +1,143 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>ulimit</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="ulimit">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+
+<h1>ulimit</h1>
+
+<blockquote><b><font size="+1"> ulimit [op&ccedil;&otilde;es] </font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando permite controlar os recursos disponibilizados para o <b><a href="shell.html">shell</a></b> e
+   para os processos inicializados pelo shell.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-H</b> : informa os limites <i>hard</i>. Estes limites s&atilde;o definidos pelo administrador 
+        (<b><a href="root.html">root</a></b>) e implementados pelo <b><a href="kernel.html">kernel</a></b>. 
+<li><b>-S</b> : informa os limites <i>soft</i>. Estes limites s&atilde;o interpretados como valores padr&otilde;es. 
+        Os limites <i>soft</i> n&atilde;o podem ultrapassar os valores definidos pelos limites <i>hard</i>.
+<li><b>-a</b> : exibe informa&ccedil;&otilde;es sobre todos os recursos.
+<li><b>-b</b> : exibe o tamanho m&aacute;ximo do buffer de socket.
+<li><b>-c</b> : exibe o tamanho m&aacute;ximo dos arquivos <i>core</i> criados (estes arquivos armazenam 
+    informa&ccedil;&otilde;es sobre processos que terminaram de forma anormal).
+<li><b>-d</b> : exibe o tamanho m&aacute;ximo de um segmento de dados do processo.
+<li><b>-e</b> : exibe a maior prioridade que pode ser alocada  aos processos.
+<li><b>-f</b> : exibe o tamanho m&aacute;ximo dos arquivos criados pelo <i>shell</i> e por seus processos-filhos.
+<li><b>-i</b> : exibe o n&uacute;mero m&aacute;ximo de sinais pendentes.
+<li><b>-l</b> : exibe o tamanho m&aacute;ximo da mem&oacute;ria RAM que pode ser bloqueada (<i>locked memory</i>), 
+    onde uma p&aacute;gina bloqueada n&atilde;o pode ser selecionada para sair da mem&oacute;ria.
+<li><b>-n</b> : exibe o n&uacute;mero m&aacute;ximo de descritores de arquivos que podem estar abertos ao mesmo tempo.
+<li><b>-q</b> : exibe o n&uacute;mero m&aacute;ximo de bytes em filas de mensagens.
+<li><b>-r</b> : exibe a prioridade m&aacute;xima dos processos em execu&ccedil;&atilde;o.
+<li><b>-s</b> : exibe o tamanho m&aacute;ximo das pilhas de dados.
+<li><b>-t</b> : exibe a quantidade m&aacute;xima de CPU que pode ser alocada em segundos.
+<li><b>-u</b> : exibe a quantidade m&aacute;xima de processos para um &uacute;nico usu&aacute;rio.
+<li><b>-v</b> : exibe a quantidade m&aacute;xima de mem&oacute;ria virtual dispon&iacute;vel.
+<li><b>-x</b> : exibe a quantidade m&aacute;xima de arquivos bloqueados.
+<li><b>-T</b> : exibe a quantidade m&aacute;xima de <i>threads</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Para verificar os valores definidos para os recursos no ambiente de trabalho (limite <i>soft</i>), digite
+    <blockquote class="t1">ulimit -a</blockquote>
+    Abaixo &eacute; apresentada uma poss&iacute;vel sa&iacute;da: a primeira coluna corresponde ao recurso; a segunda
+    coluna informa a unidade (quando existe) e a op&ccedil;&atilde;o usada no comando <i>ulimit</i> para este recurso; e a 
+    terceira coluna mostra o valor padr&atilde;o (<i>soft</i>) definido para o recurso.
+    <blockquote class="t2">
+    <table class="t2" cellpadding=3>
+    <tr><td align="left">core file size      </td><td align="right">(blocks, -c)   </td><td align="left">0</td></tr>
+    <tr><td align="left">data seg size       </td><td align="right">(kbytes, -d)   </td><td align="left">unlimited</td></tr>
+    <tr><td align="left">scheduling priority </td><td align="right">(-e)           </td><td align="left">0</td></tr>
+    <tr><td align="left">file size           </td><td align="right">(blocks, -f)   </td><td align="left">unlimited</td></tr>
+    <tr><td align="left">pending signals     </td><td align="right">(-i)           </td><td align="left">31356</td></tr>
+    <tr><td align="left">max locked memory   </td><td align="right">(kbytes, -l)   </td><td align="left">64</td></tr>
+    <tr><td align="left">max memory size     </td><td align="right">(kbytes, -m)   </td><td align="left">unlimited</td></tr>
+    <tr><td align="left">open files          </td><td align="right">(-n)           </td><td align="left">1024</td></tr>
+    <tr><td align="left">pipe size           </td><td align="right">(512 bytes, -p)</td><td align="left">8</td></tr>
+    <tr><td align="left">POSIX message queues</td><td align="right">(bytes, -q)    </td><td align="left">819200</td></tr>
+    <tr><td align="left">real-time priority  </td><td align="right">(-r)           </td><td align="left">0</td></tr>
+    <tr><td align="left">stack size          </td><td align="right">(kbytes, -s)   </td><td align="left">8192</td></tr>
+    <tr><td align="left">cpu time            </td><td align="right">(seconds, -t)  </td><td align="left">unlimited</td></tr>
+    <tr><td align="left">max user processes  </td><td align="right">(-u)           </td><td align="left">31356</td></tr>
+    <tr><td align="left">virtual memory      </td><td align="right">(kbytes, -v)   </td><td align="left">unlimited</td></tr>
+    <tr><td align="left">file locks          </td><td align="right">(-x)           </td><td align="left">unlimited</td></tr>
+    </table>
+    </blockquote>
+<li>O exemplo acima informa que os arquivos <i>core</i> por padr&atilde;o possuem zero bytes. Para saber o tamanho m&aacute;ximo
+    que um arquivo <i>core</i> pode ter, basta verificar o limite <i>hard</i> digitando
+    <blockquote class="t1">ulimit -Hc</blockquote>
+    Uma poss&iacute;vel resposta ao comando &eacute;
+    <blockquote class="t2">unlimited</blockquote>
+    Isto significa que o sistema n&atilde;o define qualquer limite para um arquivo <i>core</i> no ambiente atual.
+<li>Para definir que os arquivos criados n&atilde;o podem ser maiores que 300 KBytes, basta digitar
+    <blockquote class="t1">ulimit -f 300</blockquote>
+    Note que nem a op&ccedil;&atilde;o "-H" (limite <i>hard</i>) e nem a op&ccedil;&atilde;o "-S" (limite <i>soft</i>) foi
+    fornecida com o comando acima. Isto significa que os limites <i>hard</i> e <i>soft</i> s&atilde;o alterados para o valor
+    especificado.
+<li>Para ver o n&uacute;mero padr&atilde;o m&aacute;ximo de arquivos que podem ser abertos por um processo, digite
+    <blockquote class="t1">ulimit -Sn</blockquote>
+    A resposta do <a href="kernel.html"><b>kernel</b></a> 3.18 &eacute;
+    <blockquote class="t2">1024</blockquote>
+    Para ver o limite m&aacute;ximo que pode ser adotado pelo administrador do sistema, basta digitar
+    <blockquote class="t1">ulimit -Hn</blockquote>
+    A poss&iacute;vel resposta &eacute;
+    <blockquote class="t2">4096</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Se um valor &eacute; fornecido sem qualquer op&ccedil;&atilde;o, o aplicativo assume que o recurso
+    cujo valor limite ser&aacute; alterado &eacute; o tamanho m&aacute;ximo dos arquivos (op&ccedil;&atilde;o "-f")
+    e o valor fornecido ser&aacute; interpretado como quantidade de blocos de 1024 Bytes.
+<li>O comando <i>ulimit</i> altera os valores apenas para o ambiente em que ele &eacute; executado. Para fazer que uma
+    altera&ccedil;&atilde;o seja incorporada ao sistema &eacute; preciso incluir a defini&ccedil;&atilde;o em
+    /etc/security/limits.conf. Por exemplo, para impedir que arquivos <i>core</i> sejam criados, basta incluir
+    a linha abaixo, onde "*" corresponde a todos os usu&aacute;rios.
+    <blockquote>* hard core 0</blockquote>
+<li>O usu&aacute;rio comum s&oacute; pode diminuir o valor disponibilizado para o recurso. Além disso, existe um <i>bug</i>
+    no <b><a href="shell.html">shell</a></b> <i>bash</i>: o comando <i>ulimit</i> n&atilde;o funciona junto com o comando 
+    <b><a href="sudo.html">sudo</a></b>. Isto significa que, mesmo tendo senha de administrador, o usu&aacute;rio n&atilde;o
+    poder&aacute; aumentar os valores especificados.
+<li>O <i>ulimit</i> &eacute; um comando interno do <i>shell bash</i>. Portanto, use 
+    <blockquote class="t1">man bash</blockquote>
+    para saber mais sobre este comando.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

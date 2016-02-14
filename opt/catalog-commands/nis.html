@@ -1,0 +1,82 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>nis</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="x window">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>nis (network information system)</h1>
+
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>&Eacute; um serviço de dissemina&ccedil;&atilde;o de informa&ccedil;&atilde;o em rede fornecido pela SUN. Para ser mais espec&iacute;fico,
+ele tem como prop&oacute;sito prover informa&ccedil;&otilde;es para uma rede que devem ser conhecidas por todas as m&aacute;quinas da rede.
+Uma suposi&ccedil;&atilde;o &eacute; imaginar que suas informa&ccedil;&otilde;es de login, presentes no /etc/passwd sejam disseminadas na
+rede. A partir disso, ser&aacute; poss&iacute;vel logar em qualquer m&aacute;quina que esteja conectada &agrave; rede. 
+
+<p>Podem existir dois tipos de servidores NIS: o Master e o Slave.</p>
+
+
+<!--------------------------------------------------------------------------------------------- -->
+<h2>Alguns comandos do NIS</h2>
+<ul>
+<li><b>ypdomainname</b> : mostra o domínio do cliente NIS.
+<li><b>ypbind</b> : mostra o servidor de domínio NIS.
+<li><b>ypset</b> : relaciona um cliente NIS a um servidor.
+<li><b>ypcat</b> : mostra a base de dados do servidor NIS.
+<li><b>ypwhich</b> : mostra o nome da máquina do servidor NIS.
+<li><b>yppoll</b> : mostra a versão do servidor NIS.
+<li><b>ypmatch</b> : faz uma procura na base de dados do NIS.
+<li><b>yppasswd</b> : muda a senha do usuário na base de dados NIS.
+<li><b>ypchsh</b> : muda o shell da base de dados NIS.
+<li><b>ypchfn</b> : muda o nome do usuário na base de dados NIS.
+</ul>
+
+<!--------------------------------------------------------------------------------------------- -->
+<h2>Exemplo de uma estrutura nis</h2>
+
+<p align=center>
+<img src="imagens/nis.gif" width=524 height=251>
+</p>
+
+<p>O servidor Master vai manter os dados da rede atualizados e repassar aos clientes ou por meio de requisi&ccedil;&otilde;es ou 
+atrav&eacute;s do mapeamento slave. Os servidores Slave mantêm dados transferidos de um servidor Master e repassa aos clientes quando
+necess&aacute;rio. Esse &uacute;ltimo &eacute; utilizado em redes segmentadas com v&aacute;rios hosts ou mistas, para diminuir o 
+tráfego em rede.</p>
+
+
+<h2>Observa&ccedil;&otilde;es e curiosidades</h2>
+<ul>
+<li>A primeira vers&atilde;o era conhecida tamb&eacute;m como <i>Yellow Pages</i> e &eacute; por isso que a maioria de seus comandos se 
+    iniciam com "yp". 
+<li>&Eacute; baseado em <i>Chamadas de Procedimento Remoto</i> (RPC) que utilizam um padr&atilde;o de representa&ccedil;&atilde;o
+    de dados externo.
+<li>Possui uma versão chamada NIS+ (NIS plus) que oferece uma camada a mais de segurança. Apesar de muito potente, é mais difícil 
+    de configurar.
+</ul>
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

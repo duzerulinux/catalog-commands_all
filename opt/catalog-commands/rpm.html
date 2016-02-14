@@ -1,0 +1,134 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>rpm</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="rpm">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>rpm</h1>
+
+<blockquote><font size="+1"><b>rpm [op&ccedil;&otilde;es]</b></font></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<ul>
+<li>O <b>rpm</b> (recursivo acr&ocirc;nimo para <i>RPM Package Manager</i>) &eacute; um gerenciador de pacotes que 
+    pode ser usado para construir, instalar, consultar, verificar, atualizar e desinstalar pacotes de software. Um 
+    pacote consiste em um arquivo de arquivos e informa&ccedil;&otilde;es sobre o pacote, incluindo nome, vers&atilde;o
+    e descri&ccedil;&atilde;o.
+<li>Os pacotes RPM possuem o seguinte formato:
+    <blockquote>pacote-vers&atilde;o-release.plataforma.rpm</blockquote>
+    Por exemplo,
+    <blockquote>gtk+-3.6.0-2.ram1.x86_64.rpm</blockquote>
+    significa:
+    <ul>
+    <li>nome do arquivo = gtk+;
+    <li>vers&atilde;o = 3.6.0;
+    <li>release = 2;
+    <li>plataforma = x86_64.
+    </ul>
+    O termo "ram1" indica que o pacote foi desenvolvido para a distribui&ccedil;&atilde;o 
+    <b><a href="http://ramonelinux.sourceforge.net">Linux Ramone</a></b>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+
+<li><b>Modo de Consulta</b>
+    <blockquote>rpm -q [op&ccedil;&otilde;es]</blockquote>
+    Exemplos:
+    <ul>
+    <li><b>-q aplicativo</b> : exibe a vers&atilde;o do pacote que forneceu o aplicativo especificado.
+    <li><b>-qa</b> : exibe a vers&atilde;o de todos os pacotes instalados.
+    <li><b>-qf arquivo</b> : consulta o pacote que cont&eacute;m o arquivo especificado.
+    <li><b>-qi pacote</b> : exibe as informa&ccedil;&otilde;es sobre o pacote, incluindo nome, vers&atilde;o e 
+        descri&ccedil;&atilde;o.
+    <li><b>-ql pacote</b> : exibe a lista dos arquivos do pacote.
+    <li><b>-qlc pacote</b> : exibe a lista apenas dos arquivos de configura&ccedil;&atilde;o do pacote.
+    <li><b>-qld pacote</b> : exibe a lista apenas dos arquivos de documenta&ccedil;&atilde;o do pacote.
+    <li><b>-qR pacote</b> : exibe a lista dos pacotes dos quais o pacote especificado depende.
+    <li><b>-qs pacote</b> : exibe o estado de cada arquivo do pacote (normal, instalado ou substitu&iacute;do).
+    </ul>
+
+<li><b>Modo de Verifica&ccedil;&atilde;o</b>
+    <blockquote>rpm -V|--verify [op&ccedil;&otilde;es]</blockquote>
+    Exemplos:
+    <ul>
+    <li><b>-V pacote</b> : verifica pacote.
+    <li><b>-Va</b> : verifica todos os pacote instalados.
+    <li><b>-Vf arquivo</b> : verifica o pacote que possui o arquivo especificado.
+    <li><b>-Vp pacote</b> : verifica o pacote instalado e o arquivo de pacote RPM.
+    </ul>
+<li><b>Outras op&ccedil;&otilde;es</b><br>
+    <ul>
+    <li><b>-i pacote</b> : instala pacote.
+    <li><b>-e pacote</b> : desinstala pacote.
+    <li><b>-F pacote</b> : atualiza pacote j&aacute; instalado (compara as vers&otilde;es).
+    <li><b>--version</b> :  informa a vers&atilde;o do aplicativo.
+    <li><b>-v</b> : exibe informa&ccedil;&otilde;es mais detalhadas das opera&ccedil;&otilde;es sendo realizadas.
+    <li><b>-vh</b> : exibe o caractere <b>#</b> &agrave; medida em que o arquivo &eacute; desempacotado 
+        e verifica depend&ecirc;ncias.
+    <li><b>-U pacote</b> : substituir pacote (desinstalar e instalar novamente).
+    </ul>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<ul>
+<li>Para instalar e verificar o pacote que cont&eacute;m o compilador <a href="gcc.html"><b>gcc</b></a>, digite
+    <blockquote class="t1">rpm -ivh gcc-4.8.0-0.8.fc19.x86_64.rpm</blockquote>
+    A instala&ccedil;&atilde;o acima n&atilde;o ser&aacute; feita caso o pacote seja dependente de outro(s) pacote(s). 
+    Neste caso, o sistema especifica o nome do pacote que est&aacute; faltando, e voc&ecirc; deve instalar o pacote 
+    citado antes de tentar instalar o <i>gcc</i> novamente.
+<li>Para desinstalar o compilador <i>gcc</i>, basta digitar
+    <blockquote class="t1">rpm -e gcc-4.8.0-0.8.fc19.x86_64.rpm</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>A <a href="distribuicao.html"><b>distribui&ccedil;&atilde;o</b></a> DuZeru tem na sua interface gr&aacute;fica
+    a <i>Central de Programas do DuZeru</i> que permite instalar e remover pacotes.
+<li>O DuZeru utiliza o sistema de pacotes criado pela Debian chamado DPKG e gerenciado pelo APT.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="apt.html">APT (<i>Advanced Packaging Tool</i>)</a></b> - sistema para gerenciamento de pacotes no Linux.
+<li><b><a href="apt-get.html">apt-get</a></b> - utilit&aacute;rio para manuseamento de pacotes no Linux.
+<li><b><a href="aptitude.html">aptitude</a></b> - utilit&aacute;rio para manuseamento de pacotes no Linux.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

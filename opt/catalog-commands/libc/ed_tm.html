@@ -1,0 +1,72 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>tm</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="tm">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>tm</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Estrutura usada para armazenar data e hora.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Cabe&ccedil;alho</h2>
+
+<p>Para usar esta estrutura de dados deve-se incluir o cabe&ccedil;alho <i>time.h</i> no programa.</p>
+
+<blockquote class="t2">
+#include &lt;time.h&gt;
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<p>
+<blockquote class="t2">
+<table cellpadding=3 class="t2">
+<tr><td colspan=2>struct tm     </td></tr>
+<tr><td colspan=2>{             </td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; int tm_sec;      </td><td>/* segundos [0-60] */                         </td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; int tm_min;      </td><td>/* minutos  [0-59] */                         </td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; int tm_hour;     </td><td>/* horas    [0-23] */                         </td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; int tm_mday;     </td><td>/* dias     [1-31] */                         </td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; int tm_mon;      </td><td>/* mes      [0-11] */                         </td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; int tm_year;     </td><td>/* ano: 0 = 1900; 1 = 1901; ... */            </td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; int tm_wday;     </td><td>/* dia da semana [0 = domingo; 1 = segunda; ...; 6 = sabado] */</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; int tm_yday;     </td><td>/* dia do ano [0-365] */                       </td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; int tm_isdst;    </td><td>/* horario de verao (0 = nao, 1 = sim) */      </td></tr>
+<tr><td colspan=2>};                                                                    </td></tr>
+</table>
+</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

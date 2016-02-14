@@ -1,0 +1,171 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>read()</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="read()">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+<h1>read( )</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Esta <a href="../chamadas.html"><b>chamada de sistema</b></a> ler um descritor de <a href="../arquivo.html"><b>arquivo</b></a>.</p>
+  
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<blockquote class="t2">
+#include&lt;unistd.h&gt;<br>
+ssize_t read(int fd, void *buf, size_t count);
+</blockquote>
+
+<ul>
+<li>O argumento <i>fd</i> corresponde ao descritor do arquivo a ser lido.
+<li>O argumento <i>buf</i> &eacute; um ponteiro para a &aacute;rea onde os dados lidos ser&atilde;o armazenados.
+<li>O argumento <i>count</i> &eacute; a quantidade de bytes lidos.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Valor de retorno</h2>
+
+<p>Em caso de sucesso, o n&uacute;mero de bytes lidos &eacute; retornado (zero indica fim de arquivo) e a posi&ccedil;&atilde;o
+do arquivo &eacute; avan&ccedil;ada por este n&uacute;mero. Em caso de erro, o valor -1 &eacute; retornado e o c&oacute;digo do
+erro &eacute; colocado na vari&aacute;vel externa <b><a href="vr_errno.html">errno</a></b>. A tabela abaixo mostra os erros que
+podem ocorrer com esta chamada.</p>
+
+<p>
+<blockquote>
+<table class="t2" rules=all cellpadding=10 cellspacing=10 align=center width=650>
+<tr class="t1"><td><b>Erro</b></td><td><b>Descri&ccedil;&atilde;o</b></td></tr>
+<tr><td>EAGAIN      </td><td>Erro de <i>fd</i></td></tr>
+<tr><td>EBADF       </td><td>O <i>fd</i> n&atilde;o &eacute; v&aacute;lido</td></tr>
+<tr><td>EFAULT      </td><td>Nome do arquivo aponta para uma &aacute;rea de endere&ccedil;o n&atilde;o acess&iacute;vel</td></tr>
+<tr><td>EINTR       </td><td>Bloqueado</td></tr>
+<tr><td>EINVAL      </td><td>Valor n&atilde;o v&aacute;lido</td></tr>
+<tr><td>EIO         </td><td>Erro de I/O</td></tr>
+<tr><td>EISDIR      </td><td>&Eacute; um diret&oacute;rio</td></tr>
+</table>
+</blockquote>
+<p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<blockquote class="t2">
+1. #include&lt;unistd.h&gt; <br>
+2. #include&lt;fcntl.h&gt;  <br>
+3. #include&lt;stdio.h&gt;  <br>
+4. #include&lt;stdlib.h&gt; <br>
+5. #include&lt;string.h&gt; <br>
+6. #include&lt;errno.h&gt;  <br>
+7. int main() <br>
+8. &nbsp;&nbsp;&nbsp; { <br>
+9. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int  fd, n; <br>
+10.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char linha[100]; <br>
+11.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char nome[]  = "/etc/passwd"; <br>
+12.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fd = open(nome, O_RDONLY); <br>
+13.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (fd == -1) <br>
+14.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { <br>
+15.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("Open: %s\n", strerror(errno)); <br>
+16.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit(1); <br>
+17.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } <br>
+18.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while (n = read(fd, linha, strlen(linha))) <br>
+19.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf("%s", linha); <br>
+20.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; close(fd); <br>
+21.&nbsp;&nbsp;&nbsp; }
+</blockquote>
+
+<p>Para obter o c&oacute;digo-fonte do exemplo clique <b><a href="exemplos/read.c" target="_blank">aqui</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios</h2>
+
+<p>
+<ul>
+<li><b>Linhas de 1 a 6 :</b> &eacute; feita a inclus&atilde;o dos arquivos <i>headers</i> da 
+    <a href="../biblioteca_c.html"><b>biblioteca C</b></a>.
+    <ul>
+    <li><b>unistd.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das <a href="../chamadas.html"><b>chamadas de sistema</b></a>. 
+    <li><b>fcntl.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o de op&ccedil;&otilde;es de controle dos arquivos. Por exemplo
+        <ul>
+        <li>O_RDONLY - abrir apenas para leitura;
+        <li>O_WRONLY - abrir apenas para escrita;
+        <li>O_APPEND - adicionar registros no final do arquivo;
+        <li>O_CREAT - criar arquivo se ele ainda n&atilde;o existir;
+        <li>O_TRUNC - zerar arquivo se ele j&aacute; existir.
+        </ul>
+        O cabe&ccedil;alho <i>fcntl.h</i> inclui automaticamente o cabe&ccedil;alho <i>sys/stat.h</i> que possui defini&ccedil;&otilde;es
+        das <a href="../permissao.html"><b>permiss&otilde;es</b></a> de arquivo como, por exemplo
+        <ul>
+        <li>S_IRWXU - leitura, escrita e execu&ccedil;&atilde;o para o dono do arquivo;
+        </ul>
+    <li><b>stdio.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o das fun&ccedil;&otilde;es de E/S dos arquivos como,
+        por exemplo, <a href="fc_printf.html"><b>printf( )</b></a>.
+    <li><b>string.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o do tipo <i>string</i> e com v&aacute;rias fun&ccedil;&otilde;es
+        para manipula&ccedil;&atilde;o de strings como, por exemplo, <a href="fc_strerror.html"><b>strerror( )</b></a> que retorna a
+        mensagem associada a um determinado n&uacute;mero de erro.
+    <li><b>errno.h</b> - cabe&ccedil;alho com a defini&ccedil;&atilde;o da vari&aacute;vel <a href="vr_errno.html"><b>errno</b></a>
+        que armazena o n&uacute;mero do erro ocorrido na execu&ccedil;&atilde;o do programa.
+    </ul>
+<li><b>Linha 7 :</b> in&iacute;cio da fun&ccedil;&atilde;o <a href="fc_main.html"><b>main( )</b></a> cujos comandos v&atilde;o da
+    linha 9 a linha 20.
+<li><b>Linhas de 9 a 11 :</b> defini&ccedil;&otilde;es de vari&aacute;veis.
+<li><b>Linhas de 12 a 17:</b> abre arquivo <i>/etc/passwd</i> para leitura.
+<li><b>Linhas de 18 e 19:</b> ler arquivo e exibe na sa&iacute;da padr&atilde;o.
+<li><b>Linhas de 20:</b> fecha arquivo.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Execu&ccedil;&atilde;o</h2>
+
+<p>Para compilar
+<blockquote class="t1">
+gcc -o read read.c 
+</blockquote>
+Para executar
+<blockquote class="t1">
+./read
+</blockquote>
+Ser&aacute; ent&atilde;o exibido o conte&uacute;do do arquivo <i>/etc/passwd</i>.
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<p>
+<ul>
+<li>Note que o valor retornado pela chamada &eacute; do tipo <i>ssize_t</i>, enquanto o terceiro argumento da chamada &eacute; 
+    do tipo <i>size_t</i>. Este dois tipos correspondem ao tipo <i>int</i> (inteiro).
+<li>Se o argumento <i>count</i> &eacute; zero, a chamada <i>read( )</i> apenas retorna zero. Se <i>count</i> &eacute; maior
+    que <i>SSIZE_MAX</i>, o resultado &eacute; imprevis&iacute;vel.
+</ul>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

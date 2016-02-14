@@ -1,0 +1,101 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>smartctl</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="addgroup">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>smartctl</h1>
+
+<blockquote><b><font size="+1"> smartctl [op&ccedil;&otilde;es] dispositivo</font></b></blockquote>
+<ul>
+<li>O argumento <i>dispositivo</i> &eacute; o disco do qual se deseja obter informa&ccedil;&otilde;es.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este utilit&aacute;rio exibe relat&oacute;rio detalhado sobre os discos IDE/SCSI existentes no sistema.
+O termo SMART significa <i>Self-Monitoring, Analysis, and Reporting Technology</i>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-a, --all</b> : exibe todas as informa&ccedil;&otilde;es SMART sobre o dispositivo.
+<li><b>-h, --help, --usage</b> : informa as op&ccedil;&otilde;es do aplicativo.
+<li><b>-V, --version, --copyright, --license</b> : informa vers&atilde;o do aplicativo,
+<li><b>-i, --info</b> : informa o n&uacute;mero do modelo, o n&uacute;mero de s&eacute;rie, a vers&atilde;o do
+    firmware e informa&ccedil;&otilde;es sobre vers&atilde;o/revis&atilde;o do ATA (<i>Advanced Technology Attachment</i>).
+<li><b>-x, --xall</b> : exibe todas as informa&ccedil;&otilde;es, SMART e n&atilde;o SMART, sobre o dispositivo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<p>O comando
+
+<blockquote class="t1">sudo smartctl -i /dev/sda</blockquote>
+
+apresenta informa&ccedil;&otilde;es sobre o primeiro disco SCSI do sistema. Abaixo, &eacute; mostrada
+uma poss&iacute;vel sa&iacute;da.
+
+<blockquote class="t2">
+smartctl 5.41 2011-06-09 r3365 [i686-linux-3.2.0-36-generic-pae] (local build)<br>
+Copyright (C) 2002-11 by Bruce Allen, http://smartmontools.sourceforge.net<br>
+<br>
+=== START OF INFORMATION SECTION ===<br>
+<table class="t2" cellpadding=3>
+<tr><td>Model Family:    </td><td>Toshiba 2.5" HDD (80 GB and above)</td></tr>
+<tr><td>Device Model:    </td><td>TOSHIBA MK2035GSS</td></tr>
+<tr><td>Serial Number:   </td><td>97SHFJNZS</td></tr>
+<tr><td>Firmware Version:</td><td>DK020M</td></tr>
+<tr><td>User Capacity:   </td><td>200.049.647.616 bytes [200 GB]</td></tr>
+<tr><td>Sector Size:     </td><td>512 bytes logical/physical</td></tr>
+<tr><td>Device is:       </td><td>In smartctl database [for details use: -P show]</td></tr>
+<tr><td>ATA Version is:  </td><td>7</td></tr>
+<tr><td>ATA Standard is: </td><td>Exact ATA specification draft version not indicated</td></tr>
+<tr><td>Local Time is:   </td><td>Sun Jan 20 19:11:07 2013 BRST</td></tr>
+<tr><td>SMART support is:</td><td>Available - device has SMART capability.</td></tr>
+<tr><td>SMART support is:</td><td>Enabled</td></tr>
+</table>
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><a href="df.html"><b>df</b></a> - exibe informa&ccedil;&otilde;es sobre os espa&ccedil;os livre e utilizado das  
+    parti&ccedil;&otilde;es.
+<li><a href="du.html"><b>du</b></a> - exibe informa&ccedil;&otilde;es sobre o espa&ccedil;o usado pelos diret&oacute;rios
+    e arquivos.
+<li><b><a href="fdisk.html">fdisk</a></b> - aplicativo utilizado para particionar discos.</li>
+<li><b><a href="hdparm.html">hdparm</a></b> - exibe/altera os par&acirc;metros de discos SATA/IDE do sistema.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

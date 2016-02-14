@@ -1,0 +1,92 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>renice</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="renice">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>renice</h1>
+   
+<blockquote><font size="+1"><b>renice prioridade [op&ccedil;&otilde;es]</b></font></blockquote>
+onde 
+<ul>
+<li><b>prioridade</b> corresponde ao valor da nova prioridade a ser usada pelo(s) <b><a href="processo.html">processo(s)</a></b>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando altera a prioridade de um processo que est&aacute; executando. A prioridade de execu&ccedil;&atilde;o 
+de um processo pode variar de -20 (maior prioridade) a 19 (menor prioridade). Por padr&atilde;o, a prioridade dos 
+processos &eacute; zero.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-g gid</b> : altera a prioridade de todos os processos que possuem o <b><a href="gid.html">gid</a></b> especificado.
+<li><b>-u usu&aacute;rio</b> : altera a prioridade de todos os processos do usu&aacute;rio especificado.
+<li><b>-p pid</b> : altera a prioridade do processo que possui o <b><a href="pid.html">pid</a></b> especificado. &Eacute; o
+    padr&atilde;o.
+<li><b>-v, --version</b> : informa a vers&atilde;o do aplicativo.
+<li><b>-h, --help</b> : exibe as op&ccedil;&otilde;es do aplicativo.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>Por exemplo, o comando</p>
+
+<blockquote class="t1">renice +5 -p 374 895 -u aluno</blockquote>
+
+altera para 5 a prioridade dos processos com <i>pid</i> 374 e 895 e a prioridade de todos os
+processos do usu&aacute;rio <i>aluno</i>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Apenas o administrador do sistema (<b><a href="root.html">root</a></b>) pode alterar prioridades dos processos de
+    outros usu&aacute;rios.
+<li>Os usu&aacute;rios comuns podem somente incrementar o valor das prioridade dos seus processos, ou seja, diminuir
+    a prioridade de execu&ccedil;&atilde;o.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="nice.html">nice</a></b> - define a prioridade de execu&ccedil;&atilde;o na inicializa&ccedil;&atilde;o 
+    do processo.
+<li><b><a href="pid.html">PID</a></b> - n&uacute;mero de identifica&ccedil;&atilde;o (ID) de um processo.
+<li><b><a href="processo.html">processo</a></b> - programa em execu&ccedil;&atilde;o.
+<li><b><a href="top.html">top</a></b> - utilit&aacute;rio que lista, em tempo real, os processos que est&atilde;o usando
+    a cpu e informa a prioridade execu&ccedil;&atilde;o de cada um.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

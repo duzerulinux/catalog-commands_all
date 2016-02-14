@@ -1,0 +1,81 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>mbr</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="mbr">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>MBR</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<ul>
+<li>O MBR (<i>Master Boot Record</i>) possui informa&ccedil&otilde;es sobre como inicializar o sistema e sobre
+    as parti&ccedil;&otilde;es do HD.
+<li>O MBR &eacute; criado quando um HD &eacute; particionado, mas ele n&atilde;o faz parte de qualquer parti&ccedil;&atilde;o.
+<li>Normalmente, o MBR &eacute; armazenado no primeiro setor do HD, ou seja, &eacute; localizado no cilindro 0, cabe&ccedil;a
+    (<i>head</i>) 0 e setor 1.
+<li>O MBR cont&eacute;m as seguintes estruturas:
+    <ul>
+    <li><i>Master Boot Code</i> - programa inicial carregado pelo BIOS para inicializar o processo de boot do sistema.
+        Este programa transfere o controle para o programa que vai carregar o sistema operacional.
+    <li><i>Master Partition Table</i> - cont&eacute;m informa&ccedil;&otilde;es sobre as parti&ccedil;&otilde;es.
+    </ul>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Inicializa&ccedil;&atilde;o do LINUX</h2>
+
+<p>Quando a m&aacute;quina &eacute; ligada, o BIOS (<i>Basic Input/Output System</i>) assume o controle:
+<ul>
+<li>ler informa&ccedil;&otilde;es sobre o hardware da m&aacute;quina;
+<li>executa o POST (<i>Power On Self Test</i>) que inicializa e testa o hardware da m&aacute;quina;
+<li>procura pelo carregador do sistema operacional (ex: lilo, grub, etc) no MBR ou na primeira parti&ccedil;&atilde;o 
+    do dispositivo de armazenamento (ex: HD, CD, DVD, pendriver, etc);
+<li>o carregador do sistema passa o controle para o <b>Linux Kernel</b>;</li>
+<li>o <a href="kernel.html"><b>kernel</b></a> d&aacute; in&iacute;cio ao processo <a href="init.html"><b>init</b></a>
+    que carrega todos os servi&ccedil;os Linux. </li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O BIOS &eacute; normalmente armazenado na mem&oacute;ria ROM (<i>Read-only memory</i>) da placa-m&atilde;e.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="grub.html">grub</a></b> - carregador de inicializa&ccedil;&atilde;o do <b>Linux</b>.
+<li><b><a href="lilo.html">lilo</a></b> - carregador de inicializa&ccedil;&atilde;o do <b>Linux</b>.
+</ul>
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

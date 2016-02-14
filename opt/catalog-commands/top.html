@@ -1,0 +1,102 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>top</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="top">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>top</h1>
+
+<blockquote><font size="+1"><b>top [op&ccedil;&otilde;es]</b></font></blockquote>
+<br>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este utilit&aacute;rio exibe informa&ccedil;&otilde;es sobre os <a href="processo.html"><b>processos</b></a>
+que est&atilde;o sendo executados.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-c</b> :  mostra a linha de comando ao inv&eacute;s do nome do programa.
+<li><b>-d num</b> : atualiza a tela ap&oacute;s <i>num</i> segundos (o padr&atilde;o &eacute; 5 segundos).
+<li><b>-h</b> : exibe as op&ccedil;&otilde;es do utilit&aacute;rio.
+<li><b>-p pid</b> : mostra apenas o processo com o <a href="pid.html"><b>PID</b></a> especificado
+<li><b>-v</b> : mostra informa&ccedil;&otilde;es sobre o utilit&aacute;rio.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Teclas do aplicativo</h2>
+
+<ul>
+<li><b>espa&ccedil;o</b> : atualiza imediatamente a tela.</li>
+<li><b>h</b> : ajuda.</li>
+<li><b>k</b> : encerra um processo (comando <b><a href="kill.html">kill</a></b>). Ser&aacute; solicitado o <b><a href="pid.html">PID</a></b> do 
+               processo e o sinal a ser enviado ao processo. O sinal 15 provoca o t&eacute;rmino normal do processo, enquanto o sinal 9 provoca o
+               t&eacute;rmino for&ccedil;ado do processo. O padr&atilde;o &eacute; o sinal 15 (SIGTERM).</li>
+<li><b>M</b> : ordena processos de acordo com o uso da mem&oacute;ria.</li>
+<li><b>n</b> ou <b>#</b> : altera a quantidade de processos a serem apresentados na tela. &Eacute; solicitada a entrada de um n&uacute;mero. O valor 
+               padr&atilde;o &eacute; zero que corresponde ao n&uacute;mero de processos que a tela pode suportar.</li>
+<li><b>P</b> : ordena processos de acordo com o uso de CPU.</li>
+<li><b>q</b> : encerra o aplicativo.</li>
+<li><b>r</b> : altera a prioridade de um processo (comando <b><a href="renice.html">renice</a></b>). Ser&aacute; solicitado o <b><a href="pid.html">PID</a></b>
+               do processo e o valor da nova prioridade a ser usada pelo processo (o valor padr&atilde;o &eacute; 10). O usu&aacute;rio
+               comum s&oacute; pode informar um valor positivo maior que a prioridade atual. O root pode informar qualquer valor 
+               entre -20 (maior prioridade) e  19 (menor prioridade).</li>
+<li><b>s</b> : altera o tempo entre as atualiza&ccedil;&otilde;es de tela. &Eacute; solicitada a entrada do tempo de espera em segundos. 
+               O valor zero corresponde a atualiza&ccedil;&atilde;o cont&iacute;nua. O padr&atilde;o &eacute; 5 segundos.</li>
+<li><b>T</b> : ordena processos de acordo com o tempo de execu&ccedil;&atilde;o.</li>
+<li><b>u</b> : exibe os processos de um determinado usu&aacute;rio. &Eacute; solicitada a entrada do nome (login) do usu&aacute;rio. O padr&atilde;o &eacute; branco
+               (todos os usu&aacute;rios).</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>O comando
+<blockquote class="t1">top -d 10</blockquote>
+inicializa o aplicativo <i>top</i> e atualiza as informa&ccedil;&otilde;es apresentadas a cada 10 segundos.</p>
+<p align="center"><img src="imagens/top.jpeg" width=600 height=576></p>
+
+<p>Para ver apenas as informa&ccedil;&otilde;es apenas do processo 1 (<a href="init.html"><b>init</b></a>), digite
+<blockquote class="t1">top -p 1</blockquote>
+Abaixo &eacute; mostrada uma poss&iacute;vel sa&iacute;da para o comando.
+<p align="center"><img src="imagens/top2.jpeg" width=600 height=130></p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O comando <b><a href="ps.html">ps</a></b> exibe informa&ccedil;&otilde;es sobre os processos que est&atilde;o executando
+    na m&aacute;quina.
+<li>O comando <b><a href="pstree.html">pstree</a></b> apresenta, em formato de árvore, os processos em execu&ccedil;&atilde;o
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>grep</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="grep">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>grep</h1>
+
+<blockquote><font size="+1"><b>grep [op&ccedil;&otilde;es] express&atilde;o arquivo</b></font><br></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando procura padr&otilde;es em um arquivo.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-a, --text</b> : trata arquivos bin&aacute;rios como se fossem arquivos de texto.
+<li><b>-c</b> : imprime somente a contagem das linhas com <i>express&atilde;o</i>.
+<li><b>-i</b> : ignora a diferen&ccedil;a entre letras mai&uacute;sculas e letras min&uacute;sculas.
+<li><b>-l</b> : exibe o nome do arquivo ao inv&eacute;s da sa&iacute;da normal do comando <i>grep</i>.
+<li><b>-n</b> : mostra o n&uacute;mero de cada linha em <i>arquivo</i> com <i>express&atilde;o</i>.
+<li><b>-s, --no-messages</b> : n&atilde;o exibe mensagens de erro.
+<li><b>-v</b> : mostra todas as linhas de <i>arquivo</i>, exceto as linhas com <i>express&atilde;o</i>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplos</h2>
+
+<p>Abaixo o comando <i>grep</i> &eacute; usado para fazer busca de padr&otilde;es no arquivo <i>projeto.txt</i>.</p>
+
+<ul>
+<li>Quando a express&atilde;o procurada &eacute; composta por mais de uma palavra, deve-se usar aspa simples.
+     <blockquote class="t1">grep 'teste de ' projeto.txt</blockquote>
+<li>Para ver apenas as linhas que s&atilde;o iniciadas com o caractere "#".
+    <blockquote class="t1">grep ^# projeto.txt</blockquote>
+<li>Para ver apenas as linhas que n&atilde;o s&atilde;o iniciadas com o caractere "#".
+    <blockquote class="t1">grep -v ^# projeto.txt</blockquote>
+<li>Para ver apenas as linhas que terminam com a palavra "false".
+    <blockquote class="t1">grep false$ projeto.txt</blockquote>
+<li>Para ver apenas as linhas que come&ccedil;am o caractere "s" e terminam com a palavra "false".
+    <blockquote class="t1">grep ^s projeto.txt | grep false$</blockquote>
+<li>O ponto (.) em um padr&atilde;o representa qualquer caractere.
+    <blockquote class="t1">grep 'projeto.lin' projeto.txt</blockquote>
+<li>Uma string entre colchetes compara qualquer caractere definido na string.
+    <blockquote class="t1">grep '[Pp]rojeto' projeto.txt</blockquote>
+<li>Pode-se usar o h&iacute;fen para indicar uma s&eacute;rie de caracteres.
+    <blockquote class="t1">grep 'Projeto[a-x]' projeto.txt</blockquote>
+<li>Pode-se usar ^ para indicar os caracteres que n&atilde;o est&atilde;o na lista.
+    <blockquote class="t1">grep 'Projeto[^a-m]' projeto.txt</blockquote>
+<li>Uma express&atilde;o precedida por ^ encontra as linhas iniciadas pela express&atilde;o.
+    <blockquote class="t1">grep '^Projeto' projeto.txt</blockquote>
+<li>Uma express&atilde;o seguida por $ encontra as linhas terminada pela express&atilde;o.
+    <blockquote class="t1">grep 'Projeto$' projeto.txt</blockquote>
+<li>A barra invertida desativa qualquer significado especial que um caractere possa ter.
+    <blockquote class="t1">grep 'projeto\.lin' projeto.txt</blockquote>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O aplicativo <b><a href="zgrep.html">zgrep</a></b> procura padr&otilde;es em um arquivo compactado com 
+    <a href="compress.html"><b>compress</b></a>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

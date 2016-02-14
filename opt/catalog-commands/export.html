@@ -1,0 +1,65 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>export</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="export">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+
+<h1>export</h1>
+
+<blockquote><b><font size="+1">export vari&aacute;vel=valor</font></b></blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+<p>Comando do <b><a href="shell.html">shell</a></b> que permite configurar e compartilhar 
+<b><a href="variaveis_ambiente.html">vari&aacute;veis de ambiente</a></b> entre diversos programas e bibliotecas
+acessados a partir do mesmo terminal.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Exemplo</h2>
+
+<p>O comando
+<blockquote class="t1"><p>export TESTE=2</p></blockquote>
+cria a vari&aacute;vel de ambiente <i>TESTE</i> e atribui o valor 2 a esta vari&aacute;vel.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>&Eacute; importante observar que a vari&aacute;vel criada s&oacute; existe para a sess&atilde;o (terminal) 
+    onde o comando foi digitado.
+<li>Para garantir que a configura&ccedil;&atilde;o de uma vari&aacute;vel exista em todas as sess&otilde;es
+    criadas pelo usu&aacute;rio, o comando deve ser inclu&iacute;do no arquivo <i>.bashrc</i> do seu diret&oacute;rio
+    <b><a href="dir_home.html">home</a></b>. Para disponibilizar atualiza&ccedil;&atilde;o imediatamente, digite
+    <blockquote class="t1">source .bashrc</blockquote>
+<li>O comando <b><a href="unset.html">unset</a></b> ou o comando <b><a href="env.html">env -u</a></b> pode ser usado para
+    apagar uma vari&aacute;vel de ambiente.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

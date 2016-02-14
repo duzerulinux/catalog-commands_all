@@ -1,0 +1,241 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>processo</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="processo">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>processo</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Abaixo &eacute; apresentada a defini&ccedil;&atilde;o de <i>processo</i> dada por Tanenbaum em 
+<i>&quot;Sistemas Operacionais - Projeto e Implementa&ccedil;&atilde;o&quot;</i>.
+
+<blockquote class="t2"><i> 
+A ideia-chave aqui &eacute; que um processo &eacute; um tipo de atividade. Ele tem um programa,
+entrada, sa&iacute;da e um estado. Um &uacute;nico processador pode ser compartilhado entre v&aacute;rios
+processos, com algum algoritmo de agendamento sendo utilizado para determinar quando parar de trabalhar
+em um processo e servir a um diferente.</i>
+</blockquote> 
+
+<p>Ainda segundo Tanenbaum, s&atilde;o estados de um processo:</p>
+
+<ul>
+<li><b>executando</b> - o processo est&aacute; utilizando a CPU;
+<li><b>pronto</b> - o processo est&aacute; temporariamente parado para permitir que outro processo execute;
+<li><b>bloqueado</b> - o processo &eacute; incapaz de executar at&eacute; que um evento aconte&ccedil;a.
+</ul> 
+
+<p>Um processo pode criar outros processos. Dizemos que um processo &eacute; pai do processo que ele criou.
+Al&eacute;m disso, um processo-filho pode tamb&eacute;m criar novos processos, formando assim uma
+&aacute;rvore hier&aacute;rquica de processos.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Linux</h2>
+
+<p>O <b><a href="init.html">init</a></b> &eacute; o primeiro processo inicializado no Linux e &eacute;
+o pai de todos os outros processos. Se um processo termina e deixa processos-filho ainda executando, o 
+processo <i>init</i> assume a paternidade destes processos.</p>
+
+<p>Quando um usu&aacute;rio trabalha no modo monousu&aacute;rio, um &uacute;nico processo 
+<b><a href="shell.html">shell</a></b> &eacute; inicializado. Qualquer comando digitado pelo usu&aacute;rio
+neste terminal ir&aacute; gerar um ou mais processos. A &aacute;rvore hier&aacute;rquica dos processos
+tendo o <i>shell</i> como raiz &eacute; chamada de <i>sess&atilde;o</i>.</p>
+
+<p>Quando um usu&aacute;rio inicializa um gerenciador de janelas (<b><a href="xwindow.html">X Windows</a></b>), 
+para cada terminal criado &eacute; alocado um processo <i>shell</i> respons&aacute;vel pelo terminal em quest&atilde;o.
+Cada terminal corresponde a uma sess&atilde;o aberta pelo usu&aacute;rio sendo que as sess&otilde;es s&atilde;o 
+independentes entre si. Isto significa que uma altera&ccedil;&atilde;o feita em um dos terminais n&atilde;o ser&aacute; 
+reconhecida pelos outros terminais pois cada terminal possui o seu pr&oacute;prio conjunto de 
+<b><a href="variaveis_ambiente.html">vari&aacute;veis de ambiente</a></b>. Por exemplo, ao entrar com o comando
+<b><a href="newgrp.html">newgrp</a></b> em um dos terminais para alterar o grupo do usu&aacute;rio, apenas a
+sess&atilde;o em quest&atilde;o mudar&aacute; de grupo.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Background e Foreground</h2>
+
+<p>No linux, um processo pode estar em <i>foreground</i> ou em <i>background</i>, ou seja, em primeiro
+plano ou em segundo plano. Por exemplo, ao digitar o comando
+
+<blockquote class="t1">ls -R /etc > teste</blockquote>
+
+o sistema criar&aacute; o arquivo <i>teste</i> com o conte&uacute;do de todos os diret&oacute;rios e
+arquivos que se encontram abaixo do diret&oacute;rio <b><a href="dir_etc.html">/etc</a></b>. Durante a
+execu&ccedil;&atilde;o do comando acima, nenhum outro comando poder&aacute; ser digitado pelo 
+usu&aacute;rio no mesmo terminal. Isto significa que o comando est&aacute; sendo executado em primeiro 
+plano impedindo assim a execu&ccedil;&atilde;o de outras atividades no mesmo terminal.</p>
+
+<p>Para o exemplo acima, &eacute; poss&iacute;vel liberar o <i>shell</i> para outras atividades enquanto 
+o arquivo <i>teste</i> &eacute; criado. Basta que voc&ecirc; digite</p>
+
+<blockquote class="t1">ls -R /etc > teste &</blockquote>
+
+<p>O s&iacute;mbolo <b>&</b> indica que o comando deve ser executado em <i>background</i>, ou 
+seja, em segundo plano. </p>
+
+<p>Se um processo est&aacute; executando em <i>foreground</i> e voc&ecirc; deseja coloc&aacute;-lo em 
+<i>background</i>, voc&ecirc; deve:  
+<ol>
+<li>interromper a execu&ccedil;&atilde;o do processo com as teclas CTRL-Z;
+<li>digitar o comando <b><a href="bg.html">bg</a></b>.
+</ol>
+
+<p>Para trazer um processo do modo <i>background</i> para o modo <i>foreground</i>, 
+voc&ecirc; deve usar o comando <b><a href="fg.html">fg</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Modelo Cliente-Servidor</h2>
+
+<p>O Linux implementa muitas das suas fun&ccedil;&otilde;es usando o modelo cliente-servidor. 
+Isto significa que existem processos que s&atilde;o criados especificamente para executar 
+determinadas tarefas. Estas tarefas especiais s&atilde;o oferecidas aos outros processos do
+sistema na forma de servi&ccedil;os.</p>
+
+<p>O processo respons&aacute;vel pela execu&ccedil;&atilde;o de um determinado servi&ccedil;o no 
+sistema &eacute; chamado de <i>servidor</i>, enquanto o processo que solicita o servi&ccedil;o 
+ao sistema &eacute; chamado de <i>cliente</i>.</p>
+
+<p>Normalmente, as aplica&ccedil;&otilde;es servidoras (<i>daemons</i>) s&atilde;o
+executadas em <i>background</i>, enquanto as aplica&ccedil;&otilde;es clientes s&atilde;o
+executadas em <i>foreground</i>.</p>
+
+<p>A grande vantagem em implementar fun&ccedil;&otilde;es do sistema dessa forma &eacute; tornar 
+o <b><a href="kernel.html">kernel</a></b> do Linux menor, pois tudo que o kernel faz neste caso 
+&eacute; gerenciar a comunica&ccedil;&atilde;o entre clientes e servidores. Al&eacute;m disso,
+o administrador pode escolher os servi&ccedil;os que o sistema tornar&aacute; dispon&iacute;veis.</p>
+
+<p>S&atilde;o exemplos de <b>daemons</b> no Linux:
+<ul>
+<li><b>at daemon</b> - servidor que executa servi&ccedil;os agendados pelo comando <b><a href="at.html">at</a></b>.
+<li><b>cron daemon</b> - servidor que executa servi&ccedil;os agendados pelo comando 
+    <b><a href="crontab.html">crontab</a></b>.
+<li><b>lpd (printer daemon)</b> - servidor de impress&atilde;o de arquivos.
+</ul>
+
+<p>Por padr&atilde;o, podemos usar os seguintes argumentos com os <i>daemons</i>:
+<ul>
+<li><b>start</b> : inicializa o <i>daemon</i>.
+<li><b>stop</b> : termina o <i>daemon</i>.
+<li><b>status</b> : verifica a situa&ccedil;&atilde;o do <i>daemon</i>.
+</ul>
+
+Portanto, o comando
+<blockquote class="t1">status atd</blockquote>
+fornece informa&ccedil;&atilde;o sobre o servidor <i>at</i>. Por exemplo, &eacute; poss&iacute;vel ter
+a seguinte sa&iacute;da: 
+<blockquote>atd start/running, process 986</blockquote>
+</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<a name="memoria"></a>
+<h2>Mem&oacute;ria</h2>
+
+<ul>
+<li>O espa&ccedil;o de mem&oacute;ria alocado para um processo &eacute; organizado nos seguintes segmentos:
+    <ul>
+    <li><b>Texto ou c&oacute;digo</b> (<i>text or code segment</i>) - cont&eacute;m o c&oacute;digo de m&aacute;quina do programa compilado. 
+        &Eacute; uma &aacute;rea que s&oacute; permite leitura, evitando assim modifica&ccedil;&otilde;es no c&oacute;digo.
+    <li><b>Dados inicializados</b> (<i>initialized data segments</i>) - armazena todas as vari&aacute;veis do programa (global,
+        est&aacute;ticas, constantes e externas) que recebem um valor antes do in&iacute;cio da execu&ccedil;&atilde;o.
+    <li><b>Dados n&atilde;o inicializados</b> (<i>uninitialized data segments</i>) - armazena todas as vari&aacute;veis do programa (global,
+        est&aacute;ticas e externas) n&atilde;o inicializadas. Quando o arquivo &eacute; carregado na mem&oacute;ria para ser executado,
+        estas vari&aacute;veis s&atilde;o inicializadas com zero. Esta &aacute;rea &eacute; tamb&eacute;m conhecida como segmento BSS
+        (<i>Block Storage Start</i>). 
+    <li><b>Pilha</b> (<i>stack segment</i>) - armazena vari&aacute;veis locais, par&acirc;metros passados para alguma fun&ccedil;&atilde;o e
+        endere&ccedil;o de retorno ap&oacute;s execu&ccedil;&atilde;o de alguma fun&ccedil;&atilde;o. Dados s&atilde;o adicionados e
+        removidos usando o m&eacute;todo LIFO (<i>Last In, First Out</i>). Quando este segmento precisa ampliar sua &aacute;rea de 
+        mem&oacute;ria, a pilha cresce para baixo (os novos endere&ccedil;os ter&atilde;o valores menores que os j&aacute; alocados).
+    <li><b>Pilha inversa</b> (<i>heap segment</i>) - armazena vari&aacute;veis alocadas dinamicamente (por exemplo, com as
+        fun&ccedil;&otilde;es <a href="libc/fc_malloc.html"><b>malloc( )</b></a> e <a href="libc/fc_malloc.html"><b>calloc( )</b></a>
+        da linguagem C ou com as chamadas de sitema <a href="libc/cs_brk.html"><b>brk( )</b></a> e 
+        <a href="libc/cs_brk.html"><b>sbrk( )</b></a> do Linux). Quando este segmento precisa ampliar sua &aacute;rea de mem&oacute;ria,
+        a pilha cresce para cima (os novos endere&ccedil;os ter&atilde;o valores maiores que os j&aacute; alocados).
+    </ul>
+<li>A distin&ccedil;&atilde;o entre dados inicializados e dados n&atilde;o inicializados &eacute; feita por quest&atilde;o de 
+    efici&ecirc;ncia: vari&aacute;veis n&atilde;o inicializadas n&atilde;o ocupam espa&ccedil;o no c&oacute;digo objeto (arquivo 
+    obtido ap&oacute;s a compila&ccedil;&atilde;o).
+<li>A distin&ccedil;&atilde;o entre <i>stack</i> e <i>heap</i> pode ser feita pelo local onde &aacute;reas de mem&oacute;ria s&atilde;o
+    adicinadas e removidas. Considerando as duas estruturas como uma fila, <i>stack</i> adiciona e remove &aacute;reas no in&iacute;cio 
+    da fila, enquanto <i>heap</i> adiciona e remove &aacute;reas no fim da fila.
+<li>O sistema disponibiliza tr&ecirc;s vari&aacute;veis externas no ambiente do programa C que podem ser usadas para verificar o tamanho
+    dos segmentos de mem&oacute;ria:
+    <ul>
+    <li><b>etext</b> - primeiro endere&ccedil;o ap&oacute;s o fim do segmento de texto.
+    <li><b>edata</b> - primeiro endere&ccedil;o ap&oacute;s o fim do segmento de dados inicializados.
+    <li><b>end</b>   - primeiro endere&ccedil;o ap&oacute;s o fim do segmento de dados n&atilde;o inicializados.
+    </ul>
+<li>&Eacute; preciso declarar explicitamente as vari&aacute;veis externas <i>etext</i>, <i>edata</i> e <i>end</i> no programa C. Elas
+    n&atilde;o est&atilde;o definidas em nenhum cabe&ccedil;alho.
+<li>S&oacute; &eacute; poss&iacute;vel verificar o espa&ccedil;o alocado pelos segmentos <i>stack</i> e <i>heap</i> durante a 
+    execu&ccedil;&atilde;o do programa.
+<li>Pode-se tamb&eacute;m usar os comandos <a href="size.html"><b>size</b></a> e <a href="readelf.html"><b>readelf</b></a> para obter
+    informa&ccedil;&otilde;es sobre o tamanho dos segmentos de mem&oacute;ria.
+</ul>
+
+<p>Abaixo &eacute; mostrado um desenho simplificado da aloca&ccedil;&atilde;o de mem&oacute;ria por um processo. O segmento
+de mem&oacute;ria mais alta corresponde aos argumentos passados na linha de comandos e &agrave; lista de 
+<a href="variaveis_ambiente.html"><b>vari&aacute;veis de ambiente</b></a>.
+Em programas C, eles correspondem aos par&acirc;metros da fun&ccedil;&atilde;o <a href="libc/fc_main.html"><b>main( )</b></a>.</p>
+
+<p align=center><img src="imagens/memoria.png" width=314 height=258></p>
+
+<! --
+http://cs-fundamentals.com/c-programming/memory-layout-of-c-program-code-data-segments.php
+http://gribblelab.org/CBootcamp/7_Memory_Stack_vs_Heap.html
+http://sergioprado.org/padrao-elf-para-arquivos-objeto/
+http://elinux.org/Executable_and_Linkable_Format_%28ELF%29
+http://wiki.osdev.org/ELF_Tutorial
+http://www.thegeekstuff.com/2012/07/elf-object-file-format/
+http://www.bottomupcs.com/elf.html
+
+ldd
+malloc e calloc
+nm
+--->
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>O diret&oacute;rio <b><a href="dir_proc.html">/proc</a></b> possui a lista dos processos que est&atilde;o em
+    execu&ccedil;&atilde;o no sistema. Cada processo &eacute; identificado neste diret&oacute;rio por um n&uacute;mero.
+    Por exemplo, o processo <b><a href="init.html">init</a></b> &eacute; o processo 1.
+<li>O comando <b><a href="fuser.html">fuser</a></b> identifica os processos que est&atilde;o usando um determinado arquivo.
+<li>O comando <b><a href="kill.html">kill</a></b> envia um determinado sinal a um processo em execu&ccedil;&atilde;o.
+<li>O comando <b><a href="killall.html">killall</a></b> envia um determinado sinal a um conjunto de processos que usam o mesmo nome.
+<li>O comando <b><a href="nice.html">nice</a></b> define a prioridade de execu&ccedil;&atilde;o de um processo.
+<li>O comando <b><a href="nohup.html">nohup</a></b> executa um comando (processo) imune a interrup&ccedil;&otilde;es de conex&atilde;o.
+<li>O comando <b><a href="pidof.html">pidof</a></b> fornece o PID de um programa em execu&ccedil;&atilde;o.
+<li>O comando <b><a href="ps.html">ps</a></b> exibe informa&ccedil;&otilde;es sobre os processos em execu&ccedil;&atilde;o.
+<li>O comando <b><a href="top.html">top</a></b> lista os processos que est&atilde;o utilizando a CPU.
+</ul>
+
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

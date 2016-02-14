@@ -1,0 +1,73 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>root</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="root">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>root</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>O <i>root</i> &eacute; o usu&aacute;rio com maior n&iacute;vel de autoriza&ccedil;&atilde;o dentro do 
+<a href="linux.html"><b>Linux</b></a>. Por exemplo, o <i>root</i> pode criar novos usu&aacute;rios,
+remover usu&aacute;rios, alterar a configura&ccedil;&atilde;o do sistema, etc.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Na distribui&ccedil;&atilde;o DuZeru, se um usu&aacute;rio pertence ao grupo <i>sudo</i>, ele pode executar tarefas e/ou 
+    comandos como <i>root</i> nas duas formas descritas abaixo.
+    <ol>
+    <li>Basta usar <a href="sudo.html"><b>sudo</b></a> antes do comando e, quando solicitado pelo sistema, digitar a pr&oacute;pria
+        senha. Por exemplo, para ver a tabela de parti&ccedil;&atilde;o do disco com o comando <a href="fdisk.html"><b>fdisk</b></a>
+        basta digitar
+        <blockquote class="t1">sudo fdisk -l</blockquote>
+        e depois fornecer a pr&oacute;pria senha.
+    <li>Pode se tornar <i>root</i> com o comando <b><a href="su.html">su</a></b> no ambiente <b><a href="shell.html">shell</a></b> em
+       que se est&aacute; trabalhando, digitando
+        <blockquote class="t1">sudo su</blockquote>
+        e fornecer em seguida a pr&oacute;pria senha. A partir da autentica&ccedil;&atilde;o, n&atilde;o há mais necessidade de usar o
+        comando <i>sudo</i>, pois o usu&aacute;rio passa a ser tratado como <i>root</i> pelo sistema. Para retornar ao ambiente de
+        usu&aacute;rio comum, basta digitar <b><a href="exit.html">exit</a></b>.
+    </ol>
+<li>Para descobrir quais os usu&aacute;rios que est&atilde;o no grupo <i>sudo</i>, basta verificar o arquivo 
+    <b><a href="dir_etc.html#group">/etc/group</a></b>. Por exemplo, a linha abaixo mostra uma configura&ccedil;&atilde;o onde dois 
+    usu&aacute;rios, <i>maria</i> e <i>pedro</i>, est&atilde;o no grupo <i>sudo</i>.
+    <blockquote class="t2">sudo:x:27:maria, pedro</blockquote>
+<li>Para incluir um usu&aacute;rio no grupo <i>sudo</i>, use o comando <a href="addgroup.html"><b>addgroup</b></a>. 
+    Abaixo, &eacute; mostrado um exemplo onde o usu&aacute;rio <i>aluno</i> ganha a permiss&atilde;o de executar qualquer comando 
+    como <i>root</i>. 
+    <blockquote class="t1">sudo addgroup aluno sudo</blockquote>
+<li>Outra forma de permitir que um usu&aacute;rio execute algumas (ou todas) tarefas como <i>root</i> &eacute; alterando o arquivo
+    <b><a href="dir_etc.html#sudoers">/etc/sudoers</a></b>.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

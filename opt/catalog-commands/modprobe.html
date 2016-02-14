@@ -1,0 +1,91 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>modprobe</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="modprobe">
+<link rel="stylesheet" type="text/css" href="verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>modprobe</h1>
+   
+<blockquote><font size="+1"><b>modprobe [op&ccedil;&otilde;es] [m&oacute;dulo]</b></font></blockquote>
+<ul>
+<li>O argumento <i>m&oacute;dulo</i> &eacute; o nome do m&oacute;dulo a ser inserido ou removido.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>Este comando carrega e remove m&oacute;dulos do <b><a href="kernel.html">kernel</a></b>.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Algumas op&ccedil;&otilde;es do comando</h2>
+
+<ul>
+<li><b>-a</b> : insere m&oacute;dulos.
+<li><b>-d diret&oacute;rio</b> : diret&oacute;rio onde os m&oacute;dulos podem ser encontrados. Por padr&atilde;o,
+    os m&oacute;dulos ficam armazenados em <b>/lib/modules/RELEASE</b>, onde <b>RELEASE</b> corresponde a vers&atilde;o
+    do kernel (ex: 3.2.0-35-generic-pae).
+<li><b>-r</b> : remove m&oacute;dulos.
+<li><b>-V</b> ou <b>--version</b> : exibe informa&ccedil;&otilde;es sobre o comando.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Coment&aacute;rios sobre o comando</h2>
+
+<p>O <b>modprobe</b> l&ecirc; o arquivo de depend&ecirc;ncias de m&oacute;dulos gerado 
+pelo comando <a href="depmod.html"><b>depmod</b></a>. Por isso, deve-se executar o comando
+
+<blockquote class="t1">depmod -a</blockquote>
+
+para produzir um novo arquivo contendo as depend&ecirc;ncias de m&oacute;dulo. Ap&oacute;s 
+execut&aacute;-lo, pode-se usar o comando <b>modprobe</b> para instalar qualquer m&oacute;dulo 
+e ter os outros m&oacute;dulos dos quais ele depende automaticamente instalados.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+
+<ul>
+<li>Para acrescentar um m&oacute;dulo automaticamente a cada inicializa&ccedil;&atilde;o do sistema, inclua o
+    comando correspondente no arquivo <b><a href="dir_etc.html#modules">/etc/modules</a></b>.
+<li>O uso do comando sem par&acirc;metros faz com que o menu de op&ccedil;&otilde;es seja fornecido.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>T&oacute;picos relacionados</h2>
+
+<ul>
+<li><b><a href="depmod.html">depmod</a></b> - produz arquivo contendo as depend&ecirc;ncias dos m&oacute;dulos.
+<li><b><a href="insmod.html">insmod</a></b> - carrega m&oacute;dulos do <b>kernel</b> na mem&oacute;ria do sistema.
+<li><b><a href="lsmod.html">lsmod</a></b> - lista os m&oacute;dulos do <b>kernel</b> que est&atilde;o carregados na 
+    mem&oacute;ria.
+<li><b><a href="modinfo.html">modinfo</a></b> - mostra informa&ccedil;&otilde;es sobre um m&oacute;dulo do kernel.
+<li><b><a href="rmmod.html">rmmod</a></b> - descarrega m&oacute;dulos do <b>kernel</b> da mem&oacute;ria do sistema.
+<li><a href="uname.html"><b>uname -r</b></a> - verifica a vers&atilde;o do kernel do <b>Linux</b>.</li>
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="index.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>

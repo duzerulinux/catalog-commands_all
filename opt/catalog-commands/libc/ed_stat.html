@@ -1,0 +1,158 @@
+<!DOCTYPE HTML-->
+<html lang ="pt">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<head>
+<title>stat</title>
+<meta name="author" content="Unknown" >
+<META NAME="keywords" CONTENT="linux">
+<META NAME="description" CONTENT="stat">
+<link rel="stylesheet" type="text/css" href="../verbete.css">
+</head>
+
+<body>
+<a name="inicio"></a>
+
+<h1>stat</h1>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Descri&ccedil;&atilde;o</h2>
+
+<p>&Eacute; uma estrutura de dados usada para armazenar informa&ccedil;&otilde;es sobre um <a href="../arquivo.html"><b>arquivo</b></a>
+do sistema ou um sistema de arquivos.</p>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Cabe&ccedil;alho</h2>
+
+<p>Para usar esta estrutura de dados deve-se incluir o cabe&ccedil;alho <i>stat.h</i> no programa.</p>
+
+<blockquote class="t2">
+#include &lt;sys/stat.h&gt;
+</blockquote>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Formato</h2>
+
+<p>
+<blockquote class="t2">
+<table cellpadding=3 class="t2">
+<tr><td colspan=3>struct stat </td></tr>
+<tr><td colspan=3>{           </td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; dev_t</td><td>st_dev;</td><td>/* n&uacute;mero do dispositivo */</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; ino_t</td><td>st_ino;</td><td>/* n&uacute;mero de inode */ </td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; mode_t</td><td>st_mode;</td><td>/* prote&ccedil;&atilde;o */ </td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; nlink_t</td><td>st_nlink;</td><td>/* n&uacute;mero de links diretos para este arquivo */</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; uid_t</td><td>st_uid;</td><td>/* uid do dono do arquivo */</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; gid_t</td><td>st_gid;</td><td>/* gid do dono do arquvo */</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; dev_t</td><td>st_rdev;</td><td>/* tipo de dispositivo */</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; off_t</td><td>st_size;</td><td>/* tamanho em bytes */</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; blksize_t</td><td>st_blksize;</td><td>/* tamanho do bloco para E/S */</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; blkcnt_t</td><td>st_blocks;</td><td>/* n&uacute;mero de blocos de 512B alocados */</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; time_t</td><td>st_atime;</td><td>/* hora do &uacute;ltimo acesso */</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; time_t</td><td>st_mtime;</td><td>/* hora da &uacute;ltima modifica&ccedil;&atilde;o no arquivo */</td></tr>
+<tr><td>&nbsp;&nbsp;&nbsp; time_t</td><td>st_ctime;</td><td>/* hora da &uacute;ltima modifica&ccedil;&atilde;o no status */</td></tr>
+<tr><td colspan=3>};</td></tr>
+</table>
+</blockquote>
+</p>
+
+<p>Abaixo um pouco mais de datalhes dos campos da estrutura.</p>
+<ul>
+<li>O campo <b>st_dev</b> corresponde ao n&uacute;mero do dispositivo.
+<li>O campo <b>st_ino</b> corresponde ao n&uacute;mero do <a href="../inode.html"><b>inode</b></a> do arquivo. Cada arquivo &eacute;
+    identificado de maneira &uacute;nica pelo n&uacute;mero do seu inode e pelo sistema de arquivos a qual pertence. N&atilde;o existe,
+    dentro de um mesmo sistema de arquivos, dois arquivos com um mesmo inode.
+<li>O campo <b>st_mode</b> especifica o tipo do arquivo e as <a href="../permissao.html"><b>permiss&otilde;es de acesso</b></a> do arquivo.
+    <ul>
+    <li>Para verificar o tipo do arquivo do campo <i>st_mode</i> use as seguintes defini&ccedil;&otilde;es.
+        <table class="t1" align="center" cellpadding=3 rules=all>
+        <tr class="t1"><td><b>Macro</b></td><td><b>Significado</b>    </td></tr>
+        <tr><td>S_ISREG(st_mode) </td><td>&eacute; um arquivo comum ?               </td></tr>
+        <tr><td>S_ISDIR(st_mode) </td><td>&eacute; um diret&oacute;rio ?            </td></tr>
+        <tr><td>S_ISCHR(st_mode) </td><td>&eacute; um dispotivo do tipo caractere ? </td></tr>
+        <tr><td>S_ISBLK(st_mode) </td><td>&eacute; um dispositivo do tipo bloco ?   </td></tr>
+        <tr><td>S_ISFIFO(st_mode)</td><td>&eacute; um dispositivo do tipo fifo ?    </td></tr>
+        <tr><td>S_ISLNK(st_mode) </td><td>&eacute; um link simb&oacute;lico ?       </td></tr>
+        <tr><td>S_ISSOCK(st_mode)</td><td>&eacute; um socket ?                      </td></tr>
+        </table>
+    <li>Para verificar os <i>flags</i> do campo <i>st_mode</i> use as defini&ccedil;&otilde;es abaixo.
+        <table class="t1" align="center" cellpadding=3 rules=all>
+        <tr class="t1"><td><b>Nome</b></td><td><b>Valor octal</b></td><td><b>Significado</b></td></tr>
+        <tr><td>S_IFMT  </td><td>0170000</td><td> m&aacute;scara para os campos de bits do tipo de arquivo</td></tr>
+        <tr><td>S_IFSOCK</td><td>0140000</td><td> socket </td></tr>
+        <tr><td>S_IFLNK </td><td>0120000</td><td> link simb&oacute;lico </td></tr>
+        <tr><td>S_IFREG </td><td>0100000</td><td> arquivo regular </td></tr>
+        <tr><td>S_IFBLK </td><td>0060000</td><td> dispositivo do tipo bloco </td></tr>
+        <tr><td>S_IFDIR </td><td>0040000</td><td> diret&oacute;rio </td></tr>
+        <tr><td>S_IFCHR </td><td>0020000</td><td> dispositivo do tipo caractere </td></tr>
+        <tr><td>S_IFIFO </td><td>0010000</td><td> dispositivo do tipo fifo </td></tr>
+        <tr><td>S_ISUID </td><td>0004000</td><td> permiss&atilde;o especial SUID </td></tr>
+        <tr><td>S_ISGID </td><td>0002000</td><td> permiss&atilde;o especial SGID </td></tr>
+        <tr><td>S_ISVTX </td><td>0001000</td><td> permiss&atilde;o especial sticky bit </td></tr>
+        <tr><td>S_IRWXU </td><td>00700  </td><td> dono tem permiss&atilde;o de leitura, grava&ccedil;&atilde;o e 
+                                                  execu&ccedil;&atilde;o</td></tr>
+        <tr><td>S_IRUSR </td><td>00400  </td><td> dono tem permiss&atilde;o de leitura</td></tr>
+        <tr><td>S_IWUSR </td><td>00200  </td><td> dono tem permiss&atilde;o de grava&ccedil;&atilde;o</td></tr> 
+        <tr><td>S_IXUSR </td><td>00100  </td><td> dono tem permiss&atilde;o de execu&ccedil;&atilde;o</td></tr>
+        <tr><td>S_IRWXG </td><td>00070  </td><td> grupo tem permiss&atilde;o de leitura, grava&ccedil;&atilde;o e 
+                                                  execu&ccedil;&atilde;o</td></tr>
+        <tr><td>S_IRGRP </td><td>00040  </td><td> grupo tem permiss&atilde;o de leitura</td></tr>
+        <tr><td>S_IWGRP </td><td>00020  </td><td> grupo tem permiss&atilde;o de grava&ccedil;&atilde;o</td></tr> 
+        <tr><td>S_IXGRP </td><td>00010  </td><td> grupo tem permiss&atilde;o de execu&ccedil;&atilde;o</td></tr>
+        <tr><td>S_IRWXO </td><td>00007  </td><td> outros usu&aacute;rios t&ecirc;m permiss&atilde;o de leitura, 
+                                                  grava&ccedil;&atilde;o e execu&ccedil;&atilde;o</td></tr>
+        <tr><td>S_IROTH </td><td>00004  </td><td> outros usu&aacute;rios t&ecirc;m permiss&atilde;o de leitura</td></tr>
+        <tr><td>S_IWOTH </td><td>00002  </td><td> outros usu&aacute;rios t&ecirc;m permiss&atilde;o de grava&ccedil;&atilde;o</td></tr> 
+        <tr><td>S_IXOTH </td><td>00001  </td><td> outros usu&aacute;rios t&ecirc;m permiss&atilde;o de execu&ccedil;&atilde;o</td></tr>
+        </table>
+    </ul>
+<li>O campo <b>st_nlink</b> corresponde ao n&uacute;mero de links diretos para o arquivo. Um link direto nada mais &eacute; que um outro
+    nome para o arquivo e um arquivo pode possuir mais de um nome. Arquivos que est&atilde;o ligados diretamente possuem o mesmo 
+    n&uacute;mero de inode (<i>st_ino</i>) e o mesmo n&uacute;mero de device (<i>st_dev</i>).
+    <ul>
+    <li>Se <i>st_nlink</i> &eacute; maior que 1, ent&atilde;o existe mais de um link direto para este arquivo. Quando a contagem &eacute;
+        reduzida a zero pela chamada de sistema <b><a href="cs_unlink.html">unlink</a></b>, o arquivo &eacute; removido do sistema de arquivos.
+    <li>Use o comando <a href="../ln.html"><b>ln</b></a> para criar um link direto para um arquivo.
+    </ul>
+<li>O campo <b>st_uid</b> corresponde ao <a href="../uid.html"><b>UID</b></a> (User Identification) do dono do arquivo.
+<li>O campo <b>st_gid</b> corresponde ao <a href="../gid.html"><b>GID</b></a> (Group Identification) do arquivo.
+<li>O campo <b>st_rdev</b> especifica o tipo de dispositivo onde o arquivo est&aacute; armazenado.
+<li>O campo <b>st_size</b> corresponde ao tamanho do arquivo em bytes.
+<li>O campo <b>st_blksize</b> corresponde ao tamanho ideal dos blocos no arquivo para obter opera&ccedil;&otilde;es de E/S mais eficientes.
+<li>O campo <b>st_blocks</b> corresponde ao tamanho do arquivo em blocos de 512 bytes.
+<li>O campo <b>st_atime</b> representa a data do &uacute;ltimo acesso feito ao arquivo. Nem todas as chamadas de sistemas que acessam
+    o arquivo alteram este campo.
+<li>O campo <b>st_mtime</b> representa a data da &uacute;ltima modifica&ccedil;&atilde;o feita no arquivo. O <i>st_mtime</i> de um
+    diret&oacute;rio s&oacute; &eacute; alterado pela cria&ccedil;&atilde;o ou dele&ccedil;&atilde;o de arquivos naquele diret&oacute;rio.
+    Este campo n&atilde;o &eacute; alterado devido a mudan&ccedil;as no dono, grupo, contador de links diretos ou permiss&otilde;es de
+    acesso.
+<li>O campo <b>st_ctime</b> representa a data da cria&ccedil;&atilde;o do arquivo. O <i>st_ctime</i> de um arquivo s&oacute; &eacute; 
+    alterado quando as informa&ccedil;&otilde;es de inode s&atilde;o alteradas (dono, grupo, contador de links, permiss&otilde;es de acesso,
+    etc).
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<h2>Observa&ccedil;&otilde;es</h2>
+<ul>
+<li>Veja a chamada de sistema <a href="cs_stat.html"><b>stat()</b></a> para um exemplo do uso dessa estrutura de dados.
+</ul>
+
+<! -------------------------------------------------------------------------------------------- -->
+<p>&nbsp;</p>
+<table align="center" border=0 cellpadding=0 cellspacing=0>
+<tr bgcolor="#E6E6FA">
+<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |  </td>
+<td align=left><font size=2 color="#00008B"><a href="../index_guia.html">&nbsp;&nbsp;Guia&nbsp;&nbsp;</a></font></td>
+<td align=center><font size=2 color="#00008B">  |   </td>
+
+</tr><tr>
+<td colspan=5 >&nbsp;</td>
+</tr><tr>
+<td colspan=5 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="../data_atualizacao.js"></script></td>
+</tr>
+</table>
+
+<! -------------------------------------------------------------------------------------------- -->
+</body>
+</html>
