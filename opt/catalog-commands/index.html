@@ -1,57 +1,106 @@
-<!DOCTYPE HTML-->
-<html lang ="pt">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-<title>Guia referencial comandos GNU/Linux de A a Z</title>
-<META NAME="author" CONTENT="Claudio A. Silva(claudiosilva@duzeru.org)">
-<META NAME="keywords" CONTENT="linux">
-<META NAME="description" CONTENT="linux">
-<link rel="stylesheet" type="text/css" href="guia.css">
-</head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="Gabriel F. Vilar">
+    <META NAME="author" CONTENT="Claudio A. Silva(claudiosilva@duzeru.org)">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Guia referencial comandos GNU/Linux de A a Z</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/duzeru.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
 
 <body>
-<a name="inicio"></a>
-
-<p align="center"><img src="imagens/tux.png"></p> <!--width=150 height=166-->
-<h1 align="center">Guia referencial comandos GNU/Linux de A a Z</h1>
-
-<! -------------------------------------------------------------------------------------------- -->
-
-<center><b><font size=4 face="Comic Sans MS">
-<a href="#letra_a">A</a>&nbsp;&nbsp; 
-<a href="#letra_b">B</a>&nbsp;&nbsp; 
-<a href="#letra_c">C</a>&nbsp;&nbsp; 
-<a href="#letra_d">D</a>&nbsp;&nbsp; 
-<a href="#letra_e">E</a>&nbsp;&nbsp; 
-<a href="#letra_f">F</a>&nbsp;&nbsp; 
-<a href="#letra_g">G</a>&nbsp;&nbsp; 
-<a href="#letra_h">H</a>&nbsp;&nbsp; 
-<a href="#letra_i">I</a>&nbsp;&nbsp; 
-<a href="#letra_j">J</a>&nbsp;&nbsp; 
-<a href="#letra_k">K</a>&nbsp;&nbsp; 
-<a href="#letra_l">L</a>&nbsp;&nbsp; 
-<a href="#letra_m">M</a>&nbsp;&nbsp; 
-<a href="#letra_n">N</a>&nbsp;&nbsp; 
-<a href="#letra_o">O</a>&nbsp;&nbsp; 
-<a href="#letra_p">P</a>&nbsp;&nbsp; 
-<a href="#letra_q">Q</a>&nbsp;&nbsp; 
-<a href="#letra_r">R</a>&nbsp;&nbsp; 
-<a href="#letra_s">S</a>&nbsp;&nbsp; 
-<a href="#letra_t">T</a>&nbsp;&nbsp; 
-<a href="#letra_u">U</a>&nbsp;&nbsp; 
-<a href="#letra_v">V</a>&nbsp;&nbsp; 
-<a href="#letra_w">W</a>&nbsp;&nbsp; 
-<a href="#letra_x">X</a>&nbsp;&nbsp; 
-<a href="#letra_y">Y</a>&nbsp;&nbsp; 
-<a href="#letra_z">Z</a>
-</font></b></center>
-<p><b>
-Caso esteja em outra plataforma: <br>
-<a target="blank" href="http://www.tutorialspoint.com/unix_terminal_online.php"> <img src="imagens/terminal.png" width=70 height=70> CLIQUE AQUI para usar um terminal online</a>
-</p></b>
-
-<p>&nbsp;</p>
+<!-- <a name=""></a> -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#letra_a">A</a></li>
+            <li><a href="#letra_b">B</a></li>
+            <li><a href="#letra_c">C</a></li>
+            <li><a href="#letra_d">D</a></li>
+            <li><a href="#letra_e">E</a></li>
+            <li><a href="#letra_f">F</a></li>
+            <li><a href="#letra_g">G</a></li>
+            <li><a href="#letra_h">H</a></li>
+            <li><a href="#letra_i">I</a></li>
+            <li><a href="#letra_j">J</a></li>
+            <li><a href="#letra_k">K</a></li>
+            <li><a href="#letra_l">L</a></li>
+            <li><a href="#letra_m">M</a></li>
+            <li><a href="#letra_n">N</a></li>
+            <li><a href="#letra_o">O</a></li>
+            <li><a href="#letra_p">P</a></li>
+            <li><a href="#letra_q">Q</a></li>
+            <li><a href="#letra_r">R</a></li>
+            <li><a href="#letra_s">S</a></li>
+            <li><a href="#letra_t">T</a></li>
+            <li><a href="#letra_u">U</a></li>
+            <li><a href="#letra_v">V</a></li>
+            <li><a href="#letra_w">W</a></li>
+            <li><a href="#letra_x">X</a></li>
+            <li><a href="#letra_y">Y</a></li>
+            <li><a href="#letra_z">Z</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">DuZeru <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="http://duzeru.org/" target="_blank">Início</a></li>
+                <li><a href="#" target="_blank">Blog</a></li>
+                <li><a href="#" target="_blank">Baixe DuZeru</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Suporte</li>
+                <li><a href="#" target="_blank">Fórum</a></li>
+                <li><a href="#" target="_blank">Treinamento</a></li>
+                <li><a href="#" target="_blank">Documentação</a></li>
+                <li><a href="#" target="_blank">Sobre</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div class="container" id="inicio">
+        <div class="jumbotron" style="text-align: center;">
+            <p><img src="assets/img/tux.png"></p>
+            <h1>Guia referencial comandos GNU/Linux de A a Z</h1>
+        </div>
+        <p>
+            <strong>Caso esteja em outra plataforma:<br/>
+            <a target="blank" href="http://www.tutorialspoint.com/unix_terminal_online.php"><img src="assets/img/terminal.png" width=70 height=70> CLIQUE AQUI para usar um terminal online</a></strong>
+        </p>
 
 <!-- ------- -->
 <!-- LETRA A -->
@@ -526,20 +575,23 @@ Caso esteja em outra plataforma: <br>
 <!-- ------- -->
 <!-- Fim     -->
 <!-- ------- -->
+<br/>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="text-muted" style="text-align: center;">
+        <a href="#inicio">Topo</a> | <a href="http://duzeru.org" target="_blank">Site DuZeru</a><br />
+        <script type="text/javascript" src="assets/js/data_atualizacao.js"></script> por @CoGUMm
+    </p>
+  </div>
+</footer>
 
-<! -------------------------------------------------------------------------------------------- -->
-<p>&nbsp;</p>
-<table align="center" border=0 cellpadding=0 cellspacing=0>
-<tr bgcolor="#E6E6FA">
-<td align=center><font size=2 color="#00008B"><a href="#inicio">&nbsp;&nbsp;Topo&nbsp;&nbsp;</a></font></td>
-<td align=center><font size=2 color="#00008B">  |   </td>
-<td align=left><font size=2 color="#00008B"><a href="http://duzeru.org">&nbsp;&nbsp;Site DuZeru&nbsp;&nbsp;</a></font></td>
-</tr><tr>
-<td colspan=3 >&nbsp;</td>
-</tr><tr>
-<td colspan=3 align="center"><font size=1 color="#994C00"><script type="text/javascript" src="data_atualizacao.js"></script></td>
-</tr>
-</table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="assets/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="assets/js/ie10-viewport-bug-workaround.js"></script>
 
 </body>
 </html>
