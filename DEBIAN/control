@@ -1,12 +1,12 @@
 Package: catalog-commands
-Version: 1.0.0
-Architecture: all
+Version: 2.0.0
 Maintainer: Claudio A. Silva <claudiosilva@duzeru.org>
-Installed-Size: 1024
-Depends: firefox
-Section: utils
+Architecture: all
+Section: acessories
 Priority: optional
-Homepage: https://duzeru.org
+Installed-Size: 1200
+Depends: python-simplejson, libjs-jquery
+Homepage: http://duzeru.org
 Description: Um catalogo de comandos para o cotidiano no GNU/LInux
  PT- Um Catalogo com comandos de A a Z tendo base todas as distros
  funciona diretamente no navegador de forma offline e não requer conexão com a internet
